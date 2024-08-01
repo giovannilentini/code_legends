@@ -22,8 +22,8 @@ Verificare la versione di ruby facendo
 
 Comandi da fare per evitare errore "Error running __rvm_make -j4..."
 
-    rvm pkg install openssl <br>
-    rvm install 2.7.2 --with-openssl-dir=$rvm_path/usr <br>
+    rvm pkg install openssl 
+    rvm install 2.7.2 --with-openssl-dir=$rvm_path/usr 
 
 # Avviare applicazione
 Andare nella cartella principale e scrivere 
@@ -31,3 +31,17 @@ Andare nella cartella principale e scrivere
     rails server 
 
 Poi nel browser andare a localhost:3000 
+
+# GitHub
+
+Lavoriamo nel branch "dev" e poi, dopo tutti i test, facciamo il merge nel main
+Quindi 
+
+    git clone https://www.github.com/giovannilentini/code_legends
+
+    git checkout dev 
+
+Ogni volta che vogliamo fare qualcosa di nuovo assicuriamoci di avere tutte le modifiche recenti fatte con
+
+    git pull 
+
