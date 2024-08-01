@@ -1,20 +1,21 @@
 
 # Versione RUBY: 2.7.2
 # Versione RAILS: 7.1.3.4
-    ultima versione, quindi aggiornare con il comando
+ultima versione, quindi aggiornare con il comando
     gem update rails
 # Installazione RVM
-    Per scegliere la versione 2.7.2 di Ruby usiamo RVM.
+Per scegliere la versione 2.7.2 di Ruby usiamo RVM.
 
-    Installare RVM: \curl -sSL https://get.rvm.io | bash
+Installare RVM: 
+    \curl -sSL https://get.rvm.io | bash
 
-    Comandi da fare per evitare errore "Error running __rvm_make -j4..."
-        rvm pkg install openssl
-        rvm install 2.7.2 --with-openssl-dir=$rvm_path/usr
+Comandi da fare per evitare errore "Error running __rvm_make -j4..."
+    rvm pkg install openssl
+    rvm install 2.7.2 --with-openssl-dir=$rvm_path/usr
 
     
 
 # Avviare applicazione
-    Andare nella cartella principale e scrivere
+Andare nella cartella principale e scrivere
     rails server
-    Poi nel browser andare a localhost:3000 
+Poi nel browser andare a localhost:3000 
