@@ -59,4 +59,4 @@ Link Figma
 
 # Bozze di Sketches
 Link Figma
-    https://www.figma.com/board/Ibhwg8h6p1ZcFJkNkbWFxu/Sketches?node-id=0-1&t=kUfKxbrFfEDBe3Q0-1
+    `https://www.figma.com/board/Ibhwg8h6p1ZcFJkNkbWFxu/Sketches?node-id=0-1&t=kUfKxbrFfEDBe3Q0-1`
