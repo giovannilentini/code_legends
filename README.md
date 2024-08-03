@@ -45,3 +45,14 @@ Ogni volta che vogliamo fare qualcosa di nuovo assicuriamoci di avere tutte le m
 
     git pull 
 
+
+# Modello ER
+Link Figma
+
+    https://www.figma.com/board/ShrCXmS3xafvPNAF6OsWus/Untitled?node-id=0-1&t=lg7qsReiCcirCJ7S-1
+
+
+# Schema UML
+Link Figma 
+    
+    da fare
