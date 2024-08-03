@@ -49,7 +49,7 @@ Ogni volta che vogliamo fare qualcosa di nuovo assicuriamoci di avere tutte le m
 # Modello ER
 Link Figma
 
-    https://www.figma.com/board/ShrCXmS3xafvPNAF6OsWus/Untitled?node-id=0-1&t=lg7qsReiCcirCJ7S-1
+    https://www.figma.com/board/ShrCXmS3xafvPNAF6OsWus/ERMODEL?node-id=0-1&t=8BQps2GMOgilnbdi-0
 
 
 # Schema UML
