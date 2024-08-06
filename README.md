@@ -1,5 +1,5 @@
 
-# Versione RUBY: 2.7.2
+# Versione RUBY: 3.3.0
 
 # Versione RAILS: 7.1.3.4
 
@@ -14,7 +14,7 @@ Per scegliere la versione 2.7.2 di Ruby usiamo RVM.
 Installare RVM: 
 
     \curl -sSL https://get.rvm.io | bash
-    rvm install 2.7.2
+    rvm install 3.3.0
 
 Verificare la versione di ruby facendo 
 
@@ -23,7 +23,7 @@ Verificare la versione di ruby facendo
 Comandi da fare per evitare errore "Error running __rvm_make -j4..."
 
     rvm pkg install openssl 
-    rvm install 2.7.2 --with-openssl-dir=$rvm_path/usr 
+    rvm install 3.3.0 --with-openssl-dir=$rvm_path/usr 
 
 # Avviare applicazione
 Andare nella cartella principale e scrivere 
