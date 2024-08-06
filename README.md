@@ -9,7 +9,7 @@ ultima versione, quindi aggiornare con il comando
 
 # Installazione RVM
 
-Per scegliere la versione 2.7.2 di Ruby usiamo RVM.
+Per scegliere la versione 3.3.0 di Ruby usiamo RVM.
 
 Installare RVM: 
 
