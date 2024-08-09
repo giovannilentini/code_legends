@@ -3,4 +3,5 @@ class WelcomeController < ApplicationController
     puts "HELLOOOOOOOOO"
     puts ENV["CODE_LEGENDS_DATABASE_PASSWORD"]
   end
+
 end

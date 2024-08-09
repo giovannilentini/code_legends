@@ -1,6 +1,7 @@
 class ChallengesController < ApplicationController
   def new
     @challenge = Challenge.new
+    @challenge.test_cases.build # Costruisce un test case vuoto per la visualizzazione iniziale
   end
 
   def create
@@ -15,6 +16,6 @@ class ChallengesController < ApplicationController
   private
 
   def challenge_params
-    params.require(:challenge).permit(:description, :input_example, :expected_output)
+    params.require(:challenge).permit(:description, test_cases_attributes: [:input_example, :expected_output])
   end
 end

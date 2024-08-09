@@ -4,7 +4,7 @@
     <div class="text-center px-4 w-full max-w-lg">
       <h2 class="text-5xl font-bold mb-6">Crea una nuova sfida</h2>
 
-      <%= form_with model: @challenge, local: true, class: "bg-gray-800 p-8 rounded-lg shadow-lg" do |f| %>
+      <%= form_with model: @challenge, local: true, url: challenges_path, class: "bg-gray-800 p-8 rounded-lg shadow-lg" do |f| %>
 
         <!-- Descrizione dell'esercizio -->
         <div class="mb-8">
@@ -37,15 +37,10 @@
           </div>
         </div>
 
-        <%= form_with model: @challenge, url: challenges_path do |f| %>
-          <!-- Altri campi del form qui -->
-
-          <div class="flex justify-center space-x-10 mt-10">
-            <%= f.submit "Propose", class: "bg-green-600 hover:bg-green-800 text-white font-bold py-3 px-6 rounded transition duration-300" %>
-            <%= link_to "Quit", root_path, class: "bg-red-600 hover:bg-red-800 text-white font-bold py-3 px-6 rounded ml-4 transition duration-300" %>
-
-          </div>
-        <% end %>
+        <div class="flex justify-center space-x-10 mt-10">
+          <%= f.submit "Propose", class: "bg-green-600 hover:bg-green-800 text-white font-bold py-3 px-6 rounded transition duration-300" %>
+          <%= link_to "Quit", root_path, class: "bg-red-600 hover:bg-red-800 text-white font-bold py-3 px-6 rounded ml-4 transition duration-300" %>
+        </div>
 
       <% end %>
     </div>
