@@ -1,15 +1,15 @@
-<div class="container">
+<div class="container mx-auto h-screen">
+  <section class="flex items-center justify-center h-full bg-gray-700 bg-opacity-70">
+    <div class="text-center px-4 w-full h-full">
+      <h2 class="text-5xl font-bold mb-6 text-white">Crea una nuova sfida</h2>
 
-  <section class="flex items-center justify-center min-h-screen bg-gray-700 bg-opacity-70">
-    <div class="text-center px-4 w-full max-w-lg">
-      <h2 class="text-5xl font-bold mb-6">Crea una nuova sfida</h2>
-
-      <%= form_with model: @challenge, local: true, url: challenges_path, class: "bg-gray-800 p-8 rounded-lg shadow-lg" do |f| %>
+      <form class="bg-gray-800 p-8 rounded-lg shadow-lg w-full h-full" action="/challenges" accept-charset="UTF-8" method="post">
+        <input type="hidden" name="authenticity_token" value="CKWPTJyoG2s5uB1xpAxz_91I2ip3QYo-J2G82aHTFwDIWsoIsjxAUKA0ObLCxSEkFf7_TaTAaU0_U6JDi4l8iA" autocomplete="off">
 
         <!-- Descrizione dell'esercizio -->
         <div class="mb-8">
-          <%= f.label :description, "Descrizione dell'esercizio", class: "block text-white text-left text-xl mb-4" %>
-          <%= f.text_area :description, rows: 4, class: "w-full px-4 py-2 rounded-lg bg-gray-600 text-white" %>
+          <label class="block text-white text-left text-xl mb-4" for="challenge_description">Descrizione dell'esercizio</label>
+          <textarea rows="4" class="w-full px-4 py-2 rounded-lg bg-gray-600 text-white border border-gray-500 focus:border-blue-500 focus:outline-none" name="challenge[description]" id="challenge_description"></textarea>
         </div>
 
         <!-- Input e Output Attesi -->
@@ -17,56 +17,54 @@
           <div id="input-output-pairs" class="space-y-6">
             <h3 class="text-2xl text-left text-white mb-4">Input e Output Attesi</h3>
 
-            <%= f.fields_for :test_cases do |tc| %>
-              <div class="flex justify-center space-x-16">
-                <div class="w-1/2">
-                  <%= tc.label :input_example, "Input", class: "block text-white text-center text-xl mb-4" %>
-                  <%= tc.text_field :input_example, class: "w-full px-4 py-2 rounded-lg bg-gray-600 text-white mb-6" %>
-                </div>
-                <div class="w-1/2">
-                  <%= tc.label :expected_output, "Output", class: "block text-white text-center text-xl mb-4" %>
-                  <%= tc.text_field :expected_output, class: "w-full px-4 py-2 rounded-lg bg-gray-600 text-white mb-6" %>
-                </div>
+            <div class="flex justify-between space-x-4 mb-4">
+              <div class="w-1/2">
+                <label class="block text-white text-center text-xl mb-2" for="challenge_test_cases_attributes_0_input_example">Input</label>
+                <input class="w-full px-4 py-2 rounded-lg bg-gray-600 text-white mb-4 border border-gray-500 focus:border-blue-500 focus:outline-none" type="text" name="challenge[test_cases_attributes][0][input_example]" id="challenge_test_cases_attributes_0_input_example">
               </div>
-            <% end %>
+              <div class="w-1/2">
+                <label class="block text-white text-center text-xl mb-2" for="challenge_test_cases_attributes_0_expected_output">Output</label>
+                <input class="w-full px-4 py-2 rounded-lg bg-gray-600 text-white mb-4 border border-gray-500 focus:border-blue-500 focus:outline-none" type="text" name="challenge[test_cases_attributes][0][expected_output]" id="challenge_test_cases_attributes_0_expected_output">
+              </div>
+            </div>
           </div>
 
           <!-- Pulsante per aggiungere nuovi campi -->
-          <div class="text-right mt-4">
+          <div class="text-center mt-4">
             <button type="button" id="add-test-case" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition duration-300 mb-6">Aggiungi un'altra coppia</button>
           </div>
         </div>
 
         <div class="flex justify-center space-x-10 mt-10">
-          <%= f.submit "Propose", class: "bg-green-600 hover:bg-green-800 text-white font-bold py-3 px-6 rounded transition duration-300" %>
-          <%= link_to "Quit", root_path, class: "bg-red-600 hover:bg-red-800 text-white font-bold py-3 px-6 rounded ml-4 transition duration-300" %>
+          <input type="submit" name="commit" value="Propose" class="bg-green-600 hover:bg-green-800 text-white font-bold py-3 px-6 rounded transition duration-300" data-disable-with="Propose">
+          <a class="bg-red-600 hover:bg-red-800 text-white font-bold py-3 px-6 rounded ml-4 transition duration-300" href="/">Quit</a>
         </div>
-
-      <% end %>
+      </form>
     </div>
   </section>
-
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const addTestCaseButton = document.getElementById('add-test-case');
         const inputOutputPairsContainer = document.getElementById('input-output-pairs');
+        let testCaseIndex = 1;
 
         addTestCaseButton.addEventListener('click', function() {
             const newTestCaseHTML = `
-        <div class="flex justify-center space-x-16 mb-4">
+        <div class="flex justify-between space-x-4 mb-4">
           <div class="w-1/2">
             <label class="block text-white text-center text-xl mb-2">Input</label>
-            <input type="text" class="w-full px-4 py-2 rounded-lg bg-gray-600 text-white mb-6" />
+            <input type="text" name="challenge[test_cases_attributes][${testCaseIndex}][input_example]" class="w-full px-4 py-2 rounded-lg bg-gray-600 text-white mb-4 border border-gray-500 focus:border-blue-500 focus:outline-none" />
           </div>
           <div class="w-1/2">
             <label class="block text-white text-center text-xl mb-2">Output</label>
-            <input type="text" class="w-full px-4 py-2 rounded-lg bg-gray-600 text-white mb-6" />
+            <input type="text" name="challenge[test_cases_attributes][${testCaseIndex}][expected_output]" class="w-full px-4 py-2 rounded-lg bg-gray-600 text-white mb-4 border border-gray-500 focus:border-blue-500 focus:outline-none" />
           </div>
         </div>`;
 
             inputOutputPairsContainer.insertAdjacentHTML('beforeend', newTestCaseHTML);
+            testCaseIndex++;
         });
     });
 </script>

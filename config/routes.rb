@@ -6,6 +6,6 @@ Rails.application.routes.draw do
 
   get 'database_info', to: 'database#info', as: 'info'
 
-  delete 'clear_tables', to: 'database#clear_tables'
+  post 'clear_tables', to: 'database#clear_tables'
 end
 
