@@ -68,3 +68,6 @@ yarn-debug.log*
 !/storage/.keep
 /public/uploads
 .idea/
+# Ignore application configuration
+/config/application.yml
+
