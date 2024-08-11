@@ -11,11 +11,16 @@ class DatabaseController < ApplicationController
   end
 
   def clear_tables
+    begin
       ActiveRecord::Base.connection.tables.each do |table_name|
-        ActiveRecord::Base.connection.execute("TRUNCATE TABLE #{table_name} CASCADE")
+        ActiveRecord::Base.connection.execute("DELETE FROM #{table_name}")
+        
+        ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='#{table_name}'")
       end
+
       render json: { message: 'Tutte le tabelle sono state svuotate!' }, status: :ok
     rescue => e
       render json: { error: e.message }, status: :unprocessable_entity
     end
+  end
 end
