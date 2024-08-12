@@ -11,7 +11,7 @@ import { cpp } from "@codemirror/lang-cpp";
 import { java } from "@codemirror/lang-java";
 import { oneDark } from "@codemirror/theme-one-dark";
 
-// Initialize CodeMirror editor
+// Event that gets triggered when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     const editorElement = document.querySelector('#code-editor');
     const languageSelector = document.querySelector('#language-selector');
@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (editorElement && languageSelector) {
 
+        // Handle the languages extensions
         const createEditor = (language)=>{
             switch (language){
                 case 'javascript':
@@ -43,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     languageExtension = javascript();
             }
 
+            // Creating the Editor using CodeMirror
             const state = EditorState.create({
                 doc: 'Hello, World!',
                 extensions: [basicSetup, languageExtension, oneDark]
@@ -55,7 +57,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         createEditor(currentLanguage);
 
-
+        // Event that gets triggered when the user changes language
+        // Automatically changes the editor language
         languageSelector.addEventListener('change', (event) => {
             const selectedLanguage = event.target.value;
             editorElement.innerHTML = ''; // Clear the existing editor
