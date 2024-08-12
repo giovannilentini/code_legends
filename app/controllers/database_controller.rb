@@ -1,26 +1,27 @@
 class DatabaseController < ApplicationController
   def info
-    @tables = ActiveRecord::Base.connection.tables
-    @table_data = {}
-
-    @tables.each do |table|
-      columns = ActiveRecord::Base.connection.columns(table).map(&:name)
-      records = ActiveRecord::Base.connection.execute("SELECT * FROM #{table}")
-      @table_data[table] = { columns: columns, records: records.to_a }
+    @tables = ActiveRecord::Base.connection.tables.reject { |table| table == 'schema_migrations' || table == 'ar_internal_metadata' }
+    @table_data = @tables.each_with_object({}) do |table, hash|
+      model = table.classify.constantize rescue nil
+      if model
+        hash[table] = { columns: model.column_names, records: model.all }
+      end
     end
   end
 
+  protect_from_forgery with: :exception
+
   def clear_tables
     begin
-      ActiveRecord::Base.connection.tables.each do |table_name|
-        ActiveRecord::Base.connection.execute("DELETE FROM #{table_name}")
-        
-        ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name='#{table_name}'")
+      ActiveRecord::Base.descendants.each do |model|
+        next if model.abstract_class? # Salta classi astratte
+
+        model.delete_all
       end
 
-      render json: { message: 'Tutte le tabelle sono state svuotate!' }, status: :ok
+      render json: { message: 'Le tabelle sono state svuotate con successo.' }, status: :ok
     rescue => e
-      render json: { error: e.message }, status: :unprocessable_entity
+      render json: { message: "Errore durante l'eliminazione delle tabelle: #{e.message}" }, status: :unprocessable_entity
     end
   end
 end
