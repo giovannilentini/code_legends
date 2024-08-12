@@ -1,26 +1,57 @@
-<!-- app/views/editor/show.html.erb -->
-<div class="container mx-auto p-4">
-  <!-- Language Selector -->
-  <label for="language" class="block text-sm font-medium text-gray-700">Select Language</label>
-  <select id="language-selector" class="block w-full p-2 bg-gray-600 border border-gray-300 rounded mt-1 mb-4">
-    <option value="javascript">JavaScript</option>
-    <option value="python">Python</option>
-    <option value="java">Java</option>
-    <option value="cpp">C++</option>
-    <!-- Add more languages as needed -->
-  </select>
+<div class="flex flex-row justify-center content-center py-20 h-screen bg-gradient-to-r from-gray-800 via-gray-900 to-black w-full">
+  <div class="w-4/5 max-w-6xl p-6 flex flex-col justify-center space-y-4 text-white">
+    <!-- Box Selezione Linguaggio -->
+    <div class="bg-[#4E31AA] p-4 rounded-lg shadow-md flex flex-col">
+      <h2 class="text-lg font-bold mb-2">Scegli un Linguaggio di Programmazione</h2>
+      <%= form_with url: "#", method: :post, local: true, html: { id: 'language-form' } do %>
+        <%= select_tag :language, options_for_select([['JavaScript', 'javascript'], ['Python', 'python'], ['Java', 'java'], ['C++', 'cpp']], @selected_language), class: "w-full px-4 py-2 rounded border border-gray-600 bg-gray-800 text-white", id: "language-selector" %>
+      <% end %>
+    </div>
 
-  <!-- Code Editor -->
-  <div id="code-editor" class="bg-gray-600 w-full h-full"></div>
+    <!-- Box Codice -->
 
-  <!-- Run Code Button -->
-  <button id="run-code" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Run Code</button>
+    <div class="flex flex-col bg-black p-4 rounded-lg h-4/6 shadow-md ">
+      <h2 class="text-lg font-bold text-center">CODICE</h2>
+      <div class="overflow-auto my-5 h-5/6 shadow-md">
+        <div id="code-editor" class="bg-gray-600 w-full h-full"></div>
+      </div>
 
-  <!-- Output Section -->
-  <div class="mt-6">
-    <h2 class="text-xl font-semibold">Output</h2>
-    <div id="output" class="p-4 bg-gray-100 border border-gray-300 rounded-lg mt-2">
-      <!-- Output will appear here -->
+    </div>
+
+    <!-- Box Console -->
+    <div class="flex flex-col justify-center bg-black p-4 rounded-lg shadow-md h-4/6">
+      <h2 class="text-lg font-bold text-center">CONSOLE</h2>
+      <div class="bg-gray-600 text-white mt-2 mb-5 h-5/6 overflow-auto">
+        <div id="output" class=" w-full ">
+          <h1>aaa<br>aaaa<br>aaa<br>aaaa<br>aaa<br>aaaa<br></h1>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Sezione a Destra -->
+  <div class="w-1/5 p-6 flex flex-col space-y-6 justify-center">
+    <%= form_with  method: :post, local: true, html: { id: 'code-form' } do %>
+      <%= hidden_field_tag :code, '', id: 'code-input' %>
+      <%= hidden_field_tag :language, '', id: 'selected-language' %>
+      <%= submit_tag "Run Code", class: "mt-4 px-4 py-2 bg-green-500 text-white rounded hover:bg-blue-600 w-full" %>
+    <% end %>
+    <!-- Box Chat -->
+    <div class="bg-black p-4 rounded-lg shadow-md h-2/5 pb-11">
+      <h2 class="text-lg font-bold text-center">CHAT</h2>
+      <div class="bg-gray-800 text-white mt-2 h-5/6 overflow-auto">
+        <div id="output" class="bg-gray-600 w-full h-full">
+
+        </div>
+      </div>
+    </div>
+
+    <%= form_with  method: :post, local: true, html: { id: 'code-form' } do %>
+      <%= hidden_field_tag :code, '', id: 'code-input' %>
+      <%= hidden_field_tag :language, '', id: 'selected-language' %>
+      <%= submit_tag "Surrend", class: "mt-4 px-4 py-2 bg-red-500 text-white rounded hover:bg-blue-600 w-full" %>
+    <% end %>
+
+
+    </div>
 </div>

@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const languageSelector = document.querySelector('#language-selector');
     let currentLanguage = 'javascript';
     let languageExtension = javascript();
+    const initialNewLines = '\n'.repeat(50); // 9 newlines create 10 lines in total
 
     if (editorElement && languageSelector) {
 
@@ -46,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Creating the Editor using CodeMirror
             const state = EditorState.create({
-                doc: 'Hello, World!',
+                doc: 'Hello, World!'.concat(initialNewLines),
                 extensions: [basicSetup, languageExtension, oneDark]
             });
             new EditorView({
