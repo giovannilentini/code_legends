@@ -1,5 +1,43 @@
-<div class="container mx-auto px-4 py-8">
-  <h1 class="text-4xl font-bold mb-6">Profilo Admin</h1>
-  <p>Benvenuto nel profilo admin!</p>
-  <!-- Aggiungi altre informazioni del profilo admin qui -->
+<div class="container mx-auto h-screen">
+
+  <section class="flex items-center justify-center h-full bg-gray-700 bg-opacity-70">
+    <div class="text-center px-4 w-full h-full">
+      <h2 class="text-5xl font-bold mb-6 text-white">Proposte da Revisare</h2>
+
+      <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-lg mb-6" style="width: 100%;">
+        <thead>
+        <tr class="bg-gray-900">
+          <th class="px-6 py-3 text-center text-white">Descrizione</th> <!-- Centra il testo -->
+          <th class="px-6 py-3 text-center text-white">Test Case</th> <!-- Centra il testo -->
+          <th class="px-6 py-3 text-center text-white">Azione</th> <!-- Centra il testo -->
+        </tr>
+        </thead>
+        <tbody>
+        <% @challenges.each do |challenge| %>
+          <tr class="border-b border-gray-700">
+            <td class="px-6 py-4 text-white"><%= challenge.description %></td>
+            <td class="px-6 py-4 text-white">
+              <ul>
+                <% challenge.test_cases.each do |test_case| %>
+                  <li>Input: <%= test_case.input_example %>, Output: <%= test_case.expected_output %></li>
+                <% end %>
+              </ul>
+            </td>
+            <td class="px-6 py-4 text-center"> <!-- Centra il testo -->
+              <%= button_to 'Accetta', update_status_path(challenge.id, status: 1), method: :post, class: "bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded transition duration-300" %>
+              <%= button_to 'Rifiuta', update_status_path(challenge.id, status: 0), method: :post, class: "bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded transition duration-300" %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <!-- Pulsante per tornare alla Home -->
+      <div class="mt-10">
+        <%= link_to 'Torna alla Home', root_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition duration-300' %>
+      </div>
+
+    </div>
+  </section>
+
 </div>
