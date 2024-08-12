@@ -1,0 +1,26 @@
+<!-- app/views/editor/show.html.erb -->
+<div class="container mx-auto p-4">
+  <!-- Language Selector -->
+  <label for="language" class="block text-sm font-medium text-gray-700">Select Language</label>
+  <select id="language-selector" class="block w-full p-2 bg-gray-600 border border-gray-300 rounded mt-1 mb-4">
+    <option value="javascript">JavaScript</option>
+    <option value="python">Python</option>
+    <option value="java">Java</option>
+    <option value="cpp">C++</option>
+    <!-- Add more languages as needed -->
+  </select>
+
+  <!-- Code Editor -->
+  <div id="code-editor" class="bg-gray-600 w-full h-full"></div>
+
+  <!-- Run Code Button -->
+  <button id="run-code" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Run Code</button>
+
+  <!-- Output Section -->
+  <div class="mt-6">
+    <h2 class="text-xl font-semibold">Output</h2>
+    <div id="output" class="p-4 bg-gray-100 border border-gray-300 rounded-lg mt-2">
+      <!-- Output will appear here -->
+    </div>
+  </div>
+</div>
