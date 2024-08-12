@@ -12,7 +12,7 @@
         </tr>
         </thead>
         <tbody>
-        <% @challenges.where(status: -1).each do |challenge| %>
+        <% @challenges.each do |challenge| %>
           <tr class="border-b border-gray-700">
             <td class="px-6 py-4 text-white"><%= challenge.description %></td>
             <td class="px-6 py-4 text-white">
@@ -35,7 +35,6 @@
       <div class="mt-10 mb-6">
         <%= link_to 'Torna alla Home', root_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition duration-300' %>
       </div>
-
     </div>
   </section>
 </div>
@@ -69,6 +68,8 @@
 
             document.body.appendChild(form);
             form.submit();
+        } else {
+            alert("Il motivo del rifiuto non può essere vuoto.");
         }
     }
 </script>

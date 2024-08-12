@@ -14,7 +14,7 @@ class DatabaseController < ApplicationController
   def clear_tables
     begin
       ActiveRecord::Base.descendants.each do |model|
-        next if model.abstract_class? # Salta classi astratte
+        next if model.abstract_class?
 
         model.delete_all
       end
