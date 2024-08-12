@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_12_110309) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_12_135939) do
   create_table "challenges", force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status", default: 0
+    t.integer "status", default: -1
+    t.string "rejection_reason"
   end
 
   create_table "test_cases", force: :cascade do |t|

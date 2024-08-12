@@ -1,5 +1,62 @@
-<div class="container mx-auto px-4 py-8">
-  <h1 class="text-4xl font-bold mb-6">Profilo Utente</h1>
-  <p>Benvenuto nel tuo profilo!</p>
-  <!-- Aggiungi altre informazioni del profilo utente qui -->
+<div class="container mx-auto h-screen">
+  <section class="flex items-center justify-center h-full bg-gray-700 bg-opacity-70">
+    <div class="text-center px-4 w-full h-full">
+      <h2 class="text-5xl font-bold mb-6 text-white">Profilo Utente</h2>
+
+      <h3 class="text-3xl font-bold mb-4 text-green-500">Proposte Accettate</h3>
+      <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-lg mb-6" style="width: 100%;">
+        <thead>
+        <tr class="bg-gray-900">
+          <th class="px-6 py-3 text-center text-white">Descrizione</th>
+          <th class="px-6 py-3 text-center text-white">Test Case</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @accepted_challenges.each do |challenge| %>
+          <tr class="border-b border-gray-700">
+            <td class="px-6 py-4 text-white"><%= challenge.description %></td>
+            <td class="px-6 py-4 text-white">
+              <ul>
+                <% challenge.test_cases.each do |test_case| %>
+                  <li>Input: <%= test_case.input_example %>, Output: <%= test_case.expected_output %></li>
+                <% end %>
+              </ul>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <h3 class="text-3xl font-bold mb-4 text-red-500">Proposte Rifiutate</h3>
+      <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-lg mb-6" style="width: 100%;">
+        <thead>
+        <tr class="bg-gray-900">
+          <th class="px-6 py-3 text-center text-white">Descrizione</th>
+          <th class="px-6 py-3 text-center text-white">Test Case</th>
+          <th class="px-6 py-3 text-center text-white">Motivo del Rifiuto</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @rejected_challenges.each do |challenge| %>
+          <tr class="border-b border-gray-700">
+            <td class="px-6 py-4 text-white"><%= challenge.description %></td>
+            <td class="px-6 py-4 text-white">
+              <ul>
+                <% challenge.test_cases.each do |test_case| %>
+                  <li>Input: <%= test_case.input_example %>, Output: <%= test_case.expected_output %></li>
+                <% end %>
+              </ul>
+            </td>
+            <td class="px-6 py-4 text-white"><%= challenge.rejection_reason %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <div class="mt-10">
+        <%= link_to 'Torna alla Home', root_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition duration-300' %>
+      </div>
+
+    </div>
+  </section>
 </div>

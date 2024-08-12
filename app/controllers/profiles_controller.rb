@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   def admin_profile
-    @challenges = Challenge.all
+    @challenges = Challenge.where(status: -1)
   end
 
   def update_status
@@ -11,4 +11,9 @@ class ProfilesController < ApplicationController
       redirect_to admin_profile_path, alert: 'Errore nell\'aggiornamento dello status.'
     end
   end
+
+    def user_profile
+      @accepted_challenges = Challenge.where(status: 1)
+      @rejected_challenges = Challenge.where(status: 0)
+    end
 end
