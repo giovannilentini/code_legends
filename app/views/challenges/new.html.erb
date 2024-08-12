@@ -39,13 +39,11 @@
       <form class="bg-gray-800 p-12 rounded-lg shadow-lg" action="/challenges" accept-charset="UTF-8" method="post">
         <input type="hidden" name="authenticity_token" value="CKWPTJyoG2s5uB1xpAxz_91I2ip3QYo-J2G82aHTFwDIWsoIsjxAUKA0ObLCxSEkFf7_TaTAaU0_U6JDi4l8iA" autocomplete="off">
 
-        <!-- Descrizione dell'esercizio -->
         <div class="mb-10">
           <label class="block text-white text-left text-xl mb-4" for="challenge_description">Descrizione dell'esercizio</label>
           <textarea rows="4" class="w-full px-4 py-3 rounded-lg bg-gray-600 text-white border border-gray-500 focus:border-blue-500 focus:outline-none" name="challenge[description]" id="challenge_description"></textarea>
         </div>
 
-        <!-- Input e Output Attesi -->
         <div class="mb-6">
           <div id="input-output-pairs" class="space-y-10">
             <h3 class="text-2xl text-center text-white mb-8">Input e Output Attesi</h3>
@@ -62,14 +60,12 @@
             </div>
           </div>
 
-          <!-- Pulsante per aggiungere nuovi campi -->
           <div class="text-center mt-16 mb-6">
             <button type="button" id="add-test-case" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded transition duration-300">Aggiungi un'altra coppia</button>
           </div>
         </div>
 
-        <!-- Spaziatura tra i pulsanti -->
-        <div class="button-container">
+        <div class="button-container mb-6">
           <input type="submit" name="commit" value="Propose" class="button propose">
           <button onclick="window.location.href='/'" class="button quit">Quit</button>
         </div>
