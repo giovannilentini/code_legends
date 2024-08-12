@@ -1,7 +1,7 @@
 class ChallengesController < ApplicationController
   def new
     @challenge = Challenge.new
-    @challenge.test_cases.build # Costruisce un test case vuoto per la visualizzazione iniziale
+    @challenge.test_cases.build
   end
 
   def create
