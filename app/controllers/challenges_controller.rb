@@ -21,10 +21,9 @@ class ChallengesController < ApplicationController
 
   def update_status
     @challenge = Challenge.find(params[:id])
-
     @challenge.status = params[:status]
 
-    if params[:status].to_i == 0
+    if @challenge.status.to_i == 0
       @challenge.rejection_reason = params[:rejection_reason]
     else
       @challenge.rejection_reason = nil

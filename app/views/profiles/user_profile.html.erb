@@ -1,24 +1,24 @@
-<div class="container mx-auto h-screen">
-  <section class="flex items-center justify-center h-full bg-gray-700 bg-opacity-70">
-    <div class="text-center px-4 w-full h-full">
-      <h2 class="text-5xl font-bold mb-6 text-white">Profilo Utente</h2>
+<div class="container mx-auto h-screen overflow-auto">
+  <section class="flex items-center justify-center min-h-full bg-gradient-to-br from-gray-800 to-gray-600 bg-opacity-70">
+    <div class="text-center px-8 py-10 w-full max-w-6xl">
+      <h2 class="text-5xl font-extrabold mb-10 text-white">Profilo Utente</h2>
 
-      <h3 class="text-3xl font-bold mb-4 text-green-500">Proposte Accettate</h3>
-      <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-lg mb-6" style="width: 100%;">
+      <h3 class="text-3xl font-bold mb-6 text-green-400">Proposte Accettate</h3>
+      <table class="w-full bg-gray-800 border border-gray-700 rounded-xl shadow-xl mb-12">
         <thead>
         <tr class="bg-gray-900">
-          <th class="px-6 py-3 text-center text-white">Descrizione</th>
-          <th class="px-6 py-3 text-center text-white">Test Case</th>
+          <th class="px-6 py-4 text-center text-lg font-semibold text-white">Descrizione</th>
+          <th class="px-6 py-4 text-center text-lg font-semibold text-white">Test Case</th>
         </tr>
         </thead>
         <tbody>
         <% @accepted_challenges.each do |challenge| %>
           <tr class="border-b border-gray-700">
-            <td class="px-6 py-4 text-white"><%= challenge.description %></td>
+            <td class="px-6 py-4 text-white break-words"><%= challenge.description %></td>
             <td class="px-6 py-4 text-white">
-              <ul>
+              <ul class="list-disc list-inside">
                 <% challenge.test_cases.each do |test_case| %>
-                  <li>Input: <%= test_case.input_example %>, Output: <%= test_case.expected_output %></li>
+                  <li class="mb-2 break-words">Input: <%= test_case.input_example %>, Output: <%= test_case.expected_output %></li>
                 <% end %>
               </ul>
             </td>
@@ -27,34 +27,34 @@
         </tbody>
       </table>
 
-      <h3 class="text-3xl font-bold mb-4 text-red-500">Proposte Rifiutate</h3>
-      <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-lg mb-6" style="width: 100%;">
+      <h3 class="text-3xl font-bold mb-6 text-red-400">Proposte Rifiutate</h3>
+      <table class="w-full bg-gray-800 border border-gray-700 rounded-xl shadow-xl mb-12">
         <thead>
         <tr class="bg-gray-900">
-          <th class="px-6 py-3 text-center text-white">Descrizione</th>
-          <th class="px-6 py-3 text-center text-white">Test Case</th>
-          <th class="px-6 py-3 text-center text-white">Motivo del Rifiuto</th>
+          <th class="px-6 py-4 text-center text-lg font-semibold text-white">Descrizione</th>
+          <th class="px-6 py-4 text-center text-lg font-semibold text-white">Test Case</th>
+          <th class="px-6 py-4 text-center text-lg font-semibold text-white">Motivo del Rifiuto</th>
         </tr>
         </thead>
         <tbody>
         <% @rejected_challenges.each do |challenge| %>
           <tr class="border-b border-gray-700">
-            <td class="px-6 py-4 text-white"><%= challenge.description %></td>
+            <td class="px-6 py-4 text-white break-words"><%= challenge.description %></td>
             <td class="px-6 py-4 text-white">
-              <ul>
+              <ul class="list-disc list-inside">
                 <% challenge.test_cases.each do |test_case| %>
-                  <li>Input: <%= test_case.input_example %>, Output: <%= test_case.expected_output %></li>
+                  <li class="mb-2 break-words">Input: <%= test_case.input_example %>, Output: <%= test_case.expected_output %></li>
                 <% end %>
               </ul>
             </td>
-            <td class="px-6 py-4 text-white"><%= challenge.rejection_reason %></td>
+            <td class="px-6 py-4 text-white break-words"><%= challenge.rejection_reason %></td>
           </tr>
         <% end %>
         </tbody>
       </table>
 
-      <div class="mt-10 mb-6">
-        <%= link_to 'Torna alla Home', root_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-4 rounded transition duration-300' %>
+      <div class="mt-12">
+        <%= link_to 'Torna alla Home', root_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out shadow-lg' %>
       </div>
 
     </div>
