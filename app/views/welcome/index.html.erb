@@ -5,7 +5,8 @@
     <h1 class="text-6xl font-bold mb-6">Code Legends</h1>
     <p class="text-2xl mb-12">Benvenuto nel sito di duelli di programmazione definitivo!</p>
     <div>
-      <a href="#login" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded transition duration-300">Login</a>
+     <%= button_to 'Login', '/auth/auth0', method: :post, data: { turbo: false }, style: 'background-color: #1D4ED8; color: white; font-weight: bold; padding: 0.75rem 1.5rem; border-radius: 0.375rem; transition: background-color 0.3s; ', class: 'button-style' %>
+
       <a href="#register" class="bg-green-600 hover:bg-green-800 text-white font-bold py-3 px-6 rounded ml-4 transition duration-300">Registrati</a>
     </div>
   </div>

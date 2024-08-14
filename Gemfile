@@ -72,3 +72,5 @@ group :test do
 end
 
 gem "tailwindcss-rails", "~> 2.6"
+gem 'omniauth-auth0', '~> 3.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0' # prevents forged authentication requests
