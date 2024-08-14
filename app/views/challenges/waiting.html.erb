@@ -1,0 +1,27 @@
+<h1>In Attesa di un Avversario...</h1>
+<p>Il tuo ID: <%= @player.id %></p>
+
+<script>
+  function checkChallenge() {
+    fetch('/check_challenge')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.challenge_url) {
+          window.location.href = data.challenge_url;
+        } else {
+          console.error('Error:', data.error);
+        }
+      })
+      .catch(error => {
+        console.error('Fetch error:', error);
+      });
+  }
+
+  // Chiamato ad intervalli regolari per verificare lo stato della sfida
+  setInterval(checkChallenge, 500);
+</script>
