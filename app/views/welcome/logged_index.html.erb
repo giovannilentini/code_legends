@@ -1,0 +1,78 @@
+<div class="container">
+
+  <section class="flex items-center justify-center min-h-screen bg-gray-800 bg-opacity-70">
+    <div class="text-center px-4">
+      <h1 class="text-6xl font-bold mb-6">Code Legends</h1>
+      <p class="text-2xl mb-12">Benvenuto nel sito di duelli di programmazione definitivo!</p>
+
+      <!-- User Info -->
+      <% if @user %>
+        <div class="mb-6">
+          <p class="text-lg font-semibold text-white">Benvenuto, <span class="text-indigo-400"><%= @user['nickname'] %></span></p>
+          <p class="text-md text-gray-300"><%= @user['email'] %></p>
+        </div>
+      <% else %>
+        <p class="text-lg text-red-500">Errore: informazioni utente non disponibili.</p>
+      <% end %>
+
+
+      <!-- Logout Button -->
+      <div>
+        <%= button_to 'Logout', 'auth/logout', method: :get, data: { turbo: false }, style: 'background-color: #FF0000; color: white; font-weight: bold; padding: 0.75rem 1.5rem; border-radius: 0.375rem; transition: background-color 0.3s;', class: 'button-style' %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Start Match Section -->
+  <section class="flex items-center justify-center min-h-screen bg-gray-700 bg-opacity-70">
+    <div class="text-center px-4">
+      <h2 class="text-5xl font-bold mb-6">Inizia una nuova partita</h2>
+      <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-3 px-8 rounded transition duration-300">Avvia una partita</button>
+    </div>
+  </section>
+
+  <!-- Leaderboard Section -->
+  <section class="flex items-center justify-center min-h-screen bg-gray-600 bg-opacity-70">
+    <div class="w-full max-w-4xl px-4">
+      <h2 class="text-5xl font-bold text-center mb-12">Classifica</h2>
+      <div class="overflow-x-auto">
+        <table class="table-auto w-full text-left bg-gray-700 rounded-lg shadow-lg">
+          <thead>
+          <tr class="bg-gray-800">
+            <th class="px-6 py-3">Posizione</th>
+            <th class="px-6 py-3">Nome</th>
+            <th class="px-6 py-3">Punti</th>
+          </tr>
+          </thead>
+          <tbody>
+          <!-- Placeholder data -->
+          <tr class="bg-gray-800 odd:bg-gray-700">
+            <td class="border-t border-gray-800 px-6 py-4">1</td>
+            <td class="border-t border-gray-800 px-6 py-4">Mario Rossi</td>
+            <td class="border-t border-gray-800 px-6 py-4">1500</td>
+          </tr>
+          <tr class="bg-gray-800 odd:bg-gray-700">
+            <td class="border-t border-gray-800 px-6 py-4">2</td>
+            <td class="border-t border-gray-800 px-6 py-4">Luigi Verdi</td>
+            <td class="border-t border-gray-800 px-6 py-4">1400</td>
+          </tr>
+          <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Create New Challenge Section -->
+  <section class="flex items-center justify-center min-h-screen bg-gray-700 bg-opacity-70">
+    <div class="text-center px-4">
+      <h2 class="text-5xl font-bold mb-6">Crea una nuova sfida</h2>
+      <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded transition duration-300">Crea Sfida</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 bg-gray-800 bg-opacity-70">
+    <p>&copy; 2024 Code Legends. Tutti i diritti riservati.</p>
+  </footer>
+</div>

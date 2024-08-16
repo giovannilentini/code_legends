@@ -4835,3 +4835,572 @@ Completed 200 OK in 4ms (Views: 3.6ms | ActiveRecord: 0.0ms | Allocations: 5737)
 
 
 Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-14 12:02:54 +0200
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:10:26 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 6.6ms | Allocations: 3192)
+  Rendered layout layouts/application.html.erb (Duration: 443.0ms | Allocations: 148304)
+Completed 200 OK in 487ms (Views: 454.1ms | ActiveRecord: 0.0ms | Allocations: 155885)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-16 11:15:25 +0200
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:25:23 +0200
+  
+SyntaxError (/Users/giovannilentini/Workspace/code_legends/app/controllers/application_controller.rb:2: syntax error, unexpected `end'):
+  
+app/controllers/application_controller.rb:2: syntax error, unexpected `end'
+app/controllers/welcome_controller.rb:1:in `<main>'
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:25:33 +0200
+  
+SyntaxError (/Users/giovannilentini/Workspace/code_legends/app/controllers/application_controller.rb:2: syntax error, unexpected `end'):
+  
+app/controllers/application_controller.rb:2: syntax error, unexpected `end'
+app/controllers/welcome_controller.rb:1:in `<main>'
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:25:43 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 1.2ms | Allocations: 549)
+  Rendered layout layouts/application.html.erb (Duration: 42.3ms | Allocations: 24526)
+Completed 200 OK in 45ms (Views: 43.8ms | ActiveRecord: 0.0ms | Allocations: 25447)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:25:46 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 347)
+  Rendered layout layouts/application.html.erb (Duration: 9.8ms | Allocations: 5685)
+Completed 200 OK in 11ms (Views: 10.4ms | ActiveRecord: 0.0ms | Allocations: 5927)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:30:03 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 3.0ms | Allocations: 630)
+  Rendered layout layouts/application.html.erb (Duration: 45.9ms | Allocations: 23284)
+Completed 200 OK in 53ms (Views: 49.7ms | ActiveRecord: 0.0ms | Allocations: 24204)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-16 11:30:05 +0200
+Started GET "/auth/auth0/callback?code=Z0Oz6OkPFctmJy63ST87eF1n2tomUu60MJjJ7hguVqjcp&state=2779c9cf2959849e215707abe83218a46236fd52275443cb" for 127.0.0.1 at 2024-08-16 11:30:24 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"Z0Oz6OkPFctmJy63ST87eF1n2tomUu60MJjJ7hguVqjcp", "state"=>"2779c9cf2959849e215707abe83218a46236fd52275443cb"}
+Redirected to http://localhost:3000/dashboard
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 264)
+
+
+Started GET "/dashboard" for 127.0.0.1 at 2024-08-16 11:30:25 +0200
+Processing by DashboardController#show as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering dashboard/show.html.erb within layouts/application
+  Rendered dashboard/show.html.erb within layouts/application (Duration: 1.1ms | Allocations: 200)
+  Rendered layout layouts/application.html.erb (Duration: 9.5ms | Allocations: 5665)
+Completed 200 OK in 13ms (Views: 10.9ms | ActiveRecord: 0.0ms | Allocations: 6364)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-16 11:30:28 +0200
+Processing by Auth0Controller#logout as HTML
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 837)
+
+
+  
+NoMethodError (undefined method `[]' for nil):
+  
+app/controllers/auth0_controller.rb:29:in `logout_url'
+app/controllers/auth0_controller.rb:22:in `logout'
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-16 11:33:27 +0200
+Processing by Auth0Controller#logout as HTML
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 6ms (ActiveRecord: 0.0ms | Allocations: 498)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:33:28 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 7.5ms | Allocations: 569)
+  Rendered layout layouts/application.html.erb (Duration: 87.7ms | Allocations: 23221)
+Completed 200 OK in 100ms (Views: 95.2ms | ActiveRecord: 0.0ms | Allocations: 24128)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-16 11:33:29 +0200
+Started GET "/auth/auth0/callback?code=v8Y1ymomolL-vQ4yQLEt7Wm5OGRnFx8Ty-qDZpXXcdNDb&state=a954f8755e7e5e1b5eb417608d1b510da9b202079234c176" for 127.0.0.1 at 2024-08-16 11:33:56 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"v8Y1ymomolL-vQ4yQLEt7Wm5OGRnFx8Ty-qDZpXXcdNDb", "state"=>"a954f8755e7e5e1b5eb417608d1b510da9b202079234c176"}
+Redirected to http://localhost:3000/
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 127)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:33:57 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 381)
+  Rendered layout layouts/application.html.erb (Duration: 13.2ms | Allocations: 5744)
+Completed 200 OK in 15ms (Views: 14.0ms | ActiveRecord: 0.0ms | Allocations: 5984)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:41:54 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 2.6ms | Allocations: 1156)
+  Rendered layout layouts/application.html.erb (Duration: 2.9ms | Allocations: 1248)
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 0.0ms | Allocations: 2402)
+
+
+  
+ActionView::Template::Error (undefined local variable or method `logout_path' for an instance of #<Class:0x000000012540a328>):
+     6:       <p class="text-2xl mb-12">Benvenuto nel sito di duelli di programmazione definitivo!</p>
+     7:       <div>
+     8:         <!-- Pulsante di logout per utenti loggati -->
+     9:         <%= button_to 'Logout', logout_path, method: :get, style: 'background-color: #E53E3E; color: white; font-weight: bold; padding: 0.75rem 1.5rem; border-radius: 0.375rem; transition: background-color 0.3s;', class: 'button-style' %>
+    10:       </div>
+    11:     </div>
+    12:   </section>
+  
+app/views/welcome/logged_index.html.erb:9
+app/controllers/welcome_controller.rb:4:in `index'
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:43:54 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.5ms | Allocations: 241)
+  Rendered layout layouts/application.html.erb (Duration: 71.3ms | Allocations: 22917)
+Completed 200 OK in 78ms (Views: 75.9ms | ActiveRecord: 0.0ms | Allocations: 24073)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-16 11:43:58 +0200
+Processing by Auth0Controller#logout as HTML
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 467)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:43:58 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 2.3ms | Allocations: 295)
+  Rendered layout layouts/application.html.erb (Duration: 29.0ms | Allocations: 5625)
+Completed 200 OK in 36ms (Views: 30.9ms | ActiveRecord: 0.0ms | Allocations: 6089)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-16 11:44:07 +0200
+Started GET "/auth/auth0/callback?code=z_A980bWncudibSbsJdmONeuIAKxwi_qftKs7qsQbKjxh&state=2c349df9317dbd11cd43a7e11fbb8622e0fa9d7f9ae6bf63" for 127.0.0.1 at 2024-08-16 11:44:22 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"z_A980bWncudibSbsJdmONeuIAKxwi_qftKs7qsQbKjxh", "state"=>"2c349df9317dbd11cd43a7e11fbb8622e0fa9d7f9ae6bf63"}
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 127)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:44:22 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.1ms | Allocations: 50)
+  Rendered layout layouts/application.html.erb (Duration: 25.1ms | Allocations: 5462)
+Completed 200 OK in 27ms (Views: 25.7ms | ActiveRecord: 0.0ms | Allocations: 5960)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-16 11:44:26 +0200
+Processing by Auth0Controller#logout as HTML
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 410)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:44:26 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 111)
+  Rendered layout layouts/application.html.erb (Duration: 14.6ms | Allocations: 5448)
+Completed 200 OK in 16ms (Views: 15.3ms | ActiveRecord: 0.0ms | Allocations: 5837)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-16 11:44:32 +0200
+Started GET "/auth/auth0/callback?code=yiTA1XhDjPWX_90Ea73eE0KYnZzBm676z2sR6GdJFrjHl&state=9bca72a260ff9fd9c2bbe2056f1ce4fd643ed1d3c2b7be93" for 127.0.0.1 at 2024-08-16 11:44:40 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"yiTA1XhDjPWX_90Ea73eE0KYnZzBm676z2sR6GdJFrjHl", "state"=>"9bca72a260ff9fd9c2bbe2056f1ce4fd643ed1d3c2b7be93"}
+Redirected to http://localhost:3000/
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 122)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:44:41 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 50)
+  Rendered layout layouts/application.html.erb (Duration: 10.4ms | Allocations: 5383)
+Completed 200 OK in 12ms (Views: 11.1ms | ActiveRecord: 0.0ms | Allocations: 5899)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-16 11:44:45 +0200
+Processing by Auth0Controller#logout as HTML
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 413)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:44:46 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 111)
+  Rendered layout layouts/application.html.erb (Duration: 10.9ms | Allocations: 5441)
+Completed 200 OK in 12ms (Views: 11.6ms | ActiveRecord: 0.0ms | Allocations: 5824)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:55:21 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 3.5ms | Allocations: 324)
+  Rendered layout layouts/application.html.erb (Duration: 56.5ms | Allocations: 22908)
+Completed 200 OK in 67ms (Views: 63.9ms | ActiveRecord: 0.0ms | Allocations: 23992)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-16 11:55:23 +0200
+Started GET "/auth/auth0/callback?code=2tEvy72sxgiaH7mJWuevFxdxr21NbUgHNnV2ecVKJKhH2&state=770b7ea4e6076c03a74ffd4c2b4dfd988d0e2c8d665bf033" for 127.0.0.1 at 2024-08-16 11:55:26 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"2tEvy72sxgiaH7mJWuevFxdxr21NbUgHNnV2ecVKJKhH2", "state"=>"770b7ea4e6076c03a74ffd4c2b4dfd988d0e2c8d665bf033"}
+Redirected to http://localhost:3000/
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 165)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:55:27 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 2.0ms | Allocations: 1227)
+  Rendered layout layouts/application.html.erb (Duration: 2.3ms | Allocations: 1318)
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.0ms | Allocations: 1857)
+
+
+  
+ActionView::Template::Error (undefined method `[]' for nil):
+     7: 
+     8:       <!-- User Info -->
+     9:       <div class="mb-6">
+    10:         <p class="text-lg font-semibold text-white">Benvenuto, <span class="text-indigo-400"><%= @user['name'] %></span></p>
+    11:         <p class="text-md text-gray-300"><%= @user['email'] %></p>
+    12:       </div>
+    13: 
+  
+app/views/welcome/logged_index.html.erb:10
+app/controllers/welcome_controller.rb:4:in `index'
+Started GET "/" for 127.0.0.1 at 2024-08-16 11:59:32 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.3ms | Allocations: 1015)
+  Rendered layout layouts/application.html.erb (Duration: 1.5ms | Allocations: 1106)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms | Allocations: 1572)
+
+
+  
+ActionView::Template::Error (undefined method `[]' for nil):
+     7: 
+     8:       <!-- User Info -->
+     9:       <div class="mb-6">
+    10:         <p class="text-lg font-semibold text-white">Benvenuto, <span class="text-indigo-400"><%= @user['name'] %></span></p>
+    11:         <p class="text-md text-gray-300"><%= @user['email'] %></p>
+    12:       </div>
+    13: 
+  
+app/views/welcome/logged_index.html.erb:10
+app/controllers/welcome_controller.rb:4:in `index'
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:03:50 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.6ms | Allocations: 337)
+  Rendered layout layouts/application.html.erb (Duration: 71.7ms | Allocations: 22964)
+Completed 200 OK in 78ms (Views: 76.5ms | ActiveRecord: 0.0ms | Allocations: 24108)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-16 12:05:32 +0200
+Processing by Auth0Controller#logout as HTML
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 8ms (ActiveRecord: 0.0ms | Allocations: 452)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:05:33 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 4.5ms | Allocations: 295)
+  Rendered layout layouts/application.html.erb (Duration: 54.9ms | Allocations: 5626)
+Completed 200 OK in 60ms (Views: 58.9ms | ActiveRecord: 0.0ms | Allocations: 6083)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-16 12:05:34 +0200
+Started GET "/auth/auth0/callback?code=9oGAzB03bBT3PO9UeDzZ147_ZZnh_nLzClNqqDKR-bY6e&state=04c950c2c77dd267c78f80b7d79d575b942e1cd8f006cb48" for 127.0.0.1 at 2024-08-16 12:05:37 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"9oGAzB03bBT3PO9UeDzZ147_ZZnh_nLzClNqqDKR-bY6e", "state"=>"04c950c2c77dd267c78f80b7d79d575b942e1cd8f006cb48"}
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 127)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-16 12:05:38 +0200
+Processing by WelcomeController#logged_index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 52)
+  Rendered layout layouts/application.html.erb (Duration: 12.1ms | Allocations: 5392)
+Completed 200 OK in 15ms (Views: 13.0ms | ActiveRecord: 0.0ms | Allocations: 5935)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-16 12:11:59 +0200
+Processing by WelcomeController#logged_index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 52)
+  Rendered layout layouts/application.html.erb (Duration: 20.8ms | Allocations: 5384)
+Completed 200 OK in 25ms (Views: 21.5ms | ActiveRecord: 0.0ms | Allocations: 5904)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-16 12:12:02 +0200
+Processing by Auth0Controller#logout as HTML
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 404)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:12:03 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 111)
+  Rendered layout layouts/application.html.erb (Duration: 8.5ms | Allocations: 5441)
+Completed 200 OK in 10ms (Views: 9.1ms | ActiveRecord: 0.0ms | Allocations: 5818)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:12:09 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 108)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | Allocations: 5438)
+Completed 200 OK in 13ms (Views: 11.6ms | ActiveRecord: 0.0ms | Allocations: 5826)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:12:09 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 108)
+  Rendered layout layouts/application.html.erb (Duration: 15.8ms | Allocations: 5512)
+Completed 200 OK in 17ms (Views: 16.5ms | ActiveRecord: 0.0ms | Allocations: 5903)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:12:11 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 108)
+  Rendered layout layouts/application.html.erb (Duration: 10.6ms | Allocations: 5439)
+Completed 200 OK in 12ms (Views: 11.2ms | ActiveRecord: 0.0ms | Allocations: 5842)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:12:12 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 108)
+  Rendered layout layouts/application.html.erb (Duration: 10.2ms | Allocations: 5438)
+Completed 200 OK in 12ms (Views: 10.8ms | ActiveRecord: 0.0ms | Allocations: 5823)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:12:13 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 108)
+  Rendered layout layouts/application.html.erb (Duration: 8.8ms | Allocations: 5438)
+Completed 200 OK in 11ms (Views: 9.5ms | ActiveRecord: 0.0ms | Allocations: 5834)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:12:13 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 108)
+  Rendered layout layouts/application.html.erb (Duration: 9.6ms | Allocations: 5438)
+Completed 200 OK in 11ms (Views: 10.3ms | ActiveRecord: 0.0ms | Allocations: 5840)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-16 12:12:14 +0200
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:12:17 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 108)
+  Rendered layout layouts/application.html.erb (Duration: 11.2ms | Allocations: 5528)
+Completed 200 OK in 13ms (Views: 11.8ms | ActiveRecord: 0.0ms | Allocations: 5965)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:12:17 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 108)
+  Rendered layout layouts/application.html.erb (Duration: 9.6ms | Allocations: 5509)
+Completed 200 OK in 11ms (Views: 10.3ms | ActiveRecord: 0.0ms | Allocations: 5972)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:13:18 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 1.1ms | Allocations: 324)
+  Rendered layout layouts/application.html.erb (Duration: 36.8ms | Allocations: 22844)
+Completed 200 OK in 43ms (Views: 40.6ms | ActiveRecord: 0.0ms | Allocations: 23933)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:13:19 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 108)
+  Rendered layout layouts/application.html.erb (Duration: 11.8ms | Allocations: 5469)
+Completed 200 OK in 14ms (Views: 12.6ms | ActiveRecord: 0.0ms | Allocations: 5933)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:13:26 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 1.5ms | Allocations: 324)
+  Rendered layout layouts/application.html.erb (Duration: 19.1ms | Allocations: 22935)
+Completed 200 OK in 24ms (Views: 23.3ms | ActiveRecord: 0.0ms | Allocations: 24066)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:13:27 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 4.5ms | Allocations: 108)
+  Rendered layout layouts/application.html.erb (Duration: 15.0ms | Allocations: 5528)
+Completed 200 OK in 18ms (Views: 16.2ms | ActiveRecord: 0.0ms | Allocations: 5941)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-16 12:15:22 +0200
+Started GET "/auth/auth0/callback?code=zfKbNXuA7hRVuxBHjsse6pV8jYyIeIIDvSlMoRclLSCxP&state=46aa8195b9427a573bf8202f7d8d9930af800c39d05c1760" for 127.0.0.1 at 2024-08-16 12:16:05 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"zfKbNXuA7hRVuxBHjsse6pV8jYyIeIIDvSlMoRclLSCxP", "state"=>"46aa8195b9427a573bf8202f7d8d9930af800c39d05c1760"}
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 165)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-16 12:16:06 +0200
+Processing by WelcomeController#logged_index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 319)
+  Rendered layout layouts/application.html.erb (Duration: 23.1ms | Allocations: 5739)
+Completed 200 OK in 27ms (Views: 24.0ms | ActiveRecord: 0.0ms | Allocations: 6339)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-16 12:21:31 +0200
+Processing by WelcomeController#logged_index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.8ms | Allocations: 333)
+  Rendered layout layouts/application.html.erb (Duration: 98.8ms | Allocations: 22879)
+Completed 200 OK in 106ms (Views: 102.1ms | ActiveRecord: 0.0ms | Allocations: 24068)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-16 12:21:33 +0200
+Processing by WelcomeController#logged_index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 52)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | Allocations: 5466)
+Completed 200 OK in 13ms (Views: 11.4ms | ActiveRecord: 0.0ms | Allocations: 5970)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-16 12:21:45 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#logged_index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.6ms | Allocations: 529)
+  Rendered layout layouts/application.html.erb (Duration: 172.2ms | Allocations: 57823)
+Completed 200 OK in 218ms (Views: 182.0ms | ActiveRecord: 0.0ms | Allocations: 63447)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-16 12:28:24 +0200
+Processing by Auth0Controller#logout as HTML
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 3ms (ActiveRecord: 0.0ms | Allocations: 595)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-16 12:28:24 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 1.8ms | Allocations: 348)
+  Rendered layout layouts/application.html.erb (Duration: 55.9ms | Allocations: 22793)
+Completed 200 OK in 62ms (Views: 61.1ms | ActiveRecord: 0.0ms | Allocations: 23844)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-16 12:28:25 +0200
+Started GET "/auth/auth0/callback?code=YjE03yTuL5JhVvxcZHcPpPxkvqm4_IbTxkRcHgwS3_Krn&state=b37794ee19b1bc8962969e127065bbb995d8a68dbbabb257" for 127.0.0.1 at 2024-08-16 12:28:29 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"YjE03yTuL5JhVvxcZHcPpPxkvqm4_IbTxkRcHgwS3_Krn", "state"=>"b37794ee19b1bc8962969e127065bbb995d8a68dbbabb257"}
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 137)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-16 12:28:30 +0200
+Processing by WelcomeController#logged_index as HTML
+User info: {"nickname"=>"johnny", "name"=>"johnny@gmail.com", "picture"=>"https://s.gravatar.com/avatar/136c70acb946f0f37b12bb6fbfe56f2c?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fjo.png", "updated_at"=>"2024-08-16T10:28:28.709Z", "email"=>"johnny@gmail.com", "email_verified"=>false, "iss"=>"https://dev-clyklmmz4z2hbpdz.us.auth0.com/", "aud"=>"F3RKbMB0iW8YTxwmfCg922F0hsio17PC", "iat"=>1723804109, "exp"=>1723840109, "sub"=>"auth0|66bf128017e6fdfa4e7f2c7f", "sid"=>"5Od43pIio--uBeTo1JshGYn1VZ3L9WwT", "nonce"=>"43964d3a9dab6f2e44271e7f53afa7f9"}
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.1ms | Allocations: 317)
+  Rendered layout layouts/application.html.erb (Duration: 12.5ms | Allocations: 5846)
+Completed 200 OK in 16ms (Views: 13.3ms | ActiveRecord: 0.0ms | Allocations: 6484)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-16 12:29:31 +0200
+Processing by WelcomeController#logged_index as HTML
+User info: {"nickname"=>"johnny", "name"=>"johnny@gmail.com", "picture"=>"https://s.gravatar.com/avatar/136c70acb946f0f37b12bb6fbfe56f2c?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fjo.png", "updated_at"=>"2024-08-16T10:28:28.709Z", "email"=>"johnny@gmail.com", "email_verified"=>false, "iss"=>"https://dev-clyklmmz4z2hbpdz.us.auth0.com/", "aud"=>"F3RKbMB0iW8YTxwmfCg922F0hsio17PC", "iat"=>1723804109, "exp"=>1723840109, "sub"=>"auth0|66bf128017e6fdfa4e7f2c7f", "sid"=>"5Od43pIio--uBeTo1JshGYn1VZ3L9WwT", "nonce"=>"43964d3a9dab6f2e44271e7f53afa7f9"}
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 330)
+  Rendered layout layouts/application.html.erb (Duration: 52.9ms | Allocations: 22930)
+Completed 200 OK in 58ms (Views: 55.3ms | ActiveRecord: 0.0ms | Allocations: 24152)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-16 12:29:46 +0200
+Processing by WelcomeController#logged_index as HTML
+User info: {"nickname"=>"johnny", "name"=>"johnny@gmail.com", "picture"=>"https://s.gravatar.com/avatar/136c70acb946f0f37b12bb6fbfe56f2c?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fjo.png", "updated_at"=>"2024-08-16T10:28:28.709Z", "email"=>"johnny@gmail.com", "email_verified"=>false, "iss"=>"https://dev-clyklmmz4z2hbpdz.us.auth0.com/", "aud"=>"F3RKbMB0iW8YTxwmfCg922F0hsio17PC", "iat"=>1723804109, "exp"=>1723840109, "sub"=>"auth0|66bf128017e6fdfa4e7f2c7f", "sid"=>"5Od43pIio--uBeTo1JshGYn1VZ3L9WwT", "nonce"=>"43964d3a9dab6f2e44271e7f53afa7f9"}
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.0ms | Allocations: 337)
+  Rendered layout layouts/application.html.erb (Duration: 37.2ms | Allocations: 23077)
+Completed 200 OK in 43ms (Views: 40.6ms | ActiveRecord: 0.0ms | Allocations: 24301)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-16 12:35:49 +0200
+Processing by WelcomeController#logged_index as HTML
+User info: {"nickname"=>"johnny", "name"=>"johnny@gmail.com", "picture"=>"https://s.gravatar.com/avatar/136c70acb946f0f37b12bb6fbfe56f2c?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fjo.png", "updated_at"=>"2024-08-16T10:28:28.709Z", "email"=>"johnny@gmail.com", "email_verified"=>false, "iss"=>"https://dev-clyklmmz4z2hbpdz.us.auth0.com/", "aud"=>"F3RKbMB0iW8YTxwmfCg922F0hsio17PC", "iat"=>1723804109, "exp"=>1723840109, "sub"=>"auth0|66bf128017e6fdfa4e7f2c7f", "sid"=>"5Od43pIio--uBeTo1JshGYn1VZ3L9WwT", "nonce"=>"43964d3a9dab6f2e44271e7f53afa7f9"}
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 337)
+  Rendered layout layouts/application.html.erb (Duration: 37.6ms | Allocations: 22985)
+Completed 200 OK in 42ms (Views: 39.7ms | ActiveRecord: 0.0ms | Allocations: 24215)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-16 12:35:54 +0200
+Processing by WelcomeController#logged_index as HTML
+User info: {"nickname"=>"johnny", "name"=>"johnny@gmail.com", "picture"=>"https://s.gravatar.com/avatar/136c70acb946f0f37b12bb6fbfe56f2c?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fjo.png", "updated_at"=>"2024-08-16T10:28:28.709Z", "email"=>"johnny@gmail.com", "email_verified"=>false, "iss"=>"https://dev-clyklmmz4z2hbpdz.us.auth0.com/", "aud"=>"F3RKbMB0iW8YTxwmfCg922F0hsio17PC", "iat"=>1723804109, "exp"=>1723840109, "sub"=>"auth0|66bf128017e6fdfa4e7f2c7f", "sid"=>"5Od43pIio--uBeTo1JshGYn1VZ3L9WwT", "nonce"=>"43964d3a9dab6f2e44271e7f53afa7f9"}
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 337)
+  Rendered layout layouts/application.html.erb (Duration: 23.0ms | Allocations: 23076)
+Completed 200 OK in 26ms (Views: 24.5ms | ActiveRecord: 0.0ms | Allocations: 24307)
+
+
