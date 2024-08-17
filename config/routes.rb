@@ -1,11 +1,6 @@
 Rails.application.routes.draw do
-
-  resources :games do
-    collection do
-      post 'execute_code'
-    end
-  end
-
-  get "welcome/index"
-  root 'games#index'
+  root 'welcome#index'
+  get "play_now", to: "matchmaking#play_now"
+  post "challenge_friend", to: "matchmaking#challenge_friend"
+  post "find_opponent", to: "matchmaking#find_opponent"
 end
