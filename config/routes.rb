@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
-  get 'editor/show'
-  root 'welcome#index'
+
+  resources :games do
+    collection do
+      post 'execute_code'
+    end
+  end
+
+  get "welcome/index"
+  root 'games#index'
 end
