@@ -7,8 +7,8 @@ class WelcomeController < ApplicationController
     end
   end
 
-    def logged_index
-      @user = session[:userinfo]
-      Rails.logger.debug "User info: #{@user.inspect}"
-    end
+  def logged_index
+    @user = session[:userinfo]
+    Rails.logger.debug "User info: #{@user.inspect}"
+  end
 end

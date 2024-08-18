@@ -19,4 +19,22 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_16_171609) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "challenges", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: -1
+    t.string "rejection_reason"
+  end
+
+  create_table "test_cases", force: :cascade do |t|
+    t.string "input_example"
+    t.string "expected_output"
+    t.integer "challenge_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["challenge_id"], name: "index_test_cases_on_challenge_id"
+  end
+
+  add_foreign_key "test_cases", "challenges"
 end
