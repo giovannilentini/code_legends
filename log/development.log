@@ -8818,3 +8818,83 @@ Processing by WelcomeController#index as HTML
 Completed 200 OK in 5ms (Views: 5.2ms | ActiveRecord: 0.0ms | Allocations: 6043)
 
 
+Started GET "/" for 127.0.0.1 at 2024-08-18 17:45:22 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 1.4ms | Allocations: 605)
+  Rendered layout layouts/application.html.erb (Duration: 413.9ms | Allocations: 144411)
+Completed 200 OK in 462ms (Views: 449.0ms | ActiveRecord: 0.0ms | Allocations: 153943)
+
+
+Started GET "/auth/register" for 127.0.0.1 at 2024-08-18 17:45:25 +0200
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/authorize?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&response_type=code&redirect_uri=http://localhost:3000&scope=openid%20profile%20email&screen_hint=signup
+Completed 301 Moved Permanently in 0ms
+
+
+Started GET "/auth/register" for 127.0.0.1 at 2024-08-18 17:45:26 +0200
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/authorize?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&response_type=code&redirect_uri=http://localhost:3000&scope=openid%20profile%20email&screen_hint=signup
+Completed 301 Moved Permanently in 0ms
+
+
+Started GET "/?code=0g_NI90-Xf24gy3US2ITJCREM7QkINkkTESayyrIAUL1B" for 127.0.0.1 at 2024-08-18 17:46:03 +0200
+Processing by WelcomeController#index as HTML
+  Parameters: {"code"=>"0g_NI90-Xf24gy3US2ITJCREM7QkINkkTESayyrIAUL1B"}
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 120)
+  Rendered layout layouts/application.html.erb (Duration: 17.0ms | Allocations: 5461)
+Completed 200 OK in 64ms (Views: 18.7ms | ActiveRecord: 0.0ms | Allocations: 11718)
+
+
+Started GET "/auth/register" for 127.0.0.1 at 2024-08-18 17:46:07 +0200
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/authorize?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&response_type=code&redirect_uri=http://localhost:3000&scope=openid%20profile%20email&screen_hint=signup
+Completed 301 Moved Permanently in 0ms
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-18 17:46:08 +0200
+Started GET "/auth/auth0/callback?code=9NCNi2CWmpc6a7yRZaA5e2RP7PsNYxT6MYPgLkHC1hcTi&state=c46494e1fca6b5a67756528cad882b28cc0cdcb2be1a0ac4" for 127.0.0.1 at 2024-08-18 17:46:08 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"9NCNi2CWmpc6a7yRZaA5e2RP7PsNYxT6MYPgLkHC1hcTi", "state"=>"c46494e1fca6b5a67756528cad882b28cc0cdcb2be1a0ac4"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66c21738664fea6c618d1144"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "franco@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66c21738664fea6c618d1144"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Create (4.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "auth0_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "franco@gmail.com"], ["email", "franco@gmail.com"], ["auth0_id", "auth0|66c21738664fea6c618d1144"], ["created_at", "2024-08-18 15:46:09.591825"], ["updated_at", "2024-08-18 15:46:09.591825"]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 143ms (ActiveRecord: 19.5ms | Allocations: 26108)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-18 17:46:09 +0200
+Processing by WelcomeController#logged_index as HTML
+User info: {"auth0_id"=>"auth0|66c21738664fea6c618d1144", "name"=>"franco@gmail.com", "email"=>"franco@gmail.com"}
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 338)
+  Rendered layout layouts/application.html.erb (Duration: 9.9ms | Allocations: 5682)
+Completed 200 OK in 12ms (Views: 10.4ms | ActiveRecord: 0.0ms | Allocations: 6186)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-18 17:46:15 +0200
+Processing by Auth0Controller#logout as HTML
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 399)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-18 17:46:16 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 123)
+  Rendered layout layouts/application.html.erb (Duration: 11.7ms | Allocations: 5453)
+Completed 200 OK in 13ms (Views: 12.4ms | ActiveRecord: 0.0ms | Allocations: 5833)
+
+

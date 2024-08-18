@@ -1,8 +1,6 @@
 # ./config/routes.rb
 Rails.application.routes.draw do
   root 'welcome#index'
-  
-  root 'welcome#index'
   get '/logged_index' => 'welcome#logged_index'
 
   # Route per il login tramite Auth0
