@@ -9358,3 +9358,371 @@ Processing by DatabaseController#info as HTML
 Completed 200 OK in 14ms (Views: 12.3ms | ActiveRecord: 0.4ms | Allocations: 8109)
 
 
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-18 18:59:48 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Auth0Controller#logout as HTML
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 13ms (ActiveRecord: 0.0ms | Allocations: 3769)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-18 18:59:49 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 2.6ms | Allocations: 824)
+Started GET "/" for 127.0.0.1 at 2024-08-18 18:59:49 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 216)
+  Rendered layout layouts/application.html.erb (Duration: 469.4ms | Allocations: 209696)
+Completed 200 OK in 531ms (Views: 507.7ms | ActiveRecord: 0.0ms | Allocations: 218431)
+
+
+  Rendered layout layouts/application.html.erb (Duration: 147.0ms | Allocations: 105399)
+Completed 200 OK in 149ms (Views: 148.6ms | ActiveRecord: 0.0ms | Allocations: 106249)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-18 18:59:51 +0200
+Started GET "/auth/auth0/callback?code=TN2v6GAnJxgXonXptq7t-yIFJ4trym4D6eTFz-v_lnHjp&state=cbc95b994acce9aae83d093046d524dc2126a962c0a63aa6" for 127.0.0.1 at 2024-08-18 18:59:55 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"TN2v6GAnJxgXonXptq7t-yIFJ4trym4D6eTFz-v_lnHjp", "state"=>"cbc95b994acce9aae83d093046d524dc2126a962c0a63aa6"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66bf128017e6fdfa4e7f2c7f"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 99ms (ActiveRecord: 6.1ms | Allocations: 21614)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-18 18:59:56 +0200
+Processing by WelcomeController#logged_index as HTML
+User info: {"auth0_id"=>"auth0|66bf128017e6fdfa4e7f2c7f", "name"=>"johnny@gmail.com", "email"=>"johnny@gmail.com"}
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.0ms | Allocations: 338)
+  Rendered layout layouts/application.html.erb (Duration: 6.5ms | Allocations: 5675)
+Completed 200 OK in 9ms (Views: 7.1ms | ActiveRecord: 0.0ms | Allocations: 6200)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-18 19:00:06 +0200
+Processing by Auth0Controller#logout as HTML
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 332)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-18 19:00:06 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 216)
+  Rendered layout layouts/application.html.erb (Duration: 14.8ms | Allocations: 5546)
+Completed 200 OK in 16ms (Views: 15.4ms | ActiveRecord: 0.0ms | Allocations: 5917)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-18 19:01:14 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.9ms | Allocations: 419)
+  Rendered layout layouts/application.html.erb (Duration: 38.8ms | Allocations: 22825)
+Completed 200 OK in 43ms (Views: 42.4ms | ActiveRecord: 0.0ms | Allocations: 23907)
+
+
+Started GET "/database/info" for 127.0.0.1 at 2024-08-18 19:01:16 +0200
+Processing by DatabaseController#info as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering database/info.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mTestCase Load (0.1ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases"[0m
+  ↳ app/views/database/info.html.erb:18
+  Rendered database/info.html.erb within layouts/application (Duration: 27.3ms | Allocations: 14995)
+  Rendered layout layouts/application.html.erb (Duration: 41.3ms | Allocations: 20511)
+Completed 200 OK in 79ms (Views: 41.2ms | ActiveRecord: 5.1ms | Allocations: 26756)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-18 19:01:19 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 153)
+  Rendered layout layouts/application.html.erb (Duration: 12.8ms | Allocations: 5484)
+Completed 200 OK in 15ms (Views: 13.5ms | ActiveRecord: 0.0ms | Allocations: 5873)
+
+
+Started GET "/auth/register" for 127.0.0.1 at 2024-08-18 19:01:21 +0200
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/authorize?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&response_type=code&redirect_uri=http://localhost:3000&scope=openid%20profile%20email&screen_hint=signup
+Completed 301 Moved Permanently in 0ms
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-18 19:01:22 +0200
+Started GET "/auth/auth0/callback?code=XQMIJ02BEOBRsQBQOYpUjCO4a5GbbbzxLjsA6szSwMpXx&state=d78ab979e3225331696edf1b5d54a44ab360ecaa4113d380" for 127.0.0.1 at 2024-08-18 19:01:25 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"XQMIJ02BEOBRsQBQOYpUjCO4a5GbbbzxLjsA6szSwMpXx", "state"=>"d78ab979e3225331696edf1b5d54a44ab360ecaa4113d380"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66bf128017e6fdfa4e7f2c7f"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 3ms (ActiveRecord: 0.2ms | Allocations: 742)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-18 19:01:26 +0200
+Processing by WelcomeController#logged_index as HTML
+User info: {"auth0_id"=>"auth0|66bf128017e6fdfa4e7f2c7f", "name"=>"johnny@gmail.com", "email"=>"johnny@gmail.com"}
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.3ms | Allocations: 465)
+  Rendered layout layouts/application.html.erb (Duration: 8.0ms | Allocations: 5802)
+Completed 200 OK in 11ms (Views: 8.8ms | ActiveRecord: 0.0ms | Allocations: 6310)
+
+
+Started GET "/profile" for 127.0.0.1 at 2024-08-18 19:01:34 +0200
+Processing by ProfilesController#user_profile as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/user_profile.html.erb within layouts/application
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ?[0m  [["status", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:15
+  [1m[36mTestCase Load (3.4ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases" WHERE "test_cases"."challenge_id" = ?[0m  [["challenge_id", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:20
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ?[0m  [["status", 0]]
+  ↳ app/views/profiles/user_profile.html.erb:40
+  Rendered profiles/user_profile.html.erb within layouts/application (Duration: 36.2ms | Allocations: 9206)
+  Rendered layout layouts/application.html.erb (Duration: 44.2ms | Allocations: 14729)
+Completed 200 OK in 47ms (Views: 41.9ms | ActiveRecord: 3.6ms | Allocations: 15288)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-18 19:01:36 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 123)
+  Rendered layout layouts/application.html.erb (Duration: 14.3ms | Allocations: 5454)
+Completed 200 OK in 17ms (Views: 15.4ms | ActiveRecord: 0.0ms | Allocations: 5868)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-18 19:02:48 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.3ms | Allocations: 542)
+  Rendered layout layouts/application.html.erb (Duration: 50.7ms | Allocations: 22962)
+Completed 200 OK in 58ms (Views: 55.3ms | ActiveRecord: 0.0ms | Allocations: 24041)
+
+
+Started GET "/challenges/new" for 127.0.0.1 at 2024-08-18 19:02:50 +0200
+Processing by ChallengesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering challenges/new.html.erb within layouts/application
+  Rendered challenges/new.html.erb within layouts/application (Duration: 0.7ms | Allocations: 184)
+  Rendered layout layouts/application.html.erb (Duration: 14.3ms | Allocations: 5721)
+Completed 200 OK in 54ms (Views: 16.4ms | ActiveRecord: 10.3ms | Allocations: 15429)
+
+
+Started POST "/challenges" for 127.0.0.1 at 2024-08-18 19:02:55 +0200
+Processing by ChallengesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "challenge"=>{"description"=>"f", "test_cases_attributes"=>{"0"=>{"input_example"=>"", "expected_output"=>""}}}, "commit"=>"Propose"}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/challenges_controller.rb:9:in `create'
+  [1m[36mChallenge Create (8.1ms)[0m  [1m[32mINSERT INTO "challenges" ("description", "created_at", "updated_at", "status", "rejection_reason") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["description", "f"], ["created_at", "2024-08-18 17:02:55.104267"], ["updated_at", "2024-08-18 17:02:55.104267"], ["status", -1], ["rejection_reason", nil]]
+  ↳ app/controllers/challenges_controller.rb:9:in `create'
+  [1m[36mTestCase Create (0.3ms)[0m  [1m[32mINSERT INTO "test_cases" ("input_example", "expected_output", "challenge_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["input_example", ""], ["expected_output", ""], ["challenge_id", 2], ["created_at", "2024-08-18 17:02:55.116214"], ["updated_at", "2024-08-18 17:02:55.116214"]]
+  ↳ app/controllers/challenges_controller.rb:9:in `create'
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/challenges_controller.rb:9:in `create'
+Redirected to http://localhost:3000/challenges/2
+Completed 302 Found in 40ms (ActiveRecord: 9.4ms | Allocations: 5243)
+
+
+Started GET "/challenges/2" for 127.0.0.1 at 2024-08-18 19:02:55 +0200
+  
+AbstractController::ActionNotFound (The action 'show' could not be found for ChallengesController):
+  
+actionpack (7.1.3.4) lib/abstract_controller/base.rb:155:in `process'
+actionview (7.1.3.4) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3.4) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.4) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:882:in `call'
+omniauth (2.1.2) lib/omniauth/strategy.rb:202:in `call!'
+omniauth (2.1.2) lib/omniauth/strategy.rb:169:in `call'
+omniauth (2.1.2) lib/omniauth/builder.rb:44:in `call'
+rack (3.1.7) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.7) lib/rack/etag.rb:29:in `call'
+rack (3.1.7) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.7) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3.4) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.4) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.4) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.1.7) lib/rack/method_override.rb:28:in `call'
+rack (3.1.7) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.1.7) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.4) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/challenges/new" for 127.0.0.1 at 2024-08-18 19:02:55 +0200
+Processing by ChallengesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering challenges/new.html.erb within layouts/application
+  Rendered challenges/new.html.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered layout layouts/application.html.erb (Duration: 5.9ms | Allocations: 5518)
+Completed 200 OK in 8ms (Views: 6.7ms | ActiveRecord: 0.0ms | Allocations: 5948)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-18 19:02:56 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 143)
+  Rendered layout layouts/application.html.erb (Duration: 10.7ms | Allocations: 5474)
+Completed 200 OK in 12ms (Views: 11.4ms | ActiveRecord: 0.0ms | Allocations: 5898)
+
+
+Started GET "/database/info" for 127.0.0.1 at 2024-08-18 19:02:58 +0200
+Processing by DatabaseController#info as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering database/info.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mTestCase Load (0.1ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases"[0m
+  ↳ app/views/database/info.html.erb:18
+  Rendered database/info.html.erb within layouts/application (Duration: 11.7ms | Allocations: 5132)
+  Rendered layout layouts/application.html.erb (Duration: 24.3ms | Allocations: 10684)
+Completed 200 OK in 32ms (Views: 24.9ms | ActiveRecord: 1.3ms | Allocations: 12437)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-18 19:03:37 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 143)
+  Rendered layout layouts/application.html.erb (Duration: 15.7ms | Allocations: 5479)
+Completed 200 OK in 18ms (Views: 16.4ms | ActiveRecord: 0.0ms | Allocations: 5911)
+
+
+Started GET "/admin_profile" for 127.0.0.1 at 2024-08-18 19:03:41 +0200
+Processing by ProfilesController#admin_profile as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/admin_profile.html.erb within layouts/application
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ?[0m  [["status", -1]]
+  ↳ app/views/profiles/admin_profile.html.erb:15
+  [1m[36mTestCase Load (0.1ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases" WHERE "test_cases"."challenge_id" = ?[0m  [["challenge_id", 2]]
+  ↳ app/views/profiles/admin_profile.html.erb:20
+  Rendered profiles/admin_profile.html.erb within layouts/application (Duration: 7.5ms | Allocations: 2692)
+  Rendered layout layouts/application.html.erb (Duration: 18.0ms | Allocations: 8026)
+Completed 200 OK in 21ms (Views: 19.0ms | ActiveRecord: 0.3ms | Allocations: 8541)
+
+
+Started POST "/challenges/2/update_status" for 127.0.0.1 at 2024-08-18 19:03:47 +0200
+Processing by ProfilesController#update_status as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "status"=>"0", "rejection_reason"=>"no", "id"=>"2"}
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/profiles_controller.rb:7:in `update_status'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/profiles_controller.rb:16:in `update_status'
+  [1m[36mChallenge Update (2.0ms)[0m  [1m[33mUPDATE "challenges" SET "updated_at" = ?, "status" = ?, "rejection_reason" = ? WHERE "challenges"."id" = ?[0m  [["updated_at", "2024-08-18 17:03:47.023949"], ["status", 0], ["rejection_reason", "no"], ["id", 2]]
+  ↳ app/controllers/profiles_controller.rb:16:in `update_status'
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/profiles_controller.rb:16:in `update_status'
+Redirected to http://localhost:3000/admin_profile
+Completed 302 Found in 13ms (ActiveRecord: 3.0ms | Allocations: 3141)
+
+
+Started GET "/admin_profile" for 127.0.0.1 at 2024-08-18 19:03:47 +0200
+Processing by ProfilesController#admin_profile as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/admin_profile.html.erb within layouts/application
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ?[0m  [["status", -1]]
+  ↳ app/views/profiles/admin_profile.html.erb:15
+  Rendered profiles/admin_profile.html.erb within layouts/application (Duration: 1.2ms | Allocations: 441)
+  Rendered layout layouts/application.html.erb (Duration: 12.5ms | Allocations: 5979)
+Completed 200 OK in 14ms (Views: 13.0ms | ActiveRecord: 0.1ms | Allocations: 6251)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-18 19:03:48 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 143)
+  Rendered layout layouts/application.html.erb (Duration: 8.9ms | Allocations: 5475)
+Completed 200 OK in 11ms (Views: 9.6ms | ActiveRecord: 0.0ms | Allocations: 5912)
+
+
+Started GET "/challenges/new" for 127.0.0.1 at 2024-08-18 19:03:51 +0200
+Processing by ChallengesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering challenges/new.html.erb within layouts/application
+  Rendered challenges/new.html.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered layout layouts/application.html.erb (Duration: 10.6ms | Allocations: 5517)
+Completed 200 OK in 13ms (Views: 11.3ms | ActiveRecord: 0.0ms | Allocations: 5948)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-18 19:03:53 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 143)
+  Rendered layout layouts/application.html.erb (Duration: 10.5ms | Allocations: 5474)
+Completed 200 OK in 12ms (Views: 11.2ms | ActiveRecord: 0.0ms | Allocations: 5893)
+
+
+Started GET "/profile" for 127.0.0.1 at 2024-08-18 19:03:56 +0200
+Processing by ProfilesController#user_profile as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/user_profile.html.erb within layouts/application
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ?[0m  [["status", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:15
+  [1m[36mTestCase Load (0.1ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases" WHERE "test_cases"."challenge_id" = ?[0m  [["challenge_id", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:20
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ?[0m  [["status", 0]]
+  ↳ app/views/profiles/user_profile.html.erb:40
+  [1m[36mTestCase Load (0.1ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases" WHERE "test_cases"."challenge_id" = ?[0m  [["challenge_id", 2]]
+  ↳ app/views/profiles/user_profile.html.erb:45
+  Rendered profiles/user_profile.html.erb within layouts/application (Duration: 8.2ms | Allocations: 2347)
+  Rendered layout layouts/application.html.erb (Duration: 23.9ms | Allocations: 7857)
+Completed 200 OK in 27ms (Views: 24.1ms | ActiveRecord: 0.5ms | Allocations: 8238)
+
+

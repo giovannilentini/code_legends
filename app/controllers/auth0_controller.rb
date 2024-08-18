@@ -19,7 +19,8 @@ class Auth0Controller < ApplicationController
     session[:userinfo] = {
       'auth0_id' => user.auth0_id,
       'name' => user.name,
-      'email' => user.email
+      'email' => user.email,
+      'user_id' => user.id
     }
 
     # Redirect to the home page for logged-in users

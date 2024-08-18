@@ -67,9 +67,22 @@
   <section class="flex items-center justify-center min-h-screen bg-gray-700 bg-opacity-70">
     <div class="text-center px-4">
       <h2 class="text-5xl font-bold mb-6">Crea una nuova sfida</h2>
-      <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded transition duration-300">Crea Sfida</button>
+      <%= link_to 'Crea Sfida', new_challenge_path, class: 'bg-purple-500 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded transition duration-300' %>
     </div>
   </section>
+
+  <!-- Profile Navigation Section -->
+  <section class="flex items-center justify-center min-h-screen bg-gray-600 bg-opacity-70">
+    <div class="flex justify-center space-x-4 mt-4">
+      <%= link_to "User Profile", profile_path, class: "bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded transition duration-300" %>
+      <%= link_to "Admin Profile", admin_profile_path, class: "bg-red-600 hover:bg-red-800 text-white font-bold py-3 px-6 rounded transition duration-300" %>
+    </div>
+  </section>
+
+  <!-- Pulsante per visualizzare le informazioni sul database -->
+  <div class="flex justify-center mt-6">
+    <%= link_to 'Visualizza Tabelle DB', database_info_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded transition duration-300' %>
+  </div>
 
   <!-- Footer -->
   <footer class="text-center py-4 bg-gray-800 bg-opacity-70">
