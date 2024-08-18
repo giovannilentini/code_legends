@@ -4,8 +4,6 @@ pin "application"
 pin "@hotwired/turbo-rails", to: "turbo.min.js"
 pin "@hotwired/stimulus", to: "stimulus.min.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
-
-# Editor
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "@codemirror/basic-setup", to: "@codemirror--basic-setup.js" # @0.20.0
 pin "@codemirror/lang-javascript", to: "@codemirror--lang-javascript.js" # @6.2.2
@@ -33,3 +31,5 @@ pin "@codemirror/lang-java", to: "@codemirror--lang-java.js" # @6.0.1
 pin "@lezer/java", to: "@lezer--java.js" # @1.1.2
 pin "@codemirror/lang-cpp", to: "@codemirror--lang-cpp.js" # @6.0.2
 pin "@lezer/cpp", to: "@lezer--cpp.js" # @1.1.2
+pin "@rails/actioncable", to: "actioncable.esm.js"
+pin_all_from "app/javascript/channels", under: "channels"
