@@ -2,7 +2,6 @@
 Rails.application.routes.draw do
   get 'database/info'
   root 'welcome#index'
-<<<<<<< HEAD
   get '/logged_index' => 'welcome#logged_index'
 
   # Route per il login tramite Auth0
@@ -22,7 +21,6 @@ Rails.application.routes.draw do
 
   # Route per la registrazione
   get '/auth/register', to: redirect('https://dev-clyklmmz4z2hbpdz.us.auth0.com/authorize?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&response_type=code&redirect_uri=http://localhost:3000&scope=openid%20profile%20email&screen_hint=signup')
-=======
 
   resources :challenges, only: [:new, :create, :show, :index]
 
@@ -34,5 +32,4 @@ Rails.application.routes.draw do
   get 'database_info', to: 'database#info', as: 'info'
 
   post 'clear_tables', to: 'database#clear_tables'
->>>>>>> feature/profile-page
 end
