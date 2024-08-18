@@ -11,8 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const languageSelector = document.querySelector('#language-selector');
     let currentLanguage = 'python3';
     let languageExtension = python();
-    const initialNewLines = '\n'.repeat(50); // 9 newlines create 10 lines in total
-    let code = "";
+    const initialNewLines = '\n'.repeat(50);
     let editor;
     if (editorElement && languageSelector) {
 
@@ -39,18 +38,13 @@ document.addEventListener('DOMContentLoaded', () => {
             // Creating the Editor using CodeMirror
             const state = EditorState.create({
                 doc: 'Hello, World!'.concat(initialNewLines),
-                extensions: [basicSetup, languageExtension, oneDark,
-                    EditorView.updateListener.of((v) => {
-                        if (v.docChanged) {
-                            code = v.state.doc.toString().trimEnd()
-                        }
-                    })]
+                extensions: [basicSetup, languageExtension, oneDark]
             });
             editor = new EditorView({
                 state,
                 parent: editorElement
             });
-            code = editor.state.doc.toString().trimEnd()
+            window.editor = editor;
         }
         createEditor(currentLanguage);
 
@@ -67,9 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
     if(form){
         form.addEventListener('submit', function(event) {
             // Get the code from the editor and set it to the hidden input field
-            console.log(code)
-            hiddenCodeInput.value = code
+            hiddenCodeInput.value = editor.state.doc.toString().trimEnd()
         });
     }
 
 });
+
+/*
+EditorView.updateListener.of((v) => {
+                        if (v.docChanged) {
+                            code = v.state.doc.toString().trimEnd()
+                        }
+                    })
+ */

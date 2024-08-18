@@ -62,18 +62,26 @@ class ChallengesController < ApplicationController
   def execute_code
     response = JdoodleService.execute_code(params[:code], params[:language])
     p "RESPONSE"
-    p response
-    if response.code == 200
-      @result = JSON.parse(response.body)["output"]
-    else
-      @result = JSON.parse(response.body)["output"]
+    p response.body
+
+    unless response.nil?
+      if response.code == "200"
+        @result = JSON.parse(response.body)["output"]
+      else
+        @result = JSON.parse(response.body)["error"]
+      end
     end
-    respond_to do |format|
-      format.turbo_stream
-    end
+    render json: { output: @result }
   end
 
-
+  def format_jdoodle_message(message)
+    # Convert newlines and special characters to HTML safe format
+    message
+      .gsub("\n", "<br>")
+      .gsub(" ", "&nbsp;")
+      .gsub('\\"', '"')
+      .html_safe
+  end
 
   def waiting
     @player = Player.find(session[:player_id])

@@ -10,7 +10,7 @@
   </div>
 
   <!-- Main Content Section -->
-  <%= form_with(url: execute_code_path, method: :post, data: { turbo: true }, id: 'execute-form', class: "overflow-hidden") do |form| %>
+  <%= form_with(url: execute_code_path, method: :post, id: 'execute-form', class: "overflow-hidden") do |form| %>
 
     <div class="flex flex-row justify-center space-x-10 px-4 py-6 ">
       <!-- Left Column -->
@@ -36,23 +36,18 @@
         <!-- Box Console -->
         <div class="flex flex-col bg-black p-4 h-1/4 rounded-lg shadow-md">
           <h2 class="text-lg font-bold text-center">CONSOLE</h2>
-          <div class="bg-[#2d2d2d] text-white mt-2 h-full overflow-auto">
-            <div id="output" class="w-full">
-              <div class="text-lime-500 p-4 font-roboto">
-                <!--<%= j @result %>-->
-                <h1>Hello, world</h1>
-              </div>
-              <turbo-frame id="console-output" class="bg-gray-600">
-                <!-- Initial content of the console -->
-              </turbo-frame>
+          <div class="bg-[#2d2d2d] text-white mt-2 p-4 h-full overflow-auto">
+            <div id="output" class="text-lime-500 p-4 font-roboto">
+
+            </div>
             </div>
           </div>
         </div>
-      </div>
+
 
       <!-- Right Column -->
       <div class="w-1/5 p-4 flex flex-col space-y-6">
-        <%= submit_tag "Run Code", class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-full" %>
+        <%= submit_tag "Run Code", id: "submit-code", class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-full" %>
         <!-- Box Chat -->
         <div class="flex flex-col bg-black p-4 h-1/4 rounded-lg shadow-md">
           <h2 class="text-lg font-bold text-center">CHAT</h2>
@@ -67,3 +62,31 @@
 
   <% end %>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById('execute-form');
+        const output = document.getElementById('output');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the default form submission
+
+            // Gather form data
+            const formData = new FormData(form);
+            formData.set("code", editor.state.doc.toString().trimEnd())
+            // Perform the AJAX request using Fetch API
+            fetch(form.action, {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json', // Expect JSON response
+                },
+                body: formData
+            })
+                .then(response => response.json()) // Parse JSON response
+                .then(data => {
+                    // Update the output area with the result
+                    output.textContent = data.output // Assuming the API returns { "result": "..." }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    });
+</script>
