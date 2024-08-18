@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   post 'challenge_friend', to: 'challenges#challenge_friend'
   get 'check_challenge', to: 'challenges#check_challenge'
   get 'waiting', to: 'challenges#waiting'
-  get 'games', to: 'games#index'
-  get 'execute_code', to: 'games#execute_code'
+  #get 'games', to: 'games#index'
+  post 'execute_code', to: 'challenges#execute_code'
   resources :challenges, only: [:show, :create]
   resources :rooms, only: [:show]
 end

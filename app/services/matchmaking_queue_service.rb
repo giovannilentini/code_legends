@@ -1,4 +1,4 @@
-class MatchmakingQueue
+class MatchmakingQueueService
     @queue = {}
   
     def self.add(user, language)

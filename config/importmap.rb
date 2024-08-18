@@ -7,8 +7,6 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "@codemirror/basic-setup", to: "@codemirror--basic-setup.js" # @0.20.0
 pin "@codemirror/lang-javascript", to: "@codemirror--lang-javascript.js" # @6.2.2
-
-
 pin "@codemirror/state", to: "@codemirror--state.js" # @6.4.1
 pin "@codemirror/theme-one-dark", to: "@codemirror--theme-one-dark.js" # @6.1.2
 pin "@codemirror/view", to: "@codemirror--view.js" # @6.31.0

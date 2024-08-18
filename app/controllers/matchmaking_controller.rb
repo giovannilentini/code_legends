@@ -2,7 +2,7 @@ class MatchmakingController < ApplicationController
   before_action :set_player_name
 
   def play_now
-    @languages = ["Ruby", "Python", "JavaScript"]
+    @languages = @languages = ['Python3', 'Java', 'C++']
   end
 
   def challenge_friend

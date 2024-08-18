@@ -3,6 +3,7 @@ class ChallengesController < ApplicationController
 
   def show
     @challenge = Challenge.find(params[:id])
+    @selected_language = 'python3'
   end
 
   def create
@@ -56,7 +57,23 @@ class ChallengesController < ApplicationController
     else
       render json: { error: 'Challenge not found' }, status: :not_found
     end
-  end  
+  end
+
+  def execute_code
+    response = JdoodleService.execute_code(params[:code], params[:language])
+    p "RESPONSE"
+    p response
+    if response.code == 200
+      @result = JSON.parse(response.body)["output"]
+    else
+      @result = JSON.parse(response.body)["output"]
+    end
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
+
 
   def waiting
     @player = Player.find(session[:player_id])

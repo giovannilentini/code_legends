@@ -1,5 +1,5 @@
 class PlayNowController < ApplicationController
   def index
-    @languages = ['Ruby', 'JavaScript', 'Python']
+    @languages = ['Python3', 'Java', 'C++']
   end
 end
