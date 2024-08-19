@@ -1,6 +1,7 @@
 class WelcomeController < ApplicationController
   def index
     if session[:userinfo].present?
+      @user = current_user
       render 'logged_index'
     else
       render 'index'

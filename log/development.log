@@ -12401,3 +12401,249 @@ ActionView::Template::Error (undefined method `admin?' for nil):
   
 app/views/welcome/logged_index.html.erb:80
 app/controllers/welcome_controller.rb:4:in `index'
+Started GET "/" for 127.0.0.1 at 2024-08-19 18:15:48 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 6.7ms | Allocations: 2150)
+  Rendered layout layouts/application.html.erb (Duration: 7.2ms | Allocations: 2276)
+Completed 500 Internal Server Error in 52ms (ActiveRecord: 0.0ms | Allocations: 7718)
+
+
+  
+ActionView::Template::Error (undefined method `admin?' for nil):
+    77:       <h1 class="text-6xl font-bold mb-6">Code Legends</h1>
+    78:       <p class="text-2xl mb-12">Benvenuto nel sito di duelli di programmazione definitivo!</p>
+    79:       <div>
+    80:         <% if @user.admin? %>
+    81:           <%= link_to 'Vai al Profilo Admin', admin_profile_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded transition duration-300' %>
+    82:         <% end %>
+    83:         <%= link_to 'Vai al Profilo Utente', profile_path, class: 'bg-green-600 hover:bg-green-800 text-white font-bold py-3 px-6 rounded transition duration-300 ml-4' %>
+  
+app/views/welcome/logged_index.html.erb:80
+app/controllers/welcome_controller.rb:4:in `index'
+Started GET "/" for 127.0.0.1 at 2024-08-19 18:15:50 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 1093)
+  Rendered layout layouts/application.html.erb (Duration: 0.7ms | Allocations: 1184)
+Completed 500 Internal Server Error in 2ms (ActiveRecord: 0.0ms | Allocations: 1586)
+
+
+  
+ActionView::Template::Error (undefined method `admin?' for nil):
+    77:       <h1 class="text-6xl font-bold mb-6">Code Legends</h1>
+    78:       <p class="text-2xl mb-12">Benvenuto nel sito di duelli di programmazione definitivo!</p>
+    79:       <div>
+    80:         <% if @user.admin? %>
+    81:           <%= link_to 'Vai al Profilo Admin', admin_profile_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded transition duration-300' %>
+    82:         <% end %>
+    83:         <%= link_to 'Vai al Profilo Utente', profile_path, class: 'bg-green-600 hover:bg-green-800 text-white font-bold py-3 px-6 rounded transition duration-300 ml-4' %>
+  
+app/views/welcome/logged_index.html.erb:80
+app/controllers/welcome_controller.rb:4:in `index'
+Started GET "/challenges/new" for 127.0.0.1 at 2024-08-19 18:17:55 +0200
+Processing by ChallengesController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering challenges/new.html.erb within layouts/application
+  Rendered challenges/new.html.erb within layouts/application (Duration: 0.7ms | Allocations: 184)
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-19 18:17:55 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:5:in `current_user'
+User info: #<User id: 4, name: "johnny@gmail.com", email: "johnny@gmail.com", auth0_id: "auth0|66bf128017e6fdfa4e7f2c7f", created_at: "2024-08-18 15:59:12.135324000 +0000", updated_at: "2024-08-19 15:06:42.015129000 +0000", is_admin: true>
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 180)
+  Rendered layout layouts/application.html.erb (Duration: 100.7ms | Allocations: 39876)
+  Rendered layout layouts/application.html.erb (Duration: 412.6ms | Allocations: 99561)
+Completed 200 OK in 197ms (Views: 110.8ms | ActiveRecord: 1.7ms | Allocations: 70073)
+
+
+Completed 200 OK in 528ms (Views: 415.1ms | ActiveRecord: 4.5ms | Allocations: 127682)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-19 18:17:59 +0200
+Processing by Auth0Controller#logout as HTML
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 487)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-19 18:18:00 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 1.3ms | Allocations: 400)
+  Rendered layout layouts/application.html.erb (Duration: 11.5ms | Allocations: 5735)
+Completed 200 OK in 14ms (Views: 13.3ms | ActiveRecord: 0.0ms | Allocations: 6180)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-19 18:19:59 +0200
+Started GET "/auth/auth0/callback?code=d_v2J2BuA3rQGkv_TlftEC2nHIJnXeHNKvgUiM6UG5A4-&state=f25f8e5c66d2980d28c66b72f462abf5a9b88e7829b9c4ef" for 127.0.0.1 at 2024-08-19 18:20:02 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"d_v2J2BuA3rQGkv_TlftEC2nHIJnXeHNKvgUiM6UG5A4-", "state"=>"f25f8e5c66d2980d28c66b72f462abf5a9b88e7829b9c4ef"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66bf128017e6fdfa4e7f2c7f"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 32ms (ActiveRecord: 6.0ms | Allocations: 5654)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-19 18:20:03 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+User info: #<User id: 4, name: "johnny@gmail.com", email: "johnny@gmail.com", auth0_id: "auth0|66bf128017e6fdfa4e7f2c7f", created_at: "2024-08-18 15:59:12.135324000 +0000", updated_at: "2024-08-19 15:06:42.015129000 +0000", is_admin: true>
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.5ms | Allocations: 583)
+  Rendered layout layouts/application.html.erb (Duration: 32.5ms | Allocations: 23331)
+Completed 200 OK in 46ms (Views: 35.1ms | ActiveRecord: 0.3ms | Allocations: 27560)
+
+
+Started GET "/admin_profile" for 127.0.0.1 at 2024-08-19 18:20:33 +0200
+Processing by ProfilesController#admin_profile as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/admin_profile.html.erb within layouts/application
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ?[0m  [["status", -1]]
+  ↳ app/views/profiles/admin_profile.html.erb:15
+  [1m[36mTestCase Load (0.7ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases" WHERE "test_cases"."challenge_id" = ?[0m  [["challenge_id", 3]]
+  ↳ app/views/profiles/admin_profile.html.erb:20
+  Rendered profiles/admin_profile.html.erb within layouts/application (Duration: 19.1ms | Allocations: 9940)
+  Rendered layout layouts/application.html.erb (Duration: 26.6ms | Allocations: 15274)
+Completed 200 OK in 32ms (Views: 26.7ms | ActiveRecord: 1.7ms | Allocations: 16701)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-19 18:20:36 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 1094)
+  Rendered layout layouts/application.html.erb (Duration: 1.1ms | Allocations: 1185)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.1ms | Allocations: 2003)
+
+
+  
+ActionView::Template::Error (undefined method `admin?' for nil):
+    77:       <h1 class="text-6xl font-bold mb-6">Code Legends</h1>
+    78:       <p class="text-2xl mb-12">Benvenuto nel sito di duelli di programmazione definitivo!</p>
+    79:       <div>
+    80:         <% if @user.admin? %>
+    81:           <%= link_to 'Vai al Profilo Admin', admin_profile_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded transition duration-300' %>
+    82:         <% end %>
+    83:         <%= link_to 'Vai al Profilo Utente', profile_path, class: 'bg-green-600 hover:bg-green-800 text-white font-bold py-3 px-6 rounded transition duration-300 ml-4' %>
+  
+app/views/welcome/logged_index.html.erb:80
+app/controllers/welcome_controller.rb:4:in `index'
+Started GET "/" for 127.0.0.1 at 2024-08-19 18:23:22 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 1449)
+  Rendered layout layouts/application.html.erb (Duration: 1.9ms | Allocations: 1541)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.0ms | Allocations: 2686)
+
+
+  
+ActionView::Template::Error (undefined method `admin?' for nil):
+    77:       <h1 class="text-6xl font-bold mb-6">Code Legends</h1>
+    78:       <p class="text-2xl mb-12">Benvenuto nel sito di duelli di programmazione definitivo!</p>
+    79:       <div>
+    80:         <% if @user.admin? %>
+    81:           <%= link_to 'Vai al Profilo Admin', admin_profile_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded transition duration-300' %>
+    82:         <% end %>
+    83:         <%= link_to 'Vai al Profilo Utente', profile_path, class: 'bg-green-600 hover:bg-green-800 text-white font-bold py-3 px-6 rounded transition duration-300 ml-4' %>
+  
+app/views/welcome/logged_index.html.erb:80
+app/controllers/welcome_controller.rb:4:in `index'
+Started GET "/index" for 127.0.0.1 at 2024-08-19 18:23:45 +0200
+  
+ActionController::RoutingError (No route matches [GET] "/index"):
+  
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-19 18:23:54 +0200
+Processing by Auth0Controller#logout as HTML
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 2ms (ActiveRecord: 0.0ms | Allocations: 396)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-19 18:23:55 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 1.8ms | Allocations: 388)
+  Rendered layout layouts/application.html.erb (Duration: 60.0ms | Allocations: 23111)
+Completed 200 OK in 64ms (Views: 62.1ms | ActiveRecord: 0.0ms | Allocations: 23574)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-19 18:23:56 +0200
+Started GET "/auth/auth0/callback?code=YVs066JyOANnuEMKkKyJA-gR8r3OcZyMm0qQ-5oJ3f-bj&state=3e81b6092faccea38490089418a2393c03476bd55e65ea5f" for 127.0.0.1 at 2024-08-19 18:23:59 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"YVs066JyOANnuEMKkKyJA-gR8r3OcZyMm0qQ-5oJ3f-bj", "state"=>"3e81b6092faccea38490089418a2393c03476bd55e65ea5f"}
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66bf128017e6fdfa4e7f2c7f"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 20ms (ActiveRecord: 5.4ms | Allocations: 5502)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-19 18:24:00 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+User info: #<User id: 4, name: "johnny@gmail.com", email: "johnny@gmail.com", auth0_id: "auth0|66bf128017e6fdfa4e7f2c7f", created_at: "2024-08-18 15:59:12.135324000 +0000", updated_at: "2024-08-19 15:06:42.015129000 +0000", is_admin: true>
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 160)
+  Rendered layout layouts/application.html.erb (Duration: 11.2ms | Allocations: 5492)
+Completed 200 OK in 21ms (Views: 11.8ms | ActiveRecord: 0.6ms | Allocations: 9068)
+
+
+Started GET "/challenges/new" for 127.0.0.1 at 2024-08-19 18:24:05 +0200
+Processing by ChallengesController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering challenges/new.html.erb within layouts/application
+  Rendered challenges/new.html.erb within layouts/application (Duration: 0.4ms | Allocations: 184)
+  Rendered layout layouts/application.html.erb (Duration: 5.9ms | Allocations: 5531)
+Completed 200 OK in 19ms (Views: 6.8ms | ActiveRecord: 0.6ms | Allocations: 14198)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-19 18:24:08 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 1091)
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 1182)
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.1ms | Allocations: 1970)
+
+
+  
+ActionView::Template::Error (undefined method `admin?' for nil):
+    77:       <h1 class="text-6xl font-bold mb-6">Code Legends</h1>
+    78:       <p class="text-2xl mb-12">Benvenuto nel sito di duelli di programmazione definitivo!</p>
+    79:       <div>
+    80:         <% if @user.admin? %>
+    81:           <%= link_to 'Vai al Profilo Admin', admin_profile_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded transition duration-300' %>
+    82:         <% end %>
+    83:         <%= link_to 'Vai al Profilo Utente', profile_path, class: 'bg-green-600 hover:bg-green-800 text-white font-bold py-3 px-6 rounded transition duration-300 ml-4' %>
+  
+app/views/welcome/logged_index.html.erb:80
+app/controllers/welcome_controller.rb:4:in `index'
+Started GET "/" for 127.0.0.1 at 2024-08-19 18:25:01 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.0ms | Allocations: 586)
+  Rendered layout layouts/application.html.erb (Duration: 26.2ms | Allocations: 23333)
+Completed 200 OK in 42ms (Views: 28.8ms | ActiveRecord: 2.2ms | Allocations: 30226)
+
+
