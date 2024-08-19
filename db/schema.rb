@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_16_171609) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_19_140455) do
   create_table "challenges", force: :cascade do |t|
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: -1
     t.string "rejection_reason"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_challenges_on_user_id"
   end
 
   create_table "test_cases", force: :cascade do |t|
@@ -34,6 +36,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_16_171609) do
     t.string "auth0_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_admin", default: false
   end
 
   add_foreign_key "test_cases", "challenges"

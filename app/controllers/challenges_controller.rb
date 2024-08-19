@@ -1,13 +1,14 @@
 class ChallengesController < ApplicationController
+
   def new
     @challenge = Challenge.new
     @challenge.test_cases.build
   end
 
   def create
-    @challenge = Challenge.new(challenge_params)
+    @challenge = current_user.challenges.build(challenge_params)
     if @challenge.save
-      redirect_to @challenge, notice: 'Sfida creata con successo!'
+      redirect_to @challenge, notice: 'Sfida creata con successo.'
     else
       render :new
     end
