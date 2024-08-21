@@ -23,7 +23,7 @@
               </ul>
             </td>
             <td class="px-6 py-4 text-center">
-              <%= button_to 'Accetta', update_status_path(challenge.id, status: 1), method: :post, class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105" %>
+              <%= button_to 'Accetta', update_status_challenge_path(challenge.id, status: 1), method: :post, class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105" %>
 
               <button type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105 mt-2 ml-2" onclick="rejectChallenge(<%= challenge.id %>)"> Rifiuta </button>
             </td>
