@@ -1,17 +1,22 @@
-import consumer from "./consumer"
+// app/javascript/channels/user_channel.js
+import { createConsumer } from "@rails/actioncable"
 
-const languageSelect = document.getElementById('language-select')
+const consumer = createConsumer()
+consumer.subscriptions.create("MatchmakingChannel", {
+    connected() {
+        // Called when the subscription is ready for use on the server
+        console.log("Connected to matchmaking channel")
+    },
 
-if (languageSelect) {
-  const language = languageSelect.value
-  const channel = consumer.subscriptions.create(
-    { channel: "MatchmakingChannel", language: language },
-    {
-      received(data) {
-        if (data.type === 'MATCH_FOUND') {
-          window.location.href = data.challenge_url
-        }
-      }
-    }
-  )
-}
+    disconnected() {
+        // Called when the subscription has been terminated by the server
+        console.log("Disconnected from matchmaking channel")
+    },
+
+    received(data) {
+        // Called when there's data broadcasted to this channel
+        window.location.href = "challenges/"+data.challenge_id;
+        // Handle the incoming data here
+    },
+
+})

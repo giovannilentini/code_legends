@@ -3,26 +3,28 @@ class MatchmakingQueueService
   
     def self.add(user, language)
       @queue[language] ||= []
-      @queue[language] << user
-      match_users(language) if @queue[language].size >= 2
+
+      unless @queue[language].include? user
+        @queue[language] << user
+        match_users(language) if @queue[language].size >= 2
+      end
     end
   
-    def self.remove(user)
-      @queue.each do |language, users|
-        users.delete(user)
-      end
+    def self.remove(user, language)
+      @queue[language].delete(user)
     end
   
     def self.match_users(language)
       users = @queue[language].shift(2)
       if users.size == 2
+        p "CREATING CHALLENGE"
         challenge = Challenge.create(player_1: users[0], player_2: users[1], language: language)
-        ActionCable.server.broadcast("matchmaking_#{language}", {
-          type: 'MATCH_FOUND',
-          challenge_url: Rails.application.routes.url_helpers.challenge_path(challenge.id)
-        })
+        ActionCable.server.broadcast("matchmaking_channel", { challenge_id: challenge.id, player_1: users[0], player_2: users[1] })
+        users.each do |user| remove(user, language) end
       end
     end
+
+    def self.print_queue
+      p @queue
+    end
   end
-  
-  

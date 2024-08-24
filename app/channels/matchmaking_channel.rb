@@ -1,15 +1,11 @@
 class MatchmakingChannel < ApplicationCable::Channel
   def subscribed
-    p "USER DISCONNECTED"
-    p current_user
-    stream_from "matchmaking_#{params[:language]}"
-    MatchmakingQueueService.add(current_user, params[:language])
+    stream_from "matchmaking_channel"
   end
 
   def unsubscribed
-    p "USER DISCONNECTED"
-    p current_user
-    MatchmakingQueueService.remove(current_user)
+    MatchmakingQueueService.remove(Player.find_or_create_by(name: session[:player_name]), params[:language])
+    p MatchmakingQueueService.queue
   end
 end
 
