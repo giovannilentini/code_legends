@@ -76,3 +76,6 @@ gem "tailwindcss-rails", "~> 2.6"
 gem 'omniauth-auth0', '~> 3.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0' # prevents forged authentication requests
 gem 'rails-controller-testing', group: [:test]
+gem 'image_processing', '~> 1.2'
+gem 'mini_magick'
+

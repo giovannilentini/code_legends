@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'settings/edit'
+  get 'settings/update'
   root 'welcome#index'
   get '/logged_index', to: 'welcome#logged_index'
 
@@ -18,6 +20,9 @@ Rails.application.routes.draw do
 
   get 'profile', to: 'profiles#user_profile', as: 'profile'
   get 'admin_profile', to: 'profiles#admin_profile', as: 'admin_profile'
+
+  resource :settings, only: [:edit, :update]
+  get '/profile', to: 'profiles#user_profile'
 
   get 'database/info'
   get 'database_info', to: 'database#info', as: 'info'
