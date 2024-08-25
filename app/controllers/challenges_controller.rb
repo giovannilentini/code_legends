@@ -3,7 +3,7 @@ class ChallengesController < ApplicationController
 
   def show
     @challenge = Challenge.find(params[:id])
-    @selected_language = 'python3'
+    @selected_language = @challenge.language
   end
 
   def create
@@ -61,9 +61,6 @@ class ChallengesController < ApplicationController
 
   def execute_code
     response = JdoodleService.execute_code(params[:code], params[:language])
-    p "RESPONSE"
-    p response.body
-
     unless response.nil?
       if response.code == "200"
         @result = JSON.parse(response.body)["output"]

@@ -3,9 +3,9 @@
   <div class="flex flex-col text-center p-4 ">
     <h1 class="text-xl text-white">Dettagli della Sfida</h1>
     <div class="text-white">
-      <p><strong>Giocatore 1:</strong> <%= @challenge.player_1.name %></p>
-      <p><strong>Giocatore 2:</strong> <%= @challenge.player_2.name %></p>
-      <p><strong>Status:</strong> <%= @challenge.status %></p>
+      <p><strong>Player 1:</strong> <%= @challenge.player_1.name %></p>
+      <p><strong>Player 2:</strong> <%= @challenge.player_2.name %></p>
+      <p><strong>Language:</strong> <%= @challenge.language %></p>
     </div>
   </div>
 
@@ -14,32 +14,31 @@
 
     <div class="flex flex-row justify-center space-x-10 px-4 py-6 ">
       <!-- Left Column -->
-      <div class="flex flex-col grow space-y-4 text-white">
-        <!-- Box Selezione Linguaggio -->
-        <div class="bg-[#4E31AA] p-4 shrink rounded-lg shadow-md">
-          <h2 class="text-lg font-bold mb-2">Scegli un Linguaggio di Programmazione</h2>
-          <%= select_tag :language, options_for_select([['Python', 'python3'], ['Java', 'java'], ['C++', 'cpp']], @selected_language), class: "w-full px-4 py-2 rounded border border-gray-600 bg-gray-800 text-white", id: "language-selector" %>
-        </div>
+      <div class="flex flex-col grow resize-none space-y-4 text-white">
 
         <!-- Box Codice -->
-        <div class="flex flex-col bg-black p-4 rounded-lg h-1/2 shadow-md">
-          <div>
+        <div class="flex flex-col bg-black h-[40rem] p-4 rounded-lg shadow-md">
+
+          <div class="flex flex-row py-2 justify-between">
             <h2 class="text-lg font-bold text-center">CODICE</h2>
+            <h2 class="text-lg font-bold text-center"> <%=@selected_language %></h2>
           </div>
-          <div class="mb-4 overflow-auto">
-            <div id="code-editor" class="">
+
+          <div class="overflow-auto">
+            <div id="code-editor" data-language=<%=@selected_language %>>
               <%= hidden_field_tag :code, '', id: 'hidden-code-input' %>
             </div>
           </div>
+
         </div>
 
         <!-- Box Console -->
-        <div class="flex flex-col bg-black p-4 h-1/4 rounded-lg shadow-md">
+        <div class="flex flex-col bg-black p-4 h-[20rem] rounded-lg shadow-md">
           <h2 class="text-lg font-bold text-center">CONSOLE</h2>
           <div class="bg-[#2d2d2d] text-white mt-2 p-4 h-full overflow-auto">
-            <div id="output" class="text-lime-500 p-4 font-roboto">
+            <pre id="output" class="text-lime-500 font-roboto">
 
-            </div>
+            </pre>
             </div>
           </div>
         </div>
@@ -56,7 +55,10 @@
             </div>
           </div>
         </div>
-        <%= submit_tag "Surrend", class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 w-full" %>
+        <%= form_with url: "#", method: :post, local: true do |form| %>
+          <%= hidden_field_tag :language, @selected_language, id: 'language_field' %>
+          <%= form.submit "Surrend", class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 w-full" %>
+        <% end %>
       </div>
     </div>
 

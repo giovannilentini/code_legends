@@ -1,5 +1,7 @@
 import { EditorState } from "@codemirror/state";
-import { EditorView, basicSetup } from "@codemirror/basic-setup";
+import { basicSetup} from "@codemirror/basic-setup";
+import {indentWithTab} from "@codemirror/commands"
+import {EditorView, keymap} from "@codemirror/view"
 import { python } from "@codemirror/lang-python";
 import { cpp } from "@codemirror/lang-cpp";
 import { java } from "@codemirror/lang-java";
@@ -8,12 +10,12 @@ import { oneDark } from "@codemirror/theme-one-dark";
 // Event that gets triggered when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     const editorElement = document.querySelector('#code-editor');
-    const languageSelector = document.querySelector('#language-selector');
+    const languageSelected = editorElement.dataset.language
     let currentLanguage = 'python3';
     let languageExtension = python();
     const initialNewLines = '\n'.repeat(50);
     let editor;
-    if (editorElement && languageSelector) {
+    if (editorElement && languageSelected) {
 
         // Handle the languages extensions
         const createEditor = (language)=>{
@@ -38,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Creating the Editor using CodeMirror
             const state = EditorState.create({
                 doc: 'Hello, World!'.concat(initialNewLines),
-                extensions: [basicSetup, languageExtension, oneDark]
+                extensions: [basicSetup, languageExtension,  keymap.of([indentWithTab]), oneDark]
             });
             editor = new EditorView({
                 state,
@@ -48,13 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         createEditor(currentLanguage);
 
-        // Event that gets triggered when the user changes language
-        // Automatically changes the game language
-        languageSelector.addEventListener('change', (event) => {
-            const selectedLanguage = event.target.value;
-            editorElement.innerHTML = ''; // Clear the existing game
-            createEditor(selectedLanguage);
-        });
     }
     const form = document.getElementById('execute-form');
     const hiddenCodeInput = document.getElementById('hidden-code-input');
@@ -66,11 +61,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
-
-/*
-EditorView.updateListener.of((v) => {
-                        if (v.docChanged) {
-                            code = v.state.doc.toString().trimEnd()
-                        }
-                    })
- */

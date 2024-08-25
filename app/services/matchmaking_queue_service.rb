@@ -17,9 +17,8 @@ class MatchmakingQueueService
     def self.match_users(language)
       users = @queue[language].shift(2)
       if users.size == 2
-        p "CREATING CHALLENGE"
         challenge = Challenge.create(player_1: users[0], player_2: users[1], language: language)
-        ActionCable.server.broadcast("matchmaking_channel", { challenge_id: challenge.id, player_1: users[0], player_2: users[1] })
+        ActionCable.server.broadcast("matchmaking_#{language}", { challenge_id: challenge.id, player_1: users[0], player_2: users[1] })
         users.each do |user| remove(user, language) end
       end
     end

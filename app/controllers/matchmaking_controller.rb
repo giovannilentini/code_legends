@@ -1,13 +1,9 @@
 class MatchmakingController < ApplicationController
-  before_action :set_player_name
-
   def play_now
     @languages = ['Python3', 'Java', 'Cpp']
     @selected_language = params[:language].presence || 'python3'
     session[:selected_language] = @selected_language
   end
-
-
 
   def find_opponent
 
@@ -30,11 +26,5 @@ class MatchmakingController < ApplicationController
   def challenge
     @room = Room.find_by(uuid: params[:uuid])
     @challenge = @room.challenge
-  end
-
-  private
-
-  def set_player_name
-    session[:player_name] ||= "Player_#{SecureRandom.hex(4)}"
   end
 end
