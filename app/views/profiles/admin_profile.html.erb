@@ -28,7 +28,7 @@
                   </ul>
                 </td>
                 <td class="px-6 py-4 text-center">
-                  <%= button_to 'Accetta', update_status_challenge_path(challenge.id, status: 1), method: :post, class: "bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105", data: { action: 'accept', challenge_id: challenge.id } %>
+                  <button type="button" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105" onclick="acceptChallenge(<%= challenge.id %>)"> Accetta </button>
                   <button type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105 mt-2 ml-2" onclick="rejectChallenge(<%= challenge.id %>)"> Rifiuta </button>
                 </td>
               </tr>
@@ -75,17 +75,14 @@
 </div>
 
 <script>
-    // Funzione per toggle delle sezioni
     function toggleSection(sectionId) {
         const section = document.getElementById(sectionId);
         section.classList.toggle('hidden');
 
-        // Salva lo stato nel localStorage
         const isHidden = section.classList.contains('hidden');
         localStorage.setItem(sectionId, isHidden ? 'hidden' : 'visible');
     }
 
-    // Funzione per caricare lo stato delle sezioni al caricamento della pagina
     function loadSectionStates() {
         const challengeState = localStorage.getItem('challenges');
         const nonAdminUserState = localStorage.getItem('non-admin-users');
@@ -98,7 +95,6 @@
         }
     }
 
-    // Funzione per salvare lo stato delle sezioni
     function saveSectionStates() {
         const challengesSection = document.getElementById('challenges');
         const nonAdminUsersSection = document.getElementById('non-admin-users');
@@ -109,9 +105,9 @@
 
     window.onload = loadSectionStates;
 
-    // Funzione per accettare un challenge e mantenere lo stato del menu
     function acceptChallenge(challengeId) {
         saveSectionStates();
+
         const form = document.createElement('form');
         form.method = 'POST';
         form.action = `/challenges/${challengeId}/update_status`;
@@ -169,3 +165,4 @@
         }
     }
 </script>
+
