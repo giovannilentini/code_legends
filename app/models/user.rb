@@ -9,7 +9,7 @@ class User < ApplicationRecord
     end
 
     def profile_image_thumbnail
-      profile_image.variant(resize_to_fill: [150, 150]).processed
+      profile_image.variant(resize_to_fill: [200, 200]).processed
     end
   end
   
