@@ -1,4 +1,4 @@
-class ChallengesController < ApplicationController
+class MatchesController < ApplicationController
   before_action :set_player, only: [:create, :check_challenge, :waiting]
   before_action :set_challenge, only: [:show]
 

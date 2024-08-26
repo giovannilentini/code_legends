@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ChallengesController, type: :feature do
+RSpec.describe MatchesController, type: :feature do
   before do
     # Mock the JDoodle API request
     stub_request(:post, "https://api.jdoodle.com/v1/execute").

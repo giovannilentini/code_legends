@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'check_challenge', to: 'challenges#check_challenge'
   get 'waiting', to: 'challenges#waiting'
   post 'execute_code', to: 'challenges#execute_code'
-  resources :challenges, only: [:show, :create]
+  resources :matches, only: [:show, :create]
   resources :rooms, only: [:show]
 end
 
