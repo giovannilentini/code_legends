@@ -1,8 +1,8 @@
 class ChallengesController < ApplicationController
   before_action :set_player, only: [:create, :check_challenge, :waiting]
+  before_action :set_challenge, only: [:show]
 
   def show
-    @challenge = Challenge.find(params[:id])
     @selected_language = @challenge.language
   end
 
@@ -71,23 +71,13 @@ class ChallengesController < ApplicationController
     render json: { output: @result }
   end
 
-  def format_jdoodle_message(message)
-    # Convert newlines and special characters to HTML safe format
-    message
-      .gsub("\n", "<br>")
-      .gsub(" ", "&nbsp;")
-      .gsub('\\"', '"')
-      .html_safe
-  end
-
-  def waiting
-    @player = Player.find(session[:player_id])
-  end
-
   private
-
   def set_player
     @player = Player.find_or_create_by(name: session[:player_name])
     session[:player_id] ||= @player.id
+  end
+
+  def set_challenge
+    @challenge = Challenge.find_by(id: params[:id])
   end
 end

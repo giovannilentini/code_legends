@@ -8,8 +8,9 @@ class MatchmakingChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
+    p "UNSUBSCRIBEEEED"
     MatchmakingQueueService.remove(current_user, params[:language])
-    p MatchmakingQueueService.queue
+    MatchmakingQueueService.print_queue
   end
 end
 

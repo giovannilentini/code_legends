@@ -10,13 +10,11 @@ import { oneDark } from "@codemirror/theme-one-dark";
 // Event that gets triggered when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     const editorElement = document.querySelector('#code-editor');
-    const languageSelected = editorElement.dataset.language
     let currentLanguage = 'python3';
     let languageExtension = python();
     const initialNewLines = '\n'.repeat(50);
     let editor;
-    if (editorElement && languageSelected) {
-
+    if (editorElement) {
         // Handle the languages extensions
         const createEditor = (language)=>{
             switch (language){

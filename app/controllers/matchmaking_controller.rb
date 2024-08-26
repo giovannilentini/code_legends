@@ -8,9 +8,10 @@ class MatchmakingController < ApplicationController
   def find_opponent
 
     @selected_language = session[:selected_language]
-    player = Player.find_or_create_by(name: session[:player_name])
+    player = Player.find_or_create_by(id: session[:player_id])
     if player
       MatchmakingQueueService.add(player, @selected_language)
+
     end
 
   end

@@ -3,9 +3,10 @@ class ApplicationController < ActionController::Base
   private
   def set_player_name
     @player_name = "Player_#{SecureRandom.hex(4)}"
-    session[:player_name] ||= @player_name
-    cookies[:player_name] = {
-      :value => session[:player_name],
+    @player = Player.find_or_create_by(name: @player_name)
+    session[:player_id] ||= @player.id
+    cookies[:player_id] = {
+      :value => session[:player_id],
     }
 
   end

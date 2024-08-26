@@ -22,6 +22,7 @@
           <div class="flex flex-row py-2 justify-between">
             <h2 class="text-lg font-bold text-center">CODICE</h2>
             <h2 class="text-lg font-bold text-center"> <%=@selected_language %></h2>
+            <%= hidden_field_tag :language, @selected_language, id: 'hidden-language-selection' %>
           </div>
 
           <div class="overflow-auto">
@@ -55,10 +56,7 @@
             </div>
           </div>
         </div>
-        <%= form_with url: "#", method: :post, local: true do |form| %>
-          <%= hidden_field_tag :language, @selected_language, id: 'language_field' %>
-          <%= form.submit "Surrend", class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 w-full" %>
-        <% end %>
+        <%= submit_tag "Surrend", class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 w-full" %>
       </div>
     </div>
 
