@@ -36169,3 +36169,1151 @@ Processing by MatchesController#show as HTML
 Completed 200 OK in 11ms (Views: 8.5ms | ActiveRecord: 0.2ms | Allocations: 8251)
 
 
+Started GET "/" for 127.0.0.1 at 2024-08-26 18:35:24 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 2.2ms | Allocations: 798)
+  Rendered layout layouts/application.html.erb (Duration: 310.5ms | Allocations: 140657)
+Completed 200 OK in 357ms (Views: 340.3ms | ActiveRecord: 0.0ms | Allocations: 149088)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-26 18:35:25 +0200
+Started GET "/auth/auth0/callback?code=5HkRP5UdZNf3gXCa4OAmRZO33cq35bYLsf1cd6rk6e-XC&state=6d13f8f939cf696263c57253b8913bed20dd0720ad565f37" for 127.0.0.1 at 2024-08-26 18:35:26 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"5HkRP5UdZNf3gXCa4OAmRZO33cq35bYLsf1cd6rk6e-XC", "state"=>"6d13f8f939cf696263c57253b8913bed20dd0720ad565f37"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "google-oauth2|104107654480441593321"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "giovannilentini29@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "google-oauth2|104107654480441593321"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Create (1.0ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "auth0_id", "created_at", "updated_at", "is_admin") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Giovanni Lentini"], ["email", "giovannilentini29@gmail.com"], ["auth0_id", "google-oauth2|104107654480441593321"], ["created_at", "2024-08-26 16:35:28.138695"], ["updated_at", "2024-08-26 16:35:28.138695"], ["is_admin", 0]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 130ms (ActiveRecord: 7.8ms | Allocations: 30655)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-26 18:35:28 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+User info: #<User id: 3, name: "Giovanni Lentini", email: "giovannilentini29@gmail.com", auth0_id: "google-oauth2|104107654480441593321", created_at: "2024-08-26 16:35:28.138695000 +0000", updated_at: "2024-08-26 16:35:28.138695000 +0000", is_admin: false>
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.0ms | Allocations: 623)
+  Rendered layout layouts/application.html.erb (Duration: 6.7ms | Allocations: 6669)
+Completed 200 OK in 33ms (Views: 7.2ms | ActiveRecord: 0.3ms | Allocations: 14538)
+
+
+Started GET "/profile" for 127.0.0.1 at 2024-08-26 18:35:30 +0200
+Processing by ProfilesController#user_profile as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/user_profile.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (1.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 3], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:10
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 1], ["user_id", 3]]
+  ↳ app/views/profiles/user_profile.html.erb:43
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 0], ["user_id", 3]]
+  ↳ app/views/profiles/user_profile.html.erb:73
+  Rendered profiles/user_profile.html.erb within layouts/application (Duration: 52.5ms | Allocations: 8345)
+  Rendered layout layouts/application.html.erb (Duration: 65.9ms | Allocations: 14261)
+Completed 200 OK in 76ms (Views: 65.6ms | ActiveRecord: 2.6ms | Allocations: 15868)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 18:35:59 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 175)
+  Rendered layout layouts/application.html.erb (Duration: 16.5ms | Allocations: 6019)
+Completed 200 OK in 22ms (Views: 17.3ms | ActiveRecord: 0.1ms | Allocations: 6950)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-26 18:36:01 +0200
+Processing by Auth0Controller#logout as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms | Allocations: 876)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 18:36:01 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 200)
+  Rendered layout layouts/application.html.erb (Duration: 14.0ms | Allocations: 6040)
+Completed 200 OK in 16ms (Views: 14.7ms | ActiveRecord: 0.0ms | Allocations: 6532)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-26 18:36:02 +0200
+Started GET "/auth/auth0/callback?code=te8uF-DI2z3ZQRgOtQfWqzK-ONX_xAF4ESSZutZwjShEy&state=4bd663d160baebd42dd195d0f72236d589b298a64471bb77" for 127.0.0.1 at 2024-08-26 18:36:06 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"te8uF-DI2z3ZQRgOtQfWqzK-ONX_xAF4ESSZutZwjShEy", "state"=>"4bd663d160baebd42dd195d0f72236d589b298a64471bb77"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66bf128017e6fdfa4e7f2c7f"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "johnny@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66bf128017e6fdfa4e7f2c7f"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "auth0_id", "created_at", "updated_at", "is_admin") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "johnny@gmail.com"], ["email", "johnny@gmail.com"], ["auth0_id", "auth0|66bf128017e6fdfa4e7f2c7f"], ["created_at", "2024-08-26 16:36:08.243872"], ["updated_at", "2024-08-26 16:36:08.243872"], ["is_admin", 0]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 13ms (ActiveRecord: 2.4ms | Allocations: 4039)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-26 18:36:08 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+User info: #<User id: 4, name: "johnny@gmail.com", email: "johnny@gmail.com", auth0_id: "auth0|66bf128017e6fdfa4e7f2c7f", created_at: "2024-08-26 16:36:08.243872000 +0000", updated_at: "2024-08-26 16:36:08.243872000 +0000", is_admin: false>
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 20.7ms | Allocations: 6217)
+Completed 200 OK in 25ms (Views: 21.4ms | ActiveRecord: 0.1ms | Allocations: 7255)
+
+
+Started GET "/profile" for 127.0.0.1 at 2024-08-26 18:36:12 +0200
+Processing by ProfilesController#user_profile as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/user_profile.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:10
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 1], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:43
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 0], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:73
+  Rendered profiles/user_profile.html.erb within layouts/application (Duration: 8.0ms | Allocations: 2207)
+  Rendered layout layouts/application.html.erb (Duration: 19.9ms | Allocations: 8093)
+Completed 200 OK in 24ms (Views: 20.4ms | ActiveRecord: 0.4ms | Allocations: 9115)
+
+
+Started GET "/database/info" for 127.0.0.1 at 2024-08-26 18:36:14 +0200
+Processing by DatabaseController#info as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering database/info.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mChallenge Load (0.4ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mTestCase Load (0.4ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases"[0m
+  ↳ app/views/database/info.html.erb:18
+  Rendered database/info.html.erb within layouts/application (Duration: 4.1ms | Allocations: 2430)
+  Rendered layout layouts/application.html.erb (Duration: 13.8ms | Allocations: 8286)
+Completed 200 OK in 24ms (Views: 13.9ms | ActiveRecord: 1.3ms | Allocations: 10902)
+
+
+  [1m[36mUser Update All (2.9ms)[0m  [1m[33mUPDATE "users" SET "is_admin" = ? WHERE "users"."is_admin" = ?[0m  [["is_admin", 1], ["is_admin", 1]]
+Started GET "/database/info" for 127.0.0.1 at 2024-08-26 18:37:23 +0200
+Processing by DatabaseController#info as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering database/info.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mTestCase Load (0.1ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases"[0m
+  ↳ app/views/database/info.html.erb:18
+  Rendered database/info.html.erb within layouts/application (Duration: 4.1ms | Allocations: 1803)
+  Rendered layout layouts/application.html.erb (Duration: 24.1ms | Allocations: 7644)
+Completed 200 OK in 29ms (Views: 24.5ms | ActiveRecord: 0.3ms | Allocations: 8805)
+
+
+  [1m[36mUser Update All (0.2ms)[0m  [1m[33mUPDATE "users" SET "is_admin" = ? WHERE "users"."is_admin" = ?[0m  [["is_admin", 1], ["is_admin", 1]]
+  [1m[36mUser Update All (2.2ms)[0m  [1m[33mUPDATE "users" SET "is_admin" = ? WHERE "users"."id" = ?[0m  [["is_admin", 1], ["id", 4]]
+Started GET "/database/info" for 127.0.0.1 at 2024-08-26 18:37:51 +0200
+Processing by DatabaseController#info as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering database/info.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mTestCase Load (0.1ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases"[0m
+  ↳ app/views/database/info.html.erb:18
+  Rendered database/info.html.erb within layouts/application (Duration: 8.5ms | Allocations: 1804)
+  Rendered layout layouts/application.html.erb (Duration: 20.3ms | Allocations: 7852)
+Completed 200 OK in 25ms (Views: 20.6ms | ActiveRecord: 0.5ms | Allocations: 8968)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-26 18:37:53 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+User info: #<User id: 4, name: "johnny@gmail.com", email: "johnny@gmail.com", auth0_id: "auth0|66bf128017e6fdfa4e7f2c7f", created_at: "2024-08-26 16:36:08.243872000 +0000", updated_at: "2024-08-26 16:36:08.243872000 +0000", is_admin: true>
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 194)
+  Rendered layout layouts/application.html.erb (Duration: 11.4ms | Allocations: 6226)
+Completed 200 OK in 16ms (Views: 12.0ms | ActiveRecord: 0.1ms | Allocations: 7257)
+
+
+Started GET "/database/info" for 127.0.0.1 at 2024-08-26 18:37:54 +0200
+Processing by DatabaseController#info as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering database/info.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mTestCase Load (0.1ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases"[0m
+  ↳ app/views/database/info.html.erb:18
+  Rendered database/info.html.erb within layouts/application (Duration: 5.0ms | Allocations: 1804)
+  Rendered layout layouts/application.html.erb (Duration: 16.9ms | Allocations: 7645)
+Completed 200 OK in 21ms (Views: 17.3ms | ActiveRecord: 0.3ms | Allocations: 8776)
+
+
+Started GET "/admin_profile" for 127.0.0.1 at 2024-08-26 18:37:54 +0200
+Processing by ProfilesController#admin_profile as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/admin_profile.html.erb within layouts/application
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ?[0m  [["status", -1]]
+  ↳ app/views/profiles/admin_profile.html.erb:20
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."is_admin" = ? ORDER BY users.name[0m  [["is_admin", 0]]
+  ↳ app/views/profiles/admin_profile.html.erb:56
+  Rendered profiles/admin_profile.html.erb within layouts/application (Duration: 7.7ms | Allocations: 2102)
+  Rendered layout layouts/application.html.erb (Duration: 19.7ms | Allocations: 7943)
+Completed 200 OK in 25ms (Views: 19.1ms | ActiveRecord: 1.6ms | Allocations: 9079)
+
+
+Started GET "/admin_profile" for 127.0.0.1 at 2024-08-26 18:37:55 +0200
+Processing by ProfilesController#admin_profile as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/admin_profile.html.erb within layouts/application
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ?[0m  [["status", -1]]
+  ↳ app/views/profiles/admin_profile.html.erb:20
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."is_admin" = ? ORDER BY users.name[0m  [["is_admin", 0]]
+  ↳ app/views/profiles/admin_profile.html.erb:56
+  Rendered profiles/admin_profile.html.erb within layouts/application (Duration: 4.1ms | Allocations: 1229)
+  Rendered layout layouts/application.html.erb (Duration: 15.2ms | Allocations: 7069)
+Completed 200 OK in 19ms (Views: 15.5ms | ActiveRecord: 0.4ms | Allocations: 8082)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 18:37:59 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 195)
+  Rendered layout layouts/application.html.erb (Duration: 16.3ms | Allocations: 6065)
+Completed 200 OK in 20ms (Views: 17.0ms | ActiveRecord: 0.1ms | Allocations: 6957)
+
+
+Started GET "/profile" for 127.0.0.1 at 2024-08-26 18:38:01 +0200
+Processing by ProfilesController#user_profile as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/user_profile.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:10
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 1], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:43
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 0], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:73
+  Rendered profiles/user_profile.html.erb within layouts/application (Duration: 9.3ms | Allocations: 2210)
+  Rendered layout layouts/application.html.erb (Duration: 21.8ms | Allocations: 7933)
+Completed 200 OK in 27ms (Views: 22.3ms | ActiveRecord: 0.6ms | Allocations: 8949)
+
+
+Started GET "/profile" for 127.0.0.1 at 2024-08-26 18:39:01 +0200
+Processing by ProfilesController#user_profile as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/user_profile.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:10
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 1], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:43
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 0], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:73
+  Rendered profiles/user_profile.html.erb within layouts/application (Duration: 15.1ms | Allocations: 6016)
+  Rendered layout layouts/application.html.erb (Duration: 240.4ms | Allocations: 108959)
+Completed 200 OK in 272ms (Views: 242.6ms | ActiveRecord: 5.1ms | Allocations: 118697)
+
+
+Started GET "/profile" for 127.0.0.1 at 2024-08-26 18:39:06 +0200
+Processing by ProfilesController#user_profile as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/user_profile.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:10
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 1], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:43
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 0], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:73
+  Rendered profiles/user_profile.html.erb within layouts/application (Duration: 6.3ms | Allocations: 2197)
+  Rendered layout layouts/application.html.erb (Duration: 15.9ms | Allocations: 8086)
+Completed 200 OK in 20ms (Views: 16.3ms | ActiveRecord: 0.4ms | Allocations: 9123)
+
+
+Started GET "/profile" for 127.0.0.1 at 2024-08-26 18:39:38 +0200
+Processing by ProfilesController#user_profile as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/user_profile.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:10
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 1], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:43
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 0], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:73
+  Rendered profiles/user_profile.html.erb within layouts/application (Duration: 24.0ms | Allocations: 6014)
+  Rendered layout layouts/application.html.erb (Duration: 158.0ms | Allocations: 108747)
+Completed 200 OK in 191ms (Views: 161.9ms | ActiveRecord: 4.6ms | Allocations: 118485)
+
+
+Started GET "/settings/edit" for 127.0.0.1 at 2024-08-26 18:39:39 +0200
+Processing by SettingsController#edit as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/settings/edit.html.erb:29
+  Rendered settings/edit.html.erb within layouts/application (Duration: 23.2ms | Allocations: 2700)
+  Rendered layout layouts/application.html.erb (Duration: 33.2ms | Allocations: 8734)
+Completed 200 OK in 37ms (Views: 34.4ms | ActiveRecord: 0.2ms | Allocations: 9865)
+
+
+Started GET "/settings/edit" for 127.0.0.1 at 2024-08-26 18:40:17 +0200
+Processing by SettingsController#edit as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/settings/edit.html.erb:29
+  Rendered settings/edit.html.erb within layouts/application (Duration: 16.3ms | Allocations: 5485)
+  Rendered layout layouts/application.html.erb (Duration: 166.6ms | Allocations: 108178)
+Completed 200 OK in 186ms (Views: 168.7ms | ActiveRecord: 3.8ms | Allocations: 116074)
+
+
+Started GET "/settings/edit" for 127.0.0.1 at 2024-08-26 18:40:31 +0200
+Processing by SettingsController#edit as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/settings/edit.html.erb:29
+  Rendered settings/edit.html.erb within layouts/application (Duration: 8.7ms | Allocations: 5483)
+  Rendered layout layouts/application.html.erb (Duration: 106.5ms | Allocations: 108480)
+Completed 200 OK in 120ms (Views: 107.9ms | ActiveRecord: 2.1ms | Allocations: 116442)
+
+
+Started GET "/settings/edit" for 127.0.0.1 at 2024-08-26 18:41:02 +0200
+Processing by SettingsController#edit as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/settings/edit.html.erb:29
+  Rendered settings/edit.html.erb within layouts/application (Duration: 12.9ms | Allocations: 5482)
+  Rendered layout layouts/application.html.erb (Duration: 113.7ms | Allocations: 108617)
+Completed 200 OK in 126ms (Views: 114.6ms | ActiveRecord: 2.3ms | Allocations: 116509)
+
+
+Started GET "/settings/edit" for 127.0.0.1 at 2024-08-26 18:41:14 +0200
+Processing by SettingsController#edit as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/settings/edit.html.erb:29
+  Rendered settings/edit.html.erb within layouts/application (Duration: 21.2ms | Allocations: 5482)
+  Rendered layout layouts/application.html.erb (Duration: 118.1ms | Allocations: 108176)
+Completed 200 OK in 136ms (Views: 119.9ms | ActiveRecord: 2.4ms | Allocations: 116123)
+
+
+Started GET "/profile" for 127.0.0.1 at 2024-08-26 18:41:16 +0200
+Processing by ProfilesController#user_profile as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/user_profile.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:10
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 1], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:43
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 0], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:73
+  Rendered profiles/user_profile.html.erb within layouts/application (Duration: 7.0ms | Allocations: 2870)
+  Rendered layout layouts/application.html.erb (Duration: 18.2ms | Allocations: 8773)
+Completed 200 OK in 31ms (Views: 19.3ms | ActiveRecord: 0.7ms | Allocations: 11799)
+
+
+Started GET "/settings/edit" for 127.0.0.1 at 2024-08-26 18:41:18 +0200
+Processing by SettingsController#edit as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/settings/edit.html.erb:29
+  Rendered settings/edit.html.erb within layouts/application (Duration: 6.2ms | Allocations: 1785)
+  Rendered layout layouts/application.html.erb (Duration: 16.6ms | Allocations: 7483)
+Completed 200 OK in 20ms (Views: 17.2ms | ActiveRecord: 0.2ms | Allocations: 8429)
+
+
+Started GET "/profile" for 127.0.0.1 at 2024-08-26 18:41:21 +0200
+Processing by ProfilesController#user_profile as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/user_profile.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:10
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 1], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:43
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 0], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:73
+  Rendered profiles/user_profile.html.erb within layouts/application (Duration: 6.8ms | Allocations: 2197)
+  Rendered layout layouts/application.html.erb (Duration: 17.0ms | Allocations: 7896)
+Completed 200 OK in 20ms (Views: 17.3ms | ActiveRecord: 0.4ms | Allocations: 8909)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 18:41:23 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 621)
+  Rendered layout layouts/application.html.erb (Duration: 15.9ms | Allocations: 6505)
+Completed 200 OK in 22ms (Views: 18.6ms | ActiveRecord: 0.2ms | Allocations: 7634)
+
+
+Started GET "/database/info" for 127.0.0.1 at 2024-08-26 18:41:26 +0200
+Processing by DatabaseController#info as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering database/info.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mTestCase Load (0.1ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases"[0m
+  ↳ app/views/database/info.html.erb:18
+  Rendered database/info.html.erb within layouts/application (Duration: 6.5ms | Allocations: 2425)
+  Rendered layout layouts/application.html.erb (Duration: 18.2ms | Allocations: 8304)
+Completed 200 OK in 30ms (Views: 19.8ms | ActiveRecord: 0.9ms | Allocations: 10949)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 18:41:28 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 195)
+  Rendered layout layouts/application.html.erb (Duration: 12.7ms | Allocations: 6036)
+Completed 200 OK in 16ms (Views: 13.3ms | ActiveRecord: 0.1ms | Allocations: 6947)
+
+
+Started GET "/challenges/new" for 127.0.0.1 at 2024-08-26 18:41:52 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ChallengesController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering challenges/new.html.erb within layouts/application
+  Rendered challenges/new.html.erb within layouts/application (Duration: 0.6ms | Allocations: 276)
+  Rendered layout layouts/application.html.erb (Duration: 334.4ms | Allocations: 140808)
+Completed 200 OK in 449ms (Views: 340.2ms | ActiveRecord: 3.2ms | Allocations: 184988)
+
+
+Started POST "/challenges" for 127.0.0.1 at 2024-08-26 18:41:59 +0200
+Processing by ChallengesController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "challenge"=>{"description"=>"ciao ", "test_cases_attributes"=>{"0"=>{"input_example"=>"ciao", "expected_output"=>"ciao"}}}, "commit"=>"Propose"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/challenges_controller.rb:11:in `create'
+  [1m[36mChallenge Create (3.8ms)[0m  [1m[32mINSERT INTO "challenges" ("description", "created_at", "updated_at", "status", "rejection_reason", "user_id") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["description", "ciao "], ["created_at", "2024-08-26 16:41:59.723414"], ["updated_at", "2024-08-26 16:41:59.723414"], ["status", -1], ["rejection_reason", nil], ["user_id", 4]]
+  ↳ app/controllers/challenges_controller.rb:11:in `create'
+  [1m[36mTestCase Create (0.2ms)[0m  [1m[32mINSERT INTO "test_cases" ("input_example", "expected_output", "challenge_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["input_example", "ciao"], ["expected_output", "ciao"], ["challenge_id", 1], ["created_at", "2024-08-26 16:41:59.729803"], ["updated_at", "2024-08-26 16:41:59.729803"]]
+  ↳ app/controllers/challenges_controller.rb:11:in `create'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/challenges_controller.rb:11:in `create'
+Redirected to http://localhost:3000/challenges/1
+Completed 302 Found in 17ms (ActiveRecord: 5.0ms | Allocations: 7135)
+
+
+Started GET "/challenges/1" for 127.0.0.1 at 2024-08-26 18:41:59 +0200
+  
+AbstractController::ActionNotFound (The action 'show' could not be found for ChallengesController):
+  
+actionpack (7.1.3.4) lib/abstract_controller/base.rb:155:in `process'
+actionview (7.1.3.4) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3.4) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.4) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:882:in `call'
+omniauth (2.1.2) lib/omniauth/strategy.rb:202:in `call!'
+omniauth (2.1.2) lib/omniauth/strategy.rb:169:in `call'
+omniauth (2.1.2) lib/omniauth/builder.rb:44:in `call'
+rack (3.1.7) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.7) lib/rack/etag.rb:29:in `call'
+rack (3.1.7) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.7) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3.4) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.4) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.4) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.1.7) lib/rack/method_override.rb:28:in `call'
+rack (3.1.7) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.1.7) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.4) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/challenges/new" for 127.0.0.1 at 2024-08-26 18:42:00 +0200
+Processing by ChallengesController#new as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering challenges/new.html.erb within layouts/application
+  Rendered challenges/new.html.erb within layouts/application (Duration: 0.0ms | Allocations: 7)
+  Rendered layout layouts/application.html.erb (Duration: 9.6ms | Allocations: 5931)
+Completed 200 OK in 13ms (Views: 10.3ms | ActiveRecord: 0.1ms | Allocations: 7063)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 18:42:01 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 704)
+  Rendered layout layouts/application.html.erb (Duration: 15.0ms | Allocations: 6642)
+Completed 200 OK in 22ms (Views: 17.9ms | ActiveRecord: 0.1ms | Allocations: 7852)
+
+
+Started GET "/database/info" for 127.0.0.1 at 2024-08-26 18:42:02 +0200
+Processing by DatabaseController#info as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering database/info.html.erb within layouts/application
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges"[0m
+  ↳ app/views/database/info.html.erb:18
+  [1m[36mTestCase Load (0.2ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases"[0m
+  ↳ app/views/database/info.html.erb:18
+  Rendered database/info.html.erb within layouts/application (Duration: 6.8ms | Allocations: 2659)
+  Rendered layout layouts/application.html.erb (Duration: 20.3ms | Allocations: 8513)
+Completed 200 OK in 28ms (Views: 22.2ms | ActiveRecord: 0.7ms | Allocations: 9940)
+
+
+Started GET "/admin_profile" for 127.0.0.1 at 2024-08-26 18:42:02 +0200
+Processing by ProfilesController#admin_profile as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/admin_profile.html.erb within layouts/application
+  [1m[36mChallenge Load (0.3ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ?[0m  [["status", -1]]
+  ↳ app/views/profiles/admin_profile.html.erb:20
+  [1m[36mTestCase Load (0.2ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases" WHERE "test_cases"."challenge_id" = ?[0m  [["challenge_id", 1]]
+  ↳ app/views/profiles/admin_profile.html.erb:25
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."is_admin" = ? ORDER BY users.name[0m  [["is_admin", 0]]
+  ↳ app/views/profiles/admin_profile.html.erb:56
+  Rendered profiles/admin_profile.html.erb within layouts/application (Duration: 11.5ms | Allocations: 3613)
+  Rendered layout layouts/application.html.erb (Duration: 29.3ms | Allocations: 9457)
+Completed 200 OK in 35ms (Views: 30.1ms | ActiveRecord: 1.4ms | Allocations: 10758)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 18:42:03 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 195)
+  Rendered layout layouts/application.html.erb (Duration: 12.8ms | Allocations: 6120)
+Completed 200 OK in 16ms (Views: 13.6ms | ActiveRecord: 0.1ms | Allocations: 7056)
+
+
+Started POST "/challenges/1/update_status" for 127.0.0.1 at 2024-08-26 18:42:06 +0200
+Processing by ChallengesController#update_status as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "status"=>"1", "id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/challenges_controller.rb:44:in `set_challenge'
+  [1m[36mCACHE Challenge Load (0.0ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/challenges_controller.rb:19:in `update_status'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/challenges_controller.rb:32:in `update_status'
+  [1m[36mChallenge Update (1.9ms)[0m  [1m[33mUPDATE "challenges" SET "updated_at" = ?, "status" = ? WHERE "challenges"."id" = ?[0m  [["updated_at", "2024-08-26 16:42:06.056508"], ["status", 1], ["id", 1]]
+  ↳ app/controllers/challenges_controller.rb:32:in `update_status'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/challenges_controller.rb:32:in `update_status'
+Redirected to http://localhost:3000/admin_profile
+Completed 302 Found in 12ms (ActiveRecord: 2.4ms | Allocations: 3974)
+
+
+Started GET "/admin_profile" for 127.0.0.1 at 2024-08-26 18:42:06 +0200
+Processing by ProfilesController#admin_profile as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/admin_profile.html.erb within layouts/application
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ?[0m  [["status", -1]]
+  ↳ app/views/profiles/admin_profile.html.erb:20
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."is_admin" = ? ORDER BY users.name[0m  [["is_admin", 0]]
+  ↳ app/views/profiles/admin_profile.html.erb:56
+  Rendered profiles/admin_profile.html.erb within layouts/application (Duration: 3.6ms | Allocations: 1229)
+  Rendered layout layouts/application.html.erb (Duration: 14.3ms | Allocations: 7074)
+Completed 200 OK in 18ms (Views: 14.7ms | ActiveRecord: 0.4ms | Allocations: 8095)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 18:42:06 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 195)
+  Rendered layout layouts/application.html.erb (Duration: 17.1ms | Allocations: 6045)
+Completed 200 OK in 20ms (Views: 17.8ms | ActiveRecord: 0.1ms | Allocations: 6977)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 18:42:09 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 195)
+  Rendered layout layouts/application.html.erb (Duration: 13.6ms | Allocations: 6047)
+Completed 200 OK in 17ms (Views: 14.3ms | ActiveRecord: 0.1ms | Allocations: 6959)
+
+
+Started GET "/profile" for 127.0.0.1 at 2024-08-26 18:42:10 +0200
+Processing by ProfilesController#user_profile as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/user_profile.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.8ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:10
+  [1m[36mChallenge Load (0.4ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 1], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:43
+  [1m[36mTestCase Load (0.2ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases" WHERE "test_cases"."challenge_id" = ?[0m  [["challenge_id", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:48
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 0], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:73
+  Rendered profiles/user_profile.html.erb within layouts/application (Duration: 31.4ms | Allocations: 6935)
+  Rendered layout layouts/application.html.erb (Duration: 41.3ms | Allocations: 12636)
+Completed 200 OK in 47ms (Views: 40.0ms | ActiveRecord: 2.2ms | Allocations: 13757)
+
+
+Started GET "/settings/edit" for 127.0.0.1 at 2024-08-26 18:42:14 +0200
+Processing by SettingsController#edit as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/settings/edit.html.erb:29
+  Rendered settings/edit.html.erb within layouts/application (Duration: 16.8ms | Allocations: 2879)
+  Rendered layout layouts/application.html.erb (Duration: 29.1ms | Allocations: 8666)
+Completed 200 OK in 36ms (Views: 30.4ms | ActiveRecord: 0.3ms | Allocations: 9836)
+
+
+Started GET "/settings/edit" for 127.0.0.1 at 2024-08-26 18:42:55 +0200
+Processing by SettingsController#edit as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/settings/edit.html.erb:29
+  Rendered settings/edit.html.erb within layouts/application (Duration: 15.3ms | Allocations: 5490)
+  Rendered layout layouts/application.html.erb (Duration: 185.2ms | Allocations: 108434)
+Completed 200 OK in 206ms (Views: 187.2ms | ActiveRecord: 3.3ms | Allocations: 116313)
+
+
+Started PATCH "/settings" for 127.0.0.1 at 2024-08-26 18:43:02 +0200
+Processing by SettingsController#update as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"johnny@gmail.com", "email"=>"johnny@gmail.com", "profile_image"=>#<ActionDispatch::Http::UploadedFile:0x00000001228ef6e8 @tempfile=#<Tempfile:/var/folders/fy/kn7nw4zj3lx57crhqh_2ygt00000gn/T/RackMultipart20240826-75549-kopvjv.jpeg>, @content_type="image/jpeg", @original_filename="aaaaaaaaaaaah.jpeg", @headers="Content-Disposition: form-data; name=\"user[profile_image]\"; filename=\"aaaaaaaaaaaah.jpeg\"\r\nContent-Type: image/jpeg\r\n">}, "commit"=>"Salva Modifiche"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "johnny@gmail.com"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."auth0_id" = ? AND "users"."id" != ? LIMIT ?[0m  [["auth0_id", "auth0|66bf128017e6fdfa4e7f2c7f"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mActiveStorage::Blob Create (1.0ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["key", "imk7a96fyhhxqn7egqvaj6m8h0qz"], ["filename", "aaaaaaaaaaaah.jpeg"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 153220], ["checksum", "VOg0yd/4+qLhVYyJw++m+A=="], ["created_at", "2024-08-26 16:43:02.830765"]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mActiveStorage::Attachment Create (0.2ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "profile_image"], ["record_type", "User"], ["record_id", 4], ["blob_id", 1], ["created_at", "2024-08-26 16:43:02.834303"]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mUser Update (0.2ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2024-08-26 16:43:02.836862"], ["id", 4]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mTRANSACTION (2.3ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+[36m  Disk Storage (1.9ms) [0m[32mUploaded file to key: imk7a96fyhhxqn7egqvaj6m8h0qz (checksum: VOg0yd/4+qLhVYyJw++m+A==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: aad82f54-f9cb-4018-89bd-ef6769d5fa8b) to Async(default) with arguments: #<GlobalID:0x0000000122b629e8 @uri=#<URI::GID gid://code-legends/ActiveStorage::Blob/1>>
+[ActiveJob] ↳ app/controllers/settings_controller.rb:9:in `update'
+Redirected to http://localhost:3000/profile
+Completed 302 Found in 241ms (ActiveRecord: 6.4ms | Allocations: 48179)
+
+
+Started GET "/profile" for 127.0.0.1 at 2024-08-26 18:43:02 +0200
+[ActiveJob] [ActiveStorage::AnalyzeJob] [aad82f54-f9cb-4018-89bd-ef6769d5fa8b]   [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [aad82f54-f9cb-4018-89bd-ef6769d5fa8b] Performing ActiveStorage::AnalyzeJob (Job ID: aad82f54-f9cb-4018-89bd-ef6769d5fa8b) from Async(default) enqueued at 2024-08-26T16:43:02.923676000Z with arguments: #<GlobalID:0x00000001229c18f0 @uri=#<URI::GID gid://code-legends/ActiveStorage::Blob/1>>
+Processing by ProfilesController#user_profile as TURBO_STREAM
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/user_profile.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:10
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::VariantRecord Load (0.7ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 1], ["variation_digest", "++nZB7vDzkrwY1mbQbuBlc7kY3I="], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+[36m  Disk Storage (5.4ms) [0m[34mDownloaded file from key: imk7a96fyhhxqn7egqvaj6m8h0qz[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [aad82f54-f9cb-4018-89bd-ef6769d5fa8b] [36m  Disk Storage (18.9ms) [0m[34mDownloaded file from key: imk7a96fyhhxqn7egqvaj6m8h0qz[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [aad82f54-f9cb-4018-89bd-ef6769d5fa8b]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [aad82f54-f9cb-4018-89bd-ef6769d5fa8b]   [1m[36mActiveStorage::Blob Update (1.1ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = ? WHERE "active_storage_blobs"."id" = ?[0m  [["metadata", "{\"identified\":true,\"width\":1280,\"height\":800,\"analyzed\":true}"], ["id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [aad82f54-f9cb-4018-89bd-ef6769d5fa8b]   [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ?[0m  [["blob_id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [aad82f54-f9cb-4018-89bd-ef6769d5fa8b]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 4]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [aad82f54-f9cb-4018-89bd-ef6769d5fa8b]   [1m[36mUser Update (0.1ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2024-08-26 16:43:03.963877"], ["id", 4]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [aad82f54-f9cb-4018-89bd-ef6769d5fa8b]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [aad82f54-f9cb-4018-89bd-ef6769d5fa8b] Performed ActiveStorage::AnalyzeJob (Job ID: aad82f54-f9cb-4018-89bd-ef6769d5fa8b) from Async(default) in 1012.93ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::VariantRecord Create (1.2ms)[0m  [1m[32mINSERT INTO "active_storage_variant_records" ("blob_id", "variation_digest") VALUES (?, ?) RETURNING "id"[0m  [["blob_id", 1], ["variation_digest", "++nZB7vDzkrwY1mbQbuBlc7kY3I="]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::Attachment Load (0.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::Blob Create (0.2ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["key", "fksrn7v96a1hozi5xzptfv921aa8"], ["filename", "aaaaaaaaaaaah.jpeg"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 9788], ["checksum", "jppNQOHFAwP9DMKrsjQSNw=="], ["created_at", "2024-08-26 16:43:03.977920"]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::Attachment Create (0.2ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "image"], ["record_type", "ActiveStorage::VariantRecord"], ["record_id", 1], ["blob_id", 2], ["created_at", "2024-08-26 16:43:03.979479"]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+[36m  Disk Storage (1.0ms) [0m[32mUploaded file to key: fksrn7v96a1hozi5xzptfv921aa8 (checksum: jppNQOHFAwP9DMKrsjQSNw==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 64931279-6618-4822-9d3e-8dbd795031fc) to Async(default) with arguments: #<GlobalID:0x00000001221cfb10 @uri=#<URI::GID gid://code-legends/ActiveStorage::Blob/2>>
+[ActiveJob] ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 1], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:43
+  [1m[36mTestCase Load (0.1ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases" WHERE "test_cases"."challenge_id" = ?[0m  [["challenge_id", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:48
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 0], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:73
+  Rendered profiles/user_profile.html.erb within layouts/application (Duration: 938.3ms | Allocations: 68598)
+  Rendered layout layouts/application.html.erb (Duration: 951.1ms | Allocations: 74990)
+Completed 200 OK in 998ms (Views: 949.1ms | ActiveRecord: 6.7ms | Allocations: 83351)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [64931279-6618-4822-9d3e-8dbd795031fc]   [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [64931279-6618-4822-9d3e-8dbd795031fc] Performing ActiveStorage::AnalyzeJob (Job ID: 64931279-6618-4822-9d3e-8dbd795031fc) from Async(default) enqueued at 2024-08-26T16:43:03.984374000Z with arguments: #<GlobalID:0x0000000120754290 @uri=#<URI::GID gid://code-legends/ActiveStorage::Blob/2>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [64931279-6618-4822-9d3e-8dbd795031fc] [36m  Disk Storage (0.4ms) [0m[34mDownloaded file from key: fksrn7v96a1hozi5xzptfv921aa8[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [64931279-6618-4822-9d3e-8dbd795031fc]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [64931279-6618-4822-9d3e-8dbd795031fc]   [1m[36mActiveStorage::Blob Update (2.2ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = ? WHERE "active_storage_blobs"."id" = ?[0m  [["metadata", "{\"identified\":true,\"width\":200,\"height\":200,\"analyzed\":true}"], ["id", 2]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [64931279-6618-4822-9d3e-8dbd795031fc]   [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ?[0m  [["blob_id", 2]]
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--7e44d24a1ebd29161f99e3123bdc2b3e06c317f3/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGVnIiwicmVzaXplX3RvX2ZpbGwiOlsyMDAsMjAwXX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--a32e71ee2fd5ac451a533c24bacba88f4523bd14/aaaaaaaaaaaah.jpeg" for 127.0.0.1 at 2024-08-26 18:43:04 +0200
+[ActiveJob] [ActiveStorage::AnalyzeJob] [64931279-6618-4822-9d3e-8dbd795031fc]   [1m[36mActiveStorage::VariantRecord Load (0.2ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."id" = ?[0m  [["id", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [64931279-6618-4822-9d3e-8dbd795031fc]   [1m[36mTRANSACTION (0.3ms)[0m  [1m[36mcommit transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [64931279-6618-4822-9d3e-8dbd795031fc] Performed ActiveStorage::AnalyzeJob (Job ID: 64931279-6618-4822-9d3e-8dbd795031fc) from Async(default) in 26.67ms
+Processing by ActiveStorage::Representations::RedirectController#show as JPEG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--7e44d24a1ebd29161f99e3123bdc2b3e06c317f3", "variation_key"=>"[FILTERED]", "filename"=>"aaaaaaaaaaaah"}
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 1], ["variation_digest", "++nZB7vDzkrwY1mbQbuBlc7kY3I="], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[36m  Disk Storage (0.9ms) [0m[34mGenerated URL for file at key: fksrn7v96a1hozi5xzptfv921aa8 (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJma3Nybjd2OTZhMWhvemk1eHpwdGZ2OTIxYWE4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiYWFhYWFhYWFhYWFhaC5qcGVnXCI7IGZpbGVuYW1lKj1VVEYtOCcnYWFhYWFhYWFhYWFhaC5qcGVnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NDg6MDQuMTAxWiIsInB1ciI6ImJsb2Jfa2V5In19--bad0a02332d8ab7b2f9ff86019d94994f947ecaf/aaaaaaaaaaaah.jpeg)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJma3Nybjd2OTZhMWhvemk1eHpwdGZ2OTIxYWE4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiYWFhYWFhYWFhYWFhaC5qcGVnXCI7IGZpbGVuYW1lKj1VVEYtOCcnYWFhYWFhYWFhYWFhaC5qcGVnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NDg6MDQuMTAxWiIsInB1ciI6ImJsb2Jfa2V5In19--bad0a02332d8ab7b2f9ff86019d94994f947ecaf/aaaaaaaaaaaah.jpeg
+Completed 302 Found in 22ms (ActiveRecord: 0.5ms | Allocations: 6039)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJma3Nybjd2OTZhMWhvemk1eHpwdGZ2OTIxYWE4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiYWFhYWFhYWFhYWFhaC5qcGVnXCI7IGZpbGVuYW1lKj1VVEYtOCcnYWFhYWFhYWFhYWFhaC5qcGVnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NDg6MDQuMTAxWiIsInB1ciI6ImJsb2Jfa2V5In19--bad0a02332d8ab7b2f9ff86019d94994f947ecaf/aaaaaaaaaaaah.jpeg" for 127.0.0.1 at 2024-08-26 18:43:04 +0200
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"aaaaaaaaaaaah"}
+Completed 200 OK in 1ms (ActiveRecord: 0.0ms | Allocations: 329)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 18:43:05 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 2.2ms | Allocations: 628)
+  Rendered layout layouts/application.html.erb (Duration: 16.3ms | Allocations: 6482)
+Completed 200 OK in 23ms (Views: 18.7ms | ActiveRecord: 0.2ms | Allocations: 7623)
+
+
+Started GET "/settings/edit" for 127.0.0.1 at 2024-08-26 18:43:05 +0200
+Processing by SettingsController#edit as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/settings/edit.html.erb:29
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 1], ["variation_digest", "++nZB7vDzkrwY1mbQbuBlc7kY3I="], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  Rendered settings/edit.html.erb within layouts/application (Duration: 8.6ms | Allocations: 2574)
+  Rendered layout layouts/application.html.erb (Duration: 21.2ms | Allocations: 8414)
+Completed 200 OK in 25ms (Views: 21.5ms | ActiveRecord: 0.4ms | Allocations: 9357)
+
+
+Started GET "/settings/edit" for 127.0.0.1 at 2024-08-26 18:43:56 +0200
+Processing by SettingsController#edit as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/settings/edit.html.erb:29
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 1], ["variation_digest", "++nZB7vDzkrwY1mbQbuBlc7kY3I="], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  Rendered settings/edit.html.erb within layouts/application (Duration: 37.9ms | Allocations: 23579)
+  Rendered layout layouts/application.html.erb (Duration: 143.5ms | Allocations: 126808)
+Completed 200 OK in 160ms (Views: 145.0ms | ActiveRecord: 4.1ms | Allocations: 134709)
+
+
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--7e44d24a1ebd29161f99e3123bdc2b3e06c317f3/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGVnIiwicmVzaXplX3RvX2ZpbGwiOlsyMDAsMjAwXX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--a32e71ee2fd5ac451a533c24bacba88f4523bd14/aaaaaaaaaaaah.jpeg" for 127.0.0.1 at 2024-08-26 18:43:56 +0200
+Processing by ActiveStorage::Representations::RedirectController#show as JPEG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--7e44d24a1ebd29161f99e3123bdc2b3e06c317f3", "variation_key"=>"[FILTERED]", "filename"=>"aaaaaaaaaaaah"}
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 1], ["variation_digest", "++nZB7vDzkrwY1mbQbuBlc7kY3I="], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[36m  Disk Storage (0.8ms) [0m[34mGenerated URL for file at key: fksrn7v96a1hozi5xzptfv921aa8 (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJma3Nybjd2OTZhMWhvemk1eHpwdGZ2OTIxYWE4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiYWFhYWFhYWFhYWFhaC5qcGVnXCI7IGZpbGVuYW1lKj1VVEYtOCcnYWFhYWFhYWFhYWFhaC5qcGVnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NDg6NTYuOTg5WiIsInB1ciI6ImJsb2Jfa2V5In19--6355c0b4897f93f1e240dcc82c6b84b681cc3581/aaaaaaaaaaaah.jpeg)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJma3Nybjd2OTZhMWhvemk1eHpwdGZ2OTIxYWE4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiYWFhYWFhYWFhYWFhaC5qcGVnXCI7IGZpbGVuYW1lKj1VVEYtOCcnYWFhYWFhYWFhYWFhaC5qcGVnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NDg6NTYuOTg5WiIsInB1ciI6ImJsb2Jfa2V5In19--6355c0b4897f93f1e240dcc82c6b84b681cc3581/aaaaaaaaaaaah.jpeg
+Completed 302 Found in 17ms (ActiveRecord: 0.4ms | Allocations: 6451)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJma3Nybjd2OTZhMWhvemk1eHpwdGZ2OTIxYWE4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiYWFhYWFhYWFhYWFhaC5qcGVnXCI7IGZpbGVuYW1lKj1VVEYtOCcnYWFhYWFhYWFhYWFhaC5qcGVnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NDg6NTYuOTg5WiIsInB1ciI6ImJsb2Jfa2V5In19--6355c0b4897f93f1e240dcc82c6b84b681cc3581/aaaaaaaaaaaah.jpeg" for 127.0.0.1 at 2024-08-26 18:43:56 +0200
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"aaaaaaaaaaaah"}
+Completed 200 OK in 1ms (ActiveRecord: 0.0ms | Allocations: 311)
+
+
+Started GET "/settings/edit" for 127.0.0.1 at 2024-08-26 18:45:15 +0200
+Processing by SettingsController#edit as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/settings/edit.html.erb:29
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 1], ["variation_digest", "++nZB7vDzkrwY1mbQbuBlc7kY3I="], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  Rendered settings/edit.html.erb within layouts/application (Duration: 47.7ms | Allocations: 23602)
+  Rendered layout layouts/application.html.erb (Duration: 159.6ms | Allocations: 126953)
+Completed 200 OK in 181ms (Views: 160.4ms | ActiveRecord: 5.3ms | Allocations: 134874)
+
+
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--7e44d24a1ebd29161f99e3123bdc2b3e06c317f3/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGVnIiwicmVzaXplX3RvX2ZpbGwiOlsyMDAsMjAwXX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--a32e71ee2fd5ac451a533c24bacba88f4523bd14/aaaaaaaaaaaah.jpeg" for 127.0.0.1 at 2024-08-26 18:45:16 +0200
+Processing by ActiveStorage::Representations::RedirectController#show as JPEG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--7e44d24a1ebd29161f99e3123bdc2b3e06c317f3", "variation_key"=>"[FILTERED]", "filename"=>"aaaaaaaaaaaah"}
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 1], ["variation_digest", "++nZB7vDzkrwY1mbQbuBlc7kY3I="], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[36m  Disk Storage (0.6ms) [0m[34mGenerated URL for file at key: fksrn7v96a1hozi5xzptfv921aa8 (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJma3Nybjd2OTZhMWhvemk1eHpwdGZ2OTIxYWE4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiYWFhYWFhYWFhYWFhaC5qcGVnXCI7IGZpbGVuYW1lKj1VVEYtOCcnYWFhYWFhYWFhYWFhaC5qcGVnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NTA6MTYuODMzWiIsInB1ciI6ImJsb2Jfa2V5In19--296b04784c6d39d893f1c9af959f066a0d7041d9/aaaaaaaaaaaah.jpeg)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJma3Nybjd2OTZhMWhvemk1eHpwdGZ2OTIxYWE4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiYWFhYWFhYWFhYWFhaC5qcGVnXCI7IGZpbGVuYW1lKj1VVEYtOCcnYWFhYWFhYWFhYWFhaC5qcGVnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NTA6MTYuODMzWiIsInB1ciI6ImJsb2Jfa2V5In19--296b04784c6d39d893f1c9af959f066a0d7041d9/aaaaaaaaaaaah.jpeg
+Completed 302 Found in 16ms (ActiveRecord: 0.4ms | Allocations: 6449)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJma3Nybjd2OTZhMWhvemk1eHpwdGZ2OTIxYWE4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiYWFhYWFhYWFhYWFhaC5qcGVnXCI7IGZpbGVuYW1lKj1VVEYtOCcnYWFhYWFhYWFhYWFhaC5qcGVnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NTA6MTYuODMzWiIsInB1ciI6ImJsb2Jfa2V5In19--296b04784c6d39d893f1c9af959f066a0d7041d9/aaaaaaaaaaaah.jpeg" for 127.0.0.1 at 2024-08-26 18:45:16 +0200
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"aaaaaaaaaaaah"}
+Completed 200 OK in 1ms (ActiveRecord: 0.0ms | Allocations: 311)
+
+
+Started GET "/settings/edit" for 127.0.0.1 at 2024-08-26 18:45:28 +0200
+Processing by SettingsController#edit as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering settings/edit.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/settings/edit.html.erb:29
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 1], ["variation_digest", "++nZB7vDzkrwY1mbQbuBlc7kY3I="], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  Rendered settings/edit.html.erb within layouts/application (Duration: 56.2ms | Allocations: 23573)
+  Rendered layout layouts/application.html.erb (Duration: 183.0ms | Allocations: 126571)
+Completed 200 OK in 200ms (Views: 184.0ms | ActiveRecord: 4.7ms | Allocations: 134523)
+
+
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--7e44d24a1ebd29161f99e3123bdc2b3e06c317f3/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGVnIiwicmVzaXplX3RvX2ZpbGwiOlsyMDAsMjAwXX0sInB1ciI6InZhcmlhdGlvbiJ9fQ==--a32e71ee2fd5ac451a533c24bacba88f4523bd14/aaaaaaaaaaaah.jpeg" for 127.0.0.1 at 2024-08-26 18:45:29 +0200
+Processing by ActiveStorage::Representations::RedirectController#show as JPEG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsiZGF0YSI6MSwicHVyIjoiYmxvYl9pZCJ9fQ==--7e44d24a1ebd29161f99e3123bdc2b3e06c317f3", "variation_key"=>"[FILTERED]", "filename"=>"aaaaaaaaaaaah"}
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 1], ["variation_digest", "++nZB7vDzkrwY1mbQbuBlc7kY3I="], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[36m  Disk Storage (0.5ms) [0m[34mGenerated URL for file at key: fksrn7v96a1hozi5xzptfv921aa8 (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJma3Nybjd2OTZhMWhvemk1eHpwdGZ2OTIxYWE4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiYWFhYWFhYWFhYWFhaC5qcGVnXCI7IGZpbGVuYW1lKj1VVEYtOCcnYWFhYWFhYWFhYWFhaC5qcGVnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NTA6MjkuMDk5WiIsInB1ciI6ImJsb2Jfa2V5In19--4cfca9b48c1fed7e9ab15bbdc90b9114afff21bf/aaaaaaaaaaaah.jpeg)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJma3Nybjd2OTZhMWhvemk1eHpwdGZ2OTIxYWE4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiYWFhYWFhYWFhYWFhaC5qcGVnXCI7IGZpbGVuYW1lKj1VVEYtOCcnYWFhYWFhYWFhYWFhaC5qcGVnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NTA6MjkuMDk5WiIsInB1ciI6ImJsb2Jfa2V5In19--4cfca9b48c1fed7e9ab15bbdc90b9114afff21bf/aaaaaaaaaaaah.jpeg
+Completed 302 Found in 16ms (ActiveRecord: 0.4ms | Allocations: 6440)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJma3Nybjd2OTZhMWhvemk1eHpwdGZ2OTIxYWE4IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwiYWFhYWFhYWFhYWFhaC5qcGVnXCI7IGZpbGVuYW1lKj1VVEYtOCcnYWFhYWFhYWFhYWFhaC5qcGVnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NTA6MjkuMDk5WiIsInB1ciI6ImJsb2Jfa2V5In19--4cfca9b48c1fed7e9ab15bbdc90b9114afff21bf/aaaaaaaaaaaah.jpeg" for 127.0.0.1 at 2024-08-26 18:45:29 +0200
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"aaaaaaaaaaaah"}
+Completed 200 OK in 1ms (ActiveRecord: 0.0ms | Allocations: 316)
+
+
+Started PATCH "/settings" for 127.0.0.1 at 2024-08-26 18:45:41 +0200
+Processing by SettingsController#update as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "user"=>{"name"=>"johnny@gmail.com", "email"=>"johnny@gmail.com", "profile_image"=>#<ActionDispatch::Http::UploadedFile:0x0000000126e5f430 @tempfile=#<Tempfile:/var/folders/fy/kn7nw4zj3lx57crhqh_2ygt00000gn/T/RackMultipart20240826-75549-v6a12t.jpg>, @content_type="image/jpeg", @original_filename="lofi_coffee.jpg", @headers="Content-Disposition: form-data; name=\"user[profile_image]\"; filename=\"lofi_coffee.jpg\"\r\nContent-Type: image/jpeg\r\n">}, "commit"=>"Salva Modifiche"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? AND "users"."id" != ? LIMIT ?[0m  [["email", "johnny@gmail.com"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."auth0_id" = ? AND "users"."id" != ? LIMIT ?[0m  [["auth0_id", "auth0|66bf128017e6fdfa4e7f2c7f"], ["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mActiveStorage::Attachment Destroy (2.6ms)[0m  [1m[31mDELETE FROM "active_storage_attachments" WHERE "active_storage_attachments"."id" = ?[0m  [["id", 1]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mActiveStorage::Blob Create (0.4ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["key", "p8dl6471ifqtg1rjcfuusa63m901"], ["filename", "lofi_coffee.jpg"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 2364757], ["checksum", "9RR3NP/PsldvT8cYJqmwpg=="], ["created_at", "2024-08-26 16:45:41.621411"]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mActiveStorage::Attachment Create (0.2ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "profile_image"], ["record_type", "User"], ["record_id", 4], ["blob_id", 3], ["created_at", "2024-08-26 16:45:41.628413"]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mUser Update (0.1ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2024-08-26 16:45:41.630271"], ["id", 4]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+[36m  Disk Storage (9.8ms) [0m[32mUploaded file to key: p8dl6471ifqtg1rjcfuusa63m901 (checksum: 9RR3NP/PsldvT8cYJqmwpg==)[0m
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/settings_controller.rb:9:in `update'
+[ActiveJob] Enqueued ActiveStorage::PurgeJob (Job ID: 89e4a932-751d-4cf9-9bf3-fee6570d5b2f) to Async(default) with arguments: #<GlobalID:0x0000000121c0a8b0 @uri=#<URI::GID gid://code-legends/ActiveStorage::Blob/1>>
+[ActiveJob] ↳ app/controllers/settings_controller.rb:9:in `update'
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 44ec043a-30a1-41fa-ba32-7799a526a5f8) to Async(default) with arguments: #<GlobalID:0x000000012282ceb8 @uri=#<URI::GID gid://code-legends/ActiveStorage::Blob/3>>
+[ActiveJob] ↳ app/controllers/settings_controller.rb:9:in `update'
+Redirected to http://localhost:3000/profile
+Completed 302 Found in 70ms (ActiveRecord: 7.4ms | Allocations: 14268)
+
+
+Started GET "/profile" for 127.0.0.1 at 2024-08-26 18:45:41 +0200
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f]   [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f] Performing ActiveStorage::PurgeJob (Job ID: 89e4a932-751d-4cf9-9bf3-fee6570d5b2f) from Async(default) enqueued at 2024-08-26T16:45:41.650828000Z with arguments: #<GlobalID:0x0000000122720ce0 @uri=#<URI::GID gid://code-legends/ActiveStorage::Blob/1>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [44ec043a-30a1-41fa-ba32-7799a526a5f8]   [1m[36mActiveStorage::Blob Load (0.8ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f]   [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [44ec043a-30a1-41fa-ba32-7799a526a5f8] Performing ActiveStorage::AnalyzeJob (Job ID: 44ec043a-30a1-41fa-ba32-7799a526a5f8) from Async(default) enqueued at 2024-08-26T16:45:41.654053000Z with arguments: #<GlobalID:0x0000000122c0f990 @uri=#<URI::GID gid://code-legends/ActiveStorage::Blob/3>>
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f]   [1m[36mActiveStorage::Attachment Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ? LIMIT ?[0m  [["blob_id", 1], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f]   [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ?[0m  [["blob_id", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f]   [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f]   [1m[36mActiveStorage::Attachment Destroy (0.1ms)[0m  [1m[31mDELETE FROM "active_storage_attachments" WHERE "active_storage_attachments"."id" = ?[0m  [["id", 2]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [44ec043a-30a1-41fa-ba32-7799a526a5f8] [36m  Disk Storage (3.7ms) [0m[34mDownloaded file from key: p8dl6471ifqtg1rjcfuusa63m901[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f]   [1m[36mActiveStorage::VariantRecord Destroy (0.1ms)[0m  [1m[31mDELETE FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."id" = ?[0m  [["id", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f]   [1m[36mActiveStorage::Attachment Load (0.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 1], ["record_type", "ActiveStorage::Blob"], ["name", "preview_image"], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f]   [1m[36mActiveStorage::Blob Destroy (0.1ms)[0m  [1m[31mDELETE FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ?[0m  [["id", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f]   [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f]   [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f] Enqueued ActiveStorage::PurgeJob (Job ID: 62305b30-957c-4532-a82b-60cd14f09f56) to Async(default) with arguments: #<GlobalID:0x0000000126f1f3c0 @uri=#<URI::GID gid://code-legends/ActiveStorage::Blob/2>>
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f] [36m  Disk Storage (1.1ms) [0m[31mDeleted file from key: imk7a96fyhhxqn7egqvaj6m8h0qz[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f] [36m  Disk Storage (0.1ms) [0m[31mDeleted files by key prefix: variants/imk7a96fyhhxqn7egqvaj6m8h0qz/[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [89e4a932-751d-4cf9-9bf3-fee6570d5b2f] Performed ActiveStorage::PurgeJob (Job ID: 89e4a932-751d-4cf9-9bf3-fee6570d5b2f) from Async(default) in 26.36ms
+Processing by ProfilesController#user_profile as TURBO_STREAM
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering profiles/user_profile.html.erb within layouts/application
+  [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 4], ["record_type", "User"], ["name", "profile_image"], ["LIMIT", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:10
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [62305b30-957c-4532-a82b-60cd14f09f56]   [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+[ActiveJob] [ActiveStorage::PurgeJob] [62305b30-957c-4532-a82b-60cd14f09f56] Performing ActiveStorage::PurgeJob (Job ID: 62305b30-957c-4532-a82b-60cd14f09f56) from Async(default) enqueued at 2024-08-26T16:45:41.696263000Z with arguments: #<GlobalID:0x000000012905e4c8 @uri=#<URI::GID gid://code-legends/ActiveStorage::Blob/2>>
+  [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 3], ["variation_digest", "X2T13fgHWfQ/VWl0bR5rEsi226U="], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [62305b30-957c-4532-a82b-60cd14f09f56]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+[ActiveJob] [ActiveStorage::PurgeJob] [62305b30-957c-4532-a82b-60cd14f09f56]   [1m[36mActiveStorage::Attachment Exists? (2.5ms)[0m  [1m[34mSELECT 1 AS one FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ? LIMIT ?[0m  [["blob_id", 2], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [62305b30-957c-4532-a82b-60cd14f09f56]   [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ?[0m  [["blob_id", 2]]
+[ActiveJob] [ActiveStorage::PurgeJob] [62305b30-957c-4532-a82b-60cd14f09f56]   [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "ActiveStorage::Blob"], ["name", "preview_image"], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::PurgeJob] [62305b30-957c-4532-a82b-60cd14f09f56]   [1m[36mActiveStorage::Blob Destroy (0.1ms)[0m  [1m[31mDELETE FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ?[0m  [["id", 2]]
+[ActiveJob] [ActiveStorage::PurgeJob] [62305b30-957c-4532-a82b-60cd14f09f56]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+[36m  Disk Storage (2.8ms) [0m[34mDownloaded file from key: p8dl6471ifqtg1rjcfuusa63m901[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [62305b30-957c-4532-a82b-60cd14f09f56] [36m  Disk Storage (0.9ms) [0m[31mDeleted file from key: fksrn7v96a1hozi5xzptfv921aa8[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [62305b30-957c-4532-a82b-60cd14f09f56] [36m  Disk Storage (0.1ms) [0m[31mDeleted files by key prefix: variants/fksrn7v96a1hozi5xzptfv921aa8/[0m
+[ActiveJob] [ActiveStorage::PurgeJob] [62305b30-957c-4532-a82b-60cd14f09f56] Performed ActiveStorage::PurgeJob (Job ID: 62305b30-957c-4532-a82b-60cd14f09f56) from Async(default) in 14.34ms
+[ActiveJob] [ActiveStorage::AnalyzeJob] [44ec043a-30a1-41fa-ba32-7799a526a5f8]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [44ec043a-30a1-41fa-ba32-7799a526a5f8]   [1m[36mActiveStorage::Blob Update (1.3ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = ? WHERE "active_storage_blobs"."id" = ?[0m  [["metadata", "{\"identified\":true,\"width\":3840,\"height\":2160,\"analyzed\":true}"], ["id", 3]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [44ec043a-30a1-41fa-ba32-7799a526a5f8]   [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ?[0m  [["blob_id", 3]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [44ec043a-30a1-41fa-ba32-7799a526a5f8]   [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ?[0m  [["id", 4]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [44ec043a-30a1-41fa-ba32-7799a526a5f8]   [1m[36mUser Update (0.1ms)[0m  [1m[33mUPDATE "users" SET "updated_at" = ? WHERE "users"."id" = ?[0m  [["updated_at", "2024-08-26 16:45:41.940009"], ["id", 4]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [44ec043a-30a1-41fa-ba32-7799a526a5f8]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [44ec043a-30a1-41fa-ba32-7799a526a5f8] Performed ActiveStorage::AnalyzeJob (Job ID: 44ec043a-30a1-41fa-ba32-7799a526a5f8) from Async(default) in 264.57ms
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::VariantRecord Create (1.4ms)[0m  [1m[32mINSERT INTO "active_storage_variant_records" ("blob_id", "variation_digest") VALUES (?, ?) RETURNING "id"[0m  [["blob_id", 3], ["variation_digest", "X2T13fgHWfQ/VWl0bR5rEsi226U="]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::Attachment Load (0.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::Blob Create (0.1ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["key", "fg9jcz7th60sfxe6ugxxgsppb5qv"], ["filename", "lofi_coffee.jpg"], ["content_type", "image/jpeg"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 36200], ["checksum", "PDGiQWGCvA22YL8b8n5u/g=="], ["created_at", "2024-08-26 16:45:42.046839"]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mActiveStorage::Attachment Create (0.2ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "image"], ["record_type", "ActiveStorage::VariantRecord"], ["record_id", 2], ["blob_id", 4], ["created_at", "2024-08-26 16:45:42.048403"]]
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+[36m  Disk Storage (1.1ms) [0m[32mUploaded file to key: fg9jcz7th60sfxe6ugxxgsppb5qv (checksum: PDGiQWGCvA22YL8b8n5u/g==)[0m
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 95306806-aafa-48d6-abc1-a5d963569ec2) to Async(default) with arguments: #<GlobalID:0x0000000129250510 @uri=#<URI::GID gid://code-legends/ActiveStorage::Blob/4>>
+[ActiveJob] ↳ app/models/user.rb:12:in `profile_image_thumbnail'
+  [1m[36mChallenge Load (0.2ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 1], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:43
+  [1m[36mTestCase Load (0.1ms)[0m  [1m[34mSELECT "test_cases".* FROM "test_cases" WHERE "test_cases"."challenge_id" = ?[0m  [["challenge_id", 1]]
+  ↳ app/views/profiles/user_profile.html.erb:48
+  [1m[36mChallenge Load (0.1ms)[0m  [1m[34mSELECT "challenges".* FROM "challenges" WHERE "challenges"."status" = ? AND "challenges"."user_id" = ?[0m  [["status", 0], ["user_id", 4]]
+  ↳ app/views/profiles/user_profile.html.erb:73
+  Rendered profiles/user_profile.html.erb within layouts/application (Duration: 350.1ms | Allocations: 39276)
+[ActiveJob] [ActiveStorage::AnalyzeJob] [95306806-aafa-48d6-abc1-a5d963569ec2]   [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [95306806-aafa-48d6-abc1-a5d963569ec2] Performing ActiveStorage::AnalyzeJob (Job ID: 95306806-aafa-48d6-abc1-a5d963569ec2) from Async(default) enqueued at 2024-08-26T16:45:42.053260000Z with arguments: #<GlobalID:0x00000001290d68d8 @uri=#<URI::GID gid://code-legends/ActiveStorage::Blob/4>>
+[ActiveJob] [ActiveStorage::AnalyzeJob] [95306806-aafa-48d6-abc1-a5d963569ec2] [36m  Disk Storage (0.4ms) [0m[34mDownloaded file from key: fg9jcz7th60sfxe6ugxxgsppb5qv[0m
+  Rendered layout layouts/application.html.erb (Duration: 365.7ms | Allocations: 47589)
+Completed 200 OK in 376ms (Views: 363.4ms | ActiveRecord: 3.5ms | Allocations: 51104)
+
+
+[ActiveJob] [ActiveStorage::AnalyzeJob] [95306806-aafa-48d6-abc1-a5d963569ec2]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [95306806-aafa-48d6-abc1-a5d963569ec2]   [1m[36mActiveStorage::Blob Update (1.5ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = ? WHERE "active_storage_blobs"."id" = ?[0m  [["metadata", "{\"identified\":true,\"width\":200,\"height\":200,\"analyzed\":true}"], ["id", 4]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [95306806-aafa-48d6-abc1-a5d963569ec2]   [1m[36mActiveStorage::Attachment Load (0.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."blob_id" = ?[0m  [["blob_id", 4]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [95306806-aafa-48d6-abc1-a5d963569ec2]   [1m[36mActiveStorage::VariantRecord Load (0.1ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."id" = ?[0m  [["id", 2]]
+[ActiveJob] [ActiveStorage::AnalyzeJob] [95306806-aafa-48d6-abc1-a5d963569ec2]   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+[ActiveJob] [ActiveStorage::AnalyzeJob] [95306806-aafa-48d6-abc1-a5d963569ec2] Performed ActiveStorage::AnalyzeJob (Job ID: 95306806-aafa-48d6-abc1-a5d963569ec2) from Async(default) in 16.43ms
+Started GET "/rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsiZGF0YSI6MywicHVyIjoiYmxvYl9pZCJ9fQ==--12573bc2fe7817ea140d64770c00340014e222d7/eyJfcmFpbHMiOnsiZGF0YSI6eyJmb3JtYXQiOiJqcGciLCJyZXNpemVfdG9fZmlsbCI6WzIwMCwyMDBdfSwicHVyIjoidmFyaWF0aW9uIn19--807afafe6b768eec00255ecdb83a2aa39ceb9fc7/lofi_coffee.jpg" for 127.0.0.1 at 2024-08-26 18:45:42 +0200
+Processing by ActiveStorage::Representations::RedirectController#show as JPEG
+  Parameters: {"signed_blob_id"=>"eyJfcmFpbHMiOnsiZGF0YSI6MywicHVyIjoiYmxvYl9pZCJ9fQ==--12573bc2fe7817ea140d64770c00340014e222d7", "variation_key"=>"[FILTERED]", "filename"=>"lofi_coffee"}
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mActiveStorage::VariantRecord Load (0.2ms)[0m  [1m[34mSELECT "active_storage_variant_records".* FROM "active_storage_variant_records" WHERE "active_storage_variant_records"."blob_id" = ? AND "active_storage_variant_records"."variation_digest" = ? LIMIT ?[0m  [["blob_id", 3], ["variation_digest", "X2T13fgHWfQ/VWl0bR5rEsi226U="], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 2], ["record_type", "ActiveStorage::VariantRecord"], ["name", "image"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+[36m  Disk Storage (0.4ms) [0m[34mGenerated URL for file at key: fg9jcz7th60sfxe6ugxxgsppb5qv (http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJmZzlqY3o3dGg2MHNmeGU2dWd4eGdzcHBiNXF2IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwibG9maV9jb2ZmZWUuanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnbG9maV9jb2ZmZWUuanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NTA6NDIuMTM4WiIsInB1ciI6ImJsb2Jfa2V5In19--18669ebdaf1a5bebabe36694a04c8d3a9c8983b1/lofi_coffee.jpg)[0m
+Redirected to http://localhost:3000/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJmZzlqY3o3dGg2MHNmeGU2dWd4eGdzcHBiNXF2IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwibG9maV9jb2ZmZWUuanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnbG9maV9jb2ZmZWUuanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NTA6NDIuMTM4WiIsInB1ciI6ImJsb2Jfa2V5In19--18669ebdaf1a5bebabe36694a04c8d3a9c8983b1/lofi_coffee.jpg
+Completed 302 Found in 12ms (ActiveRecord: 0.6ms | Allocations: 5346)
+
+
+Started GET "/rails/active_storage/disk/eyJfcmFpbHMiOnsiZGF0YSI6eyJrZXkiOiJmZzlqY3o3dGg2MHNmeGU2dWd4eGdzcHBiNXF2IiwiZGlzcG9zaXRpb24iOiJpbmxpbmU7IGZpbGVuYW1lPVwibG9maV9jb2ZmZWUuanBnXCI7IGZpbGVuYW1lKj1VVEYtOCcnbG9maV9jb2ZmZWUuanBnIiwiY29udGVudF90eXBlIjoiaW1hZ2UvanBlZyIsInNlcnZpY2VfbmFtZSI6ImxvY2FsIn0sImV4cCI6IjIwMjQtMDgtMjZUMTY6NTA6NDIuMTM4WiIsInB1ciI6ImJsb2Jfa2V5In19--18669ebdaf1a5bebabe36694a04c8d3a9c8983b1/lofi_coffee.jpg" for 127.0.0.1 at 2024-08-26 18:45:42 +0200
+Processing by ActiveStorage::DiskController#show as JPEG
+  Parameters: {"encoded_key"=>"[FILTERED]", "filename"=>"lofi_coffee"}
+Completed 200 OK in 1ms (ActiveRecord: 0.0ms | Allocations: 237)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 18:45:43 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.7ms | Allocations: 625)
+  Rendered layout layouts/application.html.erb (Duration: 17.5ms | Allocations: 6535)
+Completed 200 OK in 24ms (Views: 20.4ms | ActiveRecord: 0.3ms | Allocations: 7717)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 18:45:54 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 195)
+  Rendered layout layouts/application.html.erb (Duration: 12.9ms | Allocations: 6039)
+Completed 200 OK in 16ms (Views: 13.7ms | ActiveRecord: 0.1ms | Allocations: 6952)
+
+
