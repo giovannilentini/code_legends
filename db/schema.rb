@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_24_215432) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_24_184241) do
   create_table "challenges", force: :cascade do |t|
+    t.string "language"
     t.string "status"
     t.integer "player_1_id"
     t.integer "player_2_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "language"
     t.index ["player_1_id"], name: "index_challenges_on_player_1_id"
     t.index ["player_2_id"], name: "index_challenges_on_player_2_id"
   end

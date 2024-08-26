@@ -1,3 +1,3 @@
 class Room < ApplicationRecord
-  belongs_to :challenge
+  belongs_to :match
 end

@@ -16,7 +16,7 @@ class MatchesController < ApplicationController
       @player.update(waiting: true)
       redirect_to waiting_path
     else
-      challenge = Challenge.create(player_1: @player, player_2: opponent, status: 'pending')
+      challenge = Match.create(player_1: @player, player_2: opponent, status: 'pending')
 
       if challenge.persisted?
         room = Room.create(challenge: challenge, uuid: SecureRandom.uuid)
@@ -44,7 +44,7 @@ class MatchesController < ApplicationController
       return
     end
   
-    challenge = Challenge.find_by("player_1_id = ? OR player_2_id = ?", @player.id, @player.id)
+    challenge = Match.find_by("player_1_id = ? OR player_2_id = ?", @player.id, @player.id)
   
     if challenge
       room = Room.find_by(challenge: challenge)
@@ -78,6 +78,6 @@ class MatchesController < ApplicationController
   end
 
   def set_challenge
-    @challenge = Challenge.find_by(id: params[:id])
+    @challenge = Match.find_by(id: params[:id])
   end
 end
