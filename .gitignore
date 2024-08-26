@@ -69,3 +69,9 @@ yarn-debug.log*
 /public/uploads
 .idea/
 config/application.yml
+
+
+db/development.sqlite3
+db/development.sqlite3-shm
+db/development.sqlite3-wal
+log/development.log

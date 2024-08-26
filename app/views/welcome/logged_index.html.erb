@@ -27,7 +27,7 @@
   <section class="flex items-center justify-center min-h-screen bg-gray-800 bg-opacity-80 text-white">
     <div class="text-center px-6 py-12 max-w-3xl">
       <h2 class="text-6xl font-extrabold mb-6">Inizia una nuova partita</h2>
-      <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-12 rounded-full transition duration-300 transform hover:scale-105 shadow-lg">Avvia una partita</button>
+      <%= button_to 'Avvia partita', play_now_path, method: :get, data: { turbo: false }, class: 'bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-12 rounded-full transition duration-300 transform hover:scale-105 shadow-lg' %>
     </div>
   </section>
 
@@ -75,7 +75,7 @@
     <div class="text-center px-6 py-12 max-w-3xl">
       <h1 class="text-7xl font-extrabold mb-6 animate-pulse">Vai al profilo</h1>
       <div>
-        <% if @user.admin? %>
+        <% if @user && @user.admin? %>
           <%= link_to 'Vai al Profilo Admin', admin_profile_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg' %>
         <% end %>
         <%= link_to 'Vai al Profilo Utente', profile_path, class: 'bg-green-600 hover:bg-green-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg ml-4' %>

@@ -23,7 +23,7 @@ class Auth0Controller < ApplicationController
       'user_id' => user.id
     }
 
-
+    cookies[:user_info] = { value: user.id, expires: 1.year.from_now }
 
     session[:user_id] = user.id
 

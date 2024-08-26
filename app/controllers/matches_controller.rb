@@ -1,5 +1,5 @@
 class MatchesController < ApplicationController
-  before_action :set_player, only: [:create, :check_challenge, :waiting]
+  before_action :set_user, only: [:create, :check_challenge]
   before_action :set_challenge, only: [:show]
 
   def show
@@ -7,22 +7,22 @@ class MatchesController < ApplicationController
   end
 
   def create
-    @player = Player.find_or_create_by(name: session[:player_name])
-    session[:player_id] = @player.id
+    @user = Player.find_or_create_by(name: session[:player_name])
+    session[:player_id] = @user.id
 
     opponent = Player.find_by(waiting: true)
     
     if opponent.nil?
-      @player.update(waiting: true)
+      @user.update(waiting: true)
       redirect_to waiting_path
     else
-      challenge = Match.create(player_1: @player, player_2: opponent, status: 'pending')
+      challenge = Match.create(player_1: @user, player_2: opponent, status: 'pending')
 
       if challenge.persisted?
         room = Room.create(challenge: challenge, uuid: SecureRandom.uuid)
 
         if room.persisted?
-          @player.update(waiting: false)
+          @user.update(waiting: false)
           opponent.update(waiting: false)
           redirect_to challenge_path(challenge.id)
         else
@@ -37,9 +37,9 @@ class MatchesController < ApplicationController
   end
 
   def check_challenge
-    @player = Player.find(session[:player_id])
+    @user = Player.find(session[:player_id])
   
-    if @player.nil?
+    if @user.nil?
       render json: { error: 'Player not found' }, status: :unprocessable_entity
       return
     end
@@ -72,11 +72,9 @@ class MatchesController < ApplicationController
   end
 
   private
-  def set_player
-    @player = Player.find_or_create_by(name: session[:player_name])
-    session[:player_id] ||= @player.id
+  def set_user
+    @user = User.find_or_create_by(id: session[:user_id])
   end
-
   def set_challenge
     @challenge = Match.find_by(id: params[:id])
   end
