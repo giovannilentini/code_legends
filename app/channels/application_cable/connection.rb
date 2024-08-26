@@ -8,10 +8,12 @@ module ApplicationCable
 
     private
     def find_verified_user
-      @current_user = Player.find_by(id: cookies[:player_id])
+
+      @current_user = User.find_by(:id => cookies[:user_info])
       if @current_user
         @current_user
       else
+        p "Login first"
         reject_unauthorized_connection
       end
     end
