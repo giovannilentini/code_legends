@@ -1,9 +1,9 @@
 class MatchesController < ApplicationController
   before_action :set_user, only: [:create, :check_challenge]
-  before_action :set_challenge, only: [:show]
+  before_action :set_match, only: [:show]
 
   def show
-    @selected_language = @challenge.language
+    @selected_language = @match.language
   end
 
   def create
@@ -75,7 +75,7 @@ class MatchesController < ApplicationController
   def set_user
     @user = User.find_or_create_by(id: session[:user_id])
   end
-  def set_challenge
-    @challenge = Match.find_by(id: params[:id])
+  def set_match
+    @match = Match.find_by(id: params[:id])
   end
 end
