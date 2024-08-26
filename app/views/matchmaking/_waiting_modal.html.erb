@@ -1,0 +1,29 @@
+
+<div id="matchmaking-modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
+    <h2 class="text-center text-xl font-bold mb-4">Matchmaking in Progress</h2>
+    <div class="flex justify-center mb-4">
+      <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+    </div>
+    <p class="text-center text-gray-500 mb-6">Searching for players...</p>
+    <div class="text-center">
+        <%= button_to 'Annulla', cancel_matchmaking_path, method: :post, class: "btn-cancel bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600" %>
+    </div>
+  </div>
+</div>
+<script>
+  function checkForMatch() {
+    fetch('/check_challenge')
+      .then(response => response.json())
+      .then(data => {
+        if (data.challenge_url) {
+          window.location.href = data.challenge_url;
+        }
+      })
+      .catch(error => console.error('Error:', error));
+  }
+
+  setInterval(checkForMatch, 1000);
+</script>
+
+

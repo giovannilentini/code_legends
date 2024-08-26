@@ -11,19 +11,18 @@ class MatchmakingController < ApplicationController
     player = User.find_or_create_by(id: session[:user_id])
     if player
       MatchmakingQueueService.add(player, @selected_language)
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("waiting_modal", partial: "matchmaking/waiting_modal") }
+        format.html { redirect_to play_now_path } # fallback in case Turbo isn't supported
+      end
     end
   end
 
-  def challenge_friend
-    player = Player.find_or_create_by(name: session[:player_name])
-    friend = Player.find(params[:friend_id])
-    challenge = Match.create(player_1: player, player_2: friend, status: 'pending')
-    room = Room.create(challenge: challenge, uuid: SecureRandom.uuid)
+  def cancel
+    player = User.find_by(id: session[:user_id])
+    language = session[:selected_language]
+    MatchmakingQueueService.remove(player, language)
+    redirect_to play_now_path, notice: "Ricerca avversario annullata."
+  end
 
-    redirect_to challenge_path(room.uuid)
-  end
-  def challenge
-    @room = Room.find_by(uuid: params[:uuid])
-    @challenge = @room.challenge
-  end
 end

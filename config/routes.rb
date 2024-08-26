@@ -25,7 +25,6 @@ Rails.application.routes.draw do
   end
 
   resource :settings, only: [:edit, :update]
-
   get 'database/info'
   get 'database_info', to: 'database#info', as: 'info'
   post 'clear_tables', to: 'database#clear_tables'
@@ -33,6 +32,7 @@ Rails.application.routes.draw do
   post 'find_opponent', to: 'matchmaking#find_opponent'
   post 'challenge_friend', to: 'matches#challenge_friend'
   get 'check_challenge', to: 'matches#check_challenge'
+  post 'cancel_matchmaking', to: 'matchmaking#cancel'
   get 'waiting', to: 'matches#waiting'
   post 'execute_code', to: 'matches#execute_code'
   resources :matches, only: [:show]
