@@ -12,7 +12,7 @@ rerun.txt
 pickle-email-*.html
 
 # Ignore all logfiles and tempfiles.
-/log/*
+log/*
 tmp/*
 !/log/.keep
 !/tmp/.keep
@@ -74,4 +74,3 @@ config/application.yml
 db/development.sqlite3
 db/development.sqlite3-shm
 db/development.sqlite3-wal
-log/development.log
