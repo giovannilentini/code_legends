@@ -8,9 +8,9 @@
       </div>
       <div class="text-center mb-6">
         <% if current_user.profile_image.attached? %>
-          <%= image_tag current_user.profile_image_thumbnail, class: "rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-blue-500" %>
+          <%= image_tag current_user.profile_image_thumbnail, class: "rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-indigo-500" %>
         <% else %>
-          <%= image_tag('profile-placeholder.png', alt: 'Profile Image', class: 'rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-blue-500') %>
+          <%= image_tag('profile-placeholder.png', alt: 'Profile Image', class: 'rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-indigo-500') %>
         <% end %>
       </div>
       <div class="text-left w-full space-y-6">
