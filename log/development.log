@@ -34707,3 +34707,1465 @@ ActionView::Template::Error (undefined method `admin?' for nil):
   
 app/views/welcome/logged_index.html.erb:78
 app/controllers/welcome_controller.rb:5:in `index'
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:44:09 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.9ms | Allocations: 2099)
+  Rendered layout layouts/application.html.erb (Duration: 2.1ms | Allocations: 2225)
+Completed 500 Internal Server Error in 24ms (ActiveRecord: 1.4ms | Allocations: 18831)
+
+
+  
+ActionView::Template::Error (undefined method `admin?' for nil):
+    75:     <div class="text-center px-6 py-12 max-w-3xl">
+    76:       <h1 class="text-7xl font-extrabold mb-6 animate-pulse">Vai al profilo</h1>
+    77:       <div>
+    78:         <% if @user.admin? %>
+    79:           <%= link_to 'Vai al Profilo Admin', admin_profile_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg' %>
+    80:         <% end %>
+    81:         <%= link_to 'Vai al Profilo Utente', profile_path, class: 'bg-green-600 hover:bg-green-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg ml-4' %>
+  
+app/views/welcome/logged_index.html.erb:78
+app/controllers/welcome_controller.rb:5:in `index'
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-26 17:44:27 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `current_user'
+Redirected to http://localhost:3000/
+User info: nil
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 1267)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:44:27 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:6:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 1137)
+  Rendered layout layouts/application.html.erb (Duration: 0.9ms | Allocations: 1228)
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.1ms | Allocations: 2423)
+
+
+  
+ActionView::Template::Error (undefined method `admin?' for nil):
+    75:     <div class="text-center px-6 py-12 max-w-3xl">
+    76:       <h1 class="text-7xl font-extrabold mb-6 animate-pulse">Vai al profilo</h1>
+    77:       <div>
+    78:         <% if @user.admin? %>
+    79:           <%= link_to 'Vai al Profilo Admin', admin_profile_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg' %>
+    80:         <% end %>
+    81:         <%= link_to 'Vai al Profilo Utente', profile_path, class: 'bg-green-600 hover:bg-green-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg ml-4' %>
+  
+app/views/welcome/logged_index.html.erb:78
+app/controllers/welcome_controller.rb:5:in `index'
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:47:17 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.9ms | Allocations: 596)
+  Rendered layout layouts/application.html.erb (Duration: 125.8ms | Allocations: 141650)
+Completed 200 OK in 139ms (Views: 127.3ms | ActiveRecord: 1.3ms | Allocations: 146764)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-26 17:47:20 +0200
+Processing by Auth0Controller#logout as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 942)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:47:20 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.7ms | Allocations: 447)
+  Rendered layout layouts/application.html.erb (Duration: 5.2ms | Allocations: 6378)
+Completed 200 OK in 6ms (Views: 5.7ms | ActiveRecord: 0.0ms | Allocations: 6938)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-26 17:47:43 +0200
+Started GET "/auth/auth0/callback?code=CbRA8C4Qcv3W7oBnG8ambnKCuq9ZddwVjBBFwzITsyWbi&state=9219e932117705d3d771a555d7f5d543eccf8c0e969edf59" for 127.0.0.1 at 2024-08-26 17:47:49 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"CbRA8C4Qcv3W7oBnG8ambnKCuq9ZddwVjBBFwzITsyWbi", "state"=>"9219e932117705d3d771a555d7f5d543eccf8c0e969edf59"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "google-oauth2|117052773264297272144"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "flavioialongo@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "google-oauth2|117052773264297272144"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "auth0_id", "created_at", "updated_at", "is_admin") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Flavio Ialongo"], ["email", "flavioialongo@gmail.com"], ["auth0_id", "google-oauth2|117052773264297272144"], ["created_at", "2024-08-26 15:47:49.942061"], ["updated_at", "2024-08-26 15:47:49.942061"], ["is_admin", 0]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 20ms (ActiveRecord: 3.1ms | Allocations: 14760)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-26 17:47:49 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+User info: #<User id: 1, name: "Flavio Ialongo", email: "flavioialongo@gmail.com", auth0_id: "google-oauth2|117052773264297272144", created_at: "2024-08-26 15:47:49.942061000 +0000", updated_at: "2024-08-26 15:47:49.942061000 +0000", is_admin: false>
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 178)
+  Rendered layout layouts/application.html.erb (Duration: 7.3ms | Allocations: 6028)
+Completed 200 OK in 15ms (Views: 7.7ms | ActiveRecord: 0.3ms | Allocations: 10089)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:47:53 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 174)
+  Rendered layout layouts/application.html.erb (Duration: 10.1ms | Allocations: 6023)
+Completed 200 OK in 13ms (Views: 10.7ms | ActiveRecord: 0.1ms | Allocations: 6909)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:48:01 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 174)
+  Rendered layout layouts/application.html.erb (Duration: 5.2ms | Allocations: 6023)
+Completed 200 OK in 7ms (Views: 5.7ms | ActiveRecord: 0.1ms | Allocations: 6909)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-26 17:48:03 +0200
+Processing by Auth0Controller#logout as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 1ms (ActiveRecord: 0.1ms | Allocations: 793)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:48:04 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 200)
+  Rendered layout layouts/application.html.erb (Duration: 10.8ms | Allocations: 6131)
+Completed 200 OK in 12ms (Views: 11.4ms | ActiveRecord: 0.0ms | Allocations: 6639)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-26 17:48:05 +0200
+Processing by WelcomeController#logged_index as HTML
+Redirected to http://localhost:3000/
+User info: nil
+Completed 302 Found in 1ms (ActiveRecord: 0.0ms | Allocations: 443)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:48:05 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 197)
+  Rendered layout layouts/application.html.erb (Duration: 5.4ms | Allocations: 6045)
+Completed 200 OK in 6ms (Views: 5.8ms | ActiveRecord: 0.0ms | Allocations: 6582)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-26 17:48:19 +0200
+Started GET "/auth/auth0/callback?code=OvFiJle1cmHZr2keEyB6gDUGZsm0vGrVeI-xvdR0NBuOu&state=53a6d3589245b459269b77f5f20cb6e369120bdfd71c040e" for 127.0.0.1 at 2024-08-26 17:48:23 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"OvFiJle1cmHZr2keEyB6gDUGZsm0vGrVeI-xvdR0NBuOu", "state"=>"53a6d3589245b459269b77f5f20cb6e369120bdfd71c040e"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "google-oauth2|117052773264297272144"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms | Allocations: 737)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-26 17:48:23 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+User info: #<User id: 1, name: "Flavio Ialongo", email: "flavioialongo@gmail.com", auth0_id: "google-oauth2|117052773264297272144", created_at: "2024-08-26 15:47:49.942061000 +0000", updated_at: "2024-08-26 15:47:49.942061000 +0000", is_admin: false>
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 10.4ms | Allocations: 6020)
+Completed 200 OK in 12ms (Views: 10.9ms | ActiveRecord: 0.1ms | Allocations: 7040)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:48:30 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 200)
+  Rendered layout layouts/application.html.erb (Duration: 6.0ms | Allocations: 6048)
+Completed 200 OK in 7ms (Views: 6.3ms | ActiveRecord: 0.0ms | Allocations: 6419)
+
+
+Started GET "/auth/register" for 127.0.0.1 at 2024-08-26 17:48:31 +0200
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/authorize?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&response_type=code&redirect_uri=http://localhost:3000&scope=openid%20profile%20email&screen_hint=signup
+Completed 301 Moved Permanently in 0ms
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-26 17:48:32 +0200
+Started GET "/auth/register" for 127.0.0.1 at 2024-08-26 17:48:38 +0200
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/authorize?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&response_type=code&redirect_uri=http://localhost:3000&scope=openid%20profile%20email&screen_hint=signup
+Completed 301 Moved Permanently in 0ms
+
+
+Started GET "/auth/register" for 127.0.0.1 at 2024-08-26 17:48:38 +0200
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/authorize?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&response_type=code&redirect_uri=http://localhost:3000&scope=openid%20profile%20email&screen_hint=signup
+Completed 301 Moved Permanently in 0ms
+
+
+Started GET "/?code=iUbDNkitQDQUsXDFF6uLoUYXQEObDiur9WN_hwNDT_1DY" for 127.0.0.1 at 2024-08-26 17:48:58 +0200
+Processing by WelcomeController#index as HTML
+  Parameters: {"code"=>"iUbDNkitQDQUsXDFF6uLoUYXQEObDiur9WN_hwNDT_1DY"}
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 197)
+  Rendered layout layouts/application.html.erb (Duration: 8.9ms | Allocations: 6127)
+Completed 200 OK in 10ms (Views: 9.4ms | ActiveRecord: 0.0ms | Allocations: 6665)
+
+
+Started GET "/auth/register" for 127.0.0.1 at 2024-08-26 17:48:59 +0200
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/authorize?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&response_type=code&redirect_uri=http://localhost:3000&scope=openid%20profile%20email&screen_hint=signup
+Completed 301 Moved Permanently in 0ms
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-26 17:48:59 +0200
+Started GET "/auth/auth0/callback?code=twwVKrj10lCuMV1kL0wm0XMZG6apUR4IwcAC_nucz-sEW&state=9ef3c88494a03e73d8be40f1332ee700017790bceedb9390" for 127.0.0.1 at 2024-08-26 17:49:00 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"twwVKrj10lCuMV1kL0wm0XMZG6apUR4IwcAC_nucz-sEW", "state"=>"9ef3c88494a03e73d8be40f1332ee700017790bceedb9390"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66cca3e7a06686c344126e71"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "giovannipisello@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66cca3e7a06686c344126e71"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "auth0_id", "created_at", "updated_at", "is_admin") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "giovannipisello@gmail.com"], ["email", "giovannipisello@gmail.com"], ["auth0_id", "auth0|66cca3e7a06686c344126e71"], ["created_at", "2024-08-26 15:49:00.815820"], ["updated_at", "2024-08-26 15:49:00.815820"], ["is_admin", 0]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 5ms (ActiveRecord: 1.1ms | Allocations: 3823)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-26 17:49:00 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+User info: #<User id: 2, name: "giovannipisello@gmail.com", email: "giovannipisello@gmail.com", auth0_id: "auth0|66cca3e7a06686c344126e71", created_at: "2024-08-26 15:49:00.815820000 +0000", updated_at: "2024-08-26 15:49:00.815820000 +0000", is_admin: false>
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 5.3ms | Allocations: 6103)
+Completed 200 OK in 7ms (Views: 5.6ms | ActiveRecord: 0.1ms | Allocations: 7085)
+
+
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:49:07 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.4ms | Allocations: 885)
+  Rendered layout layouts/application.html.erb (Duration: 6.9ms | Allocations: 6732)
+Completed 200 OK in 10ms (Views: 7.5ms | ActiveRecord: 0.1ms | Allocations: 7863)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:49:07 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:49:07 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMg)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:49:08 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+Completed 204 No Content in 4ms (ActiveRecord: 0.1ms | Allocations: 1623)
+
+
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:49:20 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 0.8ms | Allocations: 437)
+  Rendered layout layouts/application.html.erb (Duration: 6.6ms | Allocations: 6282)
+Completed 200 OK in 9ms (Views: 7.0ms | ActiveRecord: 0.1ms | Allocations: 7201)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:49:20 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:49:20 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMQ)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:49:21 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+Completed 500 Internal Server Error in 16ms (ActiveRecord: 0.5ms | Allocations: 8785)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Match(#39240) expected, got #<User id: 2, name: "giovannipisello@gmail.com", email: "giovannipisello@gmail.com", auth0_id: "auth0|66cca3e7a06686c344126e71", created_at: "2024-08-26 15:49:00.815820000 +0000", updated_at: "2024-08-26 15:49:00.815820000 +0000", is_admin: false> which is an instance of User(#37860)):
+  
+app/services/matchmaking_queue_service.rb:22:in `match_users'
+app/services/matchmaking_queue_service.rb:9:in `add'
+app/controllers/matchmaking_controller.rb:13:in `find_opponent'
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-08-26 15:52:02.070282', '2024-08-26 15:52:02.070285') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DropTestCasesAndChallenges (20240809184643)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809184643') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateTestCases (20240809184936)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "test_cases" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "input_example" varchar, "expected_output" varchar, "challenge_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809184936') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateChallenges (20240809184958)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "challenges" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809184958') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddChallengeIdToTestCases (20240809185515)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atest_cases" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "input_example" varchar DEFAULT NULL, "expected_output" varchar DEFAULT NULL, "challenge_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "atest_cases" ("id","input_example","expected_output","challenge_id","created_at","updated_at")
+                     SELECT "id","input_example","expected_output","challenge_id","created_at","updated_at" FROM "test_cases"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "test_cases"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "test_cases" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "input_example" varchar DEFAULT NULL, "expected_output" varchar DEFAULT NULL, "challenge_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_4879b6a3b1"
+FOREIGN KEY ("challenge_id")
+  REFERENCES "challenges" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "test_cases" ("id","input_example","expected_output","challenge_id","created_at","updated_at")
+                     SELECT "id","input_example","expected_output","challenge_id","created_at","updated_at" FROM "atest_cases"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atest_cases"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_test_cases_on_challenge_id" ON "test_cases" ("challenge_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809185515') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddStatusToChallenges (20240812110309)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "challenges" ADD "status" integer DEFAULT -1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240812110309') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddRejectionReasonToChallenges (20240812135939)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "challenges" ADD "rejection_reason" varchar[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240812135939') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateRooms (20240814171719)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "rooms" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "match_id" integer NOT NULL, "uuid" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_ebc43ac58a"
+FOREIGN KEY ("match_id")
+  REFERENCES "matches" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_rooms_on_match_id" ON "rooms" ("match_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240814171719') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreatePlayers (20240814171720)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "players" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240814171720') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUsers (20240816171609)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (9.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "auth0_id" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240816171609') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddUserIdToChallenges (20240819133910)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (1.1ms)[0m  [1m[35mALTER TABLE "challenges" ADD "user_id" integer[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_challenges_on_user_id" ON "challenges" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240819133910') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddIsAdminToUsers (20240819140455)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "is_admin" boolean DEFAULT 0[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240819140455') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateActiveStorageTables (20240824144750)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar NOT NULL, "filename" varchar NOT NULL, "content_type" varchar, "metadata" text, "service_name" varchar NOT NULL, "byte_size" bigint NOT NULL, "checksum" varchar, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240824144750') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddProfileImageToUsers (20240824144752)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240824144752') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateMatch (20240824184241)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "matches" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "language" varchar, "status" varchar, "player_1_id" integer, "player_2_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_e4e22d212d"
+FOREIGN KEY ("player_1_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_aa8b27c06e"
+FOREIGN KEY ("player_2_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_matches_on_player_1_id" ON "matches" ("player_1_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_matches_on_player_2_id" ON "matches" ("player_2_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240824184241') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-08-26 15:52:41.835180', '2024-08-26 15:52:41.835182') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DropTestCasesAndChallenges (20240809184643)
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809184643') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateTestCases (20240809184936)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "test_cases" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "input_example" varchar, "expected_output" varchar, "challenge_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809184936') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateChallenges (20240809184958)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "challenges" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809184958') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddChallengeIdToTestCases (20240809185515)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atest_cases" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "input_example" varchar DEFAULT NULL, "expected_output" varchar DEFAULT NULL, "challenge_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "atest_cases" ("id","input_example","expected_output","challenge_id","created_at","updated_at")
+                     SELECT "id","input_example","expected_output","challenge_id","created_at","updated_at" FROM "test_cases"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "test_cases"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "test_cases" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "input_example" varchar DEFAULT NULL, "expected_output" varchar DEFAULT NULL, "challenge_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_4879b6a3b1"
+FOREIGN KEY ("challenge_id")
+  REFERENCES "challenges" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "test_cases" ("id","input_example","expected_output","challenge_id","created_at","updated_at")
+                     SELECT "id","input_example","expected_output","challenge_id","created_at","updated_at" FROM "atest_cases"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atest_cases"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_test_cases_on_challenge_id" ON "test_cases" ("challenge_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809185515') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddStatusToChallenges (20240812110309)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "challenges" ADD "status" integer DEFAULT -1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240812110309') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddRejectionReasonToChallenges (20240812135939)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "challenges" ADD "rejection_reason" varchar[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240812135939') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateRooms (20240814171719)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "rooms" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "match_id" integer NOT NULL, "uuid" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_ebc43ac58a"
+FOREIGN KEY ("match_id")
+  REFERENCES "matches" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_rooms_on_match_id" ON "rooms" ("match_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240814171719') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUsers (20240816171609)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "auth0_id" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240816171609') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddUserIdToChallenges (20240819133910)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (9.6ms)[0m  [1m[35mALTER TABLE "challenges" ADD "user_id" integer[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_challenges_on_user_id" ON "challenges" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240819133910') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddIsAdminToUsers (20240819140455)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "is_admin" boolean DEFAULT 0[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240819140455') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateActiveStorageTables (20240824144750)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar NOT NULL, "filename" varchar NOT NULL, "content_type" varchar, "metadata" text, "service_name" varchar NOT NULL, "byte_size" bigint NOT NULL, "checksum" varchar, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240824144750') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddProfileImageToUsers (20240824144752)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240824144752') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateMatch (20240824184241)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "matches" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "language" varchar, "status" varchar, "player_1_id" integer, "player_2_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_e4e22d212d"
+FOREIGN KEY ("player_1_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_aa8b27c06e"
+FOREIGN KEY ("player_2_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_matches_on_player_1_id" ON "matches" ("player_1_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_matches_on_player_2_id" ON "matches" ("player_2_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240824184241') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:52:49 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 1.0ms | Allocations: 865)
+  Rendered layout layouts/application.html.erb (Duration: 165.5ms | Allocations: 141718)
+Completed 200 OK in 189ms (Views: 170.3ms | ActiveRecord: 1.5ms | Allocations: 158389)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-26 17:52:51 +0200
+Processing by Auth0Controller#logout as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 3ms (ActiveRecord: 0.1ms | Allocations: 1000)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:52:51 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 448)
+  Rendered layout layouts/application.html.erb (Duration: 6.3ms | Allocations: 6379)
+Completed 200 OK in 7ms (Views: 6.8ms | ActiveRecord: 0.0ms | Allocations: 6946)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-26 17:52:52 +0200
+Started GET "/auth/auth0/callback?code=S0xs97Gaq6KX7XGyOHwXTSccsdiMB2LgAxMBkjRcY2J88&state=a2519728a1452447343cd4d5be73bca4e9776caea8f84e3e" for 127.0.0.1 at 2024-08-26 17:52:56 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"S0xs97Gaq6KX7XGyOHwXTSccsdiMB2LgAxMBkjRcY2J88", "state"=>"a2519728a1452447343cd4d5be73bca4e9776caea8f84e3e"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "google-oauth2|117052773264297272144"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "flavioialongo@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "google-oauth2|117052773264297272144"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "auth0_id", "created_at", "updated_at", "is_admin") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Flavio Ialongo"], ["email", "flavioialongo@gmail.com"], ["auth0_id", "google-oauth2|117052773264297272144"], ["created_at", "2024-08-26 15:52:57.227222"], ["updated_at", "2024-08-26 15:52:57.227222"], ["is_admin", 0]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 22ms (ActiveRecord: 3.7ms | Allocations: 12793)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-26 17:52:57 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+User info: #<User id: 1, name: "Flavio Ialongo", email: "flavioialongo@gmail.com", auth0_id: "google-oauth2|117052773264297272144", created_at: "2024-08-26 15:52:57.227222000 +0000", updated_at: "2024-08-26 15:52:57.227222000 +0000", is_admin: false>
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 181)
+  Rendered layout layouts/application.html.erb (Duration: 5.2ms | Allocations: 6115)
+Completed 200 OK in 11ms (Views: 5.5ms | ActiveRecord: 0.2ms | Allocations: 10184)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:52:58 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:52:58 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+An unauthorized connection attempt was rejected
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:52:58 +0200
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:52:59 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.6ms | Allocations: 888)
+  Rendered layout layouts/application.html.erb (Duration: 8.2ms | Allocations: 6736)
+Completed 200 OK in 12ms (Views: 8.9ms | ActiveRecord: 0.1ms | Allocations: 7886)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:52:59 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:52:59 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMQ)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:53:00 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+Completed 204 No Content in 5ms (ActiveRecord: 0.1ms | Allocations: 1649)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:53:09 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 167)
+  Rendered layout layouts/application.html.erb (Duration: 7.9ms | Allocations: 6099)
+Completed 200 OK in 10ms (Views: 8.3ms | ActiveRecord: 0.1ms | Allocations: 7261)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-26 17:53:09 +0200
+Processing by Auth0Controller#logout as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 800)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:53:10 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 200)
+  Rendered layout layouts/application.html.erb (Duration: 6.9ms | Allocations: 6048)
+Completed 200 OK in 8ms (Views: 7.2ms | ActiveRecord: 0.0ms | Allocations: 6540)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-26 17:53:11 +0200
+Started GET "/auth/auth0/callback?code=wPUiUxF2mR_CWsnmKE7MERgJ13ct5fL0RyjoXBAs8LArN&state=dab64165393e59638baf90b6307a5816225ef94a5f91d0a6" for 127.0.0.1 at 2024-08-26 17:53:42 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"wPUiUxF2mR_CWsnmKE7MERgJ13ct5fL0RyjoXBAs8LArN", "state"=>"dab64165393e59638baf90b6307a5816225ef94a5f91d0a6"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66cca50245cd9dba2407ec82"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (1.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "fifi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66cca50245cd9dba2407ec82"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "auth0_id", "created_at", "updated_at", "is_admin") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "fifi@gmail.com"], ["email", "fifi@gmail.com"], ["auth0_id", "auth0|66cca50245cd9dba2407ec82"], ["created_at", "2024-08-26 15:53:43.340193"], ["updated_at", "2024-08-26 15:53:43.340193"], ["is_admin", 0]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 10ms (ActiveRecord: 2.1ms | Allocations: 3825)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-26 17:53:43 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+User info: #<User id: 2, name: "fifi@gmail.com", email: "fifi@gmail.com", auth0_id: "auth0|66cca50245cd9dba2407ec82", created_at: "2024-08-26 15:53:43.340193000 +0000", updated_at: "2024-08-26 15:53:43.340193000 +0000", is_admin: false>
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.6ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 12.3ms | Allocations: 6208)
+Completed 200 OK in 15ms (Views: 12.8ms | ActiveRecord: 0.1ms | Allocations: 7208)
+
+
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:53:45 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.1ms | Allocations: 438)
+  Rendered layout layouts/application.html.erb (Duration: 11.6ms | Allocations: 6365)
+Completed 200 OK in 21ms (Views: 12.1ms | ActiveRecord: 0.1ms | Allocations: 7250)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:53:45 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:53:45 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMg)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:53:46 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.4ms | Allocations: 10442)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Match(#27840) expected, got #<User id: 1, name: "Flavio Ialongo", email: "flavioialongo@gmail.com", auth0_id: "google-oauth2|117052773264297272144", created_at: "2024-08-26 15:52:57.227222000 +0000", updated_at: "2024-08-26 15:52:57.227222000 +0000", is_admin: false> which is an instance of User(#26620)):
+  
+app/services/matchmaking_queue_service.rb:22:in `match_users'
+app/services/matchmaking_queue_service.rb:9:in `add'
+app/controllers/matchmaking_controller.rb:13:in `find_opponent'
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:54:44 +0200
+MatchmakingChannel stopped streaming from matchmaking_python3
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:54:44 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.3ms | Allocations: 830)
+  Rendered layout layouts/application.html.erb (Duration: 64.6ms | Allocations: 103969)
+Completed 200 OK in 82ms (Views: 66.0ms | ActiveRecord: 2.8ms | Allocations: 111559)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:54:44 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:54:44 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMg)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:54:45 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+Completed 204 No Content in 3ms (ActiveRecord: 0.1ms | Allocations: 1683)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:54:51 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:54:51 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMQ)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:54:51 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Content in 1ms (ActiveRecord: 0.0ms | Allocations: 816)
+
+
+  
+ActionController::InvalidAuthenticityToken (Can't verify CSRF token authenticity.):
+  
+actionpack (7.1.3.4) lib/action_controller/metal/request_forgery_protection.rb:293:in `handle_unverified_request'
+actionpack (7.1.3.4) lib/action_controller/metal/request_forgery_protection.rb:388:in `handle_unverified_request'
+actionpack (7.1.3.4) lib/action_controller/metal/request_forgery_protection.rb:377:in `verify_authenticity_token'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:403:in `block in make_lambda'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:202:in `block (2 levels) in halting'
+actionpack (7.1.3.4) lib/abstract_controller/callbacks.rb:34:in `block (2 levels) in <module:Callbacks>'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:203:in `block in halting'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:598:in `block in invoke_before'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:598:in `each'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:598:in `invoke_before'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:119:in `block in run_callbacks'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:141:in `run_callbacks'
+actionpack (7.1.3.4) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.3.4) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.3.4) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.3.4) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.3.4) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.3.4) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.3.4) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.3.4) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.3.4) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.3.4) lib/abstract_controller/base.rb:160:in `process'
+actionview (7.1.3.4) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3.4) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.4) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:882:in `call'
+omniauth (2.1.2) lib/omniauth/strategy.rb:202:in `call!'
+omniauth (2.1.2) lib/omniauth/strategy.rb:169:in `call'
+omniauth (2.1.2) lib/omniauth/builder.rb:44:in `call'
+rack (3.1.7) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.7) lib/rack/etag.rb:29:in `call'
+rack (3.1.7) lib/rack/conditional_get.rb:43:in `call'
+rack (3.1.7) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3.4) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.4) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.4) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.1.7) lib/rack/method_override.rb:28:in `call'
+rack (3.1.7) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.1.7) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.4) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:54:52 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 0.6ms | Allocations: 435)
+  Rendered layout layouts/application.html.erb (Duration: 5.6ms | Allocations: 6483)
+Completed 200 OK in 7ms (Views: 5.9ms | ActiveRecord: 0.1ms | Allocations: 7401)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:54:52 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:54:52 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMQ)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:54:55 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.5ms | Allocations: 6443)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Match(#39260) expected, got #<User id: 2, name: "fifi@gmail.com", email: "fifi@gmail.com", auth0_id: "auth0|66cca50245cd9dba2407ec82", created_at: "2024-08-26 15:53:43.340193000 +0000", updated_at: "2024-08-26 15:53:43.340193000 +0000", is_admin: false> which is an instance of User(#38540)):
+  
+app/services/matchmaking_queue_service.rb:22:in `match_users'
+app/services/matchmaking_queue_service.rb:9:in `add'
+app/controllers/matchmaking_controller.rb:13:in `find_opponent'
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:55:30 +0200
+MatchmakingChannel stopped streaming from matchmaking_python3
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:55:30 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.1ms | Allocations: 829)
+  Rendered layout layouts/application.html.erb (Duration: 51.0ms | Allocations: 104141)
+Completed 200 OK in 61ms (Views: 52.3ms | ActiveRecord: 1.3ms | Allocations: 111740)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:55:30 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:55:30 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMQ)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:55:31 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+Completed 204 No Content in 6ms (ActiveRecord: 0.1ms | Allocations: 1779)
+
+
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:55:35 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 0.6ms | Allocations: 435)
+  Rendered layout layouts/application.html.erb (Duration: 5.8ms | Allocations: 6361)
+Completed 200 OK in 7ms (Views: 6.1ms | ActiveRecord: 0.1ms | Allocations: 7272)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:55:35 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:55:35 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMg)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:55:36 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.3ms | Allocations: 6514)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Match(#50200) expected, got #<User id: 1, name: "Flavio Ialongo", email: "flavioialongo@gmail.com", auth0_id: "google-oauth2|117052773264297272144", created_at: "2024-08-26 15:52:57.227222000 +0000", updated_at: "2024-08-26 15:52:57.227222000 +0000", is_admin: false> which is an instance of User(#49880)):
+  
+app/services/matchmaking_queue_service.rb:23:in `match_users'
+app/services/matchmaking_queue_service.rb:10:in `add'
+app/controllers/matchmaking_controller.rb:13:in `find_opponent'
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:55:43 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:55:43 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMQ)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:56:09 +0200
+MatchmakingChannel stopped streaming from matchmaking_python3
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:56:09 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.3ms | Allocations: 829)
+  Rendered layout layouts/application.html.erb (Duration: 52.2ms | Allocations: 104112)
+Completed 200 OK in 64ms (Views: 53.1ms | ActiveRecord: 2.5ms | Allocations: 111686)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:56:09 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:56:09 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMg)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:56:10 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+Completed 204 No Content in 5ms (ActiveRecord: 0.1ms | Allocations: 1708)
+
+
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:56:12 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.3ms | Allocations: 6551)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Match(#61100) expected, got #<User id: 2, name: "fifi@gmail.com", email: "fifi@gmail.com", auth0_id: "auth0|66cca50245cd9dba2407ec82", created_at: "2024-08-26 15:53:43.340193000 +0000", updated_at: "2024-08-26 15:53:43.340193000 +0000", is_admin: false> which is an instance of User(#60860)):
+  
+app/services/matchmaking_queue_service.rb:23:in `match_users'
+app/services/matchmaking_queue_service.rb:9:in `add'
+app/controllers/matchmaking_controller.rb:13:in `find_opponent'
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:56:17 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:56:17 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMQ)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:56:17 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:56:17 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMQ)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-08-26 15:57:27.848345', '2024-08-26 15:57:27.848347') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DropTestCasesAndChallenges (20240809184643)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809184643') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateTestCases (20240809184936)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "test_cases" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "input_example" varchar, "expected_output" varchar, "challenge_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809184936') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateChallenges (20240809184958)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "challenges" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809184958') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddChallengeIdToTestCases (20240809185515)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atest_cases" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "input_example" varchar DEFAULT NULL, "expected_output" varchar DEFAULT NULL, "challenge_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "atest_cases" ("id","input_example","expected_output","challenge_id","created_at","updated_at")
+                     SELECT "id","input_example","expected_output","challenge_id","created_at","updated_at" FROM "test_cases"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "test_cases"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "test_cases" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "input_example" varchar DEFAULT NULL, "expected_output" varchar DEFAULT NULL, "challenge_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_4879b6a3b1"
+FOREIGN KEY ("challenge_id")
+  REFERENCES "challenges" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "test_cases" ("id","input_example","expected_output","challenge_id","created_at","updated_at")
+                     SELECT "id","input_example","expected_output","challenge_id","created_at","updated_at" FROM "atest_cases"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atest_cases"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_test_cases_on_challenge_id" ON "test_cases" ("challenge_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809185515') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddStatusToChallenges (20240812110309)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "challenges" ADD "status" integer DEFAULT -1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240812110309') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddRejectionReasonToChallenges (20240812135939)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "challenges" ADD "rejection_reason" varchar[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240812135939') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateRooms (20240814171719)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "rooms" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "match_id" integer NOT NULL, "uuid" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_ebc43ac58a"
+FOREIGN KEY ("match_id")
+  REFERENCES "matches" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_rooms_on_match_id" ON "rooms" ("match_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240814171719') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUsers (20240816171609)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "auth0_id" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240816171609') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddUserIdToChallenges (20240819133910)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (9.7ms)[0m  [1m[35mALTER TABLE "challenges" ADD "user_id" integer[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_challenges_on_user_id" ON "challenges" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240819133910') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddIsAdminToUsers (20240819140455)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "users" ADD "is_admin" boolean DEFAULT 0[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240819140455') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateActiveStorageTables (20240824144750)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar NOT NULL, "filename" varchar NOT NULL, "content_type" varchar, "metadata" text, "service_name" varchar NOT NULL, "byte_size" bigint NOT NULL, "checksum" varchar, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240824144750') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddProfileImageToUsers (20240824144752)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240824144752') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateMatch (20240824184241)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.9ms)[0m  [1m[35mCREATE TABLE "matches" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "language" varchar, "status" varchar, "player_1_id" integer, "player_2_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_e4e22d212d"
+FOREIGN KEY ("player_1_id")
+  REFERENCES "users" ("id")
+, CONSTRAINT "fk_rails_aa8b27c06e"
+FOREIGN KEY ("player_2_id")
+  REFERENCES "users" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_matches_on_player_1_id" ON "matches" ("player_1_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_matches_on_player_2_id" ON "matches" ("player_2_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240824184241') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:57:37 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 865)
+  Rendered layout layouts/application.html.erb (Duration: 164.3ms | Allocations: 141757)
+Completed 200 OK in 186ms (Views: 168.2ms | ActiveRecord: 1.6ms | Allocations: 158381)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:57:38 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:57:38 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+An unauthorized connection attempt was rejected
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:57:38 +0200
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-26 17:57:38 +0200
+Processing by Auth0Controller#logout as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 966)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:57:38 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 449)
+  Rendered layout layouts/application.html.erb (Duration: 5.8ms | Allocations: 6381)
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.0ms | Allocations: 6956)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-26 17:57:42 +0200
+Started GET "/auth/auth0/callback?code=dpJgNeQahPNFUgv0BZo5uXABX0-_QGHSyK2GQhFvrSzdi&state=402ef6197c3c26326c523621e3f6da0d1192f4fd3a4b1036" for 127.0.0.1 at 2024-08-26 17:57:46 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"dpJgNeQahPNFUgv0BZo5uXABX0-_QGHSyK2GQhFvrSzdi", "state"=>"402ef6197c3c26326c523621e3f6da0d1192f4fd3a4b1036"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "google-oauth2|117052773264297272144"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "flavioialongo@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "google-oauth2|117052773264297272144"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Create (0.1ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "auth0_id", "created_at", "updated_at", "is_admin") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Flavio Ialongo"], ["email", "flavioialongo@gmail.com"], ["auth0_id", "google-oauth2|117052773264297272144"], ["created_at", "2024-08-26 15:57:46.769174"], ["updated_at", "2024-08-26 15:57:46.769174"], ["is_admin", 0]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 15ms (ActiveRecord: 2.9ms | Allocations: 12784)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-26 17:57:46 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+User info: #<User id: 1, name: "Flavio Ialongo", email: "flavioialongo@gmail.com", auth0_id: "google-oauth2|117052773264297272144", created_at: "2024-08-26 15:57:46.769174000 +0000", updated_at: "2024-08-26 15:57:46.769174000 +0000", is_admin: false>
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 181)
+  Rendered layout layouts/application.html.erb (Duration: 5.8ms | Allocations: 6114)
+Completed 200 OK in 12ms (Views: 6.2ms | ActiveRecord: 0.2ms | Allocations: 10202)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:57:48 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:57:48 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+An unauthorized connection attempt was rejected
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:57:48 +0200
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:57:48 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.8ms | Allocations: 886)
+  Rendered layout layouts/application.html.erb (Duration: 10.1ms | Allocations: 6819)
+Completed 200 OK in 13ms (Views: 10.8ms | ActiveRecord: 0.1ms | Allocations: 7983)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:57:49 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:57:49 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMQ)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:57:52 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 174)
+  Rendered layout layouts/application.html.erb (Duration: 10.4ms | Allocations: 6047)
+Completed 200 OK in 13ms (Views: 10.9ms | ActiveRecord: 0.1ms | Allocations: 6952)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:58:01 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 167)
+  Rendered layout layouts/application.html.erb (Duration: 10.0ms | Allocations: 6103)
+Completed 200 OK in 22ms (Views: 19.3ms | ActiveRecord: 0.1ms | Allocations: 7276)
+
+
+Started GET "/auth/logout" for 127.0.0.1 at 2024-08-26 17:58:02 +0200
+Processing by Auth0Controller#logout as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+Redirected to https://dev-clyklmmz4z2hbpdz.us.auth0.com/v2/logout?client_id=F3RKbMB0iW8YTxwmfCg922F0hsio17PC&returnTo=http%3A%2F%2Flocalhost%3A3000%2F
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms | Allocations: 807)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:58:02 +0200
+Processing by WelcomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.5ms | Allocations: 200)
+  Rendered layout layouts/application.html.erb (Duration: 6.3ms | Allocations: 6117)
+Completed 200 OK in 7ms (Views: 6.7ms | ActiveRecord: 0.0ms | Allocations: 6595)
+
+
+Started POST "/auth/auth0" for 127.0.0.1 at 2024-08-26 17:58:03 +0200
+Started GET "/auth/auth0/callback?code=Kc4CTC8EBNUkuwrQT08Eo4crjM-MRnotY8kEAlLS5YaCH&state=3a9c094ec39fc37c3b1b0f1fe5dcb93c6bb631bf524a6fe8" for 127.0.0.1 at 2024-08-26 17:58:09 +0200
+Processing by Auth0Controller#callback as HTML
+  Parameters: {"code"=>"Kc4CTC8EBNUkuwrQT08Eo4crjM-MRnotY8kEAlLS5YaCH", "state"=>"3a9c094ec39fc37c3b1b0f1fe5dcb93c6bb631bf524a6fe8"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66cca50245cd9dba2407ec82"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "fifi@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."auth0_id" = ? LIMIT ?[0m  [["auth0_id", "auth0|66cca50245cd9dba2407ec82"], ["LIMIT", 1]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "email", "auth0_id", "created_at", "updated_at", "is_admin") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "fifi@gmail.com"], ["email", "fifi@gmail.com"], ["auth0_id", "auth0|66cca50245cd9dba2407ec82"], ["created_at", "2024-08-26 15:58:10.421799"], ["updated_at", "2024-08-26 15:58:10.421799"], ["is_admin", 0]]
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/auth0_controller.rb:13:in `callback'
+Redirected to http://localhost:3000/logged_index
+Completed 302 Found in 8ms (ActiveRecord: 2.0ms | Allocations: 3825)
+
+
+Started GET "/logged_index" for 127.0.0.1 at 2024-08-26 17:58:10 +0200
+Processing by WelcomeController#logged_index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+User info: #<User id: 2, name: "fifi@gmail.com", email: "fifi@gmail.com", auth0_id: "auth0|66cca50245cd9dba2407ec82", created_at: "2024-08-26 15:58:10.421799000 +0000", updated_at: "2024-08-26 15:58:10.421799000 +0000", is_admin: false>
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/logged_index.html.erb within layouts/application
+  Rendered welcome/logged_index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 171)
+  Rendered layout layouts/application.html.erb (Duration: 5.2ms | Allocations: 6103)
+Completed 200 OK in 7ms (Views: 5.5ms | ActiveRecord: 0.1ms | Allocations: 7094)
+
+
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:58:13 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 0.7ms | Allocations: 438)
+  Rendered layout layouts/application.html.erb (Duration: 6.2ms | Allocations: 6283)
+Completed 200 OK in 8ms (Views: 6.6ms | ActiveRecord: 0.1ms | Allocations: 7177)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:58:13 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:58:13 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:12:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1VzZXIvMg)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:58:14 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+Completed 204 No Content in 8ms (ActiveRecord: 0.1ms | Allocations: 3536)
+
+
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:58:16 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mMatch Create (1.0ms)[0m  [1m[32mINSERT INTO "matches" ("language", "status", "player_1_id", "player_2_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["language", "python3"], ["status", nil], ["player_1_id", 2], ["player_2_id", 1], ["created_at", "2024-08-26 15:58:16.793750"], ["updated_at", "2024-08-26 15:58:16.793750"]]
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+[ActionCable] Broadcasting to matchmaking_python3: {:match_id=>1, :player_1=>#<User id: 2, name: "fifi@gmail.com", email: "fifi@gmail.com", auth0_id: "auth0|66cca50245cd9dba2407ec82", created_at: "2024-08-26 15:58:10.421799000 +0000", updated_at: "2024-08-26 15:58:10.421799000 +0000", is_admin: false>, :player_2=>#<User id: 1, name: "Flavio Ialon...
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+MatchmakingChannel transmitting {"match_id"=>1, "player_1"=>{"id"=>2, "name"=>"fifi@gmail.com", "email"=>"fifi@gmail.com", "auth0_id"=>"auth0|66cca50245cd9dba2407ec82", "created_at"=>"2024-08-26T15:58:10.421Z", "updated_at"=>"2024-08-26T15:58:10.421Z", "is_admin"=>false}, "player_2"=>{"id"=>1, "name"=>"Flavio Ialongo", "email"=... (via streamed from matchmaking_python3)
+MatchmakingChannel transmitting {"match_id"=>1, "player_1"=>{"id"=>2, "name"=>"fifi@gmail.com", "email"=>"fifi@gmail.com", "auth0_id"=>"auth0|66cca50245cd9dba2407ec82", "created_at"=>"2024-08-26T15:58:10.421Z", "updated_at"=>"2024-08-26T15:58:10.421Z", "is_admin"=>false}, "player_2"=>{"id"=>1, "name"=>"Flavio Ialongo", "email"=... (via streamed from matchmaking_python3)
+Completed 204 No Content in 16ms (ActiveRecord: 1.5ms | Allocations: 10502)
+
+
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:58:16 +0200
+MatchmakingChannel stopped streaming from matchmaking_python3
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:58:16 +0200
+MatchmakingChannel stopped streaming from matchmaking_python3
+Started GET "/matches/1" for 127.0.0.1 at 2024-08-26 17:58:16 +0200
+Processing by MatchesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mMatch Load (0.1ms)[0m  [1m[34mSELECT "matches".* FROM "matches" WHERE "matches"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matches_controller.rb:79:in `set_challenge'
+Started GET "/matches/1" for 127.0.0.1 at 2024-08-26 17:58:16 +0200
+  Rendering layout layouts/application.html.erb
+  Rendering matches/show.html.erb within layouts/application
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/matches/show.html.erb:6
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/matches/show.html.erb:7
+  Rendered matches/show.html.erb within layouts/application (Duration: 3.8ms | Allocations: 3465)
+  Rendered layout layouts/application.html.erb (Duration: 14.0ms | Allocations: 9642)
+Completed 200 OK in 18ms (Views: 14.7ms | ActiveRecord: 0.2ms | Allocations: 12317)
+
+
+Processing by MatchesController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:7:in `current_user'
+  [1m[36mMatch Load (0.0ms)[0m  [1m[34mSELECT "matches".* FROM "matches" WHERE "matches"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matches_controller.rb:79:in `set_challenge'
+  Rendering layout layouts/application.html.erb
+  Rendering matches/show.html.erb within layouts/application
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/views/matches/show.html.erb:6
+  [1m[36mCACHE User Load (0.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/matches/show.html.erb:7
+  Rendered matches/show.html.erb within layouts/application (Duration: 2.6ms | Allocations: 1140)
+  Rendered layout layouts/application.html.erb (Duration: 8.1ms | Allocations: 6985)
+Completed 200 OK in 11ms (Views: 8.5ms | ActiveRecord: 0.2ms | Allocations: 8251)
+
+

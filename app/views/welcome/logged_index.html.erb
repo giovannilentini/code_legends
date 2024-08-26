@@ -75,7 +75,7 @@
     <div class="text-center px-6 py-12 max-w-3xl">
       <h1 class="text-7xl font-extrabold mb-6 animate-pulse">Vai al profilo</h1>
       <div>
-        <% if @user.admin? %>
+        <% if @user && @user.admin? %>
           <%= link_to 'Vai al Profilo Admin', admin_profile_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg' %>
         <% end %>
         <%= link_to 'Vai al Profilo Utente', profile_path, class: 'bg-green-600 hover:bg-green-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg ml-4' %>
