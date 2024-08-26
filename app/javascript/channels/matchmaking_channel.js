@@ -20,7 +20,7 @@ document.addEventListener("turbo:load", () => {
 
             received(data) {
                 // Called when there's data broadcasted to this channel
-                window.location.href = `/challenges/${data.challenge_id}`;
+                window.location.href = `/matches/${data.match_id}`;
                 // Handle the incoming data here
             },
 

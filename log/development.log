@@ -32953,3 +32953,1073 @@ Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-a
 Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci8x)
 MatchmakingChannel is transmitting the subscription confirmation
 MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:00:52 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_ef536ca4"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.6ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_ef536ca4"], ["created_at", "2024-08-26 15:00:52.150854"], ["updated_at", "2024-08-26 15:00:52.150854"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Load (0.0ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+Completed 204 No Content in 8ms (ActiveRecord: 0.7ms | Allocations: 5369)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:00:59 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_4215573d"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.6ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_4215573d"], ["created_at", "2024-08-26 15:00:59.747252"], ["updated_at", "2024-08-26 15:00:59.747252"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.4ms | Allocations: 207)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | Allocations: 6167)
+Completed 200 OK in 8ms (Views: 4.9ms | ActiveRecord: 0.8ms | Allocations: 8700)
+
+
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:01:01 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_7b67fa59"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (1.1ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_7b67fa59"], ["created_at", "2024-08-26 15:01:01.342315"], ["updated_at", "2024-08-26 15:01:01.342315"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.0ms | Allocations: 435)
+  Rendered layout layouts/application.html.erb (Duration: 8.7ms | Allocations: 6462)
+Completed 200 OK in 15ms (Views: 9.1ms | ActiveRecord: 1.4ms | Allocations: 9121)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:01:01 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:01:01 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci83)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:01:02 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_b73c0338"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (1.1ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_b73c0338"], ["created_at", "2024-08-26 15:01:02.269863"], ["updated_at", "2024-08-26 15:01:02.269863"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mMatch Create (0.8ms)[0m  [1m[32mINSERT INTO "matches" ("language", "status", "player_1_id", "player_2_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["language", "python3"], ["status", nil], ["player_1_id", 1], ["player_2_id", 7], ["created_at", "2024-08-26 15:01:02.288040"], ["updated_at", "2024-08-26 15:01:02.288040"]]
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+Completed 500 Internal Server Error in 32ms (ActiveRecord: 2.7ms | Allocations: 19212)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'match_id' for Room.):
+  
+app/models/match.rb:14:in `create_room'
+app/services/matchmaking_queue_service.rb:22:in `match_users'
+app/services/matchmaking_queue_service.rb:9:in `add'
+app/controllers/matchmaking_controller.rb:13:in `find_opponent'
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:06:55 +0200
+MatchmakingChannel stopped streaming from matchmaking_python3
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:06:55 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mPlayer Load (0.7ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_0e3910c6"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.8ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_0e3910c6"], ["created_at", "2024-08-26 15:06:55.505051"], ["updated_at", "2024-08-26 15:06:55.505051"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 0.9ms | Allocations: 825)
+  Rendered layout layouts/application.html.erb (Duration: 48.0ms | Allocations: 103873)
+Completed 200 OK in 59ms (Views: 48.8ms | ActiveRecord: 3.4ms | Allocations: 111453)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:06:55 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:06:55 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci83)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:06:58 +0200
+MatchmakingChannel stopped streaming from matchmaking_python3
+Started GET "/play_now?language=cpp" for 127.0.0.1 at 2024-08-26 17:06:58 +0200
+Processing by MatchmakingController#play_now as HTML
+  Parameters: {"language"=>"cpp"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_8abab3c6"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (1.3ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_8abab3c6"], ["created_at", "2024-08-26 15:06:58.735340"], ["updated_at", "2024-08-26 15:06:58.735340"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.1ms | Allocations: 433)
+  Rendered layout layouts/application.html.erb (Duration: 10.3ms | Allocations: 6352)
+Completed 200 OK in 16ms (Views: 10.8ms | ActiveRecord: 1.5ms | Allocations: 9045)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:06:58 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:06:58 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci83)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_cpp
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:07:00 +0200
+MatchmakingChannel stopped streaming from matchmaking_cpp
+Started GET "/play_now?language=java" for 127.0.0.1 at 2024-08-26 17:07:00 +0200
+Processing by MatchmakingController#play_now as HTML
+  Parameters: {"language"=>"java"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_347d80a0"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.7ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_347d80a0"], ["created_at", "2024-08-26 15:07:00.395207"], ["updated_at", "2024-08-26 15:07:00.395207"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 0.5ms | Allocations: 433)
+  Rendered layout layouts/application.html.erb (Duration: 4.4ms | Allocations: 6278)
+Completed 200 OK in 9ms (Views: 4.7ms | ActiveRecord: 0.9ms | Allocations: 8941)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:07:00 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:07:00 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci83)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_java
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:07:01 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"java", "commit"=>"Cerca Avversario"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_6ac2b79a"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.8ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_6ac2b79a"], ["created_at", "2024-08-26 15:07:01.381743"], ["updated_at", "2024-08-26 15:07:01.381743"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Load (0.0ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+Completed 204 No Content in 5ms (ActiveRecord: 1.0ms | Allocations: 3362)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:07:01 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:07:01 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci8x)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:07:03 +0200
+MatchmakingChannel stopped streaming from matchmaking_python3
+Started GET "/play_now?language=java" for 127.0.0.1 at 2024-08-26 17:07:03 +0200
+Processing by MatchmakingController#play_now as HTML
+  Parameters: {"language"=>"java"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_0c0297c7"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (1.7ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_0c0297c7"], ["created_at", "2024-08-26 15:07:03.660300"], ["updated_at", "2024-08-26 15:07:03.660300"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.1ms | Allocations: 433)
+  Rendered layout layouts/application.html.erb (Duration: 8.7ms | Allocations: 6474)
+Completed 200 OK in 15ms (Views: 9.2ms | ActiveRecord: 2.0ms | Allocations: 9145)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:07:03 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:07:03 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.3ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci8x)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_java
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:07:04 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"java", "commit"=>"Cerca Avversario"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_4146a06b"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (1.3ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_4146a06b"], ["created_at", "2024-08-26 15:07:04.154131"], ["updated_at", "2024-08-26 15:07:04.154131"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mMatch Create (0.9ms)[0m  [1m[32mINSERT INTO "matches" ("language", "status", "player_1_id", "player_2_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["language", "java"], ["status", nil], ["player_1_id", 7], ["player_2_id", 1], ["created_at", "2024-08-26 15:07:04.164613"], ["updated_at", "2024-08-26 15:07:04.164613"]]
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 2.6ms | Allocations: 13242)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'match_id' for Room.):
+  
+app/models/match.rb:14:in `create_room'
+app/services/matchmaking_queue_service.rb:22:in `match_users'
+app/services/matchmaking_queue_service.rb:9:in `add'
+app/controllers/matchmaking_controller.rb:13:in `find_opponent'
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:08:16 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:08:16 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci83)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_java
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:08:19 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_62db0ca8"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.8ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_62db0ca8"], ["created_at", "2024-08-26 15:08:19.050820"], ["updated_at", "2024-08-26 15:08:19.050820"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.8ms | Allocations: 731)
+  Rendered layout layouts/application.html.erb (Duration: 151.5ms | Allocations: 141437)
+Completed 200 OK in 165ms (Views: 155.1ms | ActiveRecord: 2.5ms | Allocations: 150287)
+
+
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:08:21 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_a48951ef"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.7ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_a48951ef"], ["created_at", "2024-08-26 15:08:21.733986"], ["updated_at", "2024-08-26 15:08:21.733986"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.0ms | Allocations: 893)
+  Rendered layout layouts/application.html.erb (Duration: 5.2ms | Allocations: 6823)
+Completed 200 OK in 9ms (Views: 5.7ms | ActiveRecord: 0.8ms | Allocations: 9740)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:08:21 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:08:21 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci8x)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:08:26 +0200
+MatchmakingChannel stopped streaming from matchmaking_python3
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:08:26 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_2a3f061d"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (1.1ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_2a3f061d"], ["created_at", "2024-08-26 15:08:26.490939"], ["updated_at", "2024-08-26 15:08:26.490939"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 0.7ms | Allocations: 436)
+  Rendered layout layouts/application.html.erb (Duration: 9.7ms | Allocations: 6289)
+Completed 200 OK in 15ms (Views: 10.1ms | ActiveRecord: 1.3ms | Allocations: 8979)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:08:26 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:08:26 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci8x)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:09:40 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mPlayer Load (0.0ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_82a5bb47"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.2ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_82a5bb47"], ["created_at", "2024-08-26 15:09:41.032319"], ["updated_at", "2024-08-26 15:09:41.032319"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+Completed 204 No Content in 11ms (ActiveRecord: 3.6ms | Allocations: 8213)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:09:48 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:09:48 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci83)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_java
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:09:48 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:09:48 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci8x)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:11:00 +0200
+MatchmakingChannel stopped streaming from matchmaking_java
+Started GET "/play_now?language=python3" for 127.0.0.1 at 2024-08-26 17:11:00 +0200
+Processing by MatchmakingController#play_now as HTML
+  Parameters: {"language"=>"python3"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_71c1929b"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.9ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_71c1929b"], ["created_at", "2024-08-26 15:11:00.998453"], ["updated_at", "2024-08-26 15:11:00.998453"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 5.6ms | Allocations: 825)
+  Rendered layout layouts/application.html.erb (Duration: 90.5ms | Allocations: 103832)
+Completed 200 OK in 96ms (Views: 91.5ms | ActiveRecord: 1.1ms | Allocations: 107129)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:11:01 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:11:01 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci83)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:11:05 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_82e71eb8"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (1.1ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_82e71eb8"], ["created_at", "2024-08-26 15:11:05.047839"], ["updated_at", "2024-08-26 15:11:05.047839"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mMatch Create (1.1ms)[0m  [1m[32mINSERT INTO "matches" ("language", "status", "player_1_id", "player_2_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["language", "python3"], ["status", nil], ["player_1_id", 1], ["player_2_id", 7], ["created_at", "2024-08-26 15:11:05.077117"], ["updated_at", "2024-08-26 15:11:05.077117"]]
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+Completed 500 Internal Server Error in 43ms (ActiveRecord: 3.3ms | Allocations: 20886)
+
+
+  
+ActiveModel::UnknownAttributeError (unknown attribute 'match_id' for Room.):
+  
+app/models/match.rb:14:in `create_room'
+app/services/matchmaking_queue_service.rb:22:in `match_users'
+app/services/matchmaking_queue_service.rb:9:in `add'
+app/controllers/matchmaking_controller.rb:13:in `find_opponent'
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.0ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.1ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2024-08-26 15:12:09.243382', '2024-08-26 15:12:09.243385') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DropTestCasesAndChallenges (20240809184643)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809184643') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateTestCases (20240809184936)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "test_cases" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "input_example" varchar, "expected_output" varchar, "challenge_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809184936') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateChallenges (20240809184958)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "challenges" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809184958') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddChallengeIdToTestCases (20240809185515)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atest_cases" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "input_example" varchar DEFAULT NULL, "expected_output" varchar DEFAULT NULL, "challenge_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "atest_cases" ("id","input_example","expected_output","challenge_id","created_at","updated_at")
+                     SELECT "id","input_example","expected_output","challenge_id","created_at","updated_at" FROM "test_cases"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "test_cases"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "test_cases" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "input_example" varchar DEFAULT NULL, "expected_output" varchar DEFAULT NULL, "challenge_id" integer DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_4879b6a3b1"
+FOREIGN KEY ("challenge_id")
+  REFERENCES "challenges" ("id")
+)[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "test_cases" ("id","input_example","expected_output","challenge_id","created_at","updated_at")
+                     SELECT "id","input_example","expected_output","challenge_id","created_at","updated_at" FROM "atest_cases"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atest_cases"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_test_cases_on_challenge_id" ON "test_cases" ("challenge_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240809185515') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddStatusToChallenges (20240812110309)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "challenges" ADD "status" integer DEFAULT -1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240812110309') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddRejectionReasonToChallenges (20240812135939)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mALTER TABLE "challenges" ADD "rejection_reason" varchar[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240812135939') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateRooms (20240814171719)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "rooms" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "match_id" integer NOT NULL, "uuid" varchar NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_ebc43ac58a"
+FOREIGN KEY ("match_id")
+  REFERENCES "matches" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_rooms_on_match_id" ON "rooms" ("match_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240814171719') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreatePlayers (20240814171720)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "players" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240814171720') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateUsers (20240816171609)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (9.2ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "email" varchar, "auth0_id" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240816171609') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddUserIdToChallenges (20240819133910)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "challenges" ADD "user_id" integer[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_challenges_on_user_id" ON "challenges" ("user_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240819133910') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddIsAdminToUsers (20240819140455)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "users" ADD "is_admin" boolean DEFAULT 0[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240819140455') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateActiveStorageTables (20240824144750)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "active_storage_blobs" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "key" varchar NOT NULL, "filename" varchar NOT NULL, "content_type" varchar, "metadata" text, "service_name" varchar NOT NULL, "byte_size" bigint NOT NULL, "checksum" varchar, "created_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_blobs_on_key" ON "active_storage_blobs" ("key")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_attachments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar NOT NULL, "record_type" varchar NOT NULL, "record_id" bigint NOT NULL, "blob_id" bigint NOT NULL, "created_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_c3b3935057"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_active_storage_attachments_on_blob_id" ON "active_storage_attachments" ("blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_attachments_uniqueness" ON "active_storage_attachments" ("record_type", "record_id", "name", "blob_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "active_storage_variant_records" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "blob_id" bigint NOT NULL, "variation_digest" varchar NOT NULL, CONSTRAINT "fk_rails_993965df05"
+FOREIGN KEY ("blob_id")
+  REFERENCES "active_storage_blobs" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_active_storage_variant_records_uniqueness" ON "active_storage_variant_records" ("blob_id", "variation_digest")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240824144750') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+Migrating to AddProfileImageToUsers (20240824144752)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240824144752') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mcommit transaction[0m
+Migrating to CreateMatch (20240824184241)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE TABLE "matches" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "language" varchar, "status" varchar, "player_1_id" integer, "player_2_id" integer, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_e4e22d212d"
+FOREIGN KEY ("player_1_id")
+  REFERENCES "players" ("id")
+, CONSTRAINT "fk_rails_aa8b27c06e"
+FOREIGN KEY ("player_2_id")
+  REFERENCES "players" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_matches_on_player_1_id" ON "matches" ("player_1_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_matches_on_player_2_id" ON "matches" ("player_2_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20240824184241') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:12:19 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_0ab2c532"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.2ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_0ab2c532"], ["created_at", "2024-08-26 15:12:19.476197"], ["updated_at", "2024-08-26 15:12:19.476197"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+Completed 204 No Content in 28ms (ActiveRecord: 4.0ms | Allocations: 21784)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:12:19 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:12:19 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+An unauthorized connection attempt was rejected
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:12:19 +0200
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:12:23 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_e9d57a8d"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.9ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_e9d57a8d"], ["created_at", "2024-08-26 15:12:23.740028"], ["updated_at", "2024-08-26 15:12:23.740028"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.2ms | Allocations: 1104)
+  Rendered layout layouts/application.html.erb (Duration: 151.6ms | Allocations: 141811)
+Completed 200 OK in 159ms (Views: 153.4ms | ActiveRecord: 1.0ms | Allocations: 147044)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:12:24 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:12:24 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+An unauthorized connection attempt was rejected
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:12:24 +0200
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:12:24 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:12:24 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci8x)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:12:26 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_b2f35b5f"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (1.1ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_b2f35b5f"], ["created_at", "2024-08-26 15:12:26.366154"], ["updated_at", "2024-08-26 15:12:26.366154"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Load (0.0ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+  [1m[36mPlayer Create (0.7ms)[0m  [1m[32mINSERT INTO "players" ("id", "name", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["id", 7], ["name", nil], ["created_at", "2024-08-26 15:12:26.368903"], ["updated_at", "2024-08-26 15:12:26.368903"]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mMatch Create (0.8ms)[0m  [1m[32mINSERT INTO "matches" ("language", "status", "player_1_id", "player_2_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["language", "python3"], ["status", nil], ["player_1_id", 1], ["player_2_id", 7], ["created_at", "2024-08-26 15:12:26.377854"], ["updated_at", "2024-08-26 15:12:26.377854"]]
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mRoom Create (0.2ms)[0m  [1m[32mINSERT INTO "rooms" ("match_id", "uuid", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["match_id", 1], ["uuid", "8f7ac5eb-67d5-4a87-9994-eb809d0e78de"], ["created_at", "2024-08-26 15:12:26.389089"], ["updated_at", "2024-08-26 15:12:26.389089"]]
+  ↳ app/models/match.rb:14:in `create_room'
+  [1m[36mRoom Load (0.1ms)[0m  [1m[34mSELECT "rooms".* FROM "rooms" WHERE "rooms"."match_id" = ? LIMIT ?[0m  [["match_id", 1], ["LIMIT", 1]]
+  ↳ app/models/match.rb:14:in `create_room'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+[ActionCable] Broadcasting to matchmaking_python3: {:challenge_id=>1, :player_1=>#<Player id: 1, name: "Player_0ab2c532", created_at: "2024-08-26 15:12:19.476197000 +0000", updated_at: "2024-08-26 15:12:19.476197000 +0000", waiting: false>, :player_2=>#<Player id: 7, name: nil, created_at: "2024-08-26 15:12:26.368903000 +0000", updated_at: "2024-...
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+MatchmakingChannel transmitting {"challenge_id"=>1, "player_1"=>{"id"=>1, "name"=>"Player_0ab2c532", "created_at"=>"2024-08-26T15:12:19.476Z", "updated_at"=>"2024-08-26T15:12:19.476Z", "waiting"=>false}, "player_2"=>{"id"=>7, "name"=>nil, "created_at"=>"2024-08-26T15:12:26.368Z", "updated_at"=>"2024-08-26T15:12:26.368Z", "waiti... (via streamed from matchmaking_python3)
+Completed 204 No Content in 29ms (ActiveRecord: 3.6ms | Allocations: 23365)
+
+
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:12:26 +0200
+MatchmakingChannel stopped streaming from matchmaking_python3
+Started GET "/challenges/1" for 127.0.0.1 at 2024-08-26 17:12:26 +0200
+  
+AbstractController::ActionNotFound (The action 'show' could not be found for ChallengesController):
+  
+actionpack (7.1.3.4) lib/abstract_controller/base.rb:155:in `process'
+actionview (7.1.3.4) lib/action_view/rendering.rb:40:in `process'
+actionpack (7.1.3.4) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.4) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.4) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.4) lib/action_dispatch/routing/route_set.rb:882:in `call'
+omniauth (2.1.2) lib/omniauth/strategy.rb:202:in `call!'
+omniauth (2.1.2) lib/omniauth/strategy.rb:169:in `call'
+omniauth (2.1.2) lib/omniauth/builder.rb:44:in `call'
+rack (3.1.7) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.7) lib/rack/etag.rb:29:in `call'
+rack (3.1.7) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.7) lib/rack/head.rb:15:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/http/permissions_policy.rb:36:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/http/content_security_policy.rb:33:in `call'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:272:in `context'
+rack-session (2.0.0) lib/rack/session/abstract/id.rb:266:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/cookies.rb:689:in `call'
+activerecord (7.1.3.4) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.4) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.4) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.4) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.4) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.4) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.5.2) lib/sprockets/rails/quiet_assets.rb:17:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.1.7) lib/rack/method_override.rb:28:in `call'
+rack (3.1.7) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.4) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.1.7) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.4) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.4) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:14:05 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_a6e178e5"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.2ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_a6e178e5"], ["created_at", "2024-08-26 15:14:05.764191"], ["updated_at", "2024-08-26 15:14:05.764191"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.9ms | Allocations: 768)
+  Rendered layout layouts/application.html.erb (Duration: 193.5ms | Allocations: 174468)
+Completed 200 OK in 221ms (Views: 197.5ms | ActiveRecord: 3.7ms | Allocations: 197849)
+
+
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:14:07 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_5591f6fd"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (1.6ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_5591f6fd"], ["created_at", "2024-08-26 15:14:07.471778"], ["updated_at", "2024-08-26 15:14:07.471778"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.9ms | Allocations: 895)
+  Rendered layout layouts/application.html.erb (Duration: 10.5ms | Allocations: 6813)
+Completed 200 OK in 19ms (Views: 11.3ms | ActiveRecord: 1.9ms | Allocations: 9746)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:14:07 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:14:07 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci8x)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:14:08 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_6eda6ff3"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.9ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_6eda6ff3"], ["created_at", "2024-08-26 15:14:08.640151"], ["updated_at", "2024-08-26 15:14:08.640151"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Load (0.0ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+Completed 204 No Content in 6ms (ActiveRecord: 1.0ms | Allocations: 3553)
+
+
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:14:12 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_5c909801"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.9ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_5c909801"], ["created_at", "2024-08-26 15:14:12.316686"], ["updated_at", "2024-08-26 15:14:12.316686"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 0.7ms | Allocations: 438)
+  Rendered layout layouts/application.html.erb (Duration: 6.6ms | Allocations: 6283)
+Completed 200 OK in 11ms (Views: 7.0ms | ActiveRecord: 1.0ms | Allocations: 8968)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:14:12 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:14:12 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci83)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:14:13 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_c02c3e8c"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.8ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_c02c3e8c"], ["created_at", "2024-08-26 15:14:13.775843"], ["updated_at", "2024-08-26 15:14:13.775843"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Load (0.0ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mMatch Create (0.9ms)[0m  [1m[32mINSERT INTO "matches" ("language", "status", "player_1_id", "player_2_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["language", "python3"], ["status", nil], ["player_1_id", 1], ["player_2_id", 7], ["created_at", "2024-08-26 15:14:13.786716"], ["updated_at", "2024-08-26 15:14:13.786716"]]
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mRoom Create (0.2ms)[0m  [1m[32mINSERT INTO "rooms" ("match_id", "uuid", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["match_id", 2], ["uuid", "7cada00e-ca57-4abb-b859-ec75a7752f8c"], ["created_at", "2024-08-26 15:14:13.795985"], ["updated_at", "2024-08-26 15:14:13.795985"]]
+  ↳ app/models/match.rb:14:in `create_room'
+  [1m[36mRoom Load (0.1ms)[0m  [1m[34mSELECT "rooms".* FROM "rooms" WHERE "rooms"."match_id" = ? LIMIT ?[0m  [["match_id", 2], ["LIMIT", 1]]
+  ↳ app/models/match.rb:14:in `create_room'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+[ActionCable] Broadcasting to matchmaking_python3: {:match_id=>2, :player_1=>#<Player id: 1, name: "Player_0ab2c532", created_at: "2024-08-26 15:12:19.476197000 +0000", updated_at: "2024-08-26 15:12:19.476197000 +0000", waiting: false>, :player_2=>#<Player id: 7, name: nil, created_at: "2024-08-26 15:12:26.368903000 +0000", updated_at: "2024-08-2...
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+MatchmakingChannel transmitting {"match_id"=>2, "player_1"=>{"id"=>1, "name"=>"Player_0ab2c532", "created_at"=>"2024-08-26T15:12:19.476Z", "updated_at"=>"2024-08-26T15:12:19.476Z", "waiting"=>false}, "player_2"=>{"id"=>7, "name"=>nil, "created_at"=>"2024-08-26T15:12:26.368Z", "updated_at"=>"2024-08-26T15:12:26.368Z", "waiting"=... (via streamed from matchmaking_python3)
+MatchmakingChannel transmitting {"match_id"=>2, "player_1"=>{"id"=>1, "name"=>"Player_0ab2c532", "created_at"=>"2024-08-26T15:12:19.476Z", "updated_at"=>"2024-08-26T15:12:19.476Z", "waiting"=>false}, "player_2"=>{"id"=>7, "name"=>nil, "created_at"=>"2024-08-26T15:12:26.368Z", "updated_at"=>"2024-08-26T15:12:26.368Z", "waiting"=... (via streamed from matchmaking_python3)
+Completed 204 No Content in 26ms (ActiveRecord: 2.8ms | Allocations: 21744)
+
+
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:14:13 +0200
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:14:13 +0200
+MatchmakingChannel stopped streaming from matchmaking_python3
+MatchmakingChannel stopped streaming from matchmaking_python3
+Started GET "/matches/2" for 127.0.0.1 at 2024-08-26 17:14:13 +0200
+Processing by MatchesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_e4683794"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.9ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_e4683794"], ["created_at", "2024-08-26 15:14:13.851513"], ["updated_at", "2024-08-26 15:14:13.851513"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mMatch Load (0.1ms)[0m  [1m[34mSELECT "matches".* FROM "matches" WHERE "matches"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/matches_controller.rb:81:in `set_challenge'
+  Rendering layout layouts/application.html.erb
+  Rendering matches/show.html.erb within layouts/application
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/matches/show.html.erb:6
+  [1m[36mPlayer Load (0.0ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/matches/show.html.erb:7
+  Rendered matches/show.html.erb within layouts/application (Duration: 3.3ms | Allocations: 3159)
+Started GET "/matches/2" for 127.0.0.1 at 2024-08-26 17:14:13 +0200
+  Rendered layout layouts/application.html.erb (Duration: 10.1ms | Allocations: 9437)
+Completed 200 OK in 17ms (Views: 10.7ms | ActiveRecord: 1.3ms | Allocations: 13652)
+
+
+Processing by MatchesController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_5270288d"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (1.1ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_5270288d"], ["created_at", "2024-08-26 15:14:13.872227"], ["updated_at", "2024-08-26 15:14:13.872227"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mMatch Load (0.0ms)[0m  [1m[34mSELECT "matches".* FROM "matches" WHERE "matches"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/matches_controller.rb:81:in `set_challenge'
+  Rendering layout layouts/application.html.erb
+  Rendering matches/show.html.erb within layouts/application
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/matches/show.html.erb:6
+  [1m[36mPlayer Load (0.0ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/matches/show.html.erb:7
+  Rendered matches/show.html.erb within layouts/application (Duration: 2.0ms | Allocations: 1194)
+  Rendered layout layouts/application.html.erb (Duration: 12.1ms | Allocations: 7038)
+Completed 200 OK in 18ms (Views: 13.0ms | ActiveRecord: 1.4ms | Allocations: 10044)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:15:23 +0200
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by WelcomeController#index as HTML
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_a0588a53"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.2ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_a0588a53"], ["created_at", "2024-08-26 15:15:23.398052"], ["updated_at", "2024-08-26 15:15:23.398052"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.9ms | Allocations: 768)
+  Rendered layout layouts/application.html.erb (Duration: 151.6ms | Allocations: 141537)
+Completed 200 OK in 179ms (Views: 155.6ms | ActiveRecord: 3.7ms | Allocations: 164918)
+
+
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:15:25 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_c1956bc2"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.7ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_c1956bc2"], ["created_at", "2024-08-26 15:15:25.269122"], ["updated_at", "2024-08-26 15:15:25.269122"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 1.3ms | Allocations: 895)
+  Rendered layout layouts/application.html.erb (Duration: 6.6ms | Allocations: 6825)
+Completed 200 OK in 11ms (Views: 7.2ms | ActiveRecord: 0.9ms | Allocations: 9777)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:15:25 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:15:25 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci8x)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:15:27 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_0f0fdf8f"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.9ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_0f0fdf8f"], ["created_at", "2024-08-26 15:15:27.799446"], ["updated_at", "2024-08-26 15:15:27.799446"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Load (0.0ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+Completed 204 No Content in 5ms (ActiveRecord: 1.1ms | Allocations: 3500)
+
+
+Started GET "/" for 127.0.0.1 at 2024-08-26 17:15:32 +0200
+Processing by WelcomeController#index as HTML
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_f777e826"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.9ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_f777e826"], ["created_at", "2024-08-26 15:15:32.980600"], ["updated_at", "2024-08-26 15:15:32.980600"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.3ms | Allocations: 197)
+  Rendered layout layouts/application.html.erb (Duration: 4.8ms | Allocations: 6131)
+Completed 200 OK in 9ms (Views: 5.1ms | ActiveRecord: 1.1ms | Allocations: 8777)
+
+
+Started GET "/play_now" for 127.0.0.1 at 2024-08-26 17:15:34 +0200
+Processing by MatchmakingController#play_now as HTML
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_b3c7800c"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (4.9ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_b3c7800c"], ["created_at", "2024-08-26 15:15:34.180698"], ["updated_at", "2024-08-26 15:15:34.180698"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  Rendering layout layouts/application.html.erb
+  Rendering matchmaking/play_now.html.erb within layouts/application
+  Rendered matchmaking/play_now.html.erb within layouts/application (Duration: 0.6ms | Allocations: 438)
+  Rendered layout layouts/application.html.erb (Duration: 5.4ms | Allocations: 6366)
+Completed 200 OK in 13ms (Views: 5.6ms | ActiveRecord: 5.0ms | Allocations: 9058)
+
+
+Started GET "/cable" for 127.0.0.1 at 2024-08-26 17:15:34 +0200
+Started GET "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:15:34 +0200
+Successfully upgraded to WebSocket (REQUEST_METHOD: GET, HTTP_CONNECTION: keep-alive, Upgrade, HTTP_UPGRADE: websocket)
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/channels/application_cable/connection.rb:11:in `find_verified_user'
+Registered connection (Z2lkOi8vY29kZS1sZWdlbmRzL1BsYXllci83)
+MatchmakingChannel is transmitting the subscription confirmation
+MatchmakingChannel is streaming from matchmaking_python3
+Started POST "/find_opponent" for 127.0.0.1 at 2024-08-26 17:15:40 +0200
+Processing by MatchmakingController#find_opponent as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "commit"=>"Cerca Avversario"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_42dd0781"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (0.7ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_42dd0781"], ["created_at", "2024-08-26 15:15:41.003261"], ["updated_at", "2024-08-26 15:15:41.003261"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Load (0.0ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/matchmaking_controller.rb:11:in `find_opponent'
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mMatch Create (0.8ms)[0m  [1m[32mINSERT INTO "matches" ("language", "status", "player_1_id", "player_2_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["language", "python3"], ["status", nil], ["player_1_id", 1], ["player_2_id", 7], ["created_at", "2024-08-26 15:15:41.018140"], ["updated_at", "2024-08-26 15:15:41.018140"]]
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+  [1m[36mRoom Create (0.2ms)[0m  [1m[32mINSERT INTO "rooms" ("match_id", "uuid", "created_at", "updated_at") VALUES (?, ?, ?, ?) RETURNING "id"[0m  [["match_id", 3], ["uuid", "e6f03ef8-d7c5-4f60-9b3e-54092fec4953"], ["created_at", "2024-08-26 15:15:41.028085"], ["updated_at", "2024-08-26 15:15:41.028085"]]
+  ↳ app/models/match.rb:14:in `create_room'
+  [1m[36mRoom Load (0.1ms)[0m  [1m[34mSELECT "rooms".* FROM "rooms" WHERE "rooms"."match_id" = ? LIMIT ?[0m  [["match_id", 3], ["LIMIT", 1]]
+  ↳ app/models/match.rb:14:in `create_room'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/services/matchmaking_queue_service.rb:22:in `match_users'
+[ActionCable] Broadcasting to matchmaking_python3: {:match_id=>3, :player_1=>#<Player id: 1, name: "Player_0ab2c532", created_at: "2024-08-26 15:12:19.476197000 +0000", updated_at: "2024-08-26 15:12:19.476197000 +0000", waiting: false>, :player_2=>#<Player id: 7, name: nil, created_at: "2024-08-26 15:12:26.368903000 +0000", updated_at: "2024-08-2...
+No template found for MatchmakingController#find_opponent, rendering head :no_content
+MatchmakingChannel transmitting {"match_id"=>3, "player_1"=>{"id"=>1, "name"=>"Player_0ab2c532", "created_at"=>"2024-08-26T15:12:19.476Z", "updated_at"=>"2024-08-26T15:12:19.476Z", "waiting"=>false}, "player_2"=>{"id"=>7, "name"=>nil, "created_at"=>"2024-08-26T15:12:26.368Z", "updated_at"=>"2024-08-26T15:12:26.368Z", "waiting"=... (via streamed from matchmaking_python3)
+MatchmakingChannel transmitting {"match_id"=>3, "player_1"=>{"id"=>1, "name"=>"Player_0ab2c532", "created_at"=>"2024-08-26T15:12:19.476Z", "updated_at"=>"2024-08-26T15:12:19.476Z", "waiting"=>false}, "player_2"=>{"id"=>7, "name"=>nil, "created_at"=>"2024-08-26T15:12:26.368Z", "updated_at"=>"2024-08-26T15:12:26.368Z", "waiting"=... (via streamed from matchmaking_python3)
+Completed 204 No Content in 31ms (ActiveRecord: 2.7ms | Allocations: 21780)
+
+
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:15:41 +0200
+Finished "/cable" [WebSocket] for 127.0.0.1 at 2024-08-26 17:15:41 +0200
+MatchmakingChannel stopped streaming from matchmaking_python3
+MatchmakingChannel stopped streaming from matchmaking_python3
+Started GET "/matches/3" for 127.0.0.1 at 2024-08-26 17:15:41 +0200
+Processing by MatchesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_af380672"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (1.0ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_af380672"], ["created_at", "2024-08-26 15:15:41.108890"], ["updated_at", "2024-08-26 15:15:41.108890"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mMatch Load (0.1ms)[0m  [1m[34mSELECT "matches".* FROM "matches" WHERE "matches"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/matches_controller.rb:81:in `set_challenge'
+  Rendering layout layouts/application.html.erb
+  Rendering matches/show.html.erb within layouts/application
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/matches/show.html.erb:6
+  [1m[36mPlayer Load (0.0ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/matches/show.html.erb:7
+  Rendered matches/show.html.erb within layouts/application (Duration: 3.2ms | Allocations: 3161)
+  Rendered layout layouts/application.html.erb (Duration: 7.8ms | Allocations: 9092)
+Completed 200 OK in 14ms (Views: 8.3ms | ActiveRecord: 1.3ms | Allocations: 13316)
+
+
+Started GET "/matches/3" for 127.0.0.1 at 2024-08-26 17:15:41 +0200
+Processing by MatchesController#show as HTML
+  Parameters: {"id"=>"3"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_48eec421"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (1.5ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_48eec421"], ["created_at", "2024-08-26 15:15:41.133914"], ["updated_at", "2024-08-26 15:15:41.133914"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mMatch Load (0.1ms)[0m  [1m[34mSELECT "matches".* FROM "matches" WHERE "matches"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/matches_controller.rb:81:in `set_challenge'
+  Rendering layout layouts/application.html.erb
+  Rendering matches/show.html.erb within layouts/application
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/matches/show.html.erb:6
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."id" = ? LIMIT ?[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/views/matches/show.html.erb:7
+  Rendered matches/show.html.erb within layouts/application (Duration: 9.9ms | Allocations: 1194)
+  Rendered layout layouts/application.html.erb (Duration: 17.1ms | Allocations: 7122)
+Completed 200 OK in 25ms (Views: 17.4ms | ActiveRecord: 2.0ms | Allocations: 10184)
+
+
+Started POST "/execute_code" for 127.0.0.1 at 2024-08-26 17:15:57 +0200
+Processing by MatchesController#execute_code as JSON
+  Parameters: {"authenticity_token"=>"[FILTERED]", "language"=>"python3", "code"=>"Hello, World!"}
+  [1m[36mPlayer Load (0.1ms)[0m  [1m[34mSELECT "players".* FROM "players" WHERE "players"."name" = ? LIMIT ?[0m  [["name", "Player_3420cf57"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mPlayer Create (1.2ms)[0m  [1m[32mINSERT INTO "players" ("name", "created_at", "updated_at") VALUES (?, ?, ?) RETURNING "id"[0m  [["name", "Player_3420cf57"], ["created_at", "2024-08-26 15:15:57.761910"], ["updated_at", "2024-08-26 15:15:57.761910"]]
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/application_controller.rb:13:in `set_player_name'
+Completed 200 OK in 950ms (Views: 0.2ms | ActiveRecord: 1.5ms | Allocations: 5679)
+
+

@@ -67,11 +67,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_184241) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "challenge_id", null: false
+    t.integer "match_id", null: false
     t.string "uuid", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["challenge_id"], name: "index_rooms_on_challenge_id"
+    t.index ["match_id"], name: "index_rooms_on_match_id"
   end
 
   create_table "test_cases", force: :cascade do |t|
@@ -96,6 +96,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_184241) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "matches", "players", column: "player_1_id"
   add_foreign_key "matches", "players", column: "player_2_id"
-  add_foreign_key "rooms", "challenges"
+  add_foreign_key "rooms", "matches"
   add_foreign_key "test_cases", "challenges"
 end

@@ -35,7 +35,6 @@ Rails.application.routes.draw do
   get 'check_challenge', to: 'matches#check_challenge'
   get 'waiting', to: 'matches#waiting'
   post 'execute_code', to: 'matches#execute_code'
-  resources :matches, only: [:show, :create]
-  resources :rooms, only: [:show]
+  resources :matches, only: [:show]
 end
 

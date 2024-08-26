@@ -23,6 +23,8 @@ class Auth0Controller < ApplicationController
       'user_id' => user.id
     }
 
+
+
     session[:user_id] = user.id
 
     # Redirect to the home page for logged-in users

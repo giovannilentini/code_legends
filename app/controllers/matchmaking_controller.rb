@@ -11,9 +11,7 @@ class MatchmakingController < ApplicationController
     player = Player.find_or_create_by(id: session[:player_id])
     if player
       MatchmakingQueueService.add(player, @selected_language)
-
     end
-
   end
 
   def challenge_friend
