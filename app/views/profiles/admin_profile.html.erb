@@ -1,0 +1,167 @@
+<div class="container mx-auto h-screen">
+  <section class="flex items-center justify-center h-full bg-gradient-to-br from-gray-800 via-gray-900 to-black">
+    <div class="text-center px-4 w-full h-full">
+
+      <!-- Sezione Proposte da Revisionare -->
+      <div class="mb-6">
+        <button onclick="toggleSection('challenges')" class="w-full text-left bg-gray-700 text-gray-300 font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
+          Proposte da Revisionare
+        </button>
+        <div id="challenges" class="hidden mt-2">
+          <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-md mb-6">
+            <thead>
+            <tr class="bg-gray-700">
+              <th class="px-6 py-3 text-center text-gray-300 font-medium">Descrizione</th>
+              <th class="px-6 py-3 text-center text-gray-300 font-medium">Test Case</th>
+              <th class="px-6 py-3 text-center text-gray-300 font-medium">Azione</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @challenges.each do |challenge| %>
+              <tr class="border-b border-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                <td class="px-6 py-4 text-gray-200"><%= challenge.description %></td>
+                <td class="px-6 py-4 text-gray-200">
+                  <ul class="list-disc list-inside space-y-2">
+                    <% challenge.test_cases.each do |test_case| %>
+                      <li>Input: <%= test_case.input_example %>, Output: <%= test_case.expected_output %></li>
+                    <% end %>
+                  </ul>
+                </td>
+                <td class="px-6 py-4 text-center">
+                  <button type="button" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" onclick="acceptChallenge(<%= challenge.id %>)"> Accetta </button>
+                  <button type="button" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110 mt-2 ml-2" onclick="rejectChallenge(<%= challenge.id %>)"> Rifiuta </button>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Sezione Utenti non Admin -->
+      <div class="mb-6">
+        <button onclick="toggleSection('non-admin-users')" class="w-full text-left bg-gray-700 text-gray-300 font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
+          Utenti non Admin
+        </button>
+        <div id="non-admin-users" class="hidden mt-2">
+          <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-md mb-6">
+            <thead>
+            <tr class="bg-gray-700">
+              <th class="px-6 py-3 text-center text-gray-300 font-medium">Nome</th>
+              <th class="px-6 py-3 text-center text-gray-300 font-medium">Email</th>
+              <th class="px-6 py-3 text-center text-gray-300 font-medium">Azione</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @non_admin_users.each do |user| %>
+              <tr class="border-b border-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                <td class="px-6 py-4 text-gray-200"><%= user.name %></td>
+                <td class="px-6 py-4 text-gray-200"><%= user.email %></td>
+                <td class="px-6 py-4 text-center">
+                  <%= button_to 'Promuovi a Admin', promote_to_admin_profiles_path(user.id), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="mt-10 mb-6">
+        <%= link_to 'Torna alla Home', root_path, class: 'bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105 shadow-md' %>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+    function toggleSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        section.classList.toggle('hidden');
+
+        const isHidden = section.classList.contains('hidden');
+        localStorage.setItem(sectionId, isHidden ? 'hidden' : 'visible');
+    }
+
+    function loadSectionStates() {
+        const challengeState = localStorage.getItem('challenges');
+        const nonAdminUserState = localStorage.getItem('non-admin-users');
+
+        if (challengeState === 'visible') {
+            document.getElementById('challenges').classList.remove('hidden');
+        }
+        if (nonAdminUserState === 'visible') {
+            document.getElementById('non-admin-users').classList.remove('hidden');
+        }
+    }
+
+    function saveSectionStates() {
+        const challengesSection = document.getElementById('challenges');
+        const nonAdminUsersSection = document.getElementById('non-admin-users');
+
+        localStorage.setItem('challenges', challengesSection.classList.contains('hidden') ? 'hidden' : 'visible');
+        localStorage.setItem('non-admin-users', nonAdminUsersSection.classList.contains('hidden') ? 'hidden' : 'visible');
+    }
+
+    window.onload = loadSectionStates;
+
+    function acceptChallenge(challengeId) {
+        saveSectionStates();
+
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = `/challenges/${challengeId}/update_status`;
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = 'authenticity_token';
+        csrfInput.value = csrfToken;
+        form.appendChild(csrfInput);
+
+        const statusInput = document.createElement('input');
+        statusInput.type = 'hidden';
+        statusInput.name = 'status';
+        statusInput.value = 1;
+        form.appendChild(statusInput);
+
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function rejectChallenge(challengeId) {
+        const reason = prompt('Inserisci il motivo del rifiuto:');
+        if (reason !== null) {
+            if (reason.trim() !== "") {
+                saveSectionStates();
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = `/challenges/${challengeId}/update_status`;
+
+                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                const csrfInput = document.createElement('input');
+                csrfInput.type = 'hidden';
+                csrfInput.name = 'authenticity_token';
+                csrfInput.value = csrfToken;
+                form.appendChild(csrfInput);
+
+                const statusInput = document.createElement('input');
+                statusInput.type = 'hidden';
+                statusInput.name = 'status';
+                statusInput.value = 0;
+                form.appendChild(statusInput);
+
+                const reasonInput = document.createElement('input');
+                reasonInput.type = 'hidden';
+                reasonInput.name = 'rejection_reason';
+                reasonInput.value = reason;
+                form.appendChild(reasonInput);
+
+                document.body.appendChild(form);
+                form.submit();
+            } else {
+                alert("Il motivo del rifiuto non può essere vuoto.");
+            }
+        }
+    }
+</script>

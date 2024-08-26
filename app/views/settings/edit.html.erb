@@ -1,0 +1,56 @@
+<div class="container mx-auto h-screen overflow-auto">
+  <section class="flex items-center justify-center min-h-full bg-gradient-to-br from-gray-800 to-gray-600 bg-opacity-70">
+    <div class="w-full max-w-2xl p-8 bg-gray-900 rounded-xl shadow-2xl">
+
+      <h2 class="text-4xl font-extrabold mb-8 text-white text-center tracking-tight">
+        Impostazioni del Profilo
+      </h2>
+
+      <!-- Form per aggiornare il profilo -->
+      <%= form_for(current_user, url: settings_path, html: { multipart: true }) do |f| %>
+        <div class="mb-6">
+          <%= f.label :name, 'Nome', class: 'block text-lg font-bold text-white mb-2' %>
+          <%= f.text_field :name, class: 'w-full p-4 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out transform hover:scale-105' %>
+        </div>
+
+        <div class="mb-6">
+          <%= f.label :email, 'Email', class: 'block text-lg font-bold text-white mb-2' %>
+          <%= f.email_field :email, class: 'w-full p-4 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out transform hover:scale-105' %>
+        </div>
+
+        <div class="mb-6">
+          <%= f.label :profile_image, 'Immagine di Profilo', class: 'block text-lg font-bold text-white mb-2' %>
+          <%= f.file_field :profile_image, accept: 'image/*', class: 'w-full p-4 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-4 focus:ring-blue-500 focus:border-transparent transition duration-300 ease-in-out transform hover:scale-105', onchange: "previewImage(event)" %>
+        </div>
+
+        <div class="mb-6 text-center">
+          <% if current_user.profile_image.attached? %>
+            <%= image_tag current_user.profile_image_thumbnail, id: 'profileImagePreview', class: 'rounded-full mx-auto mb-4 shadow-lg w-32 h-32 object-cover border-4 border-blue-600' %>
+          <% else %>
+            <img id="profileImagePreview" src="https://via.placeholder.com/150" alt="Profile Image" class="rounded-full mx-auto mb-4 shadow-lg w-32 h-32 object-cover border-4 border-blue-600">
+          <% end %>
+        </div>
+
+        <div class="text-center">
+          <%= f.submit 'Salva Modifiche', class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out shadow-lg transform hover:scale-110' %>
+        </div>
+      <% end %>
+
+      <div class="mt-6 text-center">
+        <%= link_to 'Torna al Profilo', profile_path, class: 'text-blue-400 hover:text-blue-600 underline' %>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function(){
+            const output = document.getElementById('profileImagePreview');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>

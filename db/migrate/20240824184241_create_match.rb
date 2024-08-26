@@ -1,6 +1,6 @@
 class CreateMatch < ActiveRecord::Migration[7.1]
   def change
-    create_table :challenges do |t|
+    create_table :matches do |t|
       t.string :language
       t.string :status
       t.references :player_1, foreign_key: { to_table: :players }

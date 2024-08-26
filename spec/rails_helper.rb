@@ -6,6 +6,8 @@ require_relative '../config/environment'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'capybara/rspec'
+require 'selenium/webdriver'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -29,6 +31,10 @@ begin
 rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
+
+# Include rails-controller-testing helpers
+require 'rails-controller-testing'
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_paths = [
@@ -39,6 +45,18 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  # Include Controller, View, and Helper testing helpers
+  [:controller, :view, :helper].each do |type|
+    config.include Rails::Controller::Testing::TemplateAssertions, type: type
+    config.include Rails::Controller::Testing::Integration, type: type
+    config.include Rails::Controller::Testing::TestProcess, type: type
+  end
+
+  # Selenium setup for Capybara
+  config.before(:each, type: :system) do
+    driven_by :selenium_chrome_headless
+  end
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
@@ -62,4 +80,10 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  RSpec.configure do |config|
+    config.before(:each, type: :system) do
+      driven_by :selenium_chrome_headless
+    end
+  end
 end
