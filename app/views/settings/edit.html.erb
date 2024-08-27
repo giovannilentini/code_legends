@@ -1,0 +1,65 @@
+<div class="container mx-auto h-screen flex items-center justify-center bg-gradient-to-br from-indigo-700 via-purple-700 to-pink-700">
+  <section class="w-full max-w-3xl p-10 bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl shadow-2xl ring-4 ring-indigo-400/50 ring-offset-4 ring-offset-gray-800 transform transition-all duration-500 hover:scale-105">
+
+    <h2 class="text-5xl font-extrabold mb-10 text-white text-center tracking-tight">
+      Impostazioni del Profilo
+    </h2>
+
+    <!-- Form per aggiornare il profilo -->
+    <%= form_for(current_user, url: settings_path, html: { multipart: true }) do |f| %>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
+        <!-- Nome -->
+        <div>
+          <%= f.label :name, 'Nome', class: 'block text-lg font-bold text-white mb-3' %>
+          <%= f.text_field :name, class: 'w-full p-4 bg-gray-700 bg-opacity-80 text-white rounded-lg focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:border-transparent transition duration-300 ease-in-out transform hover:scale-105 shadow-lg' %>
+        </div>
+
+        <!-- Email -->
+        <div>
+          <%= f.label :email, 'Email', class: 'block text-lg font-bold text-white mb-3' %>
+          <%= f.email_field :email, class: 'w-full p-4 bg-gray-700 bg-opacity-80 text-white rounded-lg focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:border-transparent transition duration-300 ease-in-out transform hover:scale-105 shadow-lg' %>
+        </div>
+      </div>
+
+      <!-- Immagine di Profilo -->
+      <div class="mb-10">
+        <%= f.label :profile_image, 'Immagine di Profilo', class: 'block text-lg font-bold text-white mb-4 text-center' %>
+        <div class="flex items-center justify-center">
+          <div class="relative group">
+            <% if current_user.profile_image.attached? %>
+              <%= image_tag current_user.profile_image_thumbnail, id: 'profileImagePreview', class: 'rounded-full shadow-2xl w-32 h-32 object-cover border-4 border-indigo-500' %>
+            <% else %>
+              <%= image_tag('profile-placeholder.png', alt: 'Profile Image', class: 'rounded-full mx-auto shadow-2xl w-32 h-32 object-cover border-4 border-indigo-500') %>
+            <% end %>
+          </div>
+        </div>
+        <div class="mt-6 text-center">
+          <%= f.file_field :profile_image, accept: 'image/*', class: 'hidden', onchange: "previewImage(event)", id: 'profileImageInput' %>
+          <button type="button" class="mt-4 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out shadow-lg transform hover:scale-105" onclick="document.getElementById('profileImageInput').click();">Seleziona Immagine</button>
+        </div>
+      </div>
+
+      <!-- Pulsante Salva Modifiche -->
+      <div class="text-center">
+        <%= f.submit 'Salva Modifiche', class: 'bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 text-white font-bold py-3 px-8 rounded-full transition duration-300 ease-in-out shadow-lg transform hover:scale-110' %>
+      </div>
+    <% end %>
+
+    <!-- Link Torna al Profilo -->
+    <div class="mt-10 text-center">
+      <%= link_to 'Torna al Profilo', profile_path, class: 'text-indigo-300 hover:text-indigo-500 underline transition duration-300' %>
+    </div>
+
+  </section>
+</div>
+
+<script>
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const output = document.getElementById('profileImagePreview');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+</script>

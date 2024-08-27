@@ -1,0 +1,65 @@
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-4xl font-bold mb-6">Informazioni sul Database</h1>
+
+  <% @tables.each do |table| %>
+    <h2 class="text-3xl font-semibold mb-4"><%= table.camelcase %></h2>
+
+    <% table_info = @table_data[table] %>
+
+    <table class="table-auto w-full mb-8 border border-gray-300">
+      <thead>
+      <tr class="bg-gray-800 text-white">
+        <% table_info[:columns].each do |column| %>
+          <th class="px-4 py-2 border border-gray-300"><%= column.humanize %></th>
+        <% end %>
+      </tr>
+      </thead>
+      <tbody>
+      <% table_info[:records].each do |record| %>
+        <tr class="bg-gray-700">
+          <% table_info[:columns].each do |column| %>
+            <td class="px-4 py-2 border border-gray-300 text-white"><%= record[column] %></td>
+          <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
+  <div class="flex space-x-4 mt-6 mb-6">
+    <%= link_to 'Torna alla Home', root_path, class: 'bg-gray-600 hover:bg-gray-800 text-white font-bold py-3 px-6 rounded transition duration-300' %>
+    <button id="clear-table-btn" class="bg-red-600 hover:bg-red-800 text-white font-bold py-3 px-6 rounded transition duration-300">Clear Table</button>
+  </div>
+</div>
+
+<script>
+    document.getElementById('clear-table-btn').addEventListener('click', function() {
+        if (confirm("Sei sicuro di voler eliminare i contenuti delle tabelle?")) {
+            clearTables();
+        }
+    });
+
+    function clearTables() {
+        fetch('/clear_tables', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Errore durante l\'eliminazione delle tabelle');
+                }
+            })
+            .then(data => {
+                alert(data.message);
+                location.reload();
+            })
+            .catch(error => {
+                alert(error.message);
+            });
+    }
+</script>

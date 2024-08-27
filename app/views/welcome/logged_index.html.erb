@@ -1,0 +1,95 @@
+<div class="container mx-auto">
+
+  <!-- Hero Section -->
+  <section class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900 text-white">
+    <div class="text-center px-6 py-12 max-w-3xl">
+      <h1 class="text-7xl font-extrabold mb-6 animate-pulse">Code Legends</h1>
+      <p class="text-3xl mb-12">Benvenuto nel sito di duelli di programmazione definitivo!</p>
+
+      <!-- User Info -->
+      <% if @user %>
+        <div class="mb-6 bg-gray-800 bg-opacity-50 p-4 rounded-lg shadow-lg">
+          <p class="text-xl font-semibold">Benvenuto, <span class="text-indigo-400"><%= @user['name'] %></span></p>
+          <p class="text-lg text-gray-300"><%= @user['email'] %></p>
+        </div>
+      <% else %>
+        <p class="text-xl text-red-500">Errore: informazioni utente non disponibili.</p>
+      <% end %>
+
+      <!-- Logout Button -->
+      <div>
+        <%= button_to 'Logout', 'auth/logout', method: :get, data: { turbo: false }, class: 'bg-red-600 hover:bg-red-800 text-white font-bold py-3 px-8 rounded-full transition duration-300 shadow-lg' %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Start Match Section -->
+  <section class="flex items-center justify-center min-h-screen bg-gray-800 bg-opacity-80 text-white">
+    <div class="text-center px-6 py-12 max-w-3xl">
+      <h2 class="text-6xl font-extrabold mb-6">Inizia una nuova partita</h2>
+      <%= button_to 'Avvia partita', play_now_path, method: :get, data: { turbo: false }, class: 'bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-12 rounded-full transition duration-300 transform hover:scale-105 shadow-lg' %>
+    </div>
+  </section>
+
+  <!-- Leaderboard Section -->
+  <section class="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-700 via-gray-900 to-black text-white">
+    <div class="w-full max-w-6xl px-6 py-12">
+      <h2 class="text-5xl font-extrabold text-center mb-12">Classifica</h2>
+      <div class="overflow-x-auto">
+        <table class="table-auto w-full text-left bg-gray-800 rounded-lg shadow-xl">
+          <thead>
+          <tr class="bg-gray-900">
+            <th class="px-6 py-3 text-lg">Posizione</th>
+            <th class="px-6 py-3 text-lg">Nome</th>
+            <th class="px-6 py-3 text-lg">Punti</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="bg-gray-800 odd:bg-gray-700 hover:bg-gray-600 transition duration-300">
+            <td class="border-t border-gray-700 px-6 py-4">1</td>
+            <td class="border-t border-gray-700 px-6 py-4">Mario Rossi</td>
+            <td class="border-t border-gray-700 px-6 py-4">1500</td>
+          </tr>
+          <tr class="bg-gray-800 odd:bg-gray-700 hover:bg-gray-600 transition duration-300">
+            <td class="border-t border-gray-700 px-6 py-4">2</td>
+            <td class="border-t border-gray-700 px-6 py-4">Luigi Verdi</td>
+            <td class="border-t border-gray-700 px-6 py-4">1400</td>
+          </tr>
+          <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Create New Challenge Section -->
+  <section class="flex items-center justify-center min-h-screen bg-gray-800 bg-opacity-80 text-white">
+    <div class="text-center px-6 py-12 max-w-3xl">
+      <h2 class="text-6xl font-extrabold mb-6">Crea una nuova sfida</h2>
+      <%= link_to 'Crea Sfida', new_challenge_path, class: 'bg-purple-600 hover:bg-purple-800 text-white font-bold py-4 px-12 rounded-full transition duration-300 transform hover:scale-105 shadow-lg' %>
+    </div>
+  </section>
+
+  <!-- Profile Navigation Section -->
+  <section class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900 text-white">
+    <div class="text-center px-6 py-12 max-w-3xl">
+      <h1 class="text-7xl font-extrabold mb-6 animate-pulse">Vai al profilo</h1>
+      <div>
+        <% if @user && @user.admin? %>
+          <%= link_to 'Vai al Profilo Admin', admin_profile_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg' %>
+        <% end %>
+        <%= link_to 'Vai al Profilo Utente', profile_path, class: 'bg-green-600 hover:bg-green-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg ml-4' %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Database Info Button -->
+  <div class="flex justify-center mt-6">
+    <%= link_to 'Visualizza Tabelle DB', database_info_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg' %>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center py-6 bg-gray-900 text-gray-400">
+    <p>&copy; 2024 Code Legends. Tutti i diritti riservati.</p>
+  </footer>
+</div>
