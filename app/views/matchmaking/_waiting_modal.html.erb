@@ -1,16 +1,16 @@
-
 <div id="matchmaking-modal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
-  <div class="bg-gray-900 rounded-lg shadow-lg p-6 max-w-md w-full">
+  <div class="bg-[#4B3F72] rounded-lg shadow-lg p-6 max-w-md w-full">
     <h2 class="text-center text-xl font-bold text-white mb-4">Matchmaking in Progress</h2>
     <div class="flex justify-center mb-4">
-      <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-400"></div>
+      <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-[#9F86C0]"></div>
     </div>
-    <p class="text-center text-gray-400 mb-6">Searching for players...</p>
+    <p class="text-center text-[#D4BBF2] mb-6">Searching for players...</p>
     <div class="text-center">
-        <%= button_to 'Annulla', cancel_matchmaking_path, method: :post, class: "btn-cancel bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700" %>
+      <%= button_to 'Annulla', cancel_matchmaking_path, method: :post, class: "btn-cancel bg-[#E0C3FC] text-[#4B3F72] px-4 py-2 rounded-lg hover:bg-[#D4BBF2]" %>
     </div>
   </div>
 </div>
+
 <script>
   function checkForMatch() {
     fetch('/check_challenge')

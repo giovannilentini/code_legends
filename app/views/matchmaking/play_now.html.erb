@@ -1,40 +1,45 @@
-<div class="flex flex-row justify-center bg-gradient-to-r from-gray-800 via-gray-900 w-full to-black">
-  <div class="w-4/5 max-w-6xl p-6 flex flex-col space-y-4 text-white">
-    <!-- Box Selezione Linguaggio -->
-    <div class="bg-black p-4 rounded-lg shadow-md flex flex-col">
-      <h2 class="text-lg font-bold mb-2">Scegli un Linguaggio di Programmazione</h2>
+<div class="flex bg-[#FAF8FF] w-full min-h-screen p-10">
+  <div class="w-4/5 flex flex-col space-y-8 text-[#4B3F72]">
+    <div class="flex flex-row h-1/2 space-x-8">
+      <div class="flex flex-col w-1/2 space-y-8">
+        <div class="flex flex-col items-center space-y-4 p-4">
+          <div class="bg-[#E0C3FC] rounded-full w-32 h-32 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-[#4B3F72]">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.125v-.375a5.625 5.625 0 015.625-5.625h4.75a5.625 5.625 0 015.625 5.625v.375" />
+            </svg>
+          </div>
+          <div class="text-center">
+            <h2 class="text-2xl font-bold text-[#4B3F72]">Player: @name</h2>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col w-1/2 space-y-2 px-4">
+        <h2 class="text-xl font-semibold text-[#4B3F72]">Your Recent Games</h2>
+      </div>
+    </div>
+    <div class="flex flex-col space-y-2 px-4">
+      <h2 class="text-xl font-semibold text-[#4B3F72]">Leaderboard</h2>
+      <div class="border-t-2 border-[#D4BBF2] mt-2 w-full"></div>
+    </div>
+  </div>
+  <div class="border-l-2 border-[#D4BBF2] h-full mt-4"></div>
+  <div class="w-1/5 p-6 flex flex-col space-y-6 justify-start">
+    <div class="flex flex-col space-y-2">
       <%= form_with url: play_now_path, method: :get, local: true, html: { id: 'language-form' } do %>
-        <%= select_tag :language, options_for_select(@languages.map { |language| [language, language.downcase] }, selected: @selected_language), class: "w-full px-4 py-2 rounded border border-gray-600 bg-gray-800 text-white", onchange: "this.form.submit();" %>
+        <%= select_tag :language, options_for_select(@languages.map { |language| [language, language.downcase] }, selected: @selected_language), class: "w-full px-4 py-2 rounded border border-[#D4BBF2] bg-white text-[#4B3F72]", onchange: "this.form.submit();" %>
       <% end %>
     </div>
-
-    <!-- Box Codice -->
-    <div class="bg-black p-4 rounded-lg h-4/6 shadow-md">
-      <h2 class="text-lg font-bold text-center">CODICE</h2>
-    </div>
-
-    <!-- Box Console -->
-    <div class="bg-black p-4 rounded-lg shadow-md">
-      <h2 class="text-lg font-bold text-center">CONSOLE</h2>
-    </div>
-  </div>
-
-  <!-- Sezione a Destra -->
-  <div class="w-1/5 p-6 flex flex-col space-y-6 justify-start">
     <%= form_with url: find_opponent_path, method: :post, local: true do |form| %>
       <%= hidden_field_tag :language, @selected_language, id: 'language_field' %>
-      <%= form.submit "Cerca Avversario", class: "bg-red-500 text-white py-6 px-8 rounded-lg shadow-xl hover:bg-red-700 transition duration-300 text-xl font-bold w-full text-center" %>
+      <%= form.submit "Find Opponent", class: "bg-[#9F86C0] text-white py-3 px-4 rounded-lg shadow-md hover:bg-[#6B4F8A] transition duration-300 text-xl font-bold w-full text-center" %>
     <% end %>
-
     <%= form_with url: challenge_friend_path, method: :post, local: true do |form| %>
       <%= hidden_field_tag :language, @selected_language, id: 'language_field' %>
-      <%= form.submit "Sfida un amico", class: "bg-green-500 text-white py-6 px-8 rounded-lg shadow-xl hover:bg-green-700 transition duration-300 text-xl font-bold w-full text-center" %>
+      <%= form.submit "Challenge a Friend", class: "bg-[#9F86C0] text-white py-3 px-4 rounded-lg shadow-md hover:bg-[#6B4F8A] transition duration-300 text-xl font-bold w-full text-center" %>
     <% end %>
   </div>
-
-
 </div>
-
-<div class="play-now" >
-<div id="waiting_modal"></div>
+<div class="play-now">
+  <div id="waiting_modal"></div>
 </div>
