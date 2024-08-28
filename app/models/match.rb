@@ -8,7 +8,7 @@ class Match < ApplicationRecord
 
 
   def players_must_be_different
-    if player_1_id == player_2_id
+    if player_1 == player_2
       errors.add(:player_2, 'must be different from Player 1')
     end
   end

@@ -1,78 +1,79 @@
 <div class="flex flex-col h-full w-full">
   <!-- Header Section -->
-  <div class="flex flex-col text-center p-4 ">
+  <div class="flex flex-col text-center p-4">
     <h1 class="text-xl text-white">Dettagli della Sfida</h1>
     <div class="text-white">
       <p><strong>Player 1:</strong> <%= @match.player_1.username %></p>
       <p><strong>Player 2:</strong> <%= @match.player_2.username %></p>
       <p><strong>Language:</strong> <%= @match.language %></p>
+      <input type="hidden" id="match-id" value="<%= @match.id %>" />
     </div>
   </div>
 
   <!-- Main Content Section -->
-  <%= form_with(url: execute_code_path, method: :post, id: 'execute-form', class: "overflow-hidden") do %>
-
-    <div class="flex flex-row justify-center space-x-10 px-4 py-6 ">
-      <!-- Left Column -->
-      <div class="flex flex-col grow resize-none space-y-4 text-white">
-
-        <!-- Box Codice -->
-        <div class="flex flex-col bg-black h-[40rem] p-4 rounded-lg shadow-md">
-
-          <div class="flex flex-row py-2 justify-between">
-            <h2 class="text-lg font-bold text-center">CODICE</h2>
-            <h2 class="text-lg font-bold text-center"> <%=@selected_language %></h2>
-            <%= hidden_field_tag :language, @selected_language, id: 'hidden-language-selection' %>
-          </div>
-
-          <div class="overflow-auto">
-            <div id="code-editor" data-language=<%=@selected_language %>>
-              <%= hidden_field_tag :code, '', id: 'hidden-code-input' %>
-            </div>
-          </div>
-
+  <div class="flex flex-row justify-center space-x-10 px-4 py-6">
+    <!-- Left Column -->
+    <div class="flex flex-col grow resize-none space-y-4 text-white">
+      <!-- Box Codice -->
+      <div class="flex flex-col bg-black h-[40rem] p-4 rounded-lg shadow-md">
+        <div class="flex flex-row py-2 justify-between">
+          <h2 class="text-lg font-bold text-center">CODICE</h2>
+          <h2 class="text-lg font-bold text-center"> <%= @selected_language %></h2>
+          <%= hidden_field_tag :language, @selected_language, id: 'hidden-language-selection' %>
         </div>
 
-        <!-- Box Console -->
-        <div class="flex flex-col bg-black p-4 h-[20rem] rounded-lg shadow-md">
-          <h2 class="text-lg font-bold text-center">CONSOLE</h2>
-          <div class="bg-[#2d2d2d] text-white mt-2 p-4 h-full overflow-auto">
-            <pre id="output" class="text-lime-500 font-roboto">
-
-            </pre>
-            </div>
+        <div class="overflow-auto">
+          <div id="code-editor" data-language="<%= @selected_language %>">
+            <%= hidden_field_tag :code, '', id: 'hidden-code-input' %>
           </div>
         </div>
+      </div>
 
-
-      <!-- Right Column -->
-      <div class="w-1/5 p-4 flex flex-col space-y-6">
-        <%= submit_tag "Run Code", id: "submit-code", class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-full" %>
-        <!-- Box Chat -->
-        <div class="flex flex-col bg-black p-4 h-1/4 rounded-lg shadow-md">
-          <h2 class="text-lg font-bold text-center">CHAT</h2>
-          <div class="bg-gray-600 text-white mt-2 h-full overflow-auto">
-            <div id="chat" class="w-full">
-            </div>
-          </div>
+      <!-- Box Console -->
+      <div class="flex flex-col bg-black p-4 h-[20rem] rounded-lg shadow-md">
+        <h2 class="text-lg font-bold text-center">CONSOLE</h2>
+        <div class="bg-[#2d2d2d] text-white mt-2 p-4 h-full overflow-auto">
+          <pre id="output" class="text-lime-500 font-roboto"></pre>
         </div>
-        <%= submit_tag "Surrend", class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 w-full" %>
       </div>
     </div>
 
-  <% end %>
+    <!-- Right Column -->
+    <div class="w-1/5 p-4 flex flex-col space-y-6">
+      <!-- Run Code Button -->
+      <%= form_with(url: match_execute_code_path(@match.id), method: :post, id: 'execute-form', class: "overflow-hidden") do %>
+        <%= submit_tag "Run Code", id: "submit-code", class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-full" %>
+      <% end %>
+
+      <!-- Box Chat -->
+      <div class="flex flex-col bg-black p-4 h-1/4 rounded-lg shadow-md">
+        <h2 class="text-lg font-bold text-center">CHAT</h2>
+        <div class="bg-gray-600 text-white mt-2 h-full overflow-auto">
+          <div id="chat" class="w-full"></div>
+        </div>
+      </div>
+
+      <!-- Surrender Button -->
+      <%= form_with(url: match_surrender_path(@match), method: :post, id: 'surrender-form', class: "overflow-hidden") do %>
+        <%= submit_tag "Surrender", id: "surrender-submit", class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 w-full" %>
+      <% end %>
+    </div>
+  </div>
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.getElementById('execute-form');
         const output = document.getElementById('output');
-        form.addEventListener('submit', function(e) {
+        const surrenderButton = document.getElementById('surrender-form');
+
+        form.addEventListener('submit', function (e) {
             e.preventDefault(); // Prevent the default form submission
 
             // Gather form data
             const formData = new FormData(form);
-            formData.set("code", editor.state.doc.toString().trimEnd())
+            formData.set("code", editor.state.doc.toString().trimEnd());
+
             // Perform the AJAX request using Fetch API
             fetch(form.action, {
                 method: 'POST',
@@ -81,12 +82,12 @@
                 },
                 body: formData
             })
-                .then(response => response.json()) // Parse JSON response
+                .then(response => response.json())  // Return the parsed JSON
                 .then(data => {
                     // Update the output area with the result
-                    output.textContent = data.output // Assuming the API returns { "result": "..." }
+                    output.textContent = data.output;
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => console.error('ERROR:', error));
         });
     });
 </script>

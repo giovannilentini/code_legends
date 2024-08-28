@@ -1,66 +1,15 @@
 class MatchesController < ApplicationController
-  before_action :set_user, only: [:create, :check_challenge]
-  before_action :set_match, only: [:show]
-
+  before_action :authenticate_user!
+  before_action :set_match
   def show
-    @selected_language = @match.language
-  end
-
-  def create
-    @user = Player.find_or_create_by(name: session[:player_name])
-    session[:player_id] = @user.id
-
-    opponent = Player.find_by(waiting: true)
-    
-    if opponent.nil?
-      @user.update(waiting: true)
-      redirect_to waiting_path
-    else
-      challenge = Match.create(player_1: @user, player_2: opponent, status: 'pending')
-
-      if challenge.persisted?
-        room = Room.create(challenge: challenge, uuid: SecureRandom.uuid)
-
-        if room.persisted?
-          @user.update(waiting: false)
-          opponent.update(waiting: false)
-          redirect_to challenge_path(challenge.id)
-        else
-          flash[:error] = "Impossibile creare la stanza di sfida."
-          redirect_to play_now_path
-        end
-      else
-        flash[:error] = "Impossibile creare la sfida."
-        redirect_to play_now_path
-      end
+    # Ensure that only the participants can view the match
+    unless [@match.player_1, @match.player_2].include?(current_user)
+      redirect_to root_path, alert: 'You are not authorized to view this match.'
     end
   end
-
-  def check_challenge
-    @user = Player.find(session[:player_id])
-  
-    if @user.nil?
-      render json: { error: 'Player not found' }, status: :unprocessable_entity
-      return
-    end
-  
-    challenge = Match.find_by("player_1_id = ? OR player_2_id = ?", @player.id, @player.id)
-  
-    if challenge
-      room = Room.find_by(challenge: challenge)
-      
-      if room
-        render json: { challenge_url: challenge_path(room.challenge), room_uuid: room.uuid }
-      else
-        render json: { error: 'Room not found' }, status: :not_found
-      end
-    else
-      render json: { error: 'Challenge not found' }, status: :not_found
-    end
-  end
-
   def execute_code
-    response = JdoodleService.execute_code(params[:code], params[:language])
+    selected_language = Match.find_by(id: params[:match_id]).language
+    response = JdoodleService.execute_code(params[:code], selected_language)
     unless response.nil?
       if response.code == "200"
         @result = JSON.parse(response.body)["output"]
@@ -68,13 +17,24 @@ class MatchesController < ApplicationController
         @result = JSON.parse(response.body)["error"]
       end
     end
-    render json: { output: @result }
+    render json: { output:  @result}
+  end
+
+  def surrender
+
+    match = Match.find_by(id: params[:match_id])
+    user = current_user
+
+    winner =  user == match.player_1 ? match.player_2 : match.player_1
+
+    match.update(status: "finished", winner: winner.id)
+    MatchmakingQueueService.remove_from_queue(user)
+    MatchmakingQueueService.remove_from_queue(winner)
+    ActionCable.server.broadcast "match_#{match.id}", { action: 'redirect_to_home'}
+    ActionCable.server.broadcast "match_#{match.id}", { action: 'redirect_to_home'}
   end
 
   private
-  def set_user
-    @user = User.find_or_create_by(id: session[:user_id])
-  end
   def set_match
     @match = Match.find_by(id: params[:id])
   end

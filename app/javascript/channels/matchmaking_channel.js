@@ -1,29 +1,30 @@
 import { createConsumer } from "@rails/actioncable"
 
 const consumer = createConsumer()
+function createSubscription() {
+    // Create a new subscription
+    const subscription = consumer.subscriptions.create("MatchmakingChannel", {
+        connected() {
+            console.log("Connected to matchmaking channel");
+        },
 
-document.addEventListener("turbo:load", () => {
-    let language = document.querySelector("#language")
-    if(language) {
-        const selected_lang = language.value
-        consumer.subscriptions.create({channel: "MatchmakingChannel", language: selected_lang}, {
-            connected() {
-                // Called when the subscription is ready for use on the server
-                console.log(`Connected to matchmaking channel for the language ${selected_lang}`)
-            },
-
-            disconnected() {
-                consumer.subscriptions.remove()
-                // Called when the subscription has been terminated by the server
-                console.log("Disconnected from matchmaking channel")
-            },
-
-            received(data) {
-                // Called when there's data broadcasted to this channel
+        disconnected() {
+            console.log("Disconnected from matchmaking channel");
+        },
+        received(data) {
+            if (data.action === 'redirect_to_match') {
                 window.location.href = `/matches/${data.match_id}`;
-                // Handle the incoming data here
-            },
+            }
+        }
+    });
+    return subscription;
+}
 
-        })
+document.addEventListener('turbo:load', () => {
+    // Ensure previous subscription is cleaned up
+    const pathname = window.location.pathname;
+    if(pathname==="/play_now"){
+        createSubscription()
     }
 });
+

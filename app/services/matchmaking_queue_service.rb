@@ -1,30 +1,50 @@
 class MatchmakingQueueService
-    @queue = {}
-  
-    def self.add(user, language)
-      @queue[language] ||= []
+  def initialize(user)
+    @user = user
+    @language = nil
+  end
 
-      unless @queue[language].include? user
-        @queue[language] << user
-        match_users(language) if @queue[language].size >= 2
-      end
+  def add_to_queue(language)
+    return if
+      MatchmakingQueue.exists?(user: @user, language: language, status: 'waiting') ||
+      MatchmakingQueue.exists?(user: @user, status: 'playing')
+    @language = language
+    user = MatchmakingQueue.exists?(user: @user)
+    if user && user.language != language
+      user.language = language
+    else
+      MatchmakingQueue.create(user: @user, status: 'waiting', language: language)
     end
+    find_opponent
+  end
 
-    def self.remove(user, language)
-      unless @queue[language].nil? or @queue[language].empty?
-        @queue[language].delete user
-      end
-    end
-  
-    def self.match_users(language)
-      users = @queue[language].shift(2)
-      if users.size == 2
-        match = Match.create(player_1: users[0], player_2: users[1], language: language)
-        ActionCable.server.broadcast("matchmaking_#{language}", { match_id: match.id, player_1: users[0], player_2: users[1] })
-      end
-    end
+  def self.remove_from_queue(user)
+    MatchmakingQueue.where(user: user).destroy_all
+  end
 
-    def self.print_queue
-      p @queue
+  private
+  def find_opponent
+    opponent = MatchmakingQueue.waiting.where.not(user: @user).order(updated_at: :asc).first
+    if opponent
+      create_match(opponent)
+    else
+      # The user remains in the queue waiting
     end
   end
+
+  def create_match(opponent)
+    ActiveRecord::Base.transaction do
+      MatchmakingQueue.where(user: [@user, opponent.user]).update_all(status: 'playing')
+      match = Match.create(player_1: @user, player_2: opponent.user, language: @language, status: 'ongoing')
+      notify_players(match)
+    end
+
+  end
+
+  def notify_players(match)
+    # Use ActionCable to notify players
+    ActionCable.server.broadcast "matchmaking_#{@user.id}", { action: 'redirect_to_match', match_id: match.id }
+    ActionCable.server.broadcast "matchmaking_#{match.player_2.id}", { action: 'redirect_to_match', match_id: match.id }
+  end
+
+end

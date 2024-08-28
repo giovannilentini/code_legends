@@ -1,16 +1,10 @@
 class MatchmakingChannel < ApplicationCable::Channel
   def subscribed
-    if params[:language].present?
-      stream_from "matchmaking_#{params[:language]}"
-    else
-      reject
-    end
+    stream_from "matchmaking_#{current_user.id}"
   end
 
   def unsubscribed
-    p "UNSUBSCRIBEEEED"
-    MatchmakingQueueService.remove(current_user, params[:language])
-    MatchmakingQueueService.print_queue
+    MatchmakingQueueService.remove_from_queue(current_user)
   end
 end
 
