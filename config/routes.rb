@@ -23,9 +23,13 @@ Rails.application.routes.draw do
 
   resource :settings, only: [:edit, :update]
 
+  get 'users/:id', to: 'users#show', as: 'user_profile'
+  post 'users/:id/add_friend', to: 'friendships#create', as: 'add_friend'
+
   get 'database/info'
   get 'database_info', to: 'database#info', as: 'info'
   post 'clear_tables', to: 'database#clear_tables'
+
   get 'play_now', to: 'matchmaking#play_now'
   post 'find_opponent', to: 'matchmaking#find_opponent'
   post 'challenge_friend', to: 'matches#challenge_friend'

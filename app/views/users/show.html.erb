@@ -7,34 +7,23 @@
         <h2 class="text-5xl font-extrabold text-white tracking-tight drop-shadow-lg">Profilo Utente</h2>
       </div>
       <div class="text-center mb-6">
-        <% if current_user.profile_image.attached? %>
-          <%= image_tag current_user.profile_image_thumbnail, class: "rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-indigo-500" %>
+        <% if @user.profile_image.attached? %>
+          <%= image_tag @user.profile_image_thumbnail, class: "rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-indigo-500" %>
         <% else %>
           <%= image_tag('profile-placeholder.png', alt: 'Profile Image', class: 'rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-indigo-500') %>
         <% end %>
       </div>
       <div class="text-left w-full space-y-6">
         <h3 class="text-3xl font-bold text-indigo-400">Informazioni Utente</h3>
-        <p class="text-lg text-gray-300"><strong>Nome:</strong> <%= current_user.username %></p>
-        <p class="text-lg text-gray-300"><strong>Email:</strong> <%= current_user.email %></p>
+        <p class="text-lg text-gray-300"><strong>Nome:</strong> <%= @user.username %></p>
+        <p class="text-lg text-gray-300"><strong>Email:</strong> <%= @user.email %></p>
       </div>
 
-      <!-- Sezione Lista Amici -->
-      <div class="mt-8 w-full">
-        <h3 class="text-3xl font-bold text-indigo-400 mb-4">Amici</h3>
-        <ul class="list-disc list-inside space-y-2 text-gray-300">
-          <% current_user.friends.each do |friend| %>
-            <li><%= link_to friend.username, user_profile_path(friend), class: 'text-blue-400 hover:text-blue-500' %></li>
-          <% end %>
-          <% current_user.inverse_friends.each do |friend| %>
-            <li><%= link_to friend.username, user_profile_path(friend), class: 'text-blue-400 hover:text-blue-500' %></li>
-          <% end %>
-        </ul>
-      </div>
-
-      <!-- Pulsante per accedere alle impostazioni -->
+      <!-- Pulsante "Aggiungi Amico" -->
       <div class="mt-8 text-center w-full">
-        <%= link_to 'Impostazioni Profilo', edit_settings_path, class: 'bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300' %>
+        <% unless @is_friend || @user == current_user %>
+          <%= button_to 'Aggiungi Amico', add_friend_path(@user), method: :post, class: 'bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300' %>
+        <% end %>
       </div>
     </div>
 
