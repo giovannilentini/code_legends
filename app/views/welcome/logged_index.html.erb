@@ -9,7 +9,7 @@
       <!-- User Info -->
       <% if @user %>
         <div class="mb-6 bg-gray-800 bg-opacity-50 p-4 rounded-lg shadow-lg">
-          <p class="text-xl font-semibold">Benvenuto, <span class="text-indigo-400"><%= @user['name'] %></span></p>
+          <p class="text-xl font-semibold">Benvenuto, <span class="text-indigo-400"><%= @user['username'] %></span></p>
           <p class="text-lg text-gray-300"><%= @user['email'] %></p>
         </div>
       <% else %>

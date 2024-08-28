@@ -6,19 +6,22 @@ class Auth0Controller < ApplicationController
 
     # Estrai le informazioni dell'utente
     auth0_id = auth_info['uid']
-    name = auth_info['info']['name']
     email = auth_info['info']['email']
 
-    # Trova o crea l'utente nel database
-    user = User.find_or_create_by(auth0_id: auth0_id) do |u|
-      u.name = name
-      u.email = email
+    response = Auth0Service.get_user_info(auth0_id)
+
+    #Find or create a user based on the Auth0 UID
+    user = User.find_or_create_by(auth0_id: auth_info['uid']) do |user|
+      user.username = response["username"]
+      user.email = email
+      user.is_admin = false
+      user.auth0_id = auth0_id
     end
 
-    # Salva le informazioni dell'utente nella sessione
+
     session[:userinfo] = {
       'auth0_id' => user.auth0_id,
-      'name' => user.name,
+      'name' => user.username,
       'email' => user.email,
       'user_id' => user.id
     }
@@ -26,15 +29,13 @@ class Auth0Controller < ApplicationController
     cookies[:user_info] = { value: user.id, expires: 1.year.from_now }
 
     session[:user_id] = user.id
-
-    # Redirect to the home page for logged-in users
-    redirect_to '/logged_index'
+    redirect_to root_path
   end
 
   def failure
     @error_msg = request.params['message']
     # Redirect to a specific page with an error message
-    redirect_to '/home', alert: "Authentication failed: #{@error_msg}"
+    redirect_to root_path, alert: "Authentication failed: #{@error_msg}"
   end
 
   def logout
@@ -45,8 +46,8 @@ class Auth0Controller < ApplicationController
   private
 
   def logout_url
-    domain = Rails.application.config.auth0['auth0_domain']
-    client_id = Rails.application.config.auth0['auth0_client_id']
+    domain = Rails.application.credentials.auth0_api['auth0_domain']
+    client_id = Rails.application.credentials.auth0_api['auth0_client_id']
     return_to_url = 'http://localhost:3000/' # Assicurati che questo URL sia nella lista degli URL di logout consentiti in Auth0
 
     request_params = {

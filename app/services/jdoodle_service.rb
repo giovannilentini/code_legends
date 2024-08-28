@@ -5,7 +5,8 @@ class JdoodleService
   BASE_URL = 'https://api.jdoodle.com/v1/execute'
 
   def self.execute_code(script, language)
-    req_params = {:clientId => ENV['JDOODLE_CLIENT_ID'], :clientSecret => ENV['JDOODLE_CLIENT_SECRET'],
+
+      req_params = {:clientId => Rails.application.credentials.jdoodle_api["JDOODLE_CLIENT_ID"], :clientSecret => Rails.application.credentials.jdoodle_api["JDOODLE_CLIENT_SECRET"],
               :script => script, :language => language, :versionIndex => '0'
     }
     uri = URI(BASE_URL)

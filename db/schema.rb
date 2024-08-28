@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_24_184241) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_26_202557) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -60,6 +60,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_184241) do
     t.index ["player_2_id"], name: "index_matches_on_player_2_id"
   end
 
+  create_table "matchmaking_queues", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "status"
+    t.string "language"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_matchmaking_queues_on_user_id"
+  end
+
   create_table "rooms", force: :cascade do |t|
     t.integer "match_id", null: false
     t.string "uuid", null: false
@@ -78,7 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_184241) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "username"
     t.string "email"
     t.string "auth0_id"
     t.datetime "created_at", null: false
@@ -90,6 +99,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_24_184241) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "matches", "users", column: "player_1_id"
   add_foreign_key "matches", "users", column: "player_2_id"
+  add_foreign_key "matchmaking_queues", "users"
   add_foreign_key "rooms", "matches"
   add_foreign_key "test_cases", "challenges"
 end

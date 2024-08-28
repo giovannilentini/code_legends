@@ -74,3 +74,9 @@ config/application.yml
 db/development.sqlite3
 db/development.sqlite3-shm
 db/development.sqlite3-wal
+
+config/auth0.yml
+
+/config/credentials/development.key
+
+/config/credentials/production.key
