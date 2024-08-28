@@ -1,6 +1,6 @@
 class WelcomeController < ApplicationController
   def index
-    if session[:userinfo].present?
+    if session[:user_id].present?
       @user = current_user
       render 'logged_index'
     else
@@ -14,6 +14,5 @@ class WelcomeController < ApplicationController
     else
       redirect_to root_path, alert: 'Utente non trovato. Effettua il login.'
     end
-    Rails.logger.debug "User info: #{@user.inspect}"
   end
 end
