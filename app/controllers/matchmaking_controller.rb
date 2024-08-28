@@ -13,7 +13,7 @@ class MatchmakingController < ApplicationController
       MatchmakingQueueService.add(player, @selected_language)
       respond_to do |format|
         format.turbo_stream { render turbo_stream: turbo_stream.replace("waiting_modal", partial: "matchmaking/waiting_modal") }
-        format.html { redirect_to play_now_path } # fallback in case Turbo isn't supported
+        format.html { redirect_to play_now_path } 
       end
     end
   end
