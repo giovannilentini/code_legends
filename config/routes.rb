@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'profile', to: 'profiles#user_profile', as: 'profile'
+  get 'profile', to: 'profiles#user_profile', as: 'personal_profile'
   get 'admin_profile', to: 'profiles#admin_profile', as: 'admin_profile'
 
   resources :profiles do
@@ -25,6 +25,19 @@ Rails.application.routes.draw do
 
   get 'users/:id', to: 'users#show', as: 'user_profile'
   post 'users/:id/add_friend', to: 'friendships#create', as: 'add_friend'
+
+  resources :friend_requests, only: [:create]
+
+  resources :users, only: [:show] do
+    resources :friend_requests, only: [:create]
+  end
+
+  resources :friend_requests do
+    member do
+      post 'accept'
+      post 'reject'
+    end
+  end
 
   get 'database/info'
   get 'database_info', to: 'database#info', as: 'info'

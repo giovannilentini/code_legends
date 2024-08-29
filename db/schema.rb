@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_28_201808) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_28_213437) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -47,6 +47,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_28_201808) do
     t.string "rejection_reason"
     t.integer "user_id"
     t.index ["user_id"], name: "index_challenges_on_user_id"
+  end
+
+  create_table "friend_requests", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "friend_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["friend_id"], name: "index_friend_requests_on_friend_id"
+    t.index ["user_id"], name: "index_friend_requests_on_user_id"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -104,6 +113,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_28_201808) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "friend_requests", "users"
+  add_foreign_key "friend_requests", "users", column: "friend_id"
   add_foreign_key "matches", "users", column: "player_1_id"
   add_foreign_key "matches", "users", column: "player_2_id"
   add_foreign_key "matchmaking_queues", "users"
