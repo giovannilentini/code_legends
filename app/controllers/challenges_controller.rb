@@ -1,5 +1,6 @@
 class ChallengesController < ApplicationController
   before_action :set_challenge, only: [:update_status]
+  skip_before_action :verify_authenticity_token
 
   def new
     @challenge = Challenge.new
@@ -9,7 +10,7 @@ class ChallengesController < ApplicationController
   def create
     @challenge = current_user.challenges.build(challenge_params)
     if @challenge.save
-      redirect_to @challenge, notice: 'Sfida creata con successo.'
+      redirect_to root_path, notice: 'Sfida creata con successo.'
     else
       render :new
     end

@@ -6,4 +6,7 @@ class Challenge < ApplicationRecord
   validates :description, presence: true
 
   belongs_to :user
+
+  scope :accepted, -> { where(status: 1) }
+  scope :rejected, -> { where(status: 0) }
 end

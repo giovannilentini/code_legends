@@ -1,4 +1,4 @@
-<%if current_user %>
+<% if current_user %>
   <div class="container mx-auto">
     <!-- Hero Section -->
     <section class="flex items-center justify-center min-h-screen bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900 text-white">
@@ -29,6 +29,11 @@
         <h2 class="text-6xl font-extrabold mb-6">Inizia una nuova partita</h2>
         <%= button_to 'Avvia partita', play_now_path, method: :get, data: { turbo: false }, class: 'bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-12 rounded-full transition duration-300 transform hover:scale-105 shadow-lg' %>
       </div>
+    </section>
+
+    <!-- Friends Section -->
+    <section class="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white">
+      <button onclick="openModal()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">Cerca Amici</button>
     </section>
 
     <!-- Leaderboard Section -->
@@ -78,7 +83,7 @@
           <% if @current_user && @current_user.admin? %>
             <%= link_to 'Vai al Profilo Admin', admin_profile_path, class: 'bg-blue-600 hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg' %>
           <% end %>
-          <%= link_to 'Vai al Profilo Utente', profile_path, class: 'bg-green-600 hover:bg-green-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg ml-4' %>
+          <%= link_to 'Vai al Profilo Utente', personal_profile_path, class: 'bg-green-600 hover:bg-green-800 text-white font-bold py-4 px-8 rounded-full transition duration-300 shadow-lg ml-4' %>
         </div>
       </div>
     </section>
@@ -92,6 +97,33 @@
     <footer class="text-center py-6 bg-gray-900 text-gray-400">
       <p>&copy; 2024 Code Legends. Tutti i diritti riservati.</p>
     </footer>
+
+    <!-- Modal for Searching Friends -->
+    <div id="searchFriendsModal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+      <div class="flex items-center justify-center min-h-screen px-4">
+        <div class="bg-white rounded-lg px-6 pt-6 pb-6 text-left overflow-hidden shadow-xl transform transition-all w-full max-w-xl">
+          <div>
+            <h3 class="text-2xl leading-6 font-bold text-gray-900 mb-4">Cerca Amici</h3>
+            <input type="text" id="friendSearchInput" onkeyup="filterFriends()" placeholder="Cerca per username..." class="mt-3 p-3 border border-gray-300 rounded-lg w-full text-lg text-gray-700">
+
+            <!-- Lista degli amici -->
+            <ul id="friendList" class="mt-4 max-h-72 overflow-y-auto border border-gray-300 rounded-lg">
+              <% available_friends = User.where.not(id: @current_user.id).where.not(id: @current_user.friends.ids) %>
+              <% available_friends.each do |user| %>
+                <li class="flex items-center justify-between p-4 border-b border-gray-200">
+                  <%= link_to user.username, user_profile_path(user), class: 'friend-name text-lg text-gray-700 hover:underline' %>
+                  <%= button_to 'Richiedi Amicizia', friend_requests_path(user_id: user.id), method: :post, class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full' %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+          <div class="mt-6 text-right">
+            <button onclick="closeModal()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Chiudi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 <% else %>
@@ -158,12 +190,28 @@
   </div>
 <% end %>
 
+<script>
+    function openModal() {
+        document.getElementById('searchFriendsModal').classList.remove('hidden');
+    }
 
+    function closeModal() {
+        document.getElementById('searchFriendsModal').classList.add('hidden');
+    }
 
+    function filterFriends() {
+        let input = document.getElementById('friendSearchInput');
+        let filter = input.value.toLowerCase();
+        let ul = document.getElementById('friendList');
+        let li = ul.getElementsByTagName('li');
 
-
-
-
-
-
-
+        for (let i = 0; i < li.length; i++) {
+            let friendName = li[i].getElementsByClassName('friend-name')[0];
+            if (friendName.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                li[i].style.display = "";
+            } else {
+                li[i].style.display = "none";
+            }
+        }
+    }
+</script>
