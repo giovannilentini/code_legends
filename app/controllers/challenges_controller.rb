@@ -7,10 +7,25 @@ class ChallengesController < ApplicationController
   end
 
   def create
-    p "PARAMS #{params.inspect}"
-    @challenge = current_user.challenges.build(challenge_params)
+
+    ActiveRecord::Base.transaction do
+    @challenge = current_user.challenges.new(challenge_params)
+
+    # Filter out invalid test cases
+    valid_test_case_params = test_case_params.reject do |_, params|
+      params[:input_example].blank? || params[:expected_output].blank?
+    end
+
+    valid_test_case_params.each do |index, test_case_params|
+        input_example = test_case_params[:input_example]
+        expected_output = test_case_params[:expected_output]
+        input_type = test_case_params[:input_type]
+        output_type = test_case_params[:output_type]
+        TestCase.create(input_example: input_example, expected_output: expected_output, input_type: input_type, output_type: output_type, challenge: @challenge)
+      end
+    end
     if @challenge.save
-      redirect_to root_path, notice: 'Sfida creata con successo.'
+      #redirect_to root_path, notice: 'Sfida creata con successo.'
     else
       render :new
     end
@@ -46,6 +61,10 @@ class ChallengesController < ApplicationController
   end
 
   def challenge_params
-    params.require(:challenge).permit(:description, test_cases_attributes: [:input_example, :expected_output])
+    params.require(:challenge).permit(:description, test_cases_attributes: [:input_example, :expected_output, :input_type, :output_type])
+  end
+
+  def test_case_params
+    params.require(:challenge).permit(test_cases_attributes: [:input_example, :expected_output, :input_type, :output_type])
   end
 end
