@@ -1,6 +1,6 @@
 class ChallengesController < ApplicationController
   before_action :set_challenge, only: [:update_status]
-  skip_before_action :verify_authenticity_token
+  #skip_before_action :verify_authenticity_token
 
   def new
     @challenge = Challenge.new

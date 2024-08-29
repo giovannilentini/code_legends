@@ -3,8 +3,6 @@ import "@hotwired/turbo-rails";
 import "controllers";
 import "channels";
 import "./codemirror_setup";
-import Rails from "@rails/ujs";
-Rails.start();
 
 
 
