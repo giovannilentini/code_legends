@@ -11,19 +11,3 @@
   </div>
 </div>
 
-<script>
-  function checkForMatch() {
-    fetch('/check_challenge')
-      .then(response => response.json())
-      .then(data => {
-        if (data.challenge_url) {
-          window.location.href = data.challenge_url;
-        }
-      })
-      .catch(error => console.error('Error:', error));
-  }
-
-  setInterval(checkForMatch, 1000);
-</script>
-
-

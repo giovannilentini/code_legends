@@ -20,7 +20,7 @@ class MatchmakingQueueController < ApplicationController
   def cancel
     player = User.find_by(id: session[:user_id])
     language = session[:selected_language]
-    MatchmakingQueueService.remove(player, language)
+    MatchmakingQueueService.remove_from_queue(player)
     redirect_to play_now_path, notice: "Ricerca avversario annullata."
   end
 
