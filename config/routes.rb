@@ -31,9 +31,9 @@ Rails.application.routes.draw do
   get 'database_info', to: 'database#info', as: 'info'
   post 'clear_tables', to: 'database#clear_tables'
   get 'play_now', to: 'matchmaking_queue#play_now'
-  get 'challenge_friend', to: 'matchmaking_queue#challenge_friend'
   post 'find_opponent', to: 'matchmaking_queue#find_opponent'
-
+  post 'cancel_matchmaking', to: 'matchmaking_queue#cancel'
+  get 'waiting', to: 'matches#waiting'
 
 
 

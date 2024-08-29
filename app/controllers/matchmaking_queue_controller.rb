@@ -2,7 +2,7 @@ class MatchmakingQueueController < ApplicationController
 
   before_action :set_languages
   def play_now
-
+    @player = User.find_by(id: session[:user_id])
 
   end
 
@@ -10,16 +10,18 @@ class MatchmakingQueueController < ApplicationController
     player = User.find_by(id: session[:user_id])
     if player
       MatchmakingQueueService.new(player).add_to_queue(@selected_language)
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("waiting_modal", partial: "matchmaking_queue/waiting_modal") }
+        format.html { redirect_to play_now_path }
+      end
     end
   end
 
-  def challenge_friend
-    player = Player.find_or_create_by(name: session[:player_name])
-    friend = Player.find(params[:friend_id])
-    challenge = Match.create(player_1: player, player_2: friend, status: 'pending')
-    room = Room.create(challenge: challenge, uuid: SecureRandom.uuid)
-
-    redirect_to challenge_path(room.uuid)
+  def cancel
+    player = User.find_by(id: session[:user_id])
+    language = session[:selected_language]
+    MatchmakingQueueService.remove(player, language)
+    redirect_to play_now_path, notice: "Ricerca avversario annullata."
   end
 
   private
@@ -27,5 +29,4 @@ class MatchmakingQueueController < ApplicationController
     @languages = ['Python3', 'Java', 'Cpp']
     @selected_language = params[:language].presence || 'python3'
   end
-
 end

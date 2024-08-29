@@ -2,24 +2,26 @@
 <html>
   <head>
     <title>CodeLegends</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-  </head>
-  <style>
+    <style>
       body {
-          height: 100%;
-          background: linear-gradient(135deg, #1f2937 25%, #111827 100%);
-          margin: 0;
-          font-family: 'Arial', sans-serif;
-          min-height: 100vh;
+        height: 100%;
+        margin: 0;
+        font-family: 'Arial', sans-serif;
+        min-height: 100vh;
+        background-size: contain;
+        background-color: #222831; 
+        background-image: url('<%= asset_path("background.png") %>');
+        background-repeat: repeat;
       }
-  </style>
+    </style>
+  </head>
   <body class="text-white h-full flex justify-center font-sans">
-    <main class="container mx-auto mt-14 px-5 flex">
+    <main class="container flex">
       <%= yield %>
     </main>
   </body>
