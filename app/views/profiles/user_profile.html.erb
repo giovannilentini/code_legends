@@ -148,8 +148,12 @@
       </div>
       <p class="text-white mb-6" id="requestMessage"></p>
       <div class="flex justify-between">
-        <%= button_to 'Accetta', '#', class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full', id: 'acceptRequest', method: :post %>
-        <%= button_to 'Rifiuta', '#', class: 'bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full', id: 'rejectRequest', method: :post %>
+        <%= form_with url: '#', method: :post, id: 'acceptRequestForm', class: 'inline' do %>
+          <%= button_tag 'Accetta', class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full' %>
+        <% end %>
+        <%= form_with url: '#', method: :post, id: 'rejectRequestForm', class: 'inline' do %>
+          <%= button_tag 'Rifiuta', class: 'bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full' %>
+        <% end %>
       </div>
     </div>
   </div>
@@ -157,37 +161,33 @@
 </section>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('openMailbox').addEventListener('click', function () {
-            document.getElementById('mailboxModal').classList.remove('hidden');
-        });
+      document.getElementById('openMailbox').addEventListener('click', function () {
+          document.getElementById('mailboxModal').classList.remove('hidden');
+      });
 
-        document.getElementById('closeMailbox').addEventListener('click', function () {
-            document.getElementById('mailboxModal').classList.add('hidden');
-        });
+      document.getElementById('closeMailbox').addEventListener('click', function () {
+          document.getElementById('mailboxModal').classList.add('hidden');
+      });
 
-        document.querySelectorAll('#mailboxModal a').forEach(function (el) {
-            el.addEventListener('click', function (e) {
-                e.preventDefault();
-                const requestId = this.getAttribute('data-request-id');
+      document.querySelectorAll('#mailboxModal a').forEach(function (el) {
+          el.addEventListener('click', function (e) {
+              e.preventDefault();
+              const requestId = this.getAttribute('data-request-id');
 
-                const senderName = this.innerText.split(' ')[2];
-                document.getElementById('requestMessage').innerText = `Ciao, sono ${senderName}, vuoi diventare mio amico?`;
+              const senderName = this.innerText.split(' ')[2];
+              document.getElementById('requestMessage').innerText = `Ciao, sono ${senderName}, vuoi diventare mio amico?`;
 
-                document.getElementById('requestModal').classList.remove('hidden');
+              document.getElementById('requestModal').classList.remove('hidden');
 
-                document.getElementById('acceptRequest').onclick = function() {
-                    this.form.action = `/friend_requests/${requestId}/accept`;
-                };
-                document.getElementById('rejectRequest').onclick = function() {
-                    this.form.action = `/friend_requests/${requestId}/reject`;
-                };
-            });
-        });
+              const acceptForm = document.getElementById('acceptRequestForm');
+              const rejectForm = document.getElementById('rejectRequestForm');
 
-        document.getElementById('closeRequest').addEventListener('click', function () {
-            document.getElementById('requestModal').classList.add('hidden');
-        });
-    });
+              acceptForm.action = `/friend_requests/${requestId}/accept`;
+              rejectForm.action = `/friend_requests/${requestId}/reject`;
+          });
+      });
+
+      document.getElementById('closeRequest').addEventListener('click', function () {
+          document.getElementById('requestModal').classList.add('hidden');
+      });
 </script>
-

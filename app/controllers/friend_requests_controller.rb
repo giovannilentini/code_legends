@@ -1,6 +1,4 @@
 class FriendRequestsController < ApplicationController
-  skip_before_action :verify_authenticity_token, only: [:accept, :reject]
-
   def create
     @friend_request = FriendRequest.new(user_id: current_user.id, friend_id: params[:user_id])
 
