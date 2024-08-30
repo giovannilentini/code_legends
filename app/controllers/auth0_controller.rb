@@ -7,8 +7,11 @@ class Auth0Controller < ApplicationController
     # Estrai le informazioni dell'utente
     auth0_id = auth_info['uid']
     email = auth_info['info']['email']
+    name = auth_info['info']['name']
 
     response = Auth0Service.get_user_info(auth0_id)
+    username = response["username"] || name
+
 
     #Find or create a user based on the Auth0 UID
     user = User.find_or_create_by(auth0_id: auth_info['uid']) do |user|
@@ -17,6 +20,7 @@ class Auth0Controller < ApplicationController
       user.is_admin = false
       user.auth0_id = auth0_id
     end
+    user.update(username: username) if user.username.nil?
 
 
     session[:userinfo] = {
