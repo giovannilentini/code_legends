@@ -12,9 +12,8 @@ class Auth0Controller < ApplicationController
     response = Auth0Service.get_user_info(auth0_id)
     username = response["username"] || name
 
-
     #Find or create a user based on the Auth0 UID
-    user = User.find_or_create_by(auth0_id: auth_info['uid']) do |user|
+    user = User.find_or_create_by(email: email) do |user|
       user.username = response["username"]
       user.email = email
       user.is_admin = false
