@@ -37,9 +37,13 @@ class Auth0Controller < ApplicationController
   end
 
   def failure
-    @error_msg = request.params['message']
+    error_type = params[:error]
+    error_description = params[:error_description]
+
+    flash[:alert] = "Authentication failed: #{error_description}. Please try again."
+    cookies.delete :user_info
     # Redirect to a specific page with an error message
-    redirect_to root_path, alert: "Authentication failed: #{@error_msg}"
+    redirect_to root_path
   end
 
   def logout
