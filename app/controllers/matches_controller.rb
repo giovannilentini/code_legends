@@ -25,9 +25,11 @@ class MatchesController < ApplicationController
     match = Match.find_by(id: params[:match_id])
     user = current_user
 
-    winner =  user == match.player_1 ? match.player_2 : match.player_1
+    winner = user == match.player_1 ? match.player_2 : match.player_1
 
-    match.update(status: "finished", winner: winner)
+    match.chat_messages.destroy_all
+
+    match.update(status: "finished", winner_id: winner.id)
     MatchmakingQueueService.remove_from_queue(user)
     MatchmakingQueueService.remove_from_queue(winner)
     ActionCable.server.broadcast "match_#{match.id}", { action: 'redirect_to_home'}
