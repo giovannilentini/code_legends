@@ -42,6 +42,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :matches do
+    resources :chat_messages, only: [:create]
+    post 'execute_code', on: :member
+    post 'surrender', on: :member
+  end
+
   get 'database/info'
   get 'database_info', to: 'database#info', as: 'info'
   post 'clear_tables', to: 'database#clear_tables'

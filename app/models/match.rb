@@ -4,8 +4,9 @@ class Match < ApplicationRecord
   belongs_to :player_2, class_name: 'User', foreign_key: 'player_2_id'
   validate :players_must_be_different
 
-  private
+  has_many :chat_messages, dependent: :destroy
 
+  private
 
   def players_must_be_different
     if player_1 == player_2
