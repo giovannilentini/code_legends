@@ -62,6 +62,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'redis'
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
@@ -79,6 +80,5 @@ group :test do
   gem "webmock"
   gem 'webdrivers'
 end
-
 
 
