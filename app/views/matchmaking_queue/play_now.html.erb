@@ -3,11 +3,13 @@
     <div class="flex flex-row h-1/2 space-x-8">
       <div class="flex flex-col w-1/2 space-y-8">
         <div class="flex flex-col items-center space-y-4 p-4">
-          <div class="bg-trasparent border border-white rounded-full w-32 h-32 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-16 h-16 text-[#EEEEEE]">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 7.5a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.125v-.375a5.625 5.625 0 015.625-5.625h4.75a5.625 5.625 0 015.625 5.625v.375" />
-            </svg>
+          <!-- Nuova sezione con immagine profilo -->
+          <div class="text-center mb-6">
+            <% if current_user.profile_image.attached?%>
+              <%= image_tag current_user.profile_image_thumbnail, class: "rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-white" %>
+            <% else %>
+              <%= image_tag('profile-placeholder.png', alt: 'Profile Image', class: 'rounded-full mx-auto shadow-xl w-40 h-40 object-cover') %>
+            <% end %>
           </div>
           <div class="text-center">
             <h2 class="text-2xl font-bold text-[#EEEEEE]">Player: <%= @player.username %></h2>
@@ -58,7 +60,6 @@
         Challenge a Friend
       <% end %>
     <% end %>
-    
 
   </div>
 </div>

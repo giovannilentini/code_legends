@@ -7,7 +7,7 @@ class SettingsController < ApplicationController
     @user = current_user
 
     if @user.update(user_params)
-      redirect_to profile_path, notice: 'Profilo aggiornato con successo.'
+      redirect_to personal_profile_path, notice: 'Profilo aggiornato con successo.'
     else
       flash.now[:alert] = 'Errore nell\'aggiornamento del profilo.'
       render :edit
