@@ -98,7 +98,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (input === 'member' || input === 'Member') {
                 response = '<br><span class="utente">Redirecting to login screen...</span><br>';
                 setTimeout(function() {
-                    window.location.href = '/auth/auth0';
+                    var loginButton = document.getElementById('loginButton');
+                    loginButton.click();
                 }, 2000);
             } else if (input === 'guest' || input === 'Guest') {
                 response = '<br>Continuing as Guest...<br>';
