@@ -48,6 +48,8 @@
     <span id="utente" class="hidden"></span>
   </section>
 </div>
+
+
 <div class="absolute bottom-0 left-0 mb-4 ml-4">
   <div class="relative flex h-[30px] w-40 items-center justify-center overflow-hidden bg-transparent text-white transition-all border border-gray-400 hover:border-gray-600 before:absolute before:h-0 before:w-0 before:rounded-full before:bg-gray-600 before:duration-500 before:ease-out hover:before:h-56 hover:before:w-56 hover:before:opacity-100 font-mono">
     <%= button_to 'Login', '/auth/auth0/', method: :post, data: { turbo: false }, class: 'relative z-10', id: 'loginButton'%>
@@ -56,9 +58,11 @@
 
 <div class="absolute bottom-0 right-0 mb-4 mr-4">
   <div class="relative flex h-[30px] w-40 items-center justify-center overflow-hidden bg-transparent text-white transition-all border border-gray-400 hover:border-gray-600 before:absolute before:h-0 before:w-0 before:rounded-full before:bg-gray-600 before:duration-500 before:ease-out hover:before:h-56 hover:before:w-56 hover:before:opacity-100 font-mono">
-    <%= button_to 'Enter as guest', '/auth/auth0/', method: :post, data: { turbo: false }, class: 'relative z-10' %>
+    <%= button_to 'Enter as guest', create_guest_path, method: :post, data: { turbo: false }, class: 'relative z-10', id: 'guestButton'%>
   </div>
 </div>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>

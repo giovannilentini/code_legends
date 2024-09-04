@@ -102,7 +102,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     loginButton.click();
                 }, 2000);
             } else if (input === 'guest' || input === 'Guest') {
-                response = '<br>Continuing as Guest...<br>';
+                response = '<br><span class="utente">Continuing as Guest...</span><br>';
+                setTimeout(function() {
+                    var guestButton = document.getElementById('guestButton');
+                    guestButton.click();
+                }, 2000);
             } else {
                 response = '<br><span class="error">Invalid input. Please type "Member" or "Guest".</span><br>';
                 utenteElement.innerHTML += response;
@@ -114,8 +118,11 @@ document.addEventListener('DOMContentLoaded', function() {
             document.removeEventListener('keydown', handleUserInput);
         } else if (e.key === 'Backspace') {
             var content = utenteElement.innerHTML.split('<span class="utente">Guest</span>:$ ').pop();
-            content = content.slice(0, -1);
-            utenteElement.innerHTML = '<span class="utente">Guest </span>:$ ' + content;
+            var cursorPosition = content.length;
+    
+            if (cursorPosition > 0) {
+                content = content.slice(0, -1);
+                utenteElement.innerHTML = '<span class="utente">Guest</span>:$ ' + content;}
         } else if (e.key.length === 1) {
             utenteElement.innerHTML += e.key;
         }
