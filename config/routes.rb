@@ -7,8 +7,7 @@ Rails.application.routes.draw do
   get '/auth/auth0/callback', to: 'auth0#callback', as: 'auth0_login'
   get '/auth/failure', to: 'auth0#failure', as: 'auth_failure'
   get '/auth/logout', to: 'auth0#logout', as: 'auth_logout'
-
-  resources :challenges, only: [:new, :create, :show, :home] do
+  resources :challenges, only: [:show, :home] do
     member do
       post 'update_status'
     end
@@ -64,6 +63,6 @@ Rails.application.routes.draw do
   post 'find_opponent', to: 'matchmaking_queue#find_opponent'
   post 'cancel_matchmaking', to: 'matchmaking_queue#cancel'
   get 'waiting', to: 'matches#waiting'
-
+  resources :challenge_proposals, only: [:new, :create, :show]
   resources :matches, only: [:show]
 end

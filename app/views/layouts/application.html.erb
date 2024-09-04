@@ -24,12 +24,13 @@
   </head>
   <body class="text-white h-full flex justify-center font-sans">
   <main class="container flex">
-      <%= yield %>
     <% if flash[:alert] %>
       <div id="alert-popup" class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 w-1/2 bg-red-100 border border-red-500 text-red-700 rounded-lg p-4 shadow-lg opacity-0 transition-opacity duration-500 ease-in-out">
         <span id="alert-message" class="font-medium"></span>
       </div>
     <% end %>
+      <%= yield %>
+
     </main>
 
 
@@ -51,7 +52,7 @@
       }
 
       // Example of how to trigger the alert from the server-side
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener('turbo:load', function() {
           <% if flash[:alert] %>
           showAlert("<%= j flash[:alert] %>");
           <% end %>
