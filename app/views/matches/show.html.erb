@@ -71,7 +71,10 @@
 </div>
 
 <script>
+    var code_template = <%= @code_template.to_json.html_safe %>;
+    var currentLanguage = <%=@match.language.to_json.html_safe %>;
     document.addEventListener("DOMContentLoaded", function() {
+
         const form = document.getElementById('execute-form');
         const output = document.getElementById('output');
         const surrenderButton = document.getElementById('surrender-form');
