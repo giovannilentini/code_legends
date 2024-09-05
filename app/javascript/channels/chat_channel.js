@@ -1,7 +1,7 @@
 import consumer from "./consumer";
 
 document.addEventListener("turbo:load", () => {
-    const chatContainer = document.getElementById('chat');
+    const chatContainer = document.getElementById('chat-container');
     const chatForm = document.getElementById('chat-form');
     const messageInput = document.getElementById('chat-input');
 
@@ -14,9 +14,11 @@ document.addEventListener("turbo:load", () => {
                 received(data) {
                     chatContainer.insertAdjacentHTML('beforeend', data);
                     scrollToBottom(chatContainer);  // Ensure chat scrolls to the bottom
+                    messageInput.value = ''; // Clear the input field after sending
                 },
                 send_message(content) {
                     this.perform('send_message', { match_id: matchId, content: content });
+
                 }
             }
         );
@@ -24,10 +26,6 @@ document.addEventListener("turbo:load", () => {
         chatForm.addEventListener('ajax:success', (event) => {
             const [data, status, xhr] = event.detail;
             chatChannel.send_message(messageInput.value);
-
-            // Clear the input field after sending
-            messageInput.value = '';
-
             // Refocus the input field for user convenience
             messageInput.focus();
         });
