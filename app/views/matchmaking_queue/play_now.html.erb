@@ -1,10 +1,11 @@
 <div class="flex w-full min-h-screen p-10">
   <div class="w-4/5 flex flex-col space-y-8 text-[#EEEEEE]">
 
+    <!-- Sezione immagine profilo e recent games -->
     <div class="flex flex-row h-1/2 space-x-8">
       <div class="flex flex-col w-1/2 space-y-8">
         <div class="flex flex-col items-center space-y-4 p-4">
-          <!-- Nuova sezione con immagine profilo -->
+          <!-- Profile Image Section -->
           <div class="text-center mb-6">
             <% if current_user.profile_image.attached? %>
               <%= image_tag current_user.profile_image_thumbnail, class: "rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-white" %>
@@ -22,6 +23,7 @@
       </div>
     </div>
 
+    <!-- Leaderboard Section -->
     <div class="flex flex-col space-y-2 px-4">
       <h2 class="text-2xl font-semibold text-[#EEEEEE]">Leaderboard</h2>
       <div class="border-t-2 border-white mt-2 w-full"></div>
@@ -30,6 +32,7 @@
 
   <div class="border-l-2 border-white h-full mt-4"></div>
 
+  <!-- Sidebar Section -->
   <div class="w-1/5 p-6 flex flex-col space-y-6 justify-start">
     <div class="flex flex-col space-y-2">
       <%= form_with url: play_now_path, method: :get, local: true, html: { id: 'language-form' } do %>
@@ -41,7 +44,7 @@
 
     <%= form_with url: find_opponent_path, method: :post, local: true do |form| %>
       <%= hidden_field_tag :language, @selected_language, id: 'language_field' %>
-      <%= button_tag(type: 'submit', class: "relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900") do %>
+      <%= button_tag(type: 'submit', class: "relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900", onclick: "return checkGuestStatus()") do %>
         <svg class="h-6 w-6 text-white-500 mr-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
           <path stroke="none" d="M0 0h24v24H0z"/>
           <polyline points="7 8 3 12 7 16" />
@@ -52,43 +55,60 @@
       <% end %>
     <% end %>
 
+    <!-- Challenge a Friend Button -->
     <section>
-      <button onclick="openChallengeModal()" class="relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900">Challenge a Friend</button>
+      <button onclick="return checkGuestStatus()" class="relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900" data-modal-target="#challengeModal">Challenge a Friend</button>
     </section>
 
+    <!-- Search Friends Button -->
     <section>
-      <button onclick="openModal()" class="relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900">Cerca Amici</button>
+      <button onclick="return checkGuestStatus()" class="relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900" data-modal-target="#searchFriendsModal">Search Friends</button>
     </section>
 
+    <!-- Create Challenge Link -->
     <div>
-      <%= link_to 'Crea Sfida', new_challenge_path, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900' %>
+      <%= link_to 'Create Challenge', new_challenge_path, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900', onclick: "return checkGuestStatus()" %>
     </div>
 
+    <!-- Admin Profile Link -->
     <div>
       <% if @current_user && @current_user.admin? %>
-        <%= link_to 'Vai al Profilo Admin', admin_profile_path, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900' %>
+        <%= link_to 'Go to Admin Profile', admin_profile_path, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900' %>
       <% end %>
-      <%= link_to 'Vai al Profilo Utente', personal_profile_path, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900' %>
+      <%= link_to 'Go to User Profile', personal_profile_path, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900', onclick: "return checkGuestStatus()" %>
     </div>
 
+    <!-- View DB Tables Link -->
     <div>
-      <%= link_to 'Visualizza Tabelle DB', database_info_path, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900' %>
+      <%= link_to 'View DB Tables', database_info_path, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900' %>
     </div>
 
+    <!-- Logout Button -->
     <div>
       <%= button_to 'Logout', 'auth/logout', method: :get, data: { turbo: false }, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900' %>
     </div>
-
   </div>
 </div>
 
+<!-- Modal for Guest Users -->
+<div id="guestModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
+  <div class="bg-transparent rounded-lg shadow-lg p-6 max-w-xl w-full border border-white">
+    <h3 class="text-center text-xl font-bold text-white mb-4">Access Required</h3>
+    <p class="text-center text-white">You need to log in with an account to access this feature.</p>
+    <div class="mt-6 text-center">
+      <button onclick="closeGuestModal()" class="bg-transparent text-white px-4 py-2 rounded-lg hover:bg-white hover:text-gray-900">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Challenge Friends -->
 <div id="challengeModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
   <div class="bg-transparent rounded-lg shadow-lg p-6 max-w-xl w-full border border-white">
-    <h3 class="text-center text-xl font-bold text-white mb-4">Sfida un Amico</h3>
+    <h3 class="text-center text-xl font-bold text-white mb-4">Challenge a Friend</h3>
 
-    <!-- Barra di ricerca per filtrare gli amici -->
+    <!-- Search bar to filter friends -->
     <input type="text" id="friendSearchChallengeInput" onkeyup="filterChallengeFriends()"
-           placeholder="Cerca per username..."
+           placeholder="Search by username..."
            class="mt-3 p-3 bg-gray-800 text-white border border-gray-600 rounded-lg w-full text-lg">
 
     <ul id="challengeFriendList" class="mt-4 max-h-72 overflow-y-auto border border-gray-600 rounded-lg">
@@ -99,7 +119,7 @@
               <%= link_to friend.username, user_profile_path(friend), class: 'friend-name text-lg text-white hover:underline' %>
             </div>
 
-            <!-- Dropdown per la selezione del linguaggio -->
+            <!-- Dropdown for language selection -->
             <div class="w-full md:w-1/3">
               <%= select_tag :language, options_for_select(@languages.map { |language| [language, language.downcase] }, selected: nil),
                              class: "w-full px-4 py-2 rounded border border-white text-white bg-gray-800 focus:border-white focus:ring-0" %>
@@ -107,41 +127,42 @@
 
             <div class="w-full md:w-auto">
               <%= hidden_field_tag :friend_id, friend.id %>
-              <%= submit_tag 'Sfida', class: 'bg-transparent text-white border border-white hover:bg-white hover:text-gray-900 font-bold py-2 px-4 rounded-lg w-full md:w-auto' %>
+              <%= submit_tag 'Challenge', class: 'bg-transparent text-white border border-white hover:bg-white hover:text-gray-900 font-bold py-2 px-4 rounded-lg w-full md:w-auto' %>
             </div>
           <% end %>
         </li>
       <% end %>
     </ul>
     <div class="mt-6 text-center">
-      <button onclick="closeChallengeModal()" class="bg-transparent text-white px-4 py-2 rounded-lg hover:bg-white hover:text-gray-900">Chiudi</button>
+      <button onclick="closeChallengeModal()" class="bg-transparent text-white px-4 py-2 rounded-lg hover:bg-white hover:text-gray-900">Close</button>
     </div>
   </div>
 </div>
 
+<!-- Modal Search Friends -->
 <div id="searchFriendsModal" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 hidden">
   <div class="bg-transparent rounded-lg shadow-lg p-6 max-w-xl w-full border border-white">
-    <h3 class="text-center text-xl font-bold text-white mb-4">Cerca Amici</h3>
+    <h3 class="text-center text-xl font-bold text-white mb-4">Search Friends</h3>
 
     <input type="text" id="friendSearchInput" onkeyup="filterFriends()"
-           placeholder="Cerca per username..."
+           placeholder="Search by username..."
            class="mt-3 p-3 bg-gray-800 text-white border border-gray-600 rounded-lg w-full text-lg">
 
-    <!-- Lista degli amici -->
+    <!-- List of friends -->
     <ul id="friendList" class="mt-4 max-h-72 overflow-y-auto border border-gray-600 rounded-lg">
       <% available_friends = User.where.not(id: @current_user.id).where.not(id: @current_user.friends.ids) %>
       <% available_friends.each do |user| %>
         <li class="flex items-center justify-between p-4 border-b border-gray-600">
           <%= link_to user.username, user_profile_path(user), class: 'friend-name text-lg text-white hover:underline' %>
-          <%= button_to 'Richiedi Amicizia', friend_requests_path(user_id: user.id), method: :post,
+          <%= button_to 'Request Friendship', friend_requests_path(user_id: user.id), method: :post,
                         class: 'bg-transparent text-white border border-white hover:bg-white hover:text-gray-900 font-bold py-2 px-4 rounded-lg mt-2 md:mt-0' %>
         </li>
       <% end %>
     </ul>
 
-    <!-- Margine tra la lista e il bottone "Chiudi" -->
+    <!-- Margin between list and close button -->
     <div class="mt-6 text-center">
-      <button onclick="closeModal()" class="bg-transparent text-white px-4 py-2 rounded-lg hover:bg-white hover:text-gray-900">Chiudi</button>
+      <button onclick="closeModal('#searchFriendsModal')" class="bg-transparent text-white px-4 py-2 rounded-lg hover:bg-white hover:text-gray-900">Close</button>
     </div>
   </div>
 </div>
@@ -151,20 +172,42 @@
 </div>
 
 <script>
-    function openModal() {
-        document.getElementById('searchFriendsModal').classList.remove('hidden');
+    function checkGuestStatus() {
+        console.log('Checking guest status...');
+        <% if current_user.guest? %>
+          console.log('User is a guest');
+          openGuestModal();
+          return false;
+        <% else %>
+          console.log('User is not a guest');
+          return true;
+        <% end %>
     }
 
-    function closeModal() {
-        document.getElementById('searchFriendsModal').classList.add('hidden');
+    function openGuestModal() {
+        console.log('Opening guest modal...');
+        document.getElementById('guestModal').classList.remove('hidden');
+    }
+
+    function closeGuestModal() {
+        console.log('Closing guest modal...');
+        document.getElementById('guestModal').classList.add('hidden');
+    }
+
+    function openModal(modalId) {
+        document.querySelector(modalId).classList.remove('hidden');
+    }
+
+    function closeModal(modalId) {
+        document.querySelector(modalId).classList.add('hidden');
     }
 
     function openChallengeModal() {
-        document.getElementById('challengeModal').classList.remove('hidden');
+        openModal('#challengeModal');
     }
 
     function closeChallengeModal() {
-        document.getElementById('challengeModal').classList.add('hidden');
+        closeModal('#challengeModal');
     }
 
     function filterFriends() {
@@ -184,15 +227,14 @@
     }
 
     function filterChallengeFriends() {
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById('friendSearchChallengeInput');
-        filter = input.value.toLowerCase();
-        ul = document.getElementById("challengeFriendList");
-        li = ul.getElementsByClassName('challenge-friend-item');
+        let input = document.getElementById('friendSearchChallengeInput');
+        let filter = input.value.toLowerCase();
+        let ul = document.getElementById("challengeFriendList");
+        let li = ul.getElementsByClassName('challenge-friend-item');
 
-        for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByClassName("friend-name")[0];
-            txtValue = a.textContent || a.innerText;
+        for (let i = 0; i < li.length; i++) {
+            let a = li[i].getElementsByClassName("friend-name")[0];
+            let txtValue = a.textContent || a.innerText;
             if (txtValue.toLowerCase().indexOf(filter) > -1) {
                 li[i].style.display = "";
             } else {
@@ -200,4 +242,12 @@
             }
         }
     }
+
+    // Event listeners for modal buttons
+    document.querySelectorAll('[data-modal-target]').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const modalId = button.getAttribute('data-modal-target');
+            openModal(modalId);
+        });
+    });
 </script>
