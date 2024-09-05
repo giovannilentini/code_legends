@@ -4,6 +4,11 @@ class MatchmakingQueueController < ApplicationController
   def play_now
     @player = User.find_by(id: session[:user_id])
 
+    ongoing_match = Match.where("player_1_id = ? OR player_2_id = ?", @player.id, @player.id).where(status: 'ongoing').first
+
+    if ongoing_match
+      redirect_to match_path(ongoing_match.id) and return
+    end
   end
 
   def find_opponent
