@@ -52,18 +52,9 @@
       <% end %>
     <% end %>
 
-    <%= form_with url: "#", method: :post, local: true do |form| %>
-      <%= hidden_field_tag :language, @selected_language, id: 'language_field' %>
-      <%= button_tag(type: 'submit', class: "relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900") do %>
-        <svg class="h-6 w-6 text-white-500 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-          <circle cx="9" cy="7" r="4" />
-          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-        </svg>
-        Challenge a Friend
-      <% end %>
-    <% end %>
+    <section>
+      <button onclick="openChallengeModal()" class="relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900">Challenge a Friend</button>
+    </section>
 
     <section>
       <button onclick="openModal()" class="relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900">Cerca Amici</button>
@@ -88,6 +79,30 @@
       <%= button_to 'Logout', 'auth/logout', method: :get, data: { turbo: false }, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900' %>
     </div>
 
+  </div>
+</div>
+
+<div id="challengeModal" class="fixed z-10 inset-0 overflow-y-auto hidden">
+  <div class="flex items-center justify-center min-h-screen px-4">
+    <div class="bg-gray-800 rounded-lg px-6 pt-6 pb-6 text-left overflow-hidden shadow-xl transform transition-all w-full max-w-xl">
+      <div>
+        <h3 class="text-2xl leading-6 font-bold text-gray-900 mb-4">Sfida un Amico</h3>
+        <ul id="friendList" class="mt-4 max-h-72 overflow-y-auto border border-gray-300 rounded-lg">
+          <% current_user.friends.each do |friend| %>
+            <li class="flex items-center justify-between p-4 border-b border-gray-200">
+              <%= form_with url: challenge_requests_path, method: :post do %>
+                <%= link_to friend.username, user_profile_path(friend), class: 'friend-name text-lg text-gray-700 hover:underline' %>
+                <%= hidden_field_tag :friend_id, friend.id %>  <!-- Assicurati di avere il friend_id corretto qui -->
+                <%= submit_tag 'Sfida', class: 'bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full' %>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="mt-6 text-right">
+        <button onclick="closeChallengeModal()" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">Chiudi</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -127,6 +142,14 @@
 
     function closeModal() {
         document.getElementById('searchFriendsModal').classList.add('hidden');
+    }
+
+    function openChallengeModal() {
+        document.getElementById('challengeModal').classList.remove('hidden');
+    }
+
+    function closeChallengeModal() {
+        document.getElementById('challengeModal').classList.add('hidden');
     }
 
     function filterFriends() {

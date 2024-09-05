@@ -8,13 +8,14 @@ class FriendRequestsController < ApplicationController
       flash[:alert] = "Errore nell'invio della richiesta di amicizia."
     end
 
-    redirect_to user_profile_path(params[:user_id])
+    redirect_to play_now_path
   end
 
   def accept
     @friend_request = FriendRequest.find(params[:id])
 
     Friendship.create(user_id: @friend_request.user_id, friend_id: @friend_request.friend_id)
+    Friendship.create(user_id: @friend_request.friend_id, friend_id: @friend_request.user_id)
 
     @friend_request.destroy
 

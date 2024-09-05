@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   root 'welcome#home'
+
   get 'settings/edit'
   get 'settings/update'
   post 'guests/create', to: 'guests#create', as: 'create_guest'
   get '/auth/auth0/callback', to: 'auth0#callback', as: 'auth0_login'
   get '/auth/failure', to: 'auth0#failure', as: 'auth_failure'
   get '/auth/logout', to: 'auth0#logout', as: 'auth_logout'
+
   resources :challenges, only: [:new, :create, :show, :home] do
     member do
       post 'update_status'
@@ -46,6 +48,13 @@ Rails.application.routes.draw do
     resources :chat_messages, only: [:create]
     post 'execute_code', on: :member
     post 'surrender', on: :member
+  end
+
+  resources :challenge_requests, only: [:index, :create] do
+    member do
+      post 'accept'
+      post 'reject'
+    end
   end
 
   get 'database/info'

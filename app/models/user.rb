@@ -15,8 +15,10 @@ class User < ApplicationRecord
   
     has_many :inverse_friendships, class_name: 'Friendship', foreign_key: 'friend_id', dependent: :destroy
     has_many :inverse_friends, through: :inverse_friendships, source: :user
-  
-    # Metodi per verificare il tipo di utente
+
+    has_many :sent_challenge_requests, class_name: 'ChallengeRequest', foreign_key: 'user_id'
+    has_many :received_challenge_requests, class_name: 'ChallengeRequest', foreign_key: 'friend_id'
+
     def guest?
       guest
     end

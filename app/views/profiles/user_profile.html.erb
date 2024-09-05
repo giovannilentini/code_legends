@@ -26,9 +26,6 @@
           <% current_user.friends.each do |friend| %>
             <li><%= link_to friend.username, user_profile_path(friend), class: 'text-blue-400 hover:text-blue-500' %></li>
           <% end %>
-          <% current_user.inverse_friends.each do |friend| %>
-            <li><%= link_to friend.username, user_profile_path(friend), class: 'text-blue-400 hover:text-blue-500' %></li>
-          <% end %>
         </ul>
       </div>
 
@@ -116,11 +113,11 @@
 
   </div>
 
-  <!-- Finestra Modale per le richieste di amicizia -->
+  <!-- Finestra Modale per Visualizzare la Casella Postale -->
   <div id="mailboxModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
     <div class="bg-gray-800 p-8 rounded-3xl shadow-2xl w-full max-w-2xl">
       <div class="flex justify-between items-center mb-4">
-        <h3 class="text-3xl font-bold text-indigo-400">Richieste di Amicizia</h3>
+        <h3 class="text-3xl font-bold text-indigo-400">Richieste</h3>
         <button id="closeMailbox" class="text-gray-400 hover:text-gray-300">&times;</button>
       </div>
       <ul class="space-y-4 text-white">
@@ -128,18 +125,29 @@
           <% @friend_requests.each do |request| %>
             <li>
               <a href="#" class="text-blue-400 hover:text-blue-500" data-request-id="<%= request.id %>">
-                Richiesta da <%= request.sender.username %>
+                Richiesta di amicizia da <%= request.sender.username %>
               </a>
             </li>
           <% end %>
         <% else %>
           <li class="text-gray-400">Nessuna richiesta di amicizia in sospeso.</li>
         <% end %>
+        <% if @challenge_requests.present? %>
+          <% @challenge_requests.each do |challenge| %>
+            <li>
+              <a href="#" class="text-blue-400 hover:text-blue-500 challenge-request" data-challenge-id="<%= challenge.id %>">
+                Richiesta di sfida da <%= challenge.sender.username %>
+              </a>
+            </li>
+          <% end %>
+        <% else %>
+          <li class="text-gray-400">Nessuna richiesta di sfida in sospeso.</li>
+        <% end %>
       </ul>
     </div>
   </div>
 
-  <!-- Finestra Modale per Visualizzare la Richiesta -->
+  <!-- Modale per la richiesta di amicizia -->
   <div id="requestModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
     <div class="bg-gray-800 p-8 rounded-3xl shadow-2xl w-full max-w-2xl">
       <div class="flex justify-between items-center mb-4">
@@ -158,36 +166,81 @@
     </div>
   </div>
 
+  <!-- Modale per la richiesta di sfida -->
+  <div id="challengeModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+    <div class="bg-gray-800 p-8 rounded-3xl shadow-2xl w-full max-w-2xl">
+      <div class="flex justify-between items-center mb-4">
+        <h3 class="text-3xl font-bold text-indigo-400">Richiesta di Sfida</h3>
+        <button id="closeChallenge" class="text-gray-400 hover:text-gray-300">&times;</button>
+      </div>
+      <p class="text-white mb-6" id="challengeMessage"></p>
+      <div class="flex justify-between">
+        <%= form_with url: '#', method: :post, id: 'acceptChallengeForm', class: 'inline' do %>
+          <%= button_tag 'Accetta', class: 'bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full' %>
+        <% end %>
+        <%= form_with url: '#', method: :post, id: 'rejectChallengeForm', class: 'inline' do %>
+          <%= button_tag 'Rifiuta', class: 'bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </section>
 
 <script>
-      document.getElementById('openMailbox').addEventListener('click', function () {
-          document.getElementById('mailboxModal').classList.remove('hidden');
-      });
+    document.addEventListener('DOMContentLoaded', () => {
+        const mailboxModal = document.getElementById('mailboxModal');
+        const openMailboxBtn = document.getElementById('openMailbox');
+        const closeMailboxBtn = document.getElementById('closeMailbox');
 
-      document.getElementById('closeMailbox').addEventListener('click', function () {
-          document.getElementById('mailboxModal').classList.add('hidden');
-      });
+        const requestModal = document.getElementById('requestModal');
+        const closeRequestBtn = document.getElementById('closeRequest');
 
-      document.querySelectorAll('#mailboxModal a').forEach(function (el) {
-          el.addEventListener('click', function (e) {
-              e.preventDefault();
-              const requestId = this.getAttribute('data-request-id');
+        const challengeModal = document.getElementById('challengeModal');
+        const closeChallengeBtn = document.getElementById('closeChallenge');
 
-              const senderName = this.innerText.split(' ')[2];
-              document.getElementById('requestMessage').innerText = `Ciao, sono ${senderName}, vuoi diventare mio amico?`;
+        // Casella postale
+        openMailboxBtn.addEventListener('click', () => {
+            mailboxModal.classList.remove('hidden');
+        });
 
-              document.getElementById('requestModal').classList.remove('hidden');
+        closeMailboxBtn.addEventListener('click', () => {
+            mailboxModal.classList.add('hidden');
+        });
 
-              const acceptForm = document.getElementById('acceptRequestForm');
-              const rejectForm = document.getElementById('rejectRequestForm');
+        // Modale per richieste di amicizia
+        document.querySelectorAll('a[data-request-id]').forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const requestId = link.dataset.requestId;
+                const senderName = link.innerText.split(' ')[3]; // Nome del mittente
+                document.getElementById('requestMessage').innerText = `Ciao, sono ${senderName}, vuoi diventare mio amico?`;
 
-              acceptForm.action = `/friend_requests/${requestId}/accept`;
-              rejectForm.action = `/friend_requests/${requestId}/reject`;
-          });
-      });
+                requestModal.classList.remove('hidden');
+                document.getElementById('acceptRequestForm').action = `/friend_requests/${requestId}/accept`;
+                document.getElementById('rejectRequestForm').action = `/friend_requests/${requestId}/reject`;
+            });
+        });
 
-      document.getElementById('closeRequest').addEventListener('click', function () {
-          document.getElementById('requestModal').classList.add('hidden');
-      });
+        closeRequestBtn.addEventListener('click', () => {
+            requestModal.classList.add('hidden');
+        });
+
+        // Modale per richieste di sfida
+        document.querySelectorAll('.challenge-request').forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const challengeId = link.dataset.challengeId;
+                const senderName = link.innerText.split(' ')[3]; // Nome del mittente
+                document.getElementById('challengeMessage').innerText = `Hai una nuova sfida da ${senderName}. Accetti?`;
+
+                challengeModal.classList.remove('hidden');
+                document.getElementById('acceptChallengeForm').action = `/challenge_requests/${challengeId}/accept`;
+                document.getElementById('rejectChallengeForm').action = `/challenge_requests/${challengeId}/reject`;
+            });
+        });
+
+        closeChallengeBtn.addEventListener('click', () => {
+            challengeModal.classList.add('hidden');
+        });
+    });
 </script>

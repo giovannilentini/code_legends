@@ -19,5 +19,6 @@ class ProfilesController < ApplicationController
 
     @user = User.find(session[:user_id])
     @friend_requests = FriendRequest.where(friend_id: @user.id)
+    @challenge_requests = current_user.received_challenge_requests
   end
 end
