@@ -32,8 +32,8 @@ class MatchesController < ApplicationController
     match.update(status: "finished", winner_id: winner.id)
     MatchmakingQueueService.remove_from_queue(user)
     MatchmakingQueueService.remove_from_queue(winner)
-    ActionCable.server.broadcast "match_#{match.id}", { action: 'redirect_to_home'}
-    ActionCable.server.broadcast "match_#{match.id}", { action: 'redirect_to_home'}
+    ActionCable.server.broadcast "match_#{match.id}", { action: 'redirect_to_play_now'}
+    ActionCable.server.broadcast "match_#{match.id}", { action: 'redirect_to_play_now'}
   end
 
   private

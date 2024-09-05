@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   root 'welcome#home'
-
   get 'settings/edit'
   get 'settings/update'
+  post 'guests/create', to: 'guests#create', as: 'create_guest'
   get '/auth/auth0/callback', to: 'auth0#callback', as: 'auth0_login'
   get '/auth/failure', to: 'auth0#failure', as: 'auth_failure'
   get '/auth/logout', to: 'auth0#logout', as: 'auth_logout'

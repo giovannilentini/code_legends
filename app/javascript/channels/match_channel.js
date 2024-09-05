@@ -12,9 +12,9 @@ function createSubscription(match_id) {
       console.log("Disconnected from the match channel");
     },
     received(data) {
-      if (data.action === 'redirect_to_home') {
+      if (data.action === 'redirect_to_play_now') {
         console.log("MATCH HAS ENDED");
-        window.location.href = `/`;
+        window.location.href = `/play_now`;
         this.disconnected()
       }
     }

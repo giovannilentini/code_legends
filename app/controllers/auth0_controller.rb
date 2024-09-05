@@ -32,7 +32,7 @@ class Auth0Controller < ApplicationController
     cookies[:user_info] = { value: user.id, expires: 1.year.from_now }
 
     session[:user_id] = user.id
-    redirect_to root_path
+    redirect_to play_now_path
   end
 
   def failure
