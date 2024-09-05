@@ -7,6 +7,8 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= action_cable_meta_tag %>
     <style>
       body {
         height: 100%;
@@ -14,7 +16,7 @@
         font-family: 'Arial', sans-serif;
         min-height: 100vh;
         background-size: contain;
-        background-color: #222831; 
+        background-color: #222831;
         background-image: url('<%= asset_path("background.png") %>');
         background-repeat: repeat;
       }

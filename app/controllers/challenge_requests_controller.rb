@@ -28,14 +28,27 @@ class ChallengeRequestsController < ApplicationController
         language: challenge.language,
         status: 'ongoing'
       )
-      challenge.destroy
 
-      redirect_to match_path(match.id) and return
+      # Trova l'oggetto User corrispondente al friend_id
+      friend = User.find(challenge.friend_id)
+
+      # Broadcasting della notifica al creatore della sfida
+      ChallengeNotificationChannel.broadcast_to(
+        User.find(challenge.user_id), # L'utente che ha inviato la richiesta
+        {
+          message: "#{friend.username} ha accettato la tua sfida!", # Usa il nome utente del friend
+          match_id: match.id
+        }
+      )
+
+      challenge.destroy
+      redirect_to match_path(match.id)
     else
       flash[:alert] = "Errore nell'accettare la sfida."
-      redirect_back(fallback_location: play_now_path)
+      redirect_back(fallback_location: root_path)
     end
   end
+
 
   def reject
     challenge = ChallengeRequest.find(params[:id])
