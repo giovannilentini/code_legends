@@ -150,7 +150,7 @@
 
     <!-- List of friends -->
     <ul id="friendList" class="mt-4 max-h-72 overflow-y-auto border border-gray-600 rounded-lg">
-      <% available_friends = User.where.not(id: @current_user.id).where.not(id: @current_user.friends.ids) %>
+      <% available_friends = User.where.not(id: @current_user.id).where.not(id: @current_user.friends.ids).where(guest: false) %>
       <% available_friends.each do |user| %>
         <li class="flex items-center justify-between p-4 border-b border-gray-600">
           <%= link_to user.username, user_profile_path(user), class: 'friend-name text-lg text-white hover:underline' %>
@@ -243,7 +243,6 @@
         }
     }
 
-    // Event listeners for modal buttons
     document.querySelectorAll('[data-modal-target]').forEach(button => {
         button.addEventListener('click', (event) => {
             const modalId = button.getAttribute('data-modal-target');
