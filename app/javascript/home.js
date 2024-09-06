@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var fileIcon = document.getElementById('file-icon');
     var terminal = document.getElementById('terminal-window');
     var utenteElement = document.getElementById('utente');
-
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
     var offset = { x: 0, y: 0 };
     var isDragging = false;
 
@@ -128,3 +129,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+function updateDateTime() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    document.getElementById('current-time').textContent = `${hours}:${minutes}`;
+
+    const day = now.getDate().toString().padStart(2, '0');
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const year = now.getFullYear();
+    document.getElementById('current-date').textContent = `${day}/${month}/${year}`;
+  }
+
+
