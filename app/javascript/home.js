@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var fileIcon = document.getElementById('file-icon');
     var terminal = document.getElementById('terminal-window');
     var utenteElement = document.getElementById('utente');
+    var closeTerminalButton = document.getElementById('close-terminal-button');
 
     var offset = { x: 0, y: 0 };
     var isDragging = false;
@@ -43,6 +44,15 @@ document.addEventListener('DOMContentLoaded', function() {
             duration: 400
         });
         startTypedEffect();
+    }
+
+    closeTerminalButton.addEventListener('click', function() {
+        closeTerminal();
+    });
+
+    function closeTerminal() {
+        terminal.classList.add('hidden');
+        fileIcon.classList.remove('hidden');
     }
 
     function startTypedEffect() {
@@ -119,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else if (e.key === 'Backspace') {
             var content = utenteElement.innerHTML.split('<span class="utente">Guest</span>:$ ').pop();
             var cursorPosition = content.length;
-    
+
             if (cursorPosition > 0) {
                 content = content.slice(0, -1);
                 utenteElement.innerHTML = '<span class="utente">Guest</span>:$ ' + content;}
