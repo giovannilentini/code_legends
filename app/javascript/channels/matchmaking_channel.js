@@ -1,9 +1,9 @@
-import { createConsumer } from "@rails/actioncable"
+import {createConsumer} from "@rails/actioncable"
 
 const consumer = createConsumer()
 function createSubscription() {
     // Create a new subscription
-    const subscription = consumer.subscriptions.create("MatchmakingChannel", {
+    return consumer.subscriptions.create("MatchmakingChannel", {
         connected() {
             console.log("Connected to matchmaking channel");
         },
@@ -17,7 +17,6 @@ function createSubscription() {
             }
         }
     });
-    return subscription;
 }
 
 document.addEventListener('turbo:load', () => {
