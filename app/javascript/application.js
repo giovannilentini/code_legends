@@ -2,7 +2,7 @@
 import "@hotwired/turbo-rails";
 import "controllers";
 import "channels";
-import "./codemirror_setup";
+import "codemirror_setup";
 
 
 

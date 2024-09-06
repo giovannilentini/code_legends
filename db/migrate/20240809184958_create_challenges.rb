@@ -1,8 +1,11 @@
 class CreateChallenges < ActiveRecord::Migration[7.1]
   def change
     create_table :challenges do |t|
-      t.references :code_templates, foreign_key: true
-      t.string  :title
+      t.references :challenge_proposal, foreign_key: true
+      t.string :code_template
+      t.string :test_template
+      t.string :language
+      t.string :title
       t.string :description
       t.string :difficulty
       t.timestamps

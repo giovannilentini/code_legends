@@ -5,7 +5,7 @@ class CreateChallengeProposal < ActiveRecord::Migration[7.1]
       t.string :title, null: false
       t.text :test_cases, null: false
       t.string :description, null: false
-      t.integer :status, default: -1
+      t.string :status, default: "pending"
       t.string :rejection_reason, default: nil
       t.string :language, default: nil
       t.timestamps

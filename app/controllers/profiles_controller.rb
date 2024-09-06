@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   def admin_profile
-    @challenges = Challenge.where(status: -1)
+    @challenges_proposals = ChallengeProposal.where(status: "pending")
     @non_admin_users = User.where(is_admin: false).order('users.username')
   end
 
@@ -14,10 +14,10 @@ class ProfilesController < ApplicationController
   end
 
   def user_profile
-    @accepted_challenges = Challenge.where(status: 1, user_id: session[:user_id])
-    @rejected_challenges = Challenge.where(status: 0, user_id: session[:user_id])
-
     @user = User.find(session[:user_id])
+    @accepted_challenges = ChallengeProposal.where(status: "accepted", user: @user)
+    @rejected_challenges = ChallengeProposal.where(status: "reject", user: @user)
+    @pending_challenges = ChallengeProposal.where(status: "pending", user: @user)
     @friend_requests = FriendRequest.where(friend_id: @user.id)
     @challenge_requests = current_user.received_challenge_requests
   end

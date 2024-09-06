@@ -9,12 +9,11 @@ import { java } from "@codemirror/lang-java";
 import { oneDark } from "@codemirror/theme-one-dark";
 import {create_python_template, create_java_template, create_cpp_template} from "./code_templates";
 // Event that gets triggered when the page loads
-document.addEventListener('DOMContentLoaded', () => {
-    const editorElement = document.querySelector('#code-editor');
-    let languageExtension = python();
-    const initialNewLines = '\n'.repeat(50);
+export function initializeCodeMirror(editorElement, form, hidden_form, language, initial_newline_number){
     let editor;
-
+    let code_template = "helo"
+    let languageExtension = python()
+    const initialNewLines = '\n'.repeat(initial_newline_number);
     if (editorElement) {
         // Handle the languages extensions
         const createEditor = (language)=>{
@@ -33,30 +32,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     languageExtension = cpp();
                     break;
                 default:
-                    currentLanguage = 'python3';
                     languageExtension = python();
             }
             // Creating the Editor using CodeMirror
             const state = EditorState.create({
                 doc: initialCodeContent.concat(initialNewLines),
-                extensions: [basicSetup, indentUnit.of("    "), languageExtension,  keymap.of([indentWithTab]), oneDark]
+                extensions: [basicSetup, indentUnit.of("    "), languageExtension,  EditorView.lineWrapping, keymap.of([indentWithTab]), oneDark]
             });
             editor = new EditorView({
                 state,
                 parent: editorElement
             });
-            window.editor = editor;
         }
-
-        createEditor(currentLanguage);
+        createEditor(language);
     }
-    const form = document.getElementById('execute-form');
-    const hiddenCodeInput = document.getElementById('hidden-code-input');
     if(form){
         form.addEventListener('submit', function(event) {
             // Get the code from the editor and set it to the hidden input field
-            hiddenCodeInput.value = editor.state.doc.toString().trimEnd()
+            hidden_form.value = editor.state.doc.toString().trimEnd()
         });
     }
+}
 
-});
