@@ -18,12 +18,12 @@
       <div class="flex flex-col max-w-7xl bg-gray-800 h-[30rem] p-4 rounded-lg shadow-lg">
         <div class="flex flex-row py-2 justify-between items-center border-b border-gray-700 mb-4">
           <h2 class="text-lg font-bold">CODICE</h2>
-          <h2 class="text-lg font-bold"><%= @selected_language %></h2>
-          <%= hidden_field_tag :language, @selected_language, id: 'hidden-language-selection' %>
+          <h2 class="text-lg font-bold"><%= @challenge.language %></h2>
+
         </div>
         <div class=" h-full">
-          <div id="code-editor" class="bg-black rounded-lg p-2" data-language="<%= @selected_language %>">
-            <%= hidden_field_tag :code, '', id: 'hidden-code-input' %>
+          <div id="code-editor" class="bg-black rounded-lg p-2">
+
           </div>
         </div>
       </div>
@@ -41,6 +41,8 @@
     <div class="flex flex-col min-w-lg p-4 space-y-6 bg-gray-800 rounded-lg shadow-lg">
       <!-- Run Code Button -->
       <%= form_with(url: match_execute_code_path(@match.id), method: :post, id: 'execute-form', class: "overflow-hidden") do %>
+        <%= hidden_field_tag :language, @challenge.language, id: 'hidden-language-selection' %>
+        <%= hidden_field_tag :code, '', id: 'hidden-code-input' %>
         <%= submit_tag "Run Code", id: "submit-code", class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-full transition duration-200" %>
       <% end %>
 
@@ -71,25 +73,26 @@
 </div>
 
 <script type="module">
-    import { initializeCodeMirror } from "codemirror_setup"; // Reference the module by its name
+    import { initializeCodeMirror } from "codemirror_setup";
+    import { create_executable } from "code_generation";
     document.addEventListener("turbo:load", function() {
-        var code_template = <%= @code_template.to_json.html_safe %>;
+        var code_template = <%= @challenge_code_template.to_json.html_safe %>;
         var currentLanguage = <%=@match.language.to_json.html_safe %>;
+        var test_template = <%= @challenge_test_template.to_json.html_safe %>
 
         const form = document.getElementById('execute-form');
         const output = document.getElementById('output');
         const surrenderButton = document.getElementById('surrender-form');
         const editor = document.getElementById('code-editor')
         const hidden_code = document.getElementById('hidden-code-input')
-        initializeCodeMirror(editor, form, hidden_code, currentLanguage, 20);
+        initializeCodeMirror(editor, form, hidden_code, code_template, currentLanguage, 20);
         form.addEventListener('submit', function (e) {
             e.preventDefault(); // Prevent the default form submission
-
             // Gather form data
             const formData = new FormData(form);
-            formData.set("code", editor.state.doc.toString().trimEnd());
-
+            formData.set("code",create_executable(currentLanguage, hidden_code.value, test_template));
             // Perform the AJAX request using Fetch API
+            console.log(create_executable(currentLanguage, hidden_code.value, test_template))
             fetch(form.action, {
                 method: 'POST',
                 headers: {

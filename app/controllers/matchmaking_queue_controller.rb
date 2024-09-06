@@ -22,7 +22,6 @@ class MatchmakingQueueController < ApplicationController
     MatchmakingQueueService.remove_from_queue(player)
     redirect_to play_now_path, notice: "Ricerca avversario annullata."
   end
-
   private
   def set_languages
     @languages = ['Python3', 'Java', 'Cpp']

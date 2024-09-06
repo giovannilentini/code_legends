@@ -32,3 +32,4 @@ pin "@lezer/cpp", to: "@lezer--cpp.js" # @1.1.2
 pin "@rails/actioncable", to: "actioncable.esm.js"
 pin_all_from "app/javascript/channels", under: "channels"
 pin "codemirror_setup", to: "codemirror_setup.js"
+pin "code_generation", to: "code_generation.js"

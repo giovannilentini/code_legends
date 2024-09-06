@@ -7,28 +7,24 @@ import { python } from "@codemirror/lang-python";
 import { cpp } from "@codemirror/lang-cpp";
 import { java } from "@codemirror/lang-java";
 import { oneDark } from "@codemirror/theme-one-dark";
-import {create_python_template, create_java_template, create_cpp_template} from "./code_templates";
+import {create_template} from "./code_generation";
 // Event that gets triggered when the page loads
-export function initializeCodeMirror(editorElement, form, hidden_form, language, initial_newline_number){
+export function initializeCodeMirror(editorElement, form, hidden_form, code_template, language, initial_newline_number){
     let editor;
-    let code_template = "helo"
     let languageExtension = python()
     const initialNewLines = '\n'.repeat(initial_newline_number);
     if (editorElement) {
         // Handle the languages extensions
         const createEditor = (language)=>{
-            let initialCodeContent=""
+            let initialCodeContent = create_template(language, code_template)
             switch (language){
                 case 'python3':
-                    initialCodeContent = create_python_template(code_template)
                     languageExtension = python();
                     break;
                 case 'java':
-                    initialCodeContent = create_java_template(code_template)
                     languageExtension = java();
                     break;
                 case 'cpp':
-                    initialCodeContent = create_cpp_template(code_template)
                     languageExtension = cpp();
                     break;
                 default:
