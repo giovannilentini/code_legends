@@ -1,4 +1,5 @@
-<div id="file-icon" class="profile-icon" ondblclick="toggleProfileModal()">
+<!-- Icona del Profilo -->
+<div id="file-icon" class="profile-icon" ondblclick="gotoProfile()">
   <img src="<%= asset_path('file.png') %>" alt="File Icon">
   <p>My Profile</p>
 </div>
@@ -13,22 +14,17 @@
   <p>Find Opponent</p>
 </div>
 
-<div id="file-icon" class="create-challenge-icon" ondblclick="navigateToCreateChallenge()">
+<div id="file-icon" class="create-challenge-icon" ondblclick="gotoNewChallenge()">
   <img src="<%= asset_path('file.png') %>" alt="Create Challenge Icon">
   <p>Create Challenge</p>
 </div>
 
 <% if @current_user && @current_user.admin? %>
-  <div id="file-icon" class="admin-profile-icon" ondblclick="navigateToAdminProfile()">
+  <div id="file-icon" class="admin-profile-icon" ondblclick="gotoAdminProfile()">
     <img src="<%= asset_path('file.png') %>" alt="Admin Profile Icon">
     <p>Admin Profile</p>
   </div>
 <% end %>
-
-<div id="file-icon" class="user-profile-icon" ondblclick="navigateToUserProfile()">
-  <img src="<%= asset_path('file.png') %>" alt="User Profile Icon">
-  <p>User Profile</p>
-</div>
 
 <!-- Aggiunta della div mancante -->
 <div class="window">
