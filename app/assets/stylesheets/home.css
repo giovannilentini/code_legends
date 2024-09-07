@@ -15,73 +15,171 @@
     position: absolute;
 }
 
-.file-icon:hover {
-    border: 2px solid white;
-    background: #ccc;
+.profile-icon {
+    width: 100px;
+    height: 100px;
+    top: 4%;
+    left: 2%;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    position: absolute;
 }
 
-.file-icon img {
+.challenge-friend-icon {
+    width: 100px;
+    height: 100px;
+    top: 19%;
+    left: 2%;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    position: absolute;
+}
+
+.find-opponent-icon {
+    width: 100px;
+    height: 100px;
+    top: 35%;
+    left: 2%;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    position: absolute;
+}
+
+.create-challenge-icon {
+    width: 100px;
+    height: 100px;
+    top: 51%;
+    left: 2%;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    position: absolute;
+}
+
+.user-profile-icon {
+    width: 100px;
+    height: 100px;
+    top: 67%;
+    left: 2%;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    position: absolute;
+}
+
+
+.file-icon img,
+.profile-icon img,
+.challenge-friend-icon img,
+.find-opponent-icon img,
+.create-challenge-icon img,
+.user-profile-icon img {
     width: 80px;
     height: 80px;
 }
 
-.file-icon p {
+.file-icon p,
+.profile-icon p,
+.challenge-friend-icon p,
+.find-opponent-icon p,
+.create-challenge-icon p,
+.user-profile-icon p {
     margin: 0;
     font-size: 14px;
 }
 
+.file-icon:hover,
+.profile-icon:hover,
+.challenge-friend-icon:hover,
+.find-opponent-icon:hover,
+.create-challenge-icon:hover,
+.user-profile-icon:hover {
+    border: 2px solid white;
+    background: #ccc;
+}
+
+
+/* Terminal Window */
 .terminal-window {
-    border-color: aliceblue;
-    border-width: 2px;
+    border: 2px solid aliceblue;
     text-align: left;
     width: 80vw;
     height: 80vh;
     border-radius: 10px;
     margin: auto;
     position: relative;
-  }
+}
 
-  .hidden {
+.hidden {
     display: none;
 }
 
-  .terminal-window header {
+/* Terminal Header */
+.terminal-window header {
     display: flex;
-    justify-content: space-between; 
-    align-items: center; 
+    justify-content: space-between;
+    align-items: center;
     background: #2f3031;
     height: 30px;
     border-radius: 8px 8px 0 0;
-    padding: 0 10px; 
-  }
-  
-  .terminal-window header .title-program {
+    padding: 0 10px;
+}
+
+.terminal-window header .title-program {
     color: #dddddd;
     margin-top: 2px;
     font-family: "Ubuntu Mono";
     font-size: 12pt;
-  }
-  
-  .terminal-window header .button-container {
+}
+
+.terminal-window header .button-container {
     display: flex;
-    gap: 15px; 
-  }
-  
-  .terminal-window header .button {
+    gap: 15px;
+}
+
+.terminal-window header .button {
     width: 20px;
     height: 20px;
     margin-top: 1px;
     display: inline-flex;
     border-radius: 8px;
-  }
+}
 
-  .terminal-window header .button .exit {
-    margin: 10px;
-  }
-
-  
-  
-  .terminal-window section.terminal {
+/* Terminal Body */
+.terminal-window section.terminal {
     color: white;
     font-family: Menlo, Monaco, "Consolas", "Courier New", "Courier";
     font-size: 13pt;
@@ -93,10 +191,13 @@
     top: 30px;
     bottom: 0;
     overflow: auto;
-  }
-  
-  .utente{color:green}
+}
 
-  .error{color:red}
+/* Text Styles */
+.utente {
+    color: green;
+}
 
-  
+.error {
+    color: red;
+}

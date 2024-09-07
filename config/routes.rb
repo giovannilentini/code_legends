@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   post 'clear_tables', to: 'database#clear_tables'
   get 'play_now', to: 'matchmaking_queue#play_now'
   post 'find_opponent', to: 'matchmaking_queue#find_opponent'
-  post 'cancel_matchmaking', to: 'matchmaking_queue#cancel'
+  post 'cancel_matchmaking', to: 'welcome#cancel'
   get 'waiting', to: 'matches#waiting'
 
   resources :matches, only: [:show]
