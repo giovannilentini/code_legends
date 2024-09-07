@@ -17,19 +17,21 @@
             </tr>
             </thead>
             <tbody>
-            <% @challenges.each do |challenge| %>
+            <% @challenges_proposals.each do |challenge| %>
               <tr class="border-b border-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                <td class="px-6 py-4 text-gray-200"><%= challenge.title %></td>
                 <td class="px-6 py-4 text-gray-200"><%= challenge.description %></td>
-                <td class="px-6 py-4 text-gray-200">
-                  <ul class="list-disc list-inside space-y-2">
-                    <% challenge.test_cases.each do |test_case| %>
-                      <li>Input: <%= test_case.input_example %>, Output: <%= test_case.expected_output %></li>
-                    <% end %>
-                  </ul>
-                </td>
+                <td class="px-6 py-4 text-gray-200"><%= challenge.language%></td>
+                <td class="px-6 py-4 text-gray-200"><%= challenge.user_id %></td>
+                <td class="px-6 py-4 text-gray-200"><%= challenge.test_cases%></td>
                 <td class="px-6 py-4 text-center">
-                  <button type="button" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" onclick="acceptChallenge(<%= challenge.id %>)"> Accetta </button>
-                  <button type="button" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110 mt-2 ml-2" onclick="rejectChallenge(<%= challenge.id %>)"> Rifiuta </button>
+                  <% p "HELLOOOO" %>
+                  <% p challenge.id %>
+                  <%= button_to 'Accetta', new_challenge_path, params: {challenge_proposal_id: challenge.id}, class: 'bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110', method: :get %>
+                  <%= form_with url: reject_challenge_proposal_path(challenge.id), method: :post, id: "reject-form", local: true do %>
+                    <%= hidden_field_tag :reject_motivation, nil, id: "reject-motivation" %>
+                    <%= submit_tag 'Rifiuta', id: "reject-button", class: 'bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110 mt-2 ml-2' %>
+                  <% end %>
                 </td>
               </tr>
             <% end %>
@@ -58,7 +60,7 @@
                 <td class="px-6 py-4 text-gray-200"><%= user.username %></td>
                 <td class="px-6 py-4 text-gray-200"><%= user.email %></td>
                 <td class="px-6 py-4 text-center">
-                  <%= button_to 'Promuovi a Admin', promote_to_admin_profiles_path(user.id), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
+                  <%= button_to 'Promuovi a Admin',  promote_to_admin_profiles_path(user.id), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
                 </td>
               </tr>
             <% end %>
@@ -105,63 +107,31 @@
 
     window.onload = loadSectionStates;
 
-    function acceptChallenge(challengeId) {
-        saveSectionStates();
+    document.addEventListener("turbo:load", () => {
+        const rejectButton = document.querySelector("#reject-button");
+        const rejectForm = document.querySelector("#reject-form");
+        const rejectMotivationField = document.querySelector("#reject-motivation");
 
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = `/challenges/${challengeId}/update_status`;
+        if (rejectButton && rejectForm && rejectMotivationField) {
+            rejectButton.addEventListener("click", (event) => {
+                // Prevent default form submission
+                event.preventDefault();
 
-        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        const csrfInput = document.createElement('input');
-        csrfInput.type = 'hidden';
-        csrfInput.name = 'authenticity_token';
-        csrfInput.value = csrfToken;
-        form.appendChild(csrfInput);
+                // Prompt user for rejection reason
+                const reason = prompt('Inserisci il motivo del rifiuto:');
+                if (reason !== null && reason.trim() !== '') {
+                    // Set the hidden field with the rejection reason
+                    rejectMotivationField.value = reason.trim();
 
-        const statusInput = document.createElement('input');
-        statusInput.type = 'hidden';
-        statusInput.name = 'status';
-        statusInput.value = 1;
-        form.appendChild(statusInput);
-
-        document.body.appendChild(form);
-        form.submit();
-    }
-
-    function rejectChallenge(challengeId) {
-        const reason = prompt('Inserisci il motivo del rifiuto:');
-        if (reason !== null) {
-            if (reason.trim() !== "") {
-                saveSectionStates();
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = `/challenges/${challengeId}/update_status`;
-
-                const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-                const csrfInput = document.createElement('input');
-                csrfInput.type = 'hidden';
-                csrfInput.name = 'authenticity_token';
-                csrfInput.value = csrfToken;
-                form.appendChild(csrfInput);
-
-                const statusInput = document.createElement('input');
-                statusInput.type = 'hidden';
-                statusInput.name = 'status';
-                statusInput.value = 0;
-                form.appendChild(statusInput);
-
-                const reasonInput = document.createElement('input');
-                reasonInput.type = 'hidden';
-                reasonInput.name = 'rejection_reason';
-                reasonInput.value = reason;
-                form.appendChild(reasonInput);
-
-                document.body.appendChild(form);
-                form.submit();
-            } else {
-                alert("Il motivo del rifiuto non può essere vuoto.");
-            }
+                    // Submit the form
+                    rejectForm.submit();
+                } else {
+                    alert("Il motivo del rifiuto non può essere vuoto.");
+                }
+            });
         }
-    }
+    });
+
+
+
 </script>

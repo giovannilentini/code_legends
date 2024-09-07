@@ -1,61 +1,98 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>CodeLegends</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= action_cable_meta_tag %>
-    <style>
+<head>
+  <title>CodeLegends</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+  <%= action_cable_meta_tag %>
+  <style>
       body {
-        height: 100%;
-        margin: 0;
-        font-family: 'Arial', sans-serif;
-        min-height: 100vh;
-        background-size: contain;
-        background-color: #222831;
-        background-image: url('<%= asset_path("background.png") %>');
-        background-repeat: repeat;
+          height: 100%;
+          margin: 0;
+          font-family: 'Arial', sans-serif;
+          min-height: 100vh;
+          background-size: contain;
+          background-color: #222831;
+          background-image: url('<%= asset_path("background.png") %>');
+          background-repeat: repeat;
       }
-    </style>
-  </head>
-  <body class="text-white h-full flex justify-center font-sans">
-  <main class="container flex">
-      <%= yield %>
-    <% if flash[:alert] %>
-      <div id="alert-popup" class="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 w-1/2 bg-red-100 border border-red-500 text-red-700 rounded-lg p-4 shadow-lg opacity-0 transition-opacity duration-500 ease-in-out">
-        <span id="alert-message" class="font-medium"></span>
-      </div>
-    <% end %>
-    </main>
-
-
-
-  <script>
-      // Function to show the alert popup
-      function showAlert(message) {
-          const popup = document.getElementById('alert-popup');
-          const messageElement = document.getElementById('alert-message');
-          messageElement.textContent = message;
-          popup.classList.remove('opacity-0');
-          popup.classList.add('opacity-100');
-
-          // Hide the alert after 5 seconds
-          setTimeout(() => {
-              popup.classList.remove('opacity-100');
-              popup.classList.add('opacity-0');
-          }, 5000);
+      .cm-editor{
+          height: 390px;
+          overflow-y: auto;
       }
+      .flash-popup {
+          z-index: 10;
+          position: fixed;
+          top: 1rem;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 80%;
+          max-width: 400px;
+          padding: 1rem;
+          border-radius: 0.5rem;
+          box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+          opacity: 0;
+          transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+      }
+      .flash-popup.show {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+      }
+      .flash-popup.alert {
+          background-color: #f8d7da;
+          color: #721c24;
+      }
+      .flash-popup.notice {
+          background-color: #d1ecf1;
+          color: #0c5460;
+      }
+      .flash-popup.success {
+          background-color: #d4edda;
+          color: #155724;
+      }
+  </style>
+</head>
+<body class="text-white h-full flex justify-center font-sans">
+<main class="container flex">
+  <% if flash[:alert] || flash[:notice] || flash[:success] %>
+    <div id="flash-popup" class="flash-popup">
+      <span id="flash-message"></span>
+    </div>
+  <% end %>
+  <%= yield %>
+</main>
 
-      // Example of how to trigger the alert from the server-side
-      document.addEventListener('DOMContentLoaded', function() {
-          <% if flash[:alert] %>
-          showAlert("<%= j flash[:alert] %>");
-          <% end %>
-      });
-  </script>
-  </body>
+<script>
+    document.addEventListener('turbo:load', function() {
+        const flashPopup = document.getElementById('flash-popup');
+        const flashMessage = document.getElementById('flash-message');
+
+        if (flashPopup) {
+            // Determine the flash type and message
+            const flashType = '<%= flash.keys.first || "" %>';
+            const flashText = '<%= j flash[flash.keys.first] || "" %>';
+
+            // Ensure flashType is a valid class name
+            const validFlashTypes = ['alert', 'notice', 'success'];
+            const validType = validFlashTypes.includes(flashType) ? flashType : '';
+
+            // Set the message and class based on flash type
+            flashMessage.textContent = flashText;
+            if (validType) {
+                flashPopup.classList.add('show', validType);
+            } else {
+                flashPopup.classList.add('show');
+            }
+
+            // Hide the popup after 5 seconds
+            setTimeout(() => {
+                flashPopup.classList.remove('show');
+            }, 5000);
+        }
+    });
+</script>
+</body>
 </html>

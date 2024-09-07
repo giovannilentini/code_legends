@@ -41,5 +41,8 @@ document.addEventListener("turbo:load", () => {
     }
 
     // Ensure chat is scrolled to the bottom on initial load
-    scrollToBottom(chatContainer);
+    if(chatContainer){
+        scrollToBottom(chatContainer);
+    }
+
 });

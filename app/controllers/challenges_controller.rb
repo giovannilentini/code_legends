@@ -1,44 +1,32 @@
 class ChallengesController < ApplicationController
-  before_action :set_challenge, only: [:update_status]
-
   def new
-    @challenge = Challenge.new
-    @challenge.test_cases.build
+    @challenge_proposal = ChallengeProposal.find_by(id: params[:challenge_proposal_id])
+    @challenge = Challenge.build
   end
 
+  def show
+
+  end
   def create
-    @challenge = current_user.challenges.new(challenge_params)
 
+    @challenge = Challenge.new(challenge_params)
     if @challenge.save
-      redirect_to @challenge, notice: 'Sfida creata con successo.'
+      ChallengeProposal.find_by(id: @challenge.challenge_proposal_id).update(status: "accepted")
+      flash[:success] = "Challenge successfully created!"
+      redirect_to admin_profile_path
     else
-      render :new
-    end
-  end
-
-  def update_status
-    @challenge.status = params[:status]
-
-    if @challenge.status.to_i == 0
-      @challenge.rejection_reason = params[:rejection_reason]
-    else
-      @challenge.rejection_reason = nil
-    end
-
-    if @challenge.save
-      redirect_to admin_profile_path, notice: 'Stato aggiornato con successo.'
-    else
-      redirect_to admin_profile_path, alert: 'Errore nell\'aggiornamento dello stato.'
+      Rails.logger.error(@challenge.errors)
+      flash[:alert] = "Something went wrong. Please try again."
+      redirect_to admin_profile_path
     end
   end
 
   private
-
   def set_challenge
     @challenge = Challenge.find(params[:id])
   end
 
   def challenge_params
-    params.require(:challenge).permit(:description, test_cases_attributes: [:input_example, :expected_output, :input_type, :output_type])
+    params.require(:challenge).permit(:title, :description, :language, :difficulty, :code_template, :test_template, :challenge_proposal_id)
   end
 end

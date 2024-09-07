@@ -7,13 +7,6 @@ Rails.application.routes.draw do
   get '/auth/auth0/callback', to: 'auth0#callback', as: 'auth0_login'
   get '/auth/failure', to: 'auth0#failure', as: 'auth_failure'
   get '/auth/logout', to: 'auth0#logout', as: 'auth_logout'
-
-  resources :challenges, only: [:new, :create, :show, :home] do
-    member do
-      post 'update_status'
-    end
-  end
-
   get 'profile', to: 'profiles#user_profile', as: 'personal_profile'
   get 'admin_profile', to: 'profiles#admin_profile', as: 'admin_profile'
 
@@ -24,7 +17,7 @@ Rails.application.routes.draw do
   get 'users/:id', to: 'users#show', as: 'user_profile'
   post 'users/:id/add_friend', to: 'friendships#create', as: 'add_friend'
 
-  resource :settings, only: [:edit, :update]
+
 
   resources :matches, only: [:show] do
     post 'execute_code', to: 'matches#execute_code'
@@ -35,6 +28,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show] do
     resources :friend_requests, only: [:create]
+    resource :settings, only: [:edit, :update]
   end
 
   resources :friend_requests do
@@ -64,6 +58,14 @@ Rails.application.routes.draw do
   post 'find_opponent', to: 'matchmaking_queue#find_opponent'
   post 'cancel_matchmaking', to: 'welcome#cancel'
   get 'waiting', to: 'matches#waiting'
+  resources :challenge_proposals, only: [:new, :create, :show]
 
+  resources :challenge_proposals do
+    member do
+      post 'reject'
+    end
+  end
+
+  resources :challenges, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :matches, only: [:show]
 end

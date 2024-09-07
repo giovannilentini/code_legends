@@ -28,9 +28,6 @@
     </div>
   <% end %>
 
-  <!-- Finestra Modale del Profilo -->
-  <%= render 'profile_modal' %>
-
   <div class="absolute top-5 right-0 mb-4 ml-4">
     <div class="relative flex h-[30px] w-40 items-center justify-center overflow-hidden bg-transparent text-white transition-all border border-gray-400 hover:border-gray-600 before:absolute before:h-0 before:w-0 before:rounded-full before:bg-gray-600 before:duration-500 before:ease-out hover:before:h-56 hover:before:w-56 hover:before:opacity-100 font-mono">
       <%= button_to 'Logout', 'auth/logout', method: :get, data: { turbo: false }, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900' %>
@@ -145,7 +142,7 @@
 
 <script>
     function gotoNewChallenge() {
-        window.location.href = '/challenges/new';
+        window.location.href = '/challenge_proposals/new';
     }
 
     function gotoProfile() {

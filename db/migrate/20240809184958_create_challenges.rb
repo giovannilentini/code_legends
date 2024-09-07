@@ -1,10 +1,13 @@
 class CreateChallenges < ActiveRecord::Migration[7.1]
   def change
     create_table :challenges do |t|
-      t.references :user, null: false, foreign_key: true
+      t.references :challenge_proposal, foreign_key: true
+      t.string :code_template
+      t.string :test_template
+      t.string :language
+      t.string :title
       t.string :description
-      t.integer :status, default: -1
-      t.string :rejection_reason, default: nil
+      t.string :difficulty
       t.timestamps
     end
   end

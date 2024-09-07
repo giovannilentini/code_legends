@@ -1,9 +1,27 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+
+Challenge.destroy_all
+TestCase.destroy_all
+CodeTemplate.destroy_all
+
+
+
+challenge = Challenge.create!(
+  title: "PrintHello",
+  description: "Print Hello a number of times",
+  difficulty: "Easy"
+)
+code_template = CodeTemplate.create!(
+  python: "def print_hello(self, num: int) -> int:\n\n\t",
+  java: "public static String print_hello(int num){\n\n\t}",
+  cpp: "String print_hello(int num){\n\n\n\t}",
+  challenge_id: challenge.id
+)
+
+challenge.update!(code_templates_id: code_template.id)
+
+TestCase.create!(
+  python: 'Solution.print_hello(2)',
+  java: 'Solution.print_hello(2)',
+  cpp: 'Solution::print_hello(2)',
+  challenge_id: challenge.id
+)

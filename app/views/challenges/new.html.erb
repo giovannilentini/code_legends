@@ -1,97 +1,63 @@
-<div id="file-icon" class="profile-icon" ondblclick="toggleProfileModal()">
-  <img src="<%= asset_path('file.png') %>" alt="File Icon">
-  <p>My Profile</p>
-</div>
+<div class="w-full mx-auto p-8 bg-gray-800 rounded-lg shadow-md overflow-auto">
+  <h2 class="text-2xl font-bold text-white mb-4">Challenge Details</h2>
 
-<div id="file-icon" class="challenge-friend-icon" ondblclick="toggleChallengeModal()">
-  <img src="<%= asset_path('file.png') %>" alt="Challenge a Friend Icon">
-  <p>Challenge a Friend</p>
-</div>
-
-<div id="file-icon" class="find-opponent-icon" ondblclick="gotoPlayNow()">
-  <img src="<%= asset_path('file.png') %>" alt="Find Opponent Icon">
-  <p>Find Opponent</p>
-</div>
-
-<div id="file-icon" class="create-challenge-icon" ondblclick="navigateToCreateChallenge()">
-  <img src="<%= asset_path('file.png') %>" alt="Create Challenge Icon">
-  <p>Create Challenge</p>
-</div>
-
-<% if @current_user && @current_user.admin? %>
-  <div id="file-icon" class="admin-profile-icon" ondblclick="navigateToAdminProfile()">
-    <img src="<%= asset_path('file.png') %>" alt="Admin Profile Icon">
-    <p>Admin Profile</p>
+  <!-- Challenge Title -->
+  <div class="mb-4">
+    <h3 class="text-lg font-semibold text-white">Title:</h3>
+    <p class="text-gray-300"><%= @challenge_proposal.title %></p>
   </div>
-<% end %>
 
-<div id="file-icon" class="user-profile-icon" ondblclick="navigateToUserProfile()">
-  <img src="<%= asset_path('file.png') %>" alt="User Profile Icon">
-  <p>User Profile</p>
-</div>
+  <!-- Challenge Description -->
+  <div class="mb-4">
+    <h3 class="text-lg font-semibold text-white">Description:</h3>
+    <p class="text-gray-300"><%= @challenge_proposal.description %></p>
+  </div>
+  <div class="mb-4">
+    <h3 class="text-lg font-semibold text-white">Description:</h3>
+    <p class="text-gray-300"><%= @challenge_proposal.language %></p>
+  </div>
 
-<div id="window" class="window">
-  <header>
-    <div class="title-program">CodeLegends</div>
-    <div class="button-container">
-      <div class="button minus">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
-        </svg>
-      </div>
-      <div class="button resize">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 8.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v8.25A2.25 2.25 0 0 0 6 16.5h2.25m8.25-8.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-7.5A2.25 2.25 0 0 1 8.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 0 0-2.25 2.25v6" />
-        </svg>
-      </div>
-      <div class="button exit" id="close-terminal-button">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-        </svg>
-      </div>
+  <!-- Form Start -->
+  <%= form_with(model: @challenge, id: 'submit-form', class: "overflow-hidden flex flex-col") do |f| %>
+
+    <!-- Difficulty Selection -->
+    <div class="mb-4">
+      <label for="difficulty" class="block text-white font-bold mb-2">Difficulty:</label>
+      <%= f.select :difficulty, [['Easy', 'easy'], ['Medium', 'medium'], ['Hard', 'hard']],
+                   { prompt: 'Select Difficulty' },
+                   { id: 'difficulty', class: 'w-full p-2 bg-gray-700 text-white rounded-lg', required: true } %>
     </div>
-  </header>
 
-  <section class="terminal">
-    <div class="container mx-auto h-screen overflow-auto">
-      <section class="flex items-center justify-center min-h-full bg-gradient-to-br from-gray-900 to-gray-700 bg-opacity-80">
-        <div class="text-center px-8 py-16 w-full max-w-3xl">
-          <h2 class="text-5xl font-extrabold mb-12 text-white">Crea una nuova sfida</h2>
-
-          <%= form_with url: challenges_path, model: @challenge, method: :post, class: "bg-gray-800 p-12 rounded-2xl shadow-2xl" do |f| %>
-
-            <div class="mb-10">
-              <%= f.label :description, "Descrizione dell'esercizio", class: "block text-white text-left text-xl font-semibold mb-4" %>
-              <%= f.text_area :description, rows: 4, class: "w-full px-4 py-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-4 focus:ring-blue-500 focus:border-transparent focus:outline-none resize-none transition duration-300 ease-in-out transform hover:scale-105" %>
-            </div>
-
-            <div class="mb-6">
-              <h3 class="text-3xl text-center text-white mb-8 font-semibold">Input e Output Attesi</h3>
-
-              <div id="input-output-pairs" class="space-y-10">
-                <%= f.fields_for :test_cases do |test_case|  %>
-                  <div class="test_case_fields">
-                    <%= render 'test_case_fields', f: test_case %>
-                  </div>
-
-                <% end %>
-              </div>
-
-              <div class="text-center mt-16 mb-6">
-                <button type="button" id="add-test-case" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-2 px-8 rounded-full transition duration-300 transform hover:scale-110">Aggiungi un'altra coppia</button>
-              </div>
-            </div>
-
-            <div class="flex justify-center mt-8 space-x-8">
-              <%= f.submit "Propose", class: "bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-110" %>
-              <%= link_to "Quit", play_now_path, class: "bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-110" %>
-            </div>
-
-          <% end %>
+    <div class="flex flex-col justify-center">
+      <!-- Code Skeleton Editor -->
+      <div class="mb-6">
+        <label for="code_skeleton" class="block text-white font-bold mb-2">Code Skeleton</label>
+        <div id="code_skeleton" class="w-full p-4 bg-gray-700 text-white rounded-lg">
+          <!-- CodeMirror will go inside this div -->
         </div>
-      </section>
+      </div>
+
+      <!-- Test Skeleton Editor -->
+      <div class="mb-6">
+        <label for="test_skeleton" class="block text-white font-bold mb-2">Test Skeleton</label>
+        <div id="test_skeleton" class="w-full p-4 bg-gray-700 text-white rounded-lg">
+          <!-- CodeMirror will go inside this div -->
+        </div>
+      </div>
     </div>
-  </section>
+
+    <!-- Hidden Fields for CodeMirror Content -->
+    <%= f.hidden_field :code_template, id: 'hidden-code-skeleton-input' %>
+    <%= f.hidden_field :test_template, id: 'hidden-test-skeleton-input' %>
+    <%= f.hidden_field :title, value: @challenge_proposal.title %>
+    <%= f.hidden_field :description, value: @challenge_proposal.description %>
+    <%= f.hidden_field :language, value: @challenge_proposal.language %>
+    <%= f.hidden_field :challenge_proposal_id, value: @challenge_proposal.id %>
+    <!-- Submit Button -->
+    <div class="flex justify-end">
+      <%= f.submit "Save Challenge", class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-full" %>
+    </div>
+  <% end %>
 </div>
 
 <div class="play-now">
@@ -129,16 +95,7 @@
   </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const closeButton = document.getElementById('close-terminal-button');
-
-        closeButton.addEventListener('click', function() {
-            document.getElementById('window').style.display = 'none';
-            window.location.href = '/';
-        });
-    });
-
+<script type="module">
     updateDateTime();
     setInterval(updateDateTime, 1000);
 
@@ -157,59 +114,17 @@
     const container = document.getElementById('input-output-pairs');
     let index = container.querySelectorAll('.added-test-case').length; // Start from the number of existing cases
 
-    document.getElementById('add-test-case').addEventListener('click', function(event) {
-        event.preventDefault();
+    import { initializeCodeMirror } from "codemirror_setup"; // Reference the module by its name
 
-        // Increment the index for the new test case
-        index++;
+    let code_template = <%= @code_template.to_json.html_safe %>;
+    let currentLanguage = <%= @challenge_proposal.language.to_json.html_safe %>;
 
-        const newTestCaseHTML = `
-            <div class="added-test-case flex justify-center space-x-8 mb-6">
-                <div class="w-1/2 flex flex-row content-start">
-                    <div class="flex flex-col justify-center">
-                        <label for="challenge_test_cases_attributes_${index}_input_example" class="block text-white text-center text-xl font-semibold mb-2">Input</label>
-                        <input type="text" name="challenge[test_cases_attributes][${index}][input_example]" id="challenge_test_cases_attributes_${index}_input_example" class="w-full px-6 py-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-4 focus:ring-blue-500 focus:border-transparent focus:outline-none transition duration-300 ease-in-out transform hover:scale-105" />
-                    </div>
-                    <div class="flex flex-col justify-center">
-                        <label for="challenge_test_cases_attributes_${index}_input_type" class="block ml-5 text-white text-center text-xl font-semibold mb-2">Type</label>
-                        <select name="challenge[test_cases_attributes][${index}][input_type]" id="challenge_test_cases_attributes_${index}_input_type" class="w-full ml-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-4 focus:ring-blue-500 focus:border-transparent focus:outline-none transition duration-300 ease-in-out transform hover:scale-105">
-                            <option value="string">String</option>
-                            <option value="integer">Integer</option>
-                            <option value="float">Float</option>
-                            <option value="boolean">Boolean</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="w-1/2 flex flex-row">
-                    <div class="flex flex-col justify-center">
-                        <label for="challenge_test_cases_attributes_${index}_expected_output" class="block text-white text-center text-xl font-semibold mb-2">Output</label>
-                        <input type="text" name="challenge[test_cases_attributes][${index}][expected_output]" id="challenge_test_cases_attributes_${index}_expected_output" class="w-full px-6 py-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-4 focus:ring-blue-500 focus:border-transparent focus:outline-none transition duration-300 ease-in-out transform hover:scale-105" />
-                    </div>
-                    <div class="flex flex-col justify-center">
-                        <label for="challenge_test_cases_attributes_${index}_output_type" class="block text-white text-center text-xl font-semibold mb-2">Type</label>
-                        <select name="challenge[test_cases_attributes][${index}][output_type]" id="challenge_test_cases_attributes_${index}_output_type" class="w-full ml-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:ring-4 focus:ring-blue-500 focus:border-transparent focus:outline-none transition duration-300 ease-in-out transform hover:scale-105">
-                            <option value="string">String</option>
-                            <option value="integer">Integer</option>
-                            <option value="float">Float</option>
-                            <option value="boolean">Boolean</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-        `;
+    const code_skeleton = document.getElementById('code_skeleton');
+    const form = document.getElementById('submit-form');
+    const hidden_code_skeleton_form = document.getElementById('hidden-code-skeleton-input');
+    const test_skeleton = document.getElementById('test_skeleton');
+    const hidden_test_skeleton_form = document.getElementById('hidden-test-skeleton-input');
 
-        container.insertAdjacentHTML('beforeend', newTestCaseHTML);
-    });
-
-    function clearForm() {
-        const form = document.querySelector('form');
-        if (form) {
-            form.reset(); // Reset form fields
-            // Optionally, remove all dynamically added test cases
-            container.querySelectorAll('.added-test-case').forEach(testCase => testCase.remove());
-            index = 0; // Reset the index
-        }
-    }
-
-    clearForm();
+    initializeCodeMirror(code_skeleton, form, hidden_code_skeleton_form, currentLanguage, 20);
+    initializeCodeMirror(test_skeleton, form, hidden_test_skeleton_form, currentLanguage, 20);
 </script>
