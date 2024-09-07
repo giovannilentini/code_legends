@@ -18,8 +18,7 @@ function create_cpp_execution(code, test){
     return code.concat(res)
 }
 function create_python_execution(code, test){
-    let res = `\nif __name__ == "__main__":\n\t${test}`
-    return code.concat(res)
+    return code.concat("\n"+test)
 }
 
 export function create_template(language, code){

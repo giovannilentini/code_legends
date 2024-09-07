@@ -65,15 +65,13 @@
 <script type="module">
     import { initializeCodeMirror } from "codemirror_setup"; // Reference the module by its name
 
-    let code_template = <%= @code_template.to_json.html_safe %>;
     let currentLanguage = <%= @challenge_proposal.language.to_json.html_safe %>;
-
     const code_skeleton = document.getElementById('code_skeleton');
     const form = document.getElementById('submit-form');
     const hidden_code_skeleton_form = document.getElementById('hidden-code-skeleton-input');
     const test_skeleton = document.getElementById('test_skeleton');
     const hidden_test_skeleton_form = document.getElementById('hidden-test-skeleton-input');
 
-    initializeCodeMirror(code_skeleton, form, hidden_code_skeleton_form, currentLanguage, 20);
-    initializeCodeMirror(test_skeleton, form, hidden_test_skeleton_form, currentLanguage, 20);
+    initializeCodeMirror(code_skeleton, form, hidden_code_skeleton_form, "", currentLanguage, 20);
+    initializeCodeMirror(test_skeleton, form, hidden_test_skeleton_form, "", currentLanguage, 20);
 </script>

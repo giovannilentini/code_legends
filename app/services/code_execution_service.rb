@@ -3,7 +3,7 @@ class CodeExecutionService
   require 'json'
   def self.execute_code(script, language)
     chosen_language = 0
-    if language == "python"
+    if language == "python3"
       chosen_language = 5
     elsif language == "java"
       chosen_language = 4
@@ -25,6 +25,8 @@ class CodeExecutionService
     request["Content-Type"] = 'application/json'
     request.body = req_params.to_json
     response = http.request(request)
+    p "RESPONSE"
+    p response.read_body
     return response
   end
 

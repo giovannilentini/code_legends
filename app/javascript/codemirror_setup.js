@@ -16,7 +16,12 @@ export function initializeCodeMirror(editorElement, form, hidden_form, code_temp
     if (editorElement) {
         // Handle the languages extensions
         const createEditor = (language)=>{
-            let initialCodeContent = create_template(language, code_template)
+            let initialCodeContent
+            if(code_template!==""){
+                initialCodeContent = code_template
+            }else{
+                initialCodeContent = "Hello, world!"
+            }
             switch (language){
                 case 'python3':
                     languageExtension = python();

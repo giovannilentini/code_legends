@@ -1,7 +1,6 @@
 class MatchesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_match
-  before_action :set_challenge
   def show
     # Ensure that only the participants can view the match
     unless [@match.player_1, @match.player_2].include?(current_user)
@@ -37,13 +36,16 @@ class MatchesController < ApplicationController
 
   private
   def set_match
-    @match = Match.find_by(id: params[:id])
+    @match = Match.find_by(id: params[:id] || params[:match_id])
+    if @match.challenge_id.nil?
+      @challenge = Challenge.find(Challenge.where(language: @match.language).pluck(:id).sample)
+      @match.update(:challenge_id => @challenge.id)
+    else
+      @challenge = Challenge.find_by(id: @match.challenge_id)
+    end
   end
 
   def set_challenge
-    @challenge= Challenge.find_by(id: 2)
-    @challenge_code_template = @challenge.code_template
-    @challenge_test_template = @challenge.test_template
-  end
 
+  end
 end
