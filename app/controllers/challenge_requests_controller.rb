@@ -12,7 +12,7 @@ class ChallengeRequestsController < ApplicationController
     )
 
     if @challenge_request.save
-      redirect_to play_now_path, notice: 'Richiesta di sfida inviata con successo!'
+      redirect_to root_path, notice: 'Richiesta di sfida inviata con successo!'
     else
       render :new, alert: "Si è verificato un errore nell'invio della richiesta."
     end
@@ -57,7 +57,7 @@ class ChallengeRequestsController < ApplicationController
     else
       flash[:alert] = "Si è verificato un errore nel rifiuto della richiesta."
     end
-    redirect_back(fallback_location: play_now_path)
+    redirect_back(fallback_location: root_path)
   end
 
   private
