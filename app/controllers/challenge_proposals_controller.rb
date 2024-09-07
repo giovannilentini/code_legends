@@ -1,4 +1,7 @@
 class ChallengeProposalsController < ApplicationController
+  before_action :set_challenge_proposal, only: [:show, :reject, :destroy]
+  before_action :authorize_user, only: [:reject, :destroy]
+  before_action :authenticate_user!, only: [:create, :new]  # Assicurati che solo utenti registrati possano accedere a queste azioni
 
   def show
     @challenge_proposal = ChallengeProposal.find(params[:id])
