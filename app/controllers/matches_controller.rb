@@ -2,21 +2,17 @@ class MatchesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_match
   def show
-    # TODO
-    #@code_template = retrieve_code_template(@challenge_code_template, @match.language)
     # Ensure that only the participants can view the match
     unless [@match.player_1, @match.player_2].include?(current_user)
       redirect_to root_path, alert: 'You are not authorized to view this match.'
     end
   end
   def execute_code
-    selected_language = @match.language
-    response = JdoodleService.execute_code(params[:code], selected_language)
+    response = CodeExecutionService.execute_code(params[:code], params[:language])
     unless response.nil?
-      if response.code == "200"
-        @result = JSON.parse(response.body)["output"]
-      else
-        @result = JSON.parse(response.body)["error"]
+      @result = JSON.parse(response.body)["Result"]
+      unless @result
+        @result = JSON.parse(response.body)["Errors"]
       end
     end
     render json: { output:  @result}
@@ -40,21 +36,16 @@ class MatchesController < ApplicationController
 
   private
   def set_match
-    @match = Match.find_by(id: params[:id])
+    @match = Match.find_by(id: params[:id] || params[:match_id])
+    if @match.challenge_id.nil?
+      @challenge = Challenge.find(Challenge.where(language: @match.language).pluck(:id).sample)
+      @match.update(:challenge_id => @challenge.id)
+    else
+      @challenge = Challenge.find_by(id: @match.challenge_id)
+    end
   end
 
   def set_challenge
-    @challenge= Challenge.find_by(id: 1)
-    @challenge_code_template = CodeTemplate.find_by(challenge_id: @challenge.id)
-  end
 
-  def retrieve_code_template(code_template, language)
-    if language == "python3"
-      code_template.python
-    elsif language == "java"
-      code_template.java
-    elsif language=="cpp"
-      code_template.cpp
-    end
   end
 end
