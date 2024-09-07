@@ -133,7 +133,7 @@
 
 
 /* Terminal Window */
-.terminal-window {
+.window {
     border: 2px solid aliceblue;
     text-align: left;
     width: 80vw;
@@ -148,7 +148,7 @@
 }
 
 /* Terminal Header */
-.terminal-window header {
+.window header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -158,19 +158,19 @@
     padding: 0 10px;
 }
 
-.terminal-window header .title-program {
+.window header .title-program {
     color: #dddddd;
     margin-top: 2px;
     font-family: "Ubuntu Mono";
     font-size: 12pt;
 }
 
-.terminal-window header .button-container {
+.window header .button-container {
     display: flex;
     gap: 15px;
 }
 
-.terminal-window header .button {
+.window header .button {
     width: 20px;
     height: 20px;
     margin-top: 1px;
@@ -179,7 +179,7 @@
 }
 
 /* Terminal Body */
-.terminal-window section.terminal {
+.window section.terminal {
     color: white;
     font-family: Menlo, Monaco, "Consolas", "Courier New", "Courier";
     font-size: 13pt;
