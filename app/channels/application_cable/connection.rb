@@ -13,7 +13,6 @@ module ApplicationCable
       if @current_user
         @current_user
       else
-        flash[:alert] = "Login first"
         reject_unauthorized_connection
       end
     end
