@@ -3,6 +3,18 @@ class MatchmakingQueueController < ApplicationController
   before_action :set_languages
   def play_now
     @player = User.find_by(id: session[:user_id])
+    @last_matches = Match.where(player_1_id: @player.id).or(Match.where(player_2_id: @player.id))
+                         .order(updated_at: :desc).limit(5)
+
+    @match_details = @last_matches.map do |match|
+      opponent_id = match.player_1_id == current_user.id ? match.player_2_id : match.player_1_id
+      match_result = match.winner_id == current_user.id ? "Win" : "Lose"
+      {
+        opponent: User.find_by(id: opponent_id).username,
+        result: match_result,
+        date: match.updated_at.strftime("%B %d, %Y")
+      }
+    end
   end
 
   def find_opponent

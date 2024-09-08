@@ -71,8 +71,18 @@
           </div>
           <div class="flex flex-col w-1/2 space-y-2 px-4">
             <h2 class="text-2xl font-semibold text-[#EEEEEE]">Your Recent Games</h2>
+            <div class="space-y-4">
+              <% @match_details.each do |match| %>
+                <div class="bg-gray-800 p-4 rounded-lg shadow-md">
+                  <h3 class="text-xl font-semibold text-[#EEEEEE]">Opponent: <%= match[:opponent] %></h3>
+                  <p class="text-gray-400">Date: <%= match[:date] %></p>
+                  <p class="text-gray-400">Result: <%= match[:result] %></p>
+                </div>
+              <% end %>
+            </div>
           </div>
         </div>
+
 
         <!-- Leaderboard Section -->
         <div class="flex flex-col space-y-2 px-4">
