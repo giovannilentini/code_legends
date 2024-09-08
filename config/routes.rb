@@ -17,8 +17,6 @@ Rails.application.routes.draw do
   get 'users/:id', to: 'users#show', as: 'user_profile'
   post 'users/:id/add_friend', to: 'friendships#create', as: 'add_friend'
 
-
-
   resources :matches, only: [:show] do
     post 'execute_code', to: 'matches#execute_code'
     post 'surrender', to: 'matches#surrender'

@@ -36,7 +36,7 @@ class ChallengeRequestsController < ApplicationController
       ChallengeNotificationChannel.broadcast_to(
         User.find(challenge.user_id), # L'utente che ha inviato la richiesta
         {
-          message: "#{friend.username} ha accettato la tua sfida!", # Usa il nome utente del friend
+          message: "#{friend.username} ha accettato la tua sfida!",
           match_id: match.id
         }
       )
