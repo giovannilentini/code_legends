@@ -46,7 +46,11 @@ class Auth0Controller < ApplicationController
   end
 
   def logout
+    if current_user.guest?
+      User.find(current_user.id).destroy
+    end
     reset_session
+    cookies.delete :user_info
     redirect_to logout_url, allow_other_host: true
   end
 
