@@ -133,6 +133,16 @@ function gotoProfile() {
     }
 }
 
+function gotoLeaderboard() {
+    if (isGuest) {
+        openGuestModal();
+        return true;
+    } else {
+        window.location.href = '/leaderboard';
+        return false;
+    }
+}
+
 function toggleTerminal() {
     const terminal = document.getElementById('terminal-window');
     terminal.classList.toggle('hidden');
