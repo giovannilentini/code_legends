@@ -1,0 +1,32 @@
+<div id="mailboxModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+  <div class="bg-gray-800 p-8 rounded-3xl shadow-2xl w-full max-w-2xl">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-3xl font-bold text-indigo-400">Richieste</h3>
+      <button id="closeMailbox" class="text-gray-400 hover:text-gray-300">&times;</button>
+    </div>
+    <ul class="space-y-4 text-white">
+      <% if @friend_requests.present? %>
+        <% @friend_requests.each do |request| %>
+          <li>
+            <a href="#" class="text-blue-400 hover:text-blue-500" data-request-id="<%= request.id %>">
+              Richiesta di amicizia da <%= request.sender.username %>
+            </a>
+          </li>
+        <% end %>
+      <% else %>
+        <li class="text-gray-400">Nessuna richiesta di amicizia in sospeso.</li>
+      <% end %>
+      <% if @challenge_requests.present? %>
+        <% @challenge_requests.each do |challenge| %>
+          <li>
+            <a href="#" class="text-blue-400 hover:text-blue-500 challenge-request" data-challenge-id="<%= challenge.id %>">
+              Richiesta di sfida da <%= challenge.sender.username %>
+            </a>
+          </li>
+        <% end %>
+      <% else %>
+        <li class="text-gray-400">Nessuna richiesta di sfida in sospeso.</li>
+      <% end %>
+    </ul>
+  </div>
+</div>

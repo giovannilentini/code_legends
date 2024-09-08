@@ -4,16 +4,16 @@ class FriendRequestsController < ApplicationController
 
     if Friendship.exists?(user_id: current_user.id, friend_id: @user.id) || Friendship.exists?(user_id: @user.id, friend_id: current_user.id)
       flash[:alert] = "Siete già amici."
-      redirect_to play_now_path
+      redirect_to root_path
     elsif FriendRequest.exists?(user_id: current_user.id, friend_id: @user.id) || FriendRequest.exists?(user_id: @user.id, friend_id: current_user.id)
       flash[:alert] = "C'è già una richiesta di amicizia in sospeso."
-      redirect_to play_now_path
+      redirect_to root_path
     else
       @friend_request = FriendRequest.new(user_id: current_user.id, friend_id: @user.id)
 
       if @friend_request.save
         flash[:notice] = "Richiesta di amicizia inviata con successo."
-        redirect_to play_now_path
+        redirect_to root_path
       else
         flash[:alert] = "Errore nell'invio della richiesta di amicizia."
         render :new

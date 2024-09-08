@@ -14,7 +14,7 @@ class GuestsController < ApplicationController
         cookies[:user_info] = { value: guest_user.id, expires: 1.year.from_now }
       end
 
-      redirect_to play_now_path
+      redirect_to root_path
     end
   
     private

@@ -1,32 +1,24 @@
 <% if current_user %>
+  <% icons = [
+    { id: 'profile-icon', class: 'profile-icon', onclick: 'gotoProfile()', text: 'My Profile', alt: 'File Icon' },
+    { id: 'challenge-friend-icon', class: 'challenge-friend-icon', onclick: 'openChallengeModal()', text: 'Challenge a Friend', alt: 'Challenge a Friend Icon' },
+    { id: 'find-opponent-icon', class: 'find-opponent-icon', onclick: 'gotoPlayNow()', text: 'Find Opponent', alt: 'Find Opponent Icon' },
+    { id: 'create-challenge-icon', class: 'create-challenge-icon', onclick: 'gotoNewChallenge()', text: 'Create Challenge', alt: 'Create Challenge Icon' }
+  ] %>
 
-  <!-- Icona del Profilo -->
-  <div id="file-icon" class="profile-icon" ondblclick="gotoProfile()">
-    <img src="<%= asset_path('file.png') %>" alt="File Icon">
-    <p>My Profile</p>
-  </div>
+  <% if @current_user.admin? %>
+    <% icons << { id: 'admin-profile-icon', class: 'admin-profile-icon', onclick: 'gotoAdminProfile()', text: 'Admin Profile', alt: 'Admin Profile Icon' } %>
+  <% end %>
 
-  <div id="file-icon" class="challenge-friend-icon" ondblclick="toggleChallengeModal()">
-    <img src="<%= asset_path('file.png') %>" alt="Challenge a Friend Icon">
-    <p>Challenge a Friend</p>
-  </div>
-
-  <div id="file-icon" class="find-opponent-icon" ondblclick="gotoPlayNow()">
-    <img src="<%= asset_path('file.png') %>" alt="Find Opponent Icon">
-    <p>Find Opponent</p>
-  </div>
-
-  <div id="file-icon" class="create-challenge-icon" ondblclick="gotoNewChallenge()">
-    <img src="<%= asset_path('file.png') %>" alt="Create Challenge Icon">
-    <p>Create Challenge</p>
-  </div>
-
-  <% if @current_user && @current_user.admin? %>
-    <div id="file-icon" class="admin-profile-icon" ondblclick="navigateToAdminProfile()">
-      <img src="<%= asset_path('file.png') %>" alt="Admin Profile Icon">
-      <p>Admin Profile</p>
+  <% icons.each do |icon| %>
+    <div id="<%= icon[:id] %>" class="<%= icon[:class] %>" ondblclick="<%= icon[:onclick] %>">
+      <img src="<%= asset_path('file.png') %>" alt="<%= icon[:alt] %>">
+      <p><%= icon[:text] %></p>
     </div>
   <% end %>
+
+  <%= render 'welcome/challenge_modal' %>
+  <%= render 'welcome/guest_modal' %>
 
   <div class="absolute top-5 right-0 mb-4 ml-4">
     <div class="relative flex h-[30px] w-40 items-center justify-center overflow-hidden bg-transparent text-white transition-all border border-gray-400 hover:border-gray-600 before:absolute before:h-0 before:w-0 before:rounded-full before:bg-gray-600 before:duration-500 before:ease-out hover:before:h-56 hover:before:w-56 hover:before:opacity-100 font-mono">
@@ -39,6 +31,56 @@
       <%= link_to 'View DB', database_info_path, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold rounded-full group bg-transparent text-white border-2 border-white hover:bg-white hover:text-gray-900' %>
     </div>
   </div>
+
+  <div class="taskbar fixed bottom-0 left-0 w-screen h-[43px] bg-neutral-900 border-t border-gray-400 z-[9999] flex items-center justify-between">
+
+    <div class="icons-left flex items-center space-x-[-4px]">
+      <div id="start-menu" class="relative h-[43px] w-[48px] flex items-center justify-center">
+        <i class="fab fa-windows text-white text-[21px]"></i>
+      </div>
+
+
+      <div id="search" class="h-[43px] w-[49px] flex items-center justify-center hover:bg-white/10 rounded" onclick="openSearchModal()">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAEn0lEQVR4nO2dy48UVRSHj6OO8RF0xhETH2tFWcKIRv8BYwLB4IuF0bgDdYO6bFAXblAkozFB3RlJjIqJrnXi/A8CKghuBAYSBklmJPKZkz4kBLXu7aK769yq8yW1qX7Ur+o3Xffe86gRCYIgCIIgCIIgGDHAJPAo8AbwCbAAHAHOAH/Zdsb2Ldh7XrfPXB8G1bvoNwFbge+A89TnT+Bb4Dn9zjAjfeHvBd4Hlhg+S8Ae4J4w4t8X/nbgI2CF0bMCfAhMhxH9i/8SsMj4OQW82FkTgFXAfprna2BKugSwxmYtXvgFuE+6ALAeOIk/TgOPSJsBHgLO1Rw4fwB2ApvsFzSl83zbpmyfvrYLmLf1waCotllpI3aBBh1sfwK26SypxvFmgO3AwRqD8/3SJoDbBrznHwW2ABNDOPYE8DRwbMAx4VZpA8A1wJeZJ34R2D2KVSv91fV7dowcvpAWzfNzV6pPjEHPxgHGoRekBSvcxcz77rox6prN1HWy6BWzhRdy/vLXNaBt1oJ1Keak4MBaKrZzcRy3nf/Dpq2pMWEZuFtKw6KaKXYXovNdKQng5oyQ8lEPMXr6Wo8ntJ4FbpRSsGRKii3iBODZDL3PSClYJiu1wr3qRdawAK4FDiU0fyMF5XBTacRt4gzg5YTmc0XkmIHHEieiQbIZcQZwR0YA72HxjlUkVPG9OAX4MaF9h3gH+DRxEjvFKcBbCe0fi3esNqeKjeIUYHNC+7x4B/gtcRJrxCnAgwntR8Q7ltqrYtp58LCKU+KdjPjPpPieQlexLN4p3IAb2mBAybegmTbcglKD8APiFGBtGwbhmIY2idXnV7FLnAK8ndC+T1oQipgv+Ne7Q7xjnSlVXABWizOA1aatig3iHZtLp5Ld28UZwKsJzUtFhKMVawuq4qDDhMzhhOYDUgrWk1VMio+8FOpTUgpWBphKyh9zkpS/Bfi9VUl5xRriUuxxoHOuhPKZgdFuxMzCrMbyA8CTGRdfC7PukhKxbkSXTRHAhswe5L1SKhp4s8LbFIvjNIH+xU8FDZUTxTfwaSsoeejaYdOYbjvnMzU9L21Amx0yT1jHhL1aLjii2c4c+eyXtqDtPtb2k8txKxecGNIia2vGVPNydFG2StqE9uFmjgeXc8gq1gaOHQF3Aq8APw94zL+Bx6WNWFNEnTbVC1Y09aaVjqy1AX7Stmnbt9lqexYyAmtV/OE5cdTWRu1c3pHS0T7cAceEUXMY+KxrJujDOj6neb6yPmZtp/2gUyYo2gra0C3pxJXzfDOBLpowbXN0jbuMmmVba/znCrfG97XDBEW7Ea2bXcO/w+asdeFXBtZqfnd7TFA09q4JG20LqjltvYR+9oA9KyIrnk992mXCJYDr9Dk+wGtan2+PovnVgmkrtp22ffraPq1e0G4W/WyN410N7TRhnNB/PmmYECZ0HOKX0DyECc1DmNA8hAnNQ5jQPGGCA8IEB4QJDggTHBAmOCBMcECY4IAwwQFhQvkm9JrW32UTek3r7rIJvab1dtmEXtM6u2xCr2l9XTah17SuLpvQa1pPJ6H/b7jcPjc1CIIgCIIgCAJxyT8T2MIXGvEQ4gAAAABJRU5ErkJggg==" alt="search" class="h-[24px] w-[24px]" />
+      </div>
+
+      <%= render 'welcome/search_friends_modal' %>
+
+      <div class="px h-[43px] w-1"></div>
+    </div>
+
+    <div class="icons-right flex items-center space-x-[-4px]">
+      <div id="sound" class="h-[43px] w-[49px] flex items-center justify-center hover:bg-white/5 p-1">
+        <img src="https://img.icons8.com/ios-glyphs/90/ffffff/speaker.png" alt="speaker" class="h-[22px] w-[22px]" />
+      </div>
+
+      <div class="datetime text-center w-[70px] cursor-pointer hover:bg-white/10 rounded">
+        <span id="current-time" class="hour block text-white text-[11.3px]"></span>
+        <span id="current-date" class="date block text-white text-[11.3px]"></span>
+      </div>
+
+        <div id="notifications" class="relative h-[43px] w-[42px] flex items-center justify-center hover:bg-white/10 rounded" onclick="openMailBoxModal()">
+          <img src="https://img.icons8.com/material-sharp/96/ffffff/bell.png" alt="bell" class="h-[24px] w-[24px]"/>
+        </div>
+
+        <!-- Finestra Modale per Visualizzare la Casella Postale -->
+        <%= render 'welcome/mailbox_modal' %>
+
+        <!-- Modale per la richiesta di amicizia -->
+        <%=render 'welcome/friend_requests_modal' %>
+
+        <!-- Modale per la richiesta di sfida -->
+        <%= render 'welcome/challenge_requests_modal' %>
+
+    </div>
+  </div>
+
+  <div id="userData"
+       data-guest="<%= current_user.guest? %>"
+       data-user-id="<%= current_user.id %>">
+  </div>
+
+  <%= javascript_include_tag 'logged_home', 'data-turbolinks-track': 'reload' %>
 
 <% else %>
   <div id="file-icon" class="file-icon">
@@ -85,7 +127,7 @@
       <div class="prompt" id="prompt4"></div>
       <div class="prompt" id="prompt5"></div>
       <div class="prompt" id="prompt6"></div>
-      <div class="prompt" id="prompt7"></div>
+      <div class="prompt" vorrei che quegli script si caricassero solo quando sei loggato id="prompt7"></div>
       <br>
       <span id="utente" class="hidden"></span>
     </section>
@@ -102,60 +144,40 @@
       <%= button_to 'Enter as guest', create_guest_path, method: :post, data: { turbo: false }, class: 'relative z-10', id: 'guestButton'%>
     </div>
   </div>
+
+  <div class="taskbar fixed bottom-0 left-0 w-screen h-[43px] bg-neutral-900 border-t border-gray-400 z-[9999] flex items-center justify-between">
+
+    <div class="icons-left flex items-center space-x-[-4px]">
+      <div id="start-menu" class="relative h-[43px] w-[48px] flex items-center justify-center">
+        <i class="fab fa-windows text-white text-[21px]"></i>
+      </div>
+
+        <div id="search" class="h-[43px] w-[49px] flex items-center justify-center hover:bg-white/10 rounded">
+          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAEn0lEQVR4nO2dy48UVRSHj6OO8RF0xhETH2tFWcKIRv8BYwLB4IuF0bgDdYO6bFAXblAkozFB3RlJjIqJrnXi/A8CKghuBAYSBklmJPKZkz4kBLXu7aK769yq8yW1qX7Ur+o3Xffe86gRCYIgCIIgCIIgGDHAJPAo8AbwCbAAHAHOAH/Zdsb2Ldh7XrfPXB8G1bvoNwFbge+A89TnT+Bb4Dn9zjAjfeHvBd4Hlhg+S8Ae4J4w4t8X/nbgI2CF0bMCfAhMhxH9i/8SsMj4OQW82FkTgFXAfprna2BKugSwxmYtXvgFuE+6ALAeOIk/TgOPSJsBHgLO1Rw4fwB2ApvsFzSl83zbpmyfvrYLmLf1waCotllpI3aBBh1sfwK26SypxvFmgO3AwRqD8/3SJoDbBrznHwW2ABNDOPYE8DRwbMAx4VZpA8A1wJeZJ34R2D2KVSv91fV7dowcvpAWzfNzV6pPjEHPxgHGoRekBSvcxcz77rox6prN1HWy6BWzhRdy/vLXNaBt1oJ1Keak4MBaKrZzcRy3nf/Dpq2pMWEZuFtKw6KaKXYXovNdKQng5oyQ8lEPMXr6Wo8ntJ4FbpRSsGRKii3iBODZDL3PSClYJiu1wr3qRdawAK4FDiU0fyMF5XBTacRt4gzg5YTmc0XkmIHHEieiQbIZcQZwR0YA72HxjlUkVPG9OAX4MaF9h3gH+DRxEjvFKcBbCe0fi3esNqeKjeIUYHNC+7x4B/gtcRJrxCnAgwntR8Q7ltqrYtp58LCKU+KdjPjPpPieQlexLN4p3IAb2mBAybegmTbcglKD8APiFGBtGwbhmIY2idXnV7FLnAK8ndC+T1oQipgv+Ne7Q7xjnSlVXABWizOA1aatig3iHZtLp5Ld28UZwKsJzUtFhKMVawuq4qDDhMzhhOYDUgrWk1VMio+8FOpTUgpWBphKyh9zkpS/Bfi9VUl5xRriUuxxoHOuhPKZgdFuxMzCrMbyA8CTGRdfC7PukhKxbkSXTRHAhswe5L1SKhp4s8LbFIvjNIH+xU8FDZUTxTfwaSsoeejaYdOYbjvnMzU9L21Amx0yT1jHhL1aLjii2c4c+eyXtqDtPtb2k8txKxecGNIia2vGVPNydFG2StqE9uFmjgeXc8gq1gaOHQF3Aq8APw94zL+Bx6WNWFNEnTbVC1Y09aaVjqy1AX7Stmnbt9lqexYyAmtV/OE5cdTWRu1c3pHS0T7cAceEUXMY+KxrJujDOj6neb6yPmZtp/2gUyYo2gra0C3pxJXzfDOBLpowbXN0jbuMmmVba/znCrfG97XDBEW7Ea2bXcO/w+asdeFXBtZqfnd7TFA09q4JG20LqjltvYR+9oA9KyIrnk992mXCJYDr9Dk+wGtan2+PovnVgmkrtp22ffraPq1e0G4W/WyN410N7TRhnNB/PmmYECZ0HOKX0DyECc1DmNA8hAnNQ5jQPGGCA8IEB4QJDggTHBAmOCBMcECY4IAwwQFhQvkm9JrW32UTek3r7rIJvab1dtmEXtM6u2xCr2l9XTah17SuLpvQa1pPJ6H/b7jcPjc1CIIgCIIgCAJxyT8T2MIXGvEQ4gAAAABJRU5ErkJggg==" alt="search" class="h-[24px] w-[24px]" />
+        </div>
+
+      <div class="px h-[43px] w-1"></div>
+    </div>
+
+    <div class="icons-right flex items-center space-x-[-4px]">
+      <div id="sound" class="h-[43px] w-[49px] flex items-center justify-center hover:bg-white/5 p-1">
+        <img src="https://img.icons8.com/ios-glyphs/90/ffffff/speaker.png" alt="speaker" class="h-[22px] w-[22px]" />
+      </div>
+
+      <div class="datetime text-center w-[70px] cursor-pointer hover:bg-white/10 rounded">
+        <span id="current-time" class="hour block text-white text-[11.3px]"></span>
+        <span id="current-date" class="date block text-white text-[11.3px]"></span>
+      </div>
+
+      <div id="notifications" class="relative h-[43px] w-[42px] flex items-center justify-center hover:bg-white/10 rounded" onclick="openMailBoxModal()">
+        <img src="https://img.icons8.com/material-sharp/96/ffffff/bell.png" alt="bell" class="h-[24px] w-[24px]"/>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <%= javascript_include_tag 'home', 'data-turbolinks-track': 'reload' %>
 <% end %>
-
-<div class="taskbar fixed bottom-0 left-0 w-screen h-[43px] bg-neutral-900 border-t border-gray-400 z-[9999] flex items-center justify-between">
-
-  <div class="icons-left flex items-center space-x-[-4px]">
-    <div id="start-menu" class="relative h-[43px] w-[48px] flex items-center justify-center">
-      <i class="fab fa-windows text-white text-[21px]"></i>
-    </div>
-
-    <div id="search" class="h-[43px] w-[49px] flex items-center justify-center hover:bg-white/10 rounded">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAEn0lEQVR4nO2dy48UVRSHj6OO8RF0xhETH2tFWcKIRv8BYwLB4IuF0bgDdYO6bFAXblAkozFB3RlJjIqJrnXi/A8CKghuBAYSBklmJPKZkz4kBLXu7aK769yq8yW1qX7Ur+o3Xffe86gRCYIgCIIgCIIgGDHAJPAo8AbwCbAAHAHOAH/Zdsb2Ldh7XrfPXB8G1bvoNwFbge+A89TnT+Bb4Dn9zjAjfeHvBd4Hlhg+S8Ae4J4w4t8X/nbgI2CF0bMCfAhMhxH9i/8SsMj4OQW82FkTgFXAfprna2BKugSwxmYtXvgFuE+6ALAeOIk/TgOPSJsBHgLO1Rw4fwB2ApvsFzSl83zbpmyfvrYLmLf1waCotllpI3aBBh1sfwK26SypxvFmgO3AwRqD8/3SJoDbBrznHwW2ABNDOPYE8DRwbMAx4VZpA8A1wJeZJ34R2D2KVSv91fV7dowcvpAWzfNzV6pPjEHPxgHGoRekBSvcxcz77rox6prN1HWy6BWzhRdy/vLXNaBt1oJ1Keak4MBaKrZzcRy3nf/Dpq2pMWEZuFtKw6KaKXYXovNdKQng5oyQ8lEPMXr6Wo8ntJ4FbpRSsGRKii3iBODZDL3PSClYJiu1wr3qRdawAK4FDiU0fyMF5XBTacRt4gzg5YTmc0XkmIHHEieiQbIZcQZwR0YA72HxjlUkVPG9OAX4MaF9h3gH+DRxEjvFKcBbCe0fi3esNqeKjeIUYHNC+7x4B/gtcRJrxCnAgwntR8Q7ltqrYtp58LCKU+KdjPjPpPieQlexLN4p3IAb2mBAybegmTbcglKD8APiFGBtGwbhmIY2idXnV7FLnAK8ndC+T1oQipgv+Ne7Q7xjnSlVXABWizOA1aatig3iHZtLp5Ld28UZwKsJzUtFhKMVawuq4qDDhMzhhOYDUgrWk1VMio+8FOpTUgpWBphKyh9zkpS/Bfi9VUl5xRriUuxxoHOuhPKZgdFuxMzCrMbyA8CTGRdfC7PukhKxbkSXTRHAhswe5L1SKhp4s8LbFIvjNIH+xU8FDZUTxTfwaSsoeejaYdOYbjvnMzU9L21Amx0yT1jHhL1aLjii2c4c+eyXtqDtPtb2k8txKxecGNIia2vGVPNydFG2StqE9uFmjgeXc8gq1gaOHQF3Aq8APw94zL+Bx6WNWFNEnTbVC1Y09aaVjqy1AX7Stmnbt9lqexYyAmtV/OE5cdTWRu1c3pHS0T7cAceEUXMY+KxrJujDOj6neb6yPmZtp/2gUyYo2gra0C3pxJXzfDOBLpowbXN0jbuMmmVba/znCrfG97XDBEW7Ea2bXcO/w+asdeFXBtZqfnd7TFA09q4JG20LqjltvYR+9oA9KyIrnk992mXCJYDr9Dk+wGtan2+PovnVgmkrtp22ffraPq1e0G4W/WyN410N7TRhnNB/PmmYECZ0HOKX0DyECc1DmNA8hAnNQ5jQPGGCA8IEB4QJDggTHBAmOCBMcECY4IAwwQFhQvkm9JrW32UTek3r7rIJvab1dtmEXtM6u2xCr2l9XTah17SuLpvQa1pPJ6H/b7jcPjc1CIIgCIIgCAJxyT8T2MIXGvEQ4gAAAABJRU5ErkJggg==" alt="search" class="h-[24px] w-[24px]" />
-    </div>
-
-    <div class="px h-[43px] w-1"></div>
-  </div>
-
-  <div class="icons-right flex items-center space-x-[-4px]">
-    <div id="sound" class="h-[43px] w-[49px] flex items-center justify-center hover:bg-white/5 p-1">
-      <img src="https://img.icons8.com/ios-glyphs/90/ffffff/speaker.png" alt="speaker" class="h-[22px] w-[22px]" />
-    </div>
-
-    <div class="datetime text-center w-[70px] cursor-pointer hover:bg-white/10 rounded">
-      <span id="current-time" class="hour block text-white text-[11.3px]"></span>
-      <span id="current-date" class="date block text-white text-[11.3px]"></span>
-    </div>
-
-    <div id="notifications" class="relative h-[43px] w-[42px] flex items-center justify-center hover:bg-white/10 rounded">
-      <img src="https://img.icons8.com/material-sharp/96/ffffff/bell.png" alt="bell" class="h-[24px] w-[24px]"/>
-    </div>
-
-  </div>
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-<%= javascript_include_tag 'home', 'data-turbolinks-track': 'reload' %>
-
-<script>
-    function gotoNewChallenge() {
-        window.location.href = '/challenge_proposals/new';
-    }
-
-    function gotoProfile() {
-        window.location.href = '/profile';
-    }
-
-    function toggleTerminal() {
-        const terminal = document.getElementById('terminal-window');
-        terminal.classList.toggle('hidden');
-    }
-
-    function gotoPlayNow() {
-        window.location.href = '/play_now';
-    }
-
-</script>

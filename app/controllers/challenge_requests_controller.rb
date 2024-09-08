@@ -12,7 +12,7 @@ class ChallengeRequestsController < ApplicationController
     )
 
     if @challenge_request.save
-      redirect_to play_now_path, notice: 'Richiesta di sfida inviata con successo!'
+      redirect_to root_path, notice: 'Richiesta di sfida inviata con successo!'
     else
       render :new, alert: "Si è verificato un errore nell'invio della richiesta."
     end
@@ -36,7 +36,7 @@ class ChallengeRequestsController < ApplicationController
       ChallengeNotificationChannel.broadcast_to(
         User.find(challenge.user_id), # L'utente che ha inviato la richiesta
         {
-          message: "#{friend.username} ha accettato la tua sfida!", # Usa il nome utente del friend
+          message: "#{friend.username} ha accettato la tua sfida!",
           match_id: match.id
         }
       )
@@ -57,7 +57,7 @@ class ChallengeRequestsController < ApplicationController
     else
       flash[:alert] = "Si è verificato un errore nel rifiuto della richiesta."
     end
-    redirect_back(fallback_location: play_now_path)
+    redirect_back(fallback_location: root_path)
   end
 
   private

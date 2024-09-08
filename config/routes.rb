@@ -17,8 +17,6 @@ Rails.application.routes.draw do
   get 'users/:id', to: 'users#show', as: 'user_profile'
   post 'users/:id/add_friend', to: 'friendships#create', as: 'add_friend'
 
-
-
   resources :matches, only: [:show] do
     post 'execute_code', to: 'matches#execute_code'
     post 'surrender', to: 'matches#surrender'
@@ -58,6 +56,9 @@ Rails.application.routes.draw do
   post 'find_opponent', to: 'matchmaking_queue#find_opponent'
   post 'cancel_matchmaking', to: 'welcome#cancel'
   get 'waiting', to: 'matches#waiting'
+  get 'leaderboard', to: 'leaderboards#index'
+
+
   resources :challenge_proposals, only: [:new, :create, :show]
 
   resources :challenge_proposals do

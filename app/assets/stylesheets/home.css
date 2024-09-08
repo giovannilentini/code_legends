@@ -18,7 +18,7 @@
 .profile-icon {
     width: 100px;
     height: 100px;
-    top: 4%;
+    top: 5%;
     left: 2%;
     border-radius: 8px;
     text-align: center;
@@ -35,7 +35,7 @@
 .challenge-friend-icon {
     width: 100px;
     height: 100px;
-    top: 19%;
+    top: 20%;
     left: 2%;
     border-radius: 8px;
     text-align: center;
@@ -52,7 +52,7 @@
 .find-opponent-icon {
     width: 100px;
     height: 100px;
-    top: 35%;
+    top: 36%;
     left: 2%;
     border-radius: 8px;
     text-align: center;
@@ -69,7 +69,7 @@
 .create-challenge-icon {
     width: 100px;
     height: 100px;
-    top: 51%;
+    top: 52%;
     left: 2%;
     border-radius: 8px;
     text-align: center;
@@ -86,7 +86,7 @@
 .user-profile-icon {
     width: 100px;
     height: 100px;
-    top: 67%;
+    top: 68%;
     left: 2%;
     border-radius: 8px;
     text-align: center;
@@ -100,13 +100,30 @@
     position: absolute;
 }
 
+.admin-profile-icon {
+    width: 100px;
+    height: 100px;
+    top: 68%;
+    left: 2%;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    position: absolute;
+}
 
 .file-icon img,
 .profile-icon img,
 .challenge-friend-icon img,
 .find-opponent-icon img,
 .create-challenge-icon img,
-.user-profile-icon img {
+.user-profile-icon img,
+.admin-profile-icon img {
     width: 80px;
     height: 80px;
 }
@@ -116,7 +133,8 @@
 .challenge-friend-icon p,
 .find-opponent-icon p,
 .create-challenge-icon p,
-.user-profile-icon p {
+.user-profile-icon p,
+.admin-profile-icon p{
     margin: 0;
     font-size: 14px;
 }
@@ -126,11 +144,11 @@
 .challenge-friend-icon:hover,
 .find-opponent-icon:hover,
 .create-challenge-icon:hover,
-.user-profile-icon:hover {
+.user-profile-icon:hover,
+.admin-profile-icon:hover {
     border: 2px solid white;
     background: #ccc;
 }
-
 
 /* Terminal Window */
 .window {

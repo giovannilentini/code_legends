@@ -4,7 +4,7 @@ class User < ApplicationRecord
     validates :auth0_id, presence: true, uniqueness: true, unless: :guest?
   
     # Associazioni
-    has_many :challenges
+    has_many :challenge_proposals
     has_one_attached :profile_image
   
     has_many :sent_friend_requests, class_name: 'FriendRequest', foreign_key: :user_id, dependent: :destroy
@@ -31,5 +31,17 @@ class User < ApplicationRecord
     def profile_image_thumbnail
       profile_image.variant(resize_to_fill: [200, 200]).processed
     end
-  end
+
+    def decrement_rank(points)
+        # Reduce the rank but ensure it doesn't go below 0
+        self.rank = [rank - points, 0].max
+        save
+    end
+
+    def increment_rank(points)
+        self.rank = rank+points
+        save
+    end
+
+end
   

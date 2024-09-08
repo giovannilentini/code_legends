@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
   def admin_profile
     @challenges_proposals = ChallengeProposal.where(status: "pending")
-    @non_admin_users = User.where(is_admin: false).order('users.username')
+    @non_admin_users = User.where(is_admin: false, guest:false).order('users.username')
   end
 
   def promote_to_admin
