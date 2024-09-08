@@ -1,28 +1,19 @@
-<!-- Icona del Profilo -->
-<div id="file-icon" class="profile-icon" ondblclick="gotoProfile()">
-  <img src="<%= asset_path('file.png') %>" alt="File Icon">
-  <p>My Profile</p>
-</div>
+<% icons = [
+  { id: 'profile-icon', class: 'profile-icon', onclick: 'gotoProfile()', text: 'My Profile', alt: 'File Icon' },
+  { id: 'challenge-friend-icon', class: 'challenge-friend-icon', onclick: 'openChallengeModal()', text: 'Challenge a Friend', alt: 'Challenge a Friend Icon' },
+  { id: 'find-opponent-icon', class: 'find-opponent-icon', onclick: 'gotoPlayNow()', text: 'Find Opponent', alt: 'Find Opponent Icon' },
+  { id: 'create-challenge-icon', class: 'create-challenge-icon', onclick: 'gotoNewChallenge()', text: 'Create Challenge', alt: 'Create Challenge Icon' },
+  { id: 'leaderboard-icon', class: 'leaderboard-icon', onclick: 'gotoLeaderboard()', text: 'Leaderboard', alt: 'Leaderboard Icon' }
+] %>
 
-<div id="file-icon" class="challenge-friend-icon" ondblclick="toggleChallengeModal()">
-  <img src="<%= asset_path('file.png') %>" alt="Challenge a Friend Icon">
-  <p>Challenge a Friend</p>
-</div>
+<% if @current_user.admin? %>
+  <% icons << { id: 'admin-profile-icon', class: 'admin-profile-icon', onclick: 'gotoAdminProfile()', text: 'Admin Profile', alt: 'Admin Profile Icon' } %>
+<% end %>
 
-<div id="file-icon" class="find-opponent-icon" ondblclick="gotoPlayNow()">
-  <img src="<%= asset_path('file.png') %>" alt="Find Opponent Icon">
-  <p>Find Opponent</p>
-</div>
-
-<div id="file-icon" class="create-challenge-icon" ondblclick="gotoNewChallenge()">
-  <img src="<%= asset_path('file.png') %>" alt="Create Challenge Icon">
-  <p>Create Challenge</p>
-</div>
-
-<% if @current_user && @current_user.admin? %>
-  <div id="file-icon" class="admin-profile-icon" ondblclick="gotoAdminProfile()">
-    <img src="<%= asset_path('file.png') %>" alt="Admin Profile Icon">
-    <p>Admin Profile</p>
+<% icons.each do |icon| %>
+  <div id="<%= icon[:id] %>" class="<%= icon[:class] %>" ondblclick="<%= icon[:onclick] %>">
+    <img src="<%= asset_path('file.png') %>" alt="<%= icon[:alt] %>">
+    <p><%= icon[:text] %></p>
   </div>
 <% end %>
 
