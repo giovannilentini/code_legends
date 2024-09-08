@@ -1,6 +1,8 @@
 class MatchesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_match
+  before_action :set_match, only: [:show, :execute_code, :surrender]
+  load_and_authorize_resource only: [:show, :execute_code, :surrender] # Carica e autorizza risorse
+
   def show
     # Ensure that only the participants can view the match
     unless [@match.player_1, @match.player_2].include?(current_user)

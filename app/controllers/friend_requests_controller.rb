@@ -1,5 +1,11 @@
 class FriendRequestsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :accept, :reject]
+  before_action :set_friend_request, only: [:accept, :reject]
+  load_and_authorize_resource only: [:create, :accept, :reject]
+  
   def create
+    authorize! :create, FriendRequest        # Solo utenti registrati possono inviare richieste di amicizia
+    
     @user = User.find(params[:user_id])
 
     if Friendship.exists?(user_id: current_user.id, friend_id: @user.id) || Friendship.exists?(user_id: @user.id, friend_id: current_user.id)
@@ -22,6 +28,8 @@ class FriendRequestsController < ApplicationController
   end
 
   def accept
+    authorize! :manage, @friend_request
+
     @friend_request = FriendRequest.find(params[:id])
 
     Friendship.create(user_id: @friend_request.user_id, friend_id: @friend_request.friend_id)
@@ -33,6 +41,8 @@ class FriendRequestsController < ApplicationController
   end
 
   def reject
+    authorize! :manage, @friend_request
+
     @friend_request = FriendRequest.find(params[:id])
 
     @friend_request.destroy

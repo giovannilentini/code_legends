@@ -4,4 +4,5 @@ class ChallengeRequest < ApplicationRecord
 
   validates :user_id, presence: true
   validates :friend_id, presence: true
+  validates :language, presence: true
 end

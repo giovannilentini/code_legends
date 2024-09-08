@@ -1,4 +1,8 @@
 class ChallengeRequestsController < ApplicationController
+  before_action :authenticate_user!, except: [:new]
+  before_action :set_challenge_request, only: [:accept, :reject]
+  load_and_authorize_resource except: [:create] # Gestisci manualmente l'autorizzazione per create
+
   def index
     @received_challenge_requests = current_user.received_challenge_requests
     @sent_challenge_requests = current_user.sent_challenge_requests
