@@ -79,3 +79,4 @@ config/auth0.yml
 /config/credentials/development.key
 
 /config/credentials/production.key
+dump.rdb

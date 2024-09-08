@@ -10,28 +10,27 @@ class MatchesController < ApplicationController
   def execute_code
     response = CodeExecutionService.execute_code(params[:code], params[:language])
     unless response.nil?
+
       @result = JSON.parse(response.body)["Result"]
-      unless @result
-        @result = JSON.parse(response.body)["Errors"]
+      @error = JSON.parse(response.body)["Errors"]
+
+      if @result
+          @output = @result
+          if @result.strip == "Winner"
+            loser = current_user == @match.player_1 ? @match.player_2 : @match.player_1
+            set_winner(current_user, loser, @match)
+          end
+      else
+        @output = @error
       end
     end
-    render json: { output:  @result}
+    render json: { output:  @output}
   end
 
   def surrender
-
-    match = Match.find_by(id: params[:match_id])
-    user = current_user
-
-    winner =  user == match.player_1 ? match.player_2 : match.player_1
-    loser =  match.player_2 == winner ? match.player_1 : match.player_2
-
-    MatchmakingQueueService.remove_from_queue(loser)
-    MatchmakingQueueService.remove_from_queue(winner)
-    match.chat_messages.destroy_all
-    match.update(status: "finished", winner_id: winner.id)
-    ActionCable.server.broadcast "match_#{match.id}", { action: 'redirect_to_play_now'}
-    ActionCable.server.broadcast "match_#{match.id}", { action: 'redirect_to_play_now'}
+    winner =  current_user == @match.player_1 ? @match.player_2 : @match.player_1
+    loser =  @match.player_2 == winner ? @match.player_1 : @match.player_2
+    set_winner(winner, loser, @match, true)
   end
 
   private
@@ -45,7 +44,41 @@ class MatchesController < ApplicationController
     end
   end
 
-  def set_challenge
+  def set_winner(winner, loser, match, surrendered=false)
+    MatchmakingQueueService.remove_from_queue(loser)
+    MatchmakingQueueService.remove_from_queue(winner)
+    match.chat_messages.destroy_all
+    match.update(status: "finished", winner_id: winner.id)
 
+    difficulty = Challenge.find_by(id: match.challenge_id).difficulty
+
+    LeaderboardService.update_score(winner.id, calculate_lp_gain(difficulty))
+    LeaderboardService.update_score(loser.id, -calculate_lp_loss(difficulty, surrendered))
+
+    ActionCable.server.broadcast "submission_#{match.id}_#{winner.id}", { status: 'winner', message: "You won #{calculate_lp_gain(difficulty)}LP"}
+    ActionCable.server.broadcast "submission_#{match.id}_#{loser.id}", { status: 'loser', message: "You lost #{calculate_lp_loss(difficulty, surrendered)}LP"}
+  end
+
+  def calculate_lp_gain(difficulty)
+    if difficulty == "easy"
+      return 10
+    elsif difficulty == "medium"
+      return 15
+    else
+      return 25
+    end
+  end
+
+  def calculate_lp_loss(difficulty, surrendered)
+
+    penalty = surrendered ? 5 : 0
+
+    if difficulty == "easy"
+      return 20 + penalty
+    elsif difficulty == "medium"
+      return 10 + penalty
+    else
+      return 5 + penalty
+    end
   end
 end

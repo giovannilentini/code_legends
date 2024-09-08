@@ -56,6 +56,9 @@ Rails.application.routes.draw do
   post 'find_opponent', to: 'matchmaking_queue#find_opponent'
   post 'cancel_matchmaking', to: 'welcome#cancel'
   get 'waiting', to: 'matches#waiting'
+  get 'leaderboard', to: 'leaderboards#index'
+
+
   resources :challenge_proposals, only: [:new, :create, :show]
 
   resources :challenge_proposals do

@@ -1,0 +1,46 @@
+
+<div class="w-full h-full flex flex-col justify-center content-center">
+  <h1 class="text-2xl font-bold text-center my-6">Leaderboard</h1>
+
+  <!-- Form to filter the number of users to display -->
+  <div class="max-w-md mx-auto mb-6">
+    <%= form_with url: leaderboard_path, method: :get, local: true, class: "mb-4" do |f| %>
+      <div class="flex items-center justify-center space-x-4">
+        <%= f.label :user_number, "Number of Users to Display:", class: "text-gray-700" %>
+        <%= f.number_field :user_number, value: @user_number, min: 0, step: 1, class: "w-full p-2 bg-gray-700 text-white rounded-lg" %>
+        <%= f.submit "Filter", class: "bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-4 rounded" %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Leaderboard Table -->
+  <div class="max-w-4xl mx-auto">
+    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <thead class="bg-gray-200">
+      <tr>
+        <th class="px-4 py-3 text-left text-sm font-medium text-gray-600 uppercase">Rank</th>
+        <th class="px-4 py-3 text-left text-sm font-medium text-gray-600 uppercase">User</th>
+        <th class="px-4 py-3 text-left text-sm font-medium text-gray-600 uppercase">Score</th>
+      </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-200">
+      <% @top_users.each_with_index do |(user_key, score), index| %>
+        <% user_id = user_key.split('_').last.to_i %>
+        <% user = @users[user_id] %>
+        <tr>
+          <td class="px-4 py-4 whitespace-nowrap">
+            <div class="text-sm font-medium text-gray-900"><%= index + 1 %></div> <!-- Rank -->
+          </td>
+          <td class="px-4 py-4 whitespace-nowrap">
+            <div class="text-sm font-medium text-gray-900"><%= user.username %></div> <!-- User's Name -->
+          </td>
+          <td class="px-4 py-4 whitespace-nowrap">
+            <div class="text-sm font-medium text-gray-900"><%= score %></div> <!-- Score -->
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
