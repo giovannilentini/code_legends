@@ -76,10 +76,15 @@
 <script type="module">
     import { initializeCodeMirror } from "codemirror_setup";
     import { create_executable } from "code_generation";
+    import {subscribeToMatchAndSubmissionChannels} from "match_subscription";
+
     document.addEventListener("turbo:load", function() {
-        var code_template = <%= @challenge.code_template.to_json.html_safe %>;
-        var currentLanguage = <%=@match.language.to_json.html_safe %>;
-        var test_template = <%= @challenge.test_template.to_json.html_safe %>
+        let code_template = <%= @challenge.code_template.to_json.html_safe %>;
+        let currentLanguage = <%=@match.language.to_json.html_safe %>;
+        let test_template = <%= @challenge.test_template.to_json.html_safe %>
+        const match_id = "<%=@match.id %>"
+        const user_id = "<%=current_user.id %>"
+        subscribeToMatchAndSubmissionChannels(match_id, user_id)
 
         const form = document.getElementById('execute-form');
         const output = document.getElementById('output');
