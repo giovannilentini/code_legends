@@ -46,7 +46,6 @@
 
       <%= render 'welcome/search_friends_modal' %>
 
-
       <div class="px h-[43px] w-1"></div>
     </div>
 
@@ -76,184 +75,12 @@
     </div>
   </div>
 
-  <script>
-      const mailboxModal = document.getElementById('mailboxModal');
-      const openMailboxBtn = document.getElementById('openMailbox');
-      const closeMailboxBtn = document.getElementById('closeMailbox');
+  <div id="userData"
+       data-guest="<%= current_user.guest? %>"
+       data-user-id="<%= current_user.id %>">
+  </div>
 
-      const requestModal = document.getElementById('requestModal');
-      const closeRequestBtn = document.getElementById('closeRequest');
-
-      const challengeModal = document.getElementById('challengeModal');
-      const closeChallengeBtn = document.getElementById('closeChallenge');
-
-      const challengeRequestModal = document.getElementById('challengeRequestModal');
-      const closeChallengeRequestBtn = document.getElementById('closeChallengeRequest');
-
-      // Casella postale
-      function openMailBoxModal() {
-          console.log('Checking guest status...');
-          <% if current_user && !current_user.guest? %>
-          console.log('User is a guest');
-          mailboxModal.classList.remove('hidden');
-
-          return true;
-          <% else %>
-          console.log('User is not a guest');
-          openGuestModal();
-
-          return true;
-          <% end %>
-      }
-
-      closeMailboxBtn.addEventListener('click', () => {
-          mailboxModal.classList.add('hidden');
-      });
-
-      // Modale per richieste di amicizia
-      document.querySelectorAll('a[data-request-id]').forEach(link => {
-          link.addEventListener('click', (event) => {
-              event.preventDefault();
-              const requestId = link.dataset.requestId;
-              const senderName = link.innerText.split(' ')[3]; // Nome del mittente
-              document.getElementById('requestMessage').innerText = `Ciao, sono ${senderName}, vuoi diventare mio amico?`;
-
-              requestModal.classList.remove('hidden');
-              document.getElementById('acceptRequestForm').action = `/friend_requests/${requestId}/accept`;
-              document.getElementById('rejectRequestForm').action = `/friend_requests/${requestId}/reject`;
-          });
-      });
-
-      closeRequestBtn.addEventListener('click', () => {
-          requestModal.classList.add('hidden');
-      });
-
-      // Modale per richieste di sfida
-      document.querySelectorAll('.challenge-request').forEach(link => {
-          link.addEventListener('click', (event) => {
-              event.preventDefault();
-              const challengeId = link.dataset.challengeId;
-              const senderName = link.innerText.split(' ')[3]; // Nome del mittente
-              document.getElementById('challengeMessage').innerText = `Hai una nuova sfida da ${senderName}. Accetti?`;
-
-              challengeRequestModal.classList.remove('hidden');
-              document.getElementById('acceptChallengeForm').action = `/challenge_requests/${challengeId}/accept`;
-              document.getElementById('rejectChallengeForm').action = `/challenge_requests/${challengeId}/reject`;
-          });
-      });
-
-      closeChallengeRequestBtn.addEventListener('click', () => {
-          challengeRequestModal.classList.add('hidden');
-      });
-
-      closeChallengeBtn.addEventListener('click', () => {
-          challengeModal.classList.add('hidden');
-      });
-
-      function openChallengeModal() {
-          console.log('Checking guest status...');
-          <% if current_user && !current_user.guest? %>
-          console.log('User is a guest');
-          document.getElementById('challengeModal').classList.remove('hidden');
-
-          return false;
-          <% else %>
-          console.log('User is not a guest');
-          openGuestModal();
-
-          return true;
-          <% end %>
-      }
-
-      function openGuestModal() {
-          const errorSound = document.getElementById('errorSound');
-          errorSound.play();
-
-          document.getElementById('guestModal').classList.remove('hidden');
-      }
-
-      function closeGuestModal() {
-          console.log('Closing guest modal...');
-          document.getElementById('guestModal').classList.add('hidden');
-      }
-
-      function closeChallengeModal() {
-          document.getElementById('challengeModal').classList.add('hidden');
-      }
-
-      function openSearchModal() {
-          console.log('Checking guest status...');
-          <% if current_user && !current_user.guest? %>
-          console.log('User is a guest');
-          document.getElementById("searchFriendsModal").classList.remove("hidden");
-
-          return false;
-          <% else %>
-          console.log('User is not a guest');
-          openGuestModal();
-
-          return true;
-          <% end %>
-      }
-
-      function closeModal() {
-          document.getElementById("searchFriendsModal").classList.add("hidden");
-      }
-
-      function gotoAdminProfile() {
-          console.log('Checking guest status...');
-          <% if current_user && !current_user.guest? %>
-          console.log('User is a guest');
-          window.location.href = '/admin_profile';
-
-          return false;
-          <% else %>
-          console.log('User is not a guest');
-          openGuestModal();
-
-          return true;
-          <% end %>
-      }
-
-      function gotoNewChallenge() {
-          console.log('Checking guest status...');
-          <% if current_user && !current_user.guest? %>
-          console.log('User is a guest');
-          window.location.href = '/challenge_proposals/new';
-
-          return false;
-          <% else %>
-          console.log('User is not a guest');
-          openGuestModal();
-
-          return true;
-          <% end %>
-      }
-
-      function gotoProfile() {
-          console.log('Checking guest status...');
-          <% if current_user && !current_user.guest? %>
-          console.log('User is a guest');
-          window.location.href = '/profile';
-
-          return false;
-          <% else %>
-          console.log('User is not a guest');
-          openGuestModal();
-
-          return true;
-          <% end %>
-      }
-
-      function toggleTerminal() {
-          const terminal = document.getElementById('terminal-window');
-          terminal.classList.toggle('hidden');
-      }
-
-      function gotoPlayNow() {
-          window.location.href = '/play_now';
-      }
-  </script>
+  <%= javascript_include_tag 'logged_home', 'data-turbolinks-track': 'reload' %>
 
 <% else %>
   <div id="file-icon" class="file-icon">
@@ -348,9 +175,9 @@
 
     </div>
   </div>
-<% end %>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-<%= javascript_include_tag 'home', 'data-turbolinks-track': 'reload' %>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <%= javascript_include_tag 'home', 'data-turbolinks-track': 'reload' %>
+<% end %>

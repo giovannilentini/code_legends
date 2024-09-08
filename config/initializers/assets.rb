@@ -4,6 +4,7 @@
 Rails.application.config.assets.version = "1.0"
 Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'audios')
 Rails.application.config.assets.precompile += %w( Error.mp3 )
+Rails.application.config.assets.precompile += %w( logged_home.js )
 
 
 # Add additional assets to the asset load path.

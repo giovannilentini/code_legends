@@ -4,6 +4,7 @@ import "controllers";
 import "channels";
 import "codemirror_setup";
 import "code_generation"
+//= require logged_home
 
 
 
