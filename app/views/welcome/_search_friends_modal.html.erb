@@ -11,7 +11,7 @@
       <% available_friends = User.where.not(id: @current_user.id).where.not(id: @current_user.friends.ids).where.not(guest: true) %>
       <% available_friends.each do |user| %>
         <li class="flex items-center justify-between p-4 border-b border-gray-600">
-          <%= link_to user.username, user_profile_path(user), class: 'friend-name text-lg text-white hover:underline' %>
+          <%= link_to user.username, user_path(user), class: 'friend-name text-lg text-white hover:underline' %>
           <%= button_to 'Richiedi Amicizia', friend_requests_path(user_id: user.id), method: :post,
                         class: 'bg-transparent text-white border border-white hover:bg-white hover:text-gray-900 font-bold py-2 px-4 rounded-lg mt-2 md:mt-0' %>
         </li>

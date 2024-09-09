@@ -1,7 +1,7 @@
 // Ottieni i dati dell'utente dal markup HTML
 const userElement = document.getElementById('userData');
 const isGuest = userElement.getAttribute('data-guest') === 'true';
-
+const user_id = userElement.getAttribute('data-guest')
 // Selezione degli elementi delle modali
 const mailboxModal = document.getElementById('mailboxModal');
 const openMailboxBtn = document.getElementById('openMailbox');
@@ -108,7 +108,7 @@ function gotoAdminProfile() {
         openGuestModal();
         return true;
     } else {
-        window.location.href = '/admin_profile';
+        window.location.href = `/admins/${user_id}`;
         return false;
     }
 }
@@ -128,7 +128,7 @@ function gotoProfile() {
         openGuestModal();
         return true;
     } else {
-        window.location.href = '/profile';
+        window.location.href = `/users/${user_id}`;
         return false;
     }
 }

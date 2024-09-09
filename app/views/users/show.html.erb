@@ -1,93 +1,215 @@
-<section class="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700">
-  <div class="flex flex-col md:flex-row w-full max-w-7xl p-10 space-y-12 md:space-y-0 md:space-x-10">
+<% icons = [
+  { id: 'profile-icon', class: 'profile-icon', onclick: 'gotoProfile()', text: 'My Profile', alt: 'File Icon' },
+  { id: 'challenge-friend-icon', class: 'challenge-friend-icon', onclick: 'openChallengeModal()', text: 'Challenge a Friend', alt: 'Challenge a Friend Icon' },
+  { id: 'find-opponent-icon', class: 'find-opponent-icon', onclick: 'gotoPlayNow()', text: 'Find Opponent', alt: 'Find Opponent Icon' },
+  { id: 'create-challenge-icon', class: 'create-challenge-icon', onclick: 'gotoNewChallenge()', text: 'Create Challenge', alt: 'Create Challenge Icon' },
+  { id: 'leaderboard-icon', class: 'leaderboard-icon', onclick: 'gotoLeaderboard()', text: 'Leaderboard', alt: 'Leaderboard Icon' }
+] %>
 
-    <!-- Sezione Informazioni Utente -->
-    <div class="w-full md:w-1/3 bg-gray-800 p-8 rounded-3xl shadow-2xl flex flex-col items-center">
-      <div class="text-center mb-6">
-        <h2 class="text-5xl font-extrabold text-white tracking-tight drop-shadow-lg">Profilo Utente</h2>
-      </div>
-      <div class="text-center mb-6">
-        <% if @user.profile_image.attached? %>
-          <%= image_tag @user.profile_image_thumbnail, class: "rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-indigo-500" %>
-        <% else %>
-          <%= image_tag('profile-placeholder.png', alt: 'Profile Image', class: 'rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-indigo-500') %>
-        <% end %>
-      </div>
-      <div class="text-left w-full space-y-6">
-        <h3 class="text-3xl font-bold text-indigo-400">Informazioni Utente</h3>
-        <p class="text-lg text-gray-300"><strong>Nome:</strong> <%= @user.username %></p>
-        <p class="text-lg text-gray-300"><strong>Email:</strong> <%= @user.email %></p>
-      </div>
-    </div>
+<% if @current_user.admin? %>
+  <% icons << { id: 'admin-profile-icon', class: 'admin-profile-icon', onclick: 'gotoAdminProfile()', text: 'Admin Profile', alt: 'Admin Profile Icon' } %>
+<% end %>
 
-    <!-- Sezione Proposte Utente -->
-    <div class="w-full md:w-2/3 space-y-20">
-
-      <!-- Proposte Accettate -->
-      <div>
-        <h3 class="text-4xl font-extrabold mb-8 text-green-400 tracking-tight drop-shadow-md">Proposte Accettate</h3>
-        <div class="overflow-hidden rounded-2xl shadow-lg bg-gray-800">
-          <table class="w-full border border-gray-700 rounded-2xl">
-            <thead>
-            <tr class="bg-gray-900">
-              <th class="px-6 py-4 text-center text-xl font-semibold text-white">Descrizione</th>
-              <th class="px-6 py-4 text-center text-xl font-semibold text-white">Test Case</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @accepted_challenges.each do |challenge| %>
-              <tr class="border-b border-gray-700 hover:bg-gray-700 transition-colors duration-200">
-                <td class="px-6 py-4 text-white"><%= challenge.description %></td>
-                <td class="px-6 py-4 text-white">
-                  <ul class="list-disc list-inside space-y-2">
-                    <% challenge.test_cases.each do |test_case| %>
-                      <li>Input: <%= test_case.input_example %>, Output: <%= test_case.expected_output %></li>
-                    <% end %>
-                  </ul>
-                </td>
-              </tr>
-            <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Proposte Rifiutate -->
-      <div>
-        <h3 class="text-4xl font-extrabold mb-8 text-red-400 tracking-tight drop-shadow-md">Proposte Rifiutate</h3>
-        <div class="overflow-hidden rounded-2xl shadow-lg bg-gray-800">
-          <table class="w-full border border-gray-700 rounded-2xl">
-            <thead>
-            <tr class="bg-gray-900">
-              <th class="px-6 py-4 text-center text-xl font-semibold text-white">Descrizione</th>
-              <th class="px-6 py-4 text-center text-xl font-semibold text-white">Test Case</th>
-              <th class="px-6 py-4 text-center text-xl font-semibold text-white">Motivo del Rifiuto</th>
-            </tr>
-            </thead>
-            <tbody>
-            <% @rejected_challenges.each do |challenge| %>
-              <tr class="border-b border-gray-700 hover:bg-gray-700 transition-colors duration-200">
-                <td class="px-6 py-4 text-white"><%= challenge.description %></td>
-                <td class="px-6 py-4 text-white">
-                  <ul class="list-disc list-inside space-y-2">
-                    <% challenge.test_cases.each do |test_case| %>
-                      <li>Input: <%= test_case.input_example %>, Output: <%= test_case.expected_output %></li>
-                    <% end %>
-                  </ul>
-                </td>
-                <td class="px-6 py-4 text-white"><%= challenge.rejection_reason %></td>
-              </tr>
-            <% end %>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <!-- Torna alla Home -->
-      <div class="mt-16 text-center">
-        <%= link_to 'Torna alla Home', play_now_path, class: 'bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 text-white font-bold py-3 px-10 rounded-full shadow-lg transform hover:scale-105 transition duration-300' %>
-      </div>
-    </div>
-
+<% icons.each do |icon| %>
+  <div id="<%= icon[:id] %>" class="<%= icon[:class] %>" ondblclick="<%= icon[:onclick] %>">
+    <img src="<%= asset_path('file.png') %>" alt="<%= icon[:alt] %>">
+    <p><%= icon[:text] %></p>
   </div>
-</section>
+<% end %>
+
+<!-- Aggiunta della div mancante -->
+<div class="window">
+  <header>
+    <div class="title-program">CodeLegends</div>
+    <div class="button-container">
+      <div class="button minus">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+        </svg>
+      </div>
+      <div class="button resize">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 8.25V6a2.25 2.25 0 0 0-2.25-2.25H6A2.25 2.25 0 0 0 3.75 6v8.25A2.25 2.25 0 0 0 6 16.5h2.25m8.25-8.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-7.5A2.25 2.25 0 0 1 8.25 18v-1.5m8.25-8.25h-6a2.25 2.25 0 0 0-2.25 2.25v6" />
+        </svg>
+      </div>
+      <div class="button exit" id="close-terminal-button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-6 w-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <section class="terminal">
+    <section class="flex flex-col md:flex-row items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-700">
+      <div class="flex flex-col md:flex-row w-full max-w-7xl p-10 space-y-12 md:space-y-0 md:space-x-10">
+
+        <!-- Sezione Informazioni Utente -->
+        <div class="w-full md:w-1/3 bg-gray-800 p-8 rounded-3xl shadow-2xl flex flex-col items-center transform hover:scale-105 transition duration-300">
+          <div class="text-center mb-6">
+            <h2 class="text-5xl font-extrabold text-white tracking-tight drop-shadow-lg">Profilo Utente</h2>
+          </div>
+          <div class="text-center mb-6">
+            <% if current_user.profile_image.attached? %>
+              <%= image_tag current_user.profile_image_thumbnail, class: "rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-indigo-500" %>
+            <% else %>
+              <%= image_tag('profile-placeholder.png', alt: 'Profile Image', class: 'rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-indigo-500') %>
+            <% end %>
+          </div>
+          <div class="text-left w-full space-y-6">
+            <h3 class="text-3xl font-bold text-indigo-400">Informazioni Utente</h3>
+            <p class="text-lg text-gray-300"><strong>Nome:</strong> <%= current_user.username %></p>
+            <p class="text-lg text-gray-300"><strong>Email:</strong> <%= current_user.email %></p>
+          </div>
+
+          <!-- Sezione Lista Amici -->
+          <div class="mt-8 w-full">
+            <h3 class="text-3xl font-bold text-indigo-400 mb-4">Amici</h3>
+            <ul class="list-disc list-inside space-y-2 text-gray-300">
+              <% current_user.friends.each do |friend| %>
+                <li><%= link_to friend.username, user_path(friend), class: 'text-blue-400 hover:text-blue-500' %></li>
+              <% end %>
+            </ul>
+          </div>
+
+          <!-- Pulsante per accedere alle impostazioni -->
+          <div class="mt-8 text-center w-full">
+            <%= link_to 'Impostazioni Profilo',  edit_user_path(current_user), class: 'bg-gradient-to-r from-green-500 to-green-700 hover:from-green-600 hover:to-green-800 text-white font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition duration-300' %>
+          </div>
+        </div>
+
+        <!-- Sezione Proposte Utente -->
+        <div class="w-full md:w-2/3 space-y-20">
+
+          <!-- Proposte Accettate -->
+          <div>
+            <h3 class="text-4xl font-extrabold mb-8 text-green-400 tracking-tight drop-shadow-md">Proposte Accettate</h3>
+            <div class="overflow-hidden rounded-2xl shadow-lg bg-gray-800 transform hover:scale-105 transition duration-300">
+              <table class="w-full border border-gray-700 rounded-2xl">
+                <thead>
+                <tr class="bg-gray-900">
+                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Titolo</th>
+                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Descrizione</th>
+                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Linguaggio</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @accepted_challenges.each do |challenge| %>
+                  <tr class="border-b border-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                    <td class="px-6 py-4 text-gray-200"><%= challenge.title %></td>
+                    <td class="px-6 py-4 text-gray-200"><%= challenge.description %></td>
+                    <td class="px-6 py-4 text-gray-200"><%= challenge.language%></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Proposte Rifiutate -->
+          <div>
+            <h3 class="text-4xl font-extrabold mb-8 text-red-400 tracking-tight drop-shadow-md">Proposte Rifiutate</h3>
+            <div class="overflow-hidden rounded-2xl shadow-lg bg-gray-800 transform hover:scale-105 transition duration-300">
+              <table class="w-full border border-gray-700 rounded-2xl">
+                <thead>
+                <tr class="bg-gray-900">
+                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Descrizione</th>
+                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Motivo</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @rejected_challenges.each do |challenge| %>
+                  <tr class="border-b border-gray-700 hover:bg-gray-700 transition-colors duration-200">
+                    <td class="px-6 py-4 text-white"><%= challenge.description %></td>
+                    <td class="px-6 py-4 text-white"><%= challenge.rejection_reason %></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </section>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const closeButton = document.getElementById('close-terminal-button');
+
+        closeButton.addEventListener('click', function() {
+            window.location.href = '/';
+        });
+    });
+
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+
+    function updateDateTime() {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        document.getElementById('current-time').textContent = `${hours}:${minutes}`;
+
+        const day = now.getDate().toString().padStart(2, '0');
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const year = now.getFullYear();
+        document.getElementById('current-date').textContent = `${day}/${month}/${year}`;
+    }
+
+    const mailboxModal = document.getElementById('mailboxModal');
+    const openMailboxBtn = document.getElementById('openMailbox');
+    const closeMailboxBtn = document.getElementById('closeMailbox');
+
+    const requestModal = document.getElementById('requestModal');
+    const closeRequestBtn = document.getElementById('closeRequest');
+
+    const challengeModal = document.getElementById('challengeModal');
+    const closeChallengeBtn = document.getElementById('closeChallenge');
+
+    // Casella postale
+    openMailboxBtn.addEventListener('click', () => {
+        mailboxModal.classList.remove('hidden');
+    });
+
+    closeMailboxBtn.addEventListener('click', () => {
+        mailboxModal.classList.add('hidden');
+    });
+
+    // Modale per richieste di amicizia
+    document.querySelectorAll('a[data-request-id]').forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const requestId = link.dataset.requestId;
+            const senderName = link.innerText.split(' ')[3]; // Nome del mittente
+            document.getElementById('requestMessage').innerText = `Ciao, sono ${senderName}, vuoi diventare mio amico?`;
+
+            requestModal.classList.remove('hidden');
+            document.getElementById('acceptRequestForm').action = `/friend_requests/${requestId}/accept`;
+            document.getElementById('rejectRequestForm').action = `/friend_requests/${requestId}/reject`;
+        });
+    });
+
+    closeRequestBtn.addEventListener('click', () => {
+        requestModal.classList.add('hidden');
+    });
+
+    // Modale per richieste di sfida
+    document.querySelectorAll('.challenge-request').forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const challengeId = link.dataset.challengeId;
+            const senderName = link.innerText.split(' ')[3]; // Nome del mittente
+            document.getElementById('challengeMessage').innerText = `Hai una nuova sfida da ${senderName}. Accetti?`;
+
+            challengeModal.classList.remove('hidden');
+            document.getElementById('acceptChallengeForm').action = `/challenge_requests/${challengeId}/accept`;
+            document.getElementById('rejectChallengeForm').action = `/challenge_requests/${challengeId}/reject`;
+        });
+    });
+
+    closeChallengeBtn.addEventListener('click', () => {
+        challengeModal.classList.add('hidden');
+    });
+</script>

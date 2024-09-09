@@ -1,6 +1,6 @@
 class DatabaseController < ApplicationController
   def info
-    @tables = %w[users challenges test_cases matches matchmaking_queues friendship friend_requests chat_messages challenge_requests]
+    @tables = %w[users challenges matches matchmaking_queues friendship friend_requests chat_messages challenge_requests]
     @table_data = @tables.each_with_object({}) do |table, hash|
       model = table.classify.constantize rescue nil
       if model

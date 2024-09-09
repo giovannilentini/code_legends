@@ -6,7 +6,7 @@
     </h2>
 
     <!-- Form per aggiornare il profilo -->
-    <%= form_for(current_user, url: user_settings_path(current_user), method: :update, html: { multipart: true }) do |f| %>
+    <%= form_for(current_user, url: edit_user_path(current_user), method: :update, html: { multipart: true }) do |f| %>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
         <!-- Nome -->
         <div>
@@ -47,7 +47,7 @@
 
     <!-- Link Torna al Profilo -->
     <div class="mt-10 text-center">
-      <%= link_to 'Torna al Profilo', personal_profile_path, class: 'text-indigo-300 hover:text-indigo-500 underline transition duration-300' %>
+      <%= link_to 'Torna al Profilo', user_path(current_user), class: 'text-indigo-300 hover:text-indigo-500 underline transition duration-300' %>
     </div>
 
   </section>

@@ -11,7 +11,7 @@
   <% end %>
 
   <% icons.each do |icon| %>
-    <div id="<%= icon[:id] %>" class="<%= icon[:class] %>" ondblclick="<%= icon[:onclick] %>">
+    <div id="<%= icon[:id] %>" class="<%= icon[:class] %>" ondblclick="<%= icon[:onclick] %>" data-user-id="<%= current_user.id %>">
       <img src="<%= asset_path('file.png') %>" alt="<%= icon[:alt] %>">
       <p><%= icon[:text] %></p>
     </div>
@@ -127,7 +127,6 @@
       <div class="prompt" id="prompt4"></div>
       <div class="prompt" id="prompt5"></div>
       <div class="prompt" id="prompt6"></div>
-      <div class="prompt" vorrei che quegli script si caricassero solo quando sei loggato id="prompt7"></div>
       <br>
       <span id="utente" class="hidden"></span>
     </section>

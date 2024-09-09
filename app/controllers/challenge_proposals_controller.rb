@@ -1,6 +1,4 @@
 class ChallengeProposalsController < ApplicationController
-  before_action :set_challenge_proposal, only: [:show, :reject, :destroy]
-  before_action :authorize_user, only: [:reject, :destroy]
   before_action :authenticate_user!, only: [:create, :new]  # Assicurati che solo utenti registrati possano accedere a queste azioni
 
   def show
@@ -32,14 +30,14 @@ class ChallengeProposalsController < ApplicationController
       @challenge_proposal = ChallengeProposal.find(params[:id])
       if @challenge_proposal.update(status: "rejected", rejection_reason: reject_motivation)
         flash[:success] = "Proposal rejected"
-        redirect_to admin_profile_path(current_user)
+        redirect_to admin_path(current_user)
       else
         flash[:alert]="An error occurred while rejecting the proposal, retry."
-        redirect_to admin_profile_path(current_user)
+        redirect_to admin_path(current_user)
       end
     else
       flash[:alert]="Rejection motivation cannot be null"
-      redirect_to admin_profile_path(current_user)
+      redirect_to admin_path(current_user)
     end
 
   end
