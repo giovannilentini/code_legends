@@ -1,4 +1,5 @@
 class MatchesController < ApplicationController
+  
   before_action :authenticate_user!
   before_action :set_match, only: [:show, :execute_code, :surrender]
   load_and_authorize_resource only: [:show, :execute_code, :surrender] # Carica e autorizza risorse
@@ -59,4 +60,10 @@ class MatchesController < ApplicationController
       code_template.cpp
     end
   end
+  def authenticate_user!
+    unless session[:user_id] # Verifica se l'ID dell'utente è presente nella sessione
+       redirect_to root_path ,alert: "You must be logged in to create a challenge proposal."
+    end
+  end
 end
+
