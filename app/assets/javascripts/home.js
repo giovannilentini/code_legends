@@ -1,33 +1,41 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var fileIcon = document.getElementById('file-icon');
     var terminal = document.getElementById('terminal-window');
+    var fileIcon = document.getElementById('file-icon');
     var utenteElement = document.getElementById('utente');
     var closeTerminalButton = document.getElementById('close-terminal-button');
-
-    var offset = { x: 0, y: 0 };
-    var isDragging = false;
-
-    fileIcon.addEventListener('mousedown', function(e) {
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+    let isDragging = false;
+    let offset = { x: 0, y: 0 };
+  
+    function makeDraggable(element) {
+      element.addEventListener('mousedown', function(e) {
         isDragging = true;
-        offset.x = e.clientX - fileIcon.offsetLeft;
-        offset.y = e.clientY - fileIcon.offsetTop;
-        fileIcon.style.cursor = 'grabbing';
+        offset.x = e.clientX - element.offsetLeft;
+        offset.y = e.clientY - element.offsetTop;
+        element.style.cursor = 'grabbing';
         e.preventDefault();
-    });
-
-    document.addEventListener('mousemove', function(e) {
+      });
+  
+      document.addEventListener('mousemove', function(e) {
         if (isDragging) {
-            fileIcon.style.left = (e.clientX - offset.x) + 'px';
-            fileIcon.style.top = (e.clientY - offset.y) + 'px';
+          element.style.left = (e.clientX - offset.x) + 'px';
+          element.style.top = (e.clientY - offset.y) + 'px';
         }
-    });
-
-    document.addEventListener('mouseup', function() {
+      });
+  
+      document.addEventListener('mouseup', function() {
         if (isDragging) {
-            isDragging = false;
-            fileIcon.style.cursor = 'pointer';
+          isDragging = false;
+          element.style.cursor = 'pointer';
         }
-    });
+      });
+    }
+
+    const icon =document.getElementById('file-icon');
+
+    makeDraggable(icon);
+
 
     fileIcon.addEventListener('dblclick', function() {
         openTerminal();
