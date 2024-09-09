@@ -15,6 +15,9 @@ const challengeModal = document.getElementById('challengeModal');
 const challengeRequestModal = document.getElementById('challengeRequestModal');
 const closeChallengeRequestBtn = document.getElementById('closeChallengeRequest');
 
+updateDateTime();
+setInterval(updateDateTime, 1000);
+
 // Funzioni per gestire le modali
 function openMailBoxModal() {
     if (isGuest) {
@@ -150,4 +153,16 @@ function toggleTerminal() {
 
 function gotoPlayNow() {
     window.location.href = '/play_now';
+}
+
+function updateDateTime() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    document.getElementById('current-time').textContent = `${hours}:${minutes}`;
+
+    const day = now.getDate().toString().padStart(2, '0');
+    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+    const year = now.getFullYear();
+    document.getElementById('current-date').textContent = `${day}/${month}/${year}`;
 }

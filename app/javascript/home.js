@@ -3,8 +3,6 @@ document.addEventListener('DOMContentLoaded', function() {
     var terminal = document.getElementById('terminal-window');
     var utenteElement = document.getElementById('utente');
     var closeTerminalButton = document.getElementById('close-terminal-button');
-    updateDateTime();
-    setInterval(updateDateTime, 1000);
 
     var offset = { x: 0, y: 0 };
     var isDragging = false;
