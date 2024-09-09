@@ -3,6 +3,7 @@ class Ability
   
     def initialize(user)
       # Regole per gli utenti non registrati (guest)
+      can :play, Game
       can :create, User
       can :index,        ChallengeRequest
       can :create,       ChallengeRequest
@@ -27,7 +28,7 @@ class Ability
       cannot :create,  FriendRequest
       cannot :accept,  FriendRequest
       cannot :reject,  FriendRequest
-      cannot :create,  Friendship
+      cannot :create,   Friendship
       cannot :new,     Challenge
       cannot :show,    Challenge
       cannot :create,  Challenge
@@ -36,9 +37,7 @@ class Ability
       cannot :user_profile, User
       cannot :admin_profile, User
       cannot :promote_to_admin, User
-      cannot :read,  User 
-      cannot :edit,  User, id: user.id
-      cannot :update, User, id: user.id 
+      cannot :read, User 
       
 
   
@@ -55,8 +54,7 @@ class Ability
           can :promote_to_admin, User
 
         else
-          can :edit, User, id: user.id
-          can :update, User, id: user.id 
+          can :play,     Game
           can :create,   FriendRequest
           can :accept,   FriendRequest, receiver_id: user.id
           can :reject,   FriendRequest, receiver_id: user.id
@@ -65,7 +63,7 @@ class Ability
           can :accept,   Friendship
           can :manage,   Challenge, user_id: user.id
           can :accept,   Challenge
-          can :reject,   Challenge
+          cap :reject,   Challenge
           can :create,   Challenge
           can :update,   Challenge, user_id: user.id
           can :create,   ChallengeRequest
@@ -89,7 +87,6 @@ class Ability
           can :play_now,      MatchmakingQueueController
           can :find_opponent, MatchmakingQueueController
           can :cancel,        MatchmakingQueueController
-          
 
           cannot :admin_profile, User
           cannot :promote_to_admin, User

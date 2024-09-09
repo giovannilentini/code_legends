@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
+  load_and_authorize_resource
   before_action :set_user, only: [:show]
-  before_action :authorize_read, only: [:show]
-  before_action :authorize_update, only: [:update, :edit]
+  before_action :authorize_user
+  before_action :authenticate_user!
+
   def show
 
   end
@@ -31,11 +33,9 @@ class UsersController < ApplicationController
     @challenge_requests = current_user.received_challenge_requests
   end
 
-  def authorize_read
-    authorize! :read, @user
+  def authenticate_user!
+    unless session[:user_id] # Verifica se l'ID dell'utente è presente nella sessione
+       redirect_to root_path ,alert: "You must be logged in to see your profile."
+    end
   end
-  def authorize_update
-    authorize! :update, @user
-  end
-
 end

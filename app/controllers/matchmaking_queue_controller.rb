@@ -1,6 +1,7 @@
 class MatchmakingQueueController < ApplicationController
-
+  before_action :authenticate_user!
   before_action :set_languages
+
   def play_now
     authorize! :read, :play_now
     @player = User.find_by(id: session[:user_id])
@@ -40,4 +41,13 @@ class MatchmakingQueueController < ApplicationController
     @languages = ['Python3', 'Java', 'Cpp']
     @selected_language = params[:language].presence || 'python3'
   end
+
+
+  def authenticate_user!
+    unless session[:user_id] # Verifica se l'ID dell'utente è presente nella sessione
+       redirect_to root_path ,alert: "You must be logged in or be guest to play now!."
+    end
+  end
 end
+
+

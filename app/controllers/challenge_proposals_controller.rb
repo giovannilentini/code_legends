@@ -1,13 +1,26 @@
 class ChallengeProposalsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :new]  # Assicurati che solo utenti registrati possano accedere a queste azioni
+  before_action :authenticate_user!
+  load_and_authorize_resource
+
 
   def show
+
+  if current_user.guest?
+      flash[:alert] = "You must be logged in to create a challenge proposal."
+      redirect_to root_path
     @challenge_proposal = ChallengeProposal.find(params[:id])
     @test_cases = @challenge_proposal.test_cases
   end
+end
+
 
   def new
-    @challenge_proposal = ChallengeProposal.new
+    if current_user.guest?
+      flash[:alert] = "You must be logged in to create a challenge proposal."
+      redirect_to root_path
+    else
+      @challenge_proposal = ChallengeProposal.new
+    end
   end
 
   def create
@@ -49,5 +62,11 @@ class ChallengeProposalsController < ApplicationController
   private
   def challenge_proposal_params
     params.require(:challenge_proposal).permit(:title, :description, :test_cases, :language)
+  end
+
+  def authenticate_user!
+    unless session[:user_id] # Verifica se l'ID dell'utente è presente nella sessione
+       redirect_to root_path ,alert: "You must be logged in to create a challenge proposal."
+    end
   end
 end
