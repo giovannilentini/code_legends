@@ -1,11 +1,10 @@
 class FriendRequestsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :accept, :reject]
-  before_action :set_friend_request, only: [:accept, :reject]
   load_and_authorize_resource only: [:create, :accept, :reject]
   
   def create
-    authorize! :create, FriendRequest        # Solo utenti registrati possono inviare richieste di amicizia
-    
+
+    authorize! :create, FriendRequest
     @user = User.find(params[:user_id])
 
     if Friendship.exists?(user_id: current_user.id, friend_id: @user.id) || Friendship.exists?(user_id: @user.id, friend_id: current_user.id)
@@ -36,8 +35,8 @@ class FriendRequestsController < ApplicationController
     Friendship.create(user_id: @friend_request.friend_id, friend_id: @friend_request.user_id)
 
     @friend_request.destroy
-
-    redirect_to personal_profile_path(current_user), notice: 'Richiesta di amicizia accettata.'
+    flash[:notice]= 'Richiesta di amicizia accettata.'
+    redirect_to user_path(current_user)
   end
 
   def reject
@@ -46,7 +45,7 @@ class FriendRequestsController < ApplicationController
     @friend_request = FriendRequest.find(params[:id])
 
     @friend_request.destroy
-
-    redirect_to personal_profile_path(current_user), notice: 'Richiesta di amicizia rifiutata.'
+    flash[:notice]= 'Richiesta di amicizia rifiutata.'
+    redirect_to user_path(current_user)
   end
 end

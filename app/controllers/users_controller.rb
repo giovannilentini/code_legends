@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
-
+  before_action :authorize_read, only: [:show]
+  before_action :authorize_update, only: [:update, :edit]
   def show
 
   end
@@ -28,6 +29,13 @@ class UsersController < ApplicationController
     @pending_challenges = ChallengeProposal.where(status: "pending", user: @user)
     @friend_requests = FriendRequest.where(friend_id: @user.id)
     @challenge_requests = current_user.received_challenge_requests
+  end
+
+  def authorize_read
+    authorize! :read, @user
+  end
+  def authorize_update
+    authorize! :update, @user
   end
 
 end

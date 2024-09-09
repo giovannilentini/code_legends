@@ -1,6 +1,6 @@
 class LeaderboardsController < ApplicationController
   def index
-
+    authorize! :read, :leaderboard
     # Get the user_number parameter or default to 10 if not provided
     user_number = params[:user_number].presence || 10
 

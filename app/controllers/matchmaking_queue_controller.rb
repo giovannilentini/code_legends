@@ -2,6 +2,7 @@ class MatchmakingQueueController < ApplicationController
 
   before_action :set_languages
   def play_now
+    authorize! :read, :play_now
     @player = User.find_by(id: session[:user_id])
     @last_matches = Match.where(player_1_id: @player.id).or(Match.where(player_2_id: @player.id))
                          .order(updated_at: :desc).limit(5)

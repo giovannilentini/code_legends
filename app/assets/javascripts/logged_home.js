@@ -1,7 +1,7 @@
 // Ottieni i dati dell'utente dal markup HTML
 const userElement = document.getElementById('userData');
 const isGuest = userElement.getAttribute('data-guest') === 'true';
-const user_id = userElement.getAttribute('data-guest')
+const user_id = userElement.getAttribute('data-user-id')
 // Selezione degli elementi delle modali
 const mailboxModal = document.getElementById('mailboxModal');
 const openMailboxBtn = document.getElementById('openMailbox');

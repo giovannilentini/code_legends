@@ -1,6 +1,8 @@
 class AdminsController < ApplicationController
 
   def show
+    authorize! :read, :admin_page
+
     @challenges_proposals = ChallengeProposal.where(status: "pending")
     @non_admin_users = User.where(is_admin: false, guest:false).order('users.username')
   end
@@ -8,9 +10,11 @@ class AdminsController < ApplicationController
   def promote_to_admin
     user = User.find(params[:id])
     if user.update(is_admin: true)
-      redirect_to admin_profile_path, notice: "#{user.username} è stato promosso a admin."
+      flash[:notice]="#{user.username} è stato promosso a admin."
+      redirect_to admin_path(user.id)
     else
-      redirect_to admin_profile_path, alert: "Errore nella promozione di #{user.username}."
+      flash[:alert]="Errore nella promozione di #{user.username}."
+      redirect_to admin_path(user.id)
     end
   end
 
