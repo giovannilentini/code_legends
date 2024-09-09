@@ -24,8 +24,7 @@ Rails.application.routes.draw do
   end
 
   # FRIEND REQUESTS ROUTES
-  resources :friend_requests, only: [:create]
-  resources :friend_requests do
+  resources :friend_requests, only: [:create] do
     member do
       post 'accept'
       post 'reject'
@@ -60,7 +59,7 @@ Rails.application.routes.draw do
   get 'play_now', to: 'matchmaking_queue#play_now'
   scope '/play_now' do
     post 'find_opponent', to: 'matchmaking_queue#find_opponent'
-    post 'cancel_matchmaking', to: 'welcome#cancel'
+    post 'cancel_matchmaking', to: 'matchmaking_queue#cancel'
   end
 
   # LEADERBOARD ROUTES
