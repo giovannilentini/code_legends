@@ -7,7 +7,7 @@
   { id: 'space-invaders-icon', class: 'space-invaders-icon', onclick: 'gotoSpaceInvaders()', text: 'Space Invaders', alt: 'Space Invaders Icon' }
 ] %>
 
-<% if @current_user.admin? %>
+<% if current_user.admin? %>
   <% icons << { id: 'admin-profile-icon', class: 'admin-profile-icon', onclick: 'gotoAdminProfile()', text: 'Admin Profile', alt: 'Admin Profile Icon' } %>
 <% end %>
 
@@ -51,7 +51,7 @@
         <div class="max-w-sm mx-auto">
           <div class="relative">
             <!-- Immagine Profilo -->
-            <%= image_tag(current_user.profile_image.attached? ? current_user.profile_image : 'profile-placeholder.png', class: 'w-32 h-32 rounded-full object-cover border-4 border-indigo-700') %>
+            <%= image_tag(@user.profile_image.attached? ? @user.profile_image : 'profile-placeholder.png', class: 'w-32 h-32 rounded-full object-cover border-4 border-indigo-700') %>
 
             <!-- Bottone Modifica -->
             <label for="profile_image" class="absolute bottom-[-10px] right-0 mb-2 mr-2 p-2 bg-indigo-700 text-white rounded-full cursor-pointer">
@@ -61,7 +61,7 @@
             </label>
 
             <!-- Input File -->
-            <%= form_with model: current_user, url: edit_user_path(current_user), method: :patch, local: true do |f| %>
+            <%= form_with model: @user, url: edit_user_path(@user), method: :patch, local: true do |f| %>
               <%= f.file_field :profile_image, class: 'hidden', id: 'profile_image', onchange: 'this.form.submit();' %>
             <% end %>
           </div>
@@ -70,8 +70,8 @@
 
         <div class="text-left w-full space-y-6">
           <h3 class="text-3xl font-bold text-indigo-400">Informazioni Utente</h3>
-          <p class="text-lg text-gray-300"><strong>Nome:</strong> <%= current_user.username %></p>
-          <p class="text-lg text-gray-300"><strong>Email:</strong> <%= current_user.email %></p>
+          <p class="text-lg text-gray-300"><strong>Nome:</strong> <%= @user.username %></p>
+          <p class="text-lg text-gray-300"><strong>Email:</strong> <%= @user.email %></p>
         </div>
       </div>
 
@@ -127,7 +127,7 @@
         <div style="background-color: #1c1b1b;" class="p-6 rounded-3xl shadow-lg border border-white">
           <h3 class="text-3xl font-bold text-indigo-400 mb-4">Amici</h3>
           <ul class="list-disc list-inside space-y-2 text-gray-300">
-            <% current_user.friends.each do |friend| %>
+            <% @user.friends.each do |friend| %>
               <li><%= link_to friend.username, user_path(friend), class: 'text-blue-400 hover:text-blue-500' %></li>
             <% end %>
           </ul>
