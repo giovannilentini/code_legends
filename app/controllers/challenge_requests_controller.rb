@@ -1,4 +1,6 @@
 class ChallengeRequestsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def index
     @received_challenge_requests = current_user.received_challenge_requests
     @sent_challenge_requests = current_user.sent_challenge_requests

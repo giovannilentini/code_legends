@@ -1,4 +1,6 @@
 class FriendRequestsController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def create
     @user = User.find(params[:user_id])
 

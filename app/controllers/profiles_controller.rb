@@ -13,6 +13,18 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def update
+    @user = current_user
+    @accepted_challenges = ChallengeProposal.where(status: "accepted", user: @user)
+    @rejected_challenges = ChallengeProposal.where(status: "reject", user: @user)
+    @pending_challenges = ChallengeProposal.where(status: "pending", user: @user)
+
+    if @user.update(user_params)
+      redirect_to personal_profile_path, notice: 'Immagine del profilo aggiornata con successo!'
+    else
+      render :edit
+    end
+  end
   def user_profile
     @user = User.find(session[:user_id])
     @accepted_challenges = ChallengeProposal.where(status: "accepted", user: @user)
@@ -20,5 +32,11 @@ class ProfilesController < ApplicationController
     @pending_challenges = ChallengeProposal.where(status: "pending", user: @user)
     @friend_requests = FriendRequest.where(friend_id: @user.id)
     @challenge_requests = current_user.received_challenge_requests
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:profile_image)
   end
 end
