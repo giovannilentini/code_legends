@@ -68,19 +68,21 @@
           </thead>
           <tbody class="divide-y divide-gray-200">
           <% @top_users.each_with_index do |(user_key, score), index| %>
-            <% user_id = user_key.split('_').last.to_i %>
-            <% user = @users[user_id] %>
-            <tr>
-              <td class="px-4 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-gray-900"><%= index + 1 %></div> <!-- Rank -->
-              </td>
-              <td class="px-4 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-gray-900"><%= user.username %></div> <!-- User's Name -->
-              </td>
-              <td class="px-4 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-gray-900"><%= score %></div> <!-- Score -->
-              </td>
-            </tr>
+              <% user_id = user_key.split('_').last.to_i %>
+              <% user = @users[user_id] %>
+              <% if user %>
+                <tr>
+                  <td class="px-4 py-4 whitespace-nowrap">
+                    <div class="text-sm font-medium text-gray-900"><%= index + 1 %></div> <!-- Rank -->
+                  </td>
+                  <td class="px-4 py-4 whitespace-nowrap">
+                    <div class="text-sm font-medium text-gray-900"><%= user.username %></div> <!-- User's Name -->
+                  </td>
+                  <td class="px-4 py-4 whitespace-nowrap">
+                    <div class="text-sm font-medium text-gray-900"><%= score %></div> <!-- Score -->
+                  </td>
+                </tr>
+            <%end %>
           <% end %>
           </tbody>
         </table>

@@ -1,19 +1,26 @@
 class ApplicationController < ActionController::Base
   before_action :set_current_user
-  helper_method :current_user
+  helper_method :current_user, :user_signed_in?
 
+  def user_signed_in?
+    current_user.present? && current_user.guest==false
+  end
+
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:alert]="You are not authorized to access this page."
+    redirect_to root_path
+  end
 
   def authenticate_user!
-    unless current_user
-      redirect_to root_path, alert: "You need to sign in before continuing."
+    if user_signed_in? && !current_user.guest?
+      return
     end
+    flash[:alert] = "Please sign in."
+    redirect_to auth0_login_url
   end
   
   def current_user
-    if session[:user_id]
-      @current_user ||= User.find_by(id: session[:user_id])
-    else
-    end
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
   private

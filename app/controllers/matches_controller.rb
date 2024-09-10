@@ -1,5 +1,4 @@
 class MatchesController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_match, only: [:show, :execute_code, :surrender, :timeout]
 
   def show
@@ -96,3 +95,4 @@ class MatchesController < ApplicationController
     end
   end
 end
+

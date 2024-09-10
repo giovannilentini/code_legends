@@ -1,4 +1,6 @@
 class FriendRequestsController < ApplicationController
+  load_and_authorize_resource only: [:create, :accept, :reject]
+
   skip_before_action :verify_authenticity_token
 
   def create
@@ -30,15 +32,16 @@ class FriendRequestsController < ApplicationController
     Friendship.create(user_id: @friend_request.friend_id, friend_id: @friend_request.user_id)
 
     @friend_request.destroy
-
-    redirect_to personal_profile_path(current_user), notice: 'Richiesta di amicizia accettata.'
+    flash[:notice]= 'Richiesta di amicizia accettata.'
+    redirect_to user_path(current_user)
   end
 
   def reject
+
     @friend_request = FriendRequest.find(params[:id])
 
     @friend_request.destroy
-
-    redirect_to personal_profile_path(current_user), notice: 'Richiesta di amicizia rifiutata.'
+    flash[:notice]= 'Richiesta di amicizia rifiutata.'
+    redirect_to user_path(current_user)
   end
 end

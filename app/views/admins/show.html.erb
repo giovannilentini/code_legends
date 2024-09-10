@@ -58,7 +58,7 @@
                 <td class="px-6 py-4 text-gray-200"><%= user.username %></td>
                 <td class="px-6 py-4 text-gray-200"><%= user.email %></td>
                 <td class="px-6 py-4 text-center">
-                  <%= button_to 'Promuovi a Admin',  promote_to_admin_profiles_path(user.id), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
+                  <%= button_to 'Promuovi a Admin',  admin_promote_to_admin_path(user.id), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
                 </td>
               </tr>
             <% end %>

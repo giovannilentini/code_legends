@@ -1,4 +1,6 @@
 class ChallengeRequestsController < ApplicationController
+  load_and_authorize_resource
+
   skip_before_action :verify_authenticity_token
 
   def index

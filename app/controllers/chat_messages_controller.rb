@@ -1,7 +1,7 @@
 class ChatMessagesController < ApplicationController
-  before_action :authenticate_user!
 
   def create
+    authorize! :chat, :all
     @match = Match.find(params[:match_id])
     @chat_message = @match.chat_messages.new(chat_message_params)
     @chat_message.user = current_user
