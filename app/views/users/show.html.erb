@@ -61,7 +61,7 @@
             </label>
 
             <!-- Input File -->
-            <%= form_with model: @user, url: edit_user_path(@user), method: :patch, local: true do |f| %>
+            <%= form_with model: @user, url: user_path(@user), method: :patch, local: true do |f| %>
               <%= f.file_field :profile_image, class: 'hidden', id: 'profile_image', onchange: 'this.form.submit();' %>
             <% end %>
           </div>
@@ -101,6 +101,31 @@
             </div>
           </div>
 
+          <%if @pending_challenges %>
+            <div>
+              <h3 class="text-4xl font-bold mb-8 text-blue-400 tracking-tight drop-shadow-md">Proposte In Attesa</h3>
+              <div class="overflow-hidden rounded-2xl shadow-lg bg-gray-700">
+                <table class="w-full rounded-2xl">
+                  <thead>
+                  <tr class="bg-neutral-700">
+                    <th class="px-6 py-4 text-center text-xl font-semibold text-white">Titolo</th>
+                    <th class="px-6 py-4 text-center text-xl font-semibold text-white">Descrizione</th>
+                    <th class="px-6 py-4 text-center text-xl font-semibold text-white">Linguaggio</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% @pending_challenges.each do |challenge| %>
+                    <tr class="border-b border-gray-600">
+                      <td class="px-6 py-4 text-gray-200"><%= challenge.title %></td>
+                      <td class="px-6 py-4 text-gray-200"><%= challenge.description %></td>
+                      <td class="px-6 py-4 text-gray-200"><%= challenge.language %></td>
+                    </tr>
+                  <% end %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          <%end %>
           <div>
             <h3 class="text-4xl font-extrabold mb-8 text-red-400 tracking-tight drop-shadow-md">Proposte Rifiutate</h3>
             <div class="overflow-hidden rounded-2xl shadow-lg bg-gray-700">
