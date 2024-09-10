@@ -54,7 +54,7 @@ class MatchesController < ApplicationController
     end
 
     unless @match.timer_expires_at
-      @match.update(timer_expires_at: 10.minutes.from_now)
+      @match.update(timer_expires_at: 10.seconds.from_now)
     end
   end
 

@@ -47,13 +47,27 @@
         <div class="text-center mb-6">
           <h2 class="text-5xl font-extrabold tracking-tight drop-shadow-lg text-indigo-400">Profilo Utente</h2>
         </div>
-        <div class="text-center mb-6">
-          <% if current_user.profile_image.attached? %>
-            <%= image_tag current_user.profile_image_thumbnail, class: "rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-indigo-500" %>
-          <% else %>
-            <%= image_tag('profile-placeholder.png', alt: 'Profile Image', class: 'rounded-full mx-auto shadow-xl w-40 h-40 object-cover border-4 border-indigo-500') %>
-          <% end %>
+
+        <div class="max-w-sm mx-auto">
+          <div class="relative">
+            <!-- Immagine Profilo -->
+            <%= image_tag(current_user.profile_image.attached? ? current_user.profile_image : 'profile-placeholder.png', class: 'w-32 h-32 rounded-full object-cover border-4 border-indigo-700') %>
+
+            <!-- Bottone Modifica -->
+            <label for="profile_image" class="absolute bottom-[-10px] right-0 mb-2 mr-2 p-2 bg-indigo-700 text-white rounded-full cursor-pointer">
+              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232a2.828 2.828 0 114 4L9 19H5v-4l10.232-10.232z"></path>
+              </svg>
+            </label>
+
+            <!-- Input File -->
+            <%= form_with model: current_user, url: profile_update_path, method: :patch, local: true do |f| %>
+              <%= f.file_field :profile_image, class: 'hidden', id: 'profile_image', onchange: 'this.form.submit();' %>
+            <% end %>
+          </div>
         </div>
+
+
         <div class="text-left w-full space-y-6">
           <h3 class="text-3xl font-bold text-indigo-400">Informazioni Utente</h3>
           <p class="text-lg text-gray-300"><strong>Nome:</strong> <%= current_user.username %></p>
@@ -229,4 +243,17 @@
   closeChallengeBtn.addEventListener('click', () => {
     challengeModal.classList.add('hidden');
   });
+  function previewImage(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+          document.getElementById('profileImagePreview').src = e.target.result;
+      }
+
+      if (file) {
+          reader.readAsDataURL(file);
+      }
+  }
+
 </script>

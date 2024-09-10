@@ -71,6 +71,8 @@ Rails.application.routes.draw do
   resources :matches, only: [:show]
 
   post 'matches/:id/timeout', to: 'matches#timeout', as: 'match_timeout'
+  patch '/profile', to: 'profiles#update', as: 'profile_update'
+
 
   get 'space_invaders', to: 'space_invaders#index'
 
