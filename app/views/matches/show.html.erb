@@ -1,12 +1,12 @@
 <head>
-  <title></title>
+  <title>Dettagli della Sfida</title>
   <meta name="csrf-token" content="<%= csrf_meta_tags %>" >
-
 </head>
+
 <div class="flex flex-col h-full w-full bg-gray-900 text-white">
   <!-- Header Section -->
   <div class="flex flex-col text-center p-4 bg-gray-800 border-b border-gray-700">
-    <h1 class="text-2xl font-semibold text-white mb-2">Dettagli della Sfida</h1>
+    <h1 class="text-3xl font-bold text-white mb-2">Dettagli della Sfida</h1>
     <div class="text-white space-y-2">
       <p><strong>Player 1:</strong> <%= @match.player_1.username %></p>
       <p><strong>Player 2:</strong> <%= @match.player_2.username %></p>
@@ -18,9 +18,28 @@
   <!-- Main Content Section -->
   <div class="flex flex-row justify-center space-x-8 px-6 py-6 overflow-auto">
     <!-- Left Column -->
-    <div class="flex flex-col grow space-y-6">
+    <div class="flex flex-col grow space-y-6 max-w-5xl">
+      <!-- Challenge Info Box -->
+      <div class="flex flex-col bg-gray-800 p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-semibold text-white mb-4">Informazioni sulla Sfida</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold text-gray-400">Titolo</span>
+            <span class="text-lg font-bold text-white"><%= @challenge.title %></span>
+          </div>
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold text-gray-400">Difficoltà</span>
+            <span class="text-lg font-bold text-white capitalize"><%= @challenge.difficulty %></span>
+          </div>
+          <div class="flex flex-col md:col-span-3">
+            <span class="text-sm font-semibold text-gray-400">Descrizione</span>
+            <p class="text-white mt-1"><%= @challenge.description %></p>
+          </div>
+        </div>
+      </div>
+
       <!-- Code Editor Box -->
-      <div class="flex flex-col max-w-7xl bg-gray-800 h-[30rem] p-4 rounded-lg shadow-lg">
+      <div class="flex flex-col bg-gray-800 h-[30rem] p-4 rounded-lg shadow-lg">
         <div class="flex flex-row py-2 justify-between items-center border-b border-gray-700 mb-4">
           <h2 class="text-lg font-bold">CODICE</h2>
           <h2 class="text-lg font-bold"><%= @challenge.language %></h2>
@@ -107,7 +126,6 @@
             e.preventDefault(); // Prevent the default form submission
             // Gather form data
             const formData = new FormData(form);
-            console.log(create_executable(currentLanguage, hidden_code.value, test_template));
             formData.set("code", create_executable(currentLanguage, hidden_code.value, test_template));
             // Perform the AJAX request using Fetch API
             fetch(form.action, {
