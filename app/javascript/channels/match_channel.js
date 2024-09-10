@@ -1,5 +1,6 @@
 import {createConsumer} from "@rails/actioncable"
 import consumer from "./consumer";
+import { displayPopup } from "../popup";
 
 export function createMatchSubscription(matchId){
   consumer.subscriptions.create(
@@ -15,9 +16,12 @@ export function createMatchSubscription(matchId){
 
         received(data) {
           console.log("Match Channel Data:", data);
-          // Handle match-related updates here
+            if (data.status === "timeout") {
+                displayPopup("Draw", data.message);
+            }
         },
       }
   );
+
 }
 

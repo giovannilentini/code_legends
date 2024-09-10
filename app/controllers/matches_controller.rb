@@ -1,6 +1,7 @@
 class MatchesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_match
+  before_action :set_match, only: [:show, :execute_code, :surrender, :timeout]
+
   def show
     # Ensure that only the participants can view the match
     unless [@match.player_1, @match.player_2].include?(current_user)
@@ -33,6 +34,15 @@ class MatchesController < ApplicationController
     set_winner(winner, loser, @match, true)
   end
 
+  def timeout
+    if @match.timer_expires_at && Time.current >= @match.timer_expires_at
+      @match.update(status: "finished", winner_id: nil)
+      ActionCable.server.broadcast "match_#{@match.id}", { status: "timeout", message: "The match ended in a draw." }
+    end
+
+    head :ok
+  end
+
   private
   def set_match
     @match = Match.find_by(id: params[:id] || params[:match_id])
@@ -41,6 +51,10 @@ class MatchesController < ApplicationController
       @match.update(:challenge_id => @challenge.id)
     else
       @challenge = Challenge.find_by(id: @match.challenge_id)
+    end
+
+    unless @match.timer_expires_at
+      @match.update(timer_expires_at: 10.minutes.from_now)
     end
   end
 
