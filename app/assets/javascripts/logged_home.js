@@ -1,40 +1,42 @@
-let isDragging = false;
-let offset = { x: 0, y: 0 };
-
 function makeDraggable(element) {
+    let isDragging = false;
+    let offset = { x: 0, y: 0 };
+
     element.addEventListener('mousedown', function(e) {
-      isDragging = true;
-      offset.x = e.clientX - element.offsetLeft;
-      offset.y = e.clientY - element.offsetTop;
-      element.style.cursor = 'grabbing';
-      e.preventDefault();
-    });
+        isDragging = true;
+        offset.x = e.clientX - element.offsetLeft;
+        offset.y = e.clientY - element.offsetTop;
+        element.style.cursor = 'grabbing';
+        e.preventDefault();
 
-    document.addEventListener('mousemove', function(e) {
-      if (isDragging) {
-        element.style.left = (e.clientX - offset.x) + 'px';
-        element.style.top = (e.clientY - offset.y) + 'px';
-      }
-    });
+        function onMouseMove(e) {
+            if (isDragging) {
+                element.style.left = (e.clientX - offset.x) + 'px';
+                element.style.top = (e.clientY - offset.y) + 'px';
+            }
+        }
 
-    document.addEventListener('mouseup', function() {
-      if (isDragging) {
-        isDragging = false;
-        element.style.cursor = 'pointer';
-      }
+        function onMouseUp() {
+            if (isDragging) {
+                isDragging = false;
+                element.style.cursor = 'pointer';
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            }
+        }
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
     });
-  }
+}
 
-  console.log("ciao");
+
 
   const icons = document.querySelectorAll('[class*="-icon"], .file-icon');
   icons.forEach(icon => makeDraggable(icon));
 
-// Ottieni i dati dell'utente dal markup HTML
 const userElement = document.getElementById('userData');
 const isGuest = userElement.getAttribute('data-guest') === 'true';
 
-// Selezione degli elementi delle modali
 const mailboxModal = document.getElementById('mailboxModal');
 const openMailboxBtn = document.getElementById('openMailbox');
 const closeMailboxBtn = document.getElementById('closeMailbox');

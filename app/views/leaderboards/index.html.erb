@@ -13,10 +13,10 @@
 
 <% icons.each do |icon| %>
   <div id="<%= icon[:id] %>" class="<%= icon[:class] %>" ondblclick="<%= icon[:onclick] %>">
-    <img src="<%= asset_path('file.png') %>" alt="<%= icon[:alt] %>">
+    <% icon_filename = "#{icon[:id]}.png" %>
+    <img src="<%= asset_path(icon_filename) %>" alt="<%= icon[:alt] %>">
     <p><%= icon[:text] %></p>
   </div>
-<% end %>
 
 <div id="window" class="window">
   <header>

@@ -18,7 +18,7 @@
 .profile-icon {
     width: 100px;
     height: 100px;
-    top: 5%;
+    top: 10%;
     left: 2%;
     border-radius: 8px;
     text-align: center;
@@ -35,7 +35,7 @@
 .challenge-friend-icon {
     width: 100px;
     height: 100px;
-    top: 20%;
+    top: 30%;
     left: 2%;
     border-radius: 8px;
     text-align: center;
@@ -52,7 +52,7 @@
 .find-opponent-icon {
     width: 100px;
     height: 100px;
-    top: 36%;
+    top: 50%;
     left: 2%;
     border-radius: 8px;
     text-align: center;
@@ -69,7 +69,7 @@
 .create-challenge-icon {
     width: 100px;
     height: 100px;
-    top: 52%;
+    top: 70%;
     left: 2%;
     border-radius: 8px;
     text-align: center;
@@ -120,8 +120,8 @@
 .leaderboard-icon {
     width: 100px;
     height: 100px;
-    top: 5%;
-    left: 10%;
+    top: 10%;
+    left: 12%;
     border-radius: 8px;
     text-align: center;
     padding: 10px;
