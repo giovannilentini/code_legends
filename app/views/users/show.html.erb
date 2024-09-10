@@ -128,7 +128,7 @@
           <h3 class="text-3xl font-bold text-indigo-400 mb-4">Amici</h3>
           <ul class="list-disc list-inside space-y-2 text-gray-300">
             <% current_user.friends.each do |friend| %>
-              <li><%= link_to friend.username, user_profile_path(friend), class: 'text-blue-400 hover:text-blue-500' %></li>
+              <li><%= link_to friend.username, user_path(friend), class: 'text-blue-400 hover:text-blue-500' %></li>
             <% end %>
           </ul>
         </div>

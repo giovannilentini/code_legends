@@ -19,6 +19,7 @@ class Auth0Controller < ApplicationController
       user.email = email
       user.is_admin = false
       user.auth0_id = auth0_id
+      user.guest = false
     end
     user.update(username: username) if user.username.nil?
 
@@ -40,7 +41,7 @@ class Auth0Controller < ApplicationController
     error_type = params[:error]
     error_description = params[:error_description]
 
-    flash[:alert] = "Authentication failed: #{error_description}. Please try again."
+    flash[:alert] = "Authentication failed: #{error_description} Please try again."
     cookies.delete :user_info
     # Redirect to a specific page with an error message
     redirect_to root_path
