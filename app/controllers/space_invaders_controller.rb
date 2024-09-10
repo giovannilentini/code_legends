@@ -1,0 +1,2 @@
+class SpaceInvadersController < ApplicationController
+end

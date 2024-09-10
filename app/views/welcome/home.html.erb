@@ -1,4 +1,5 @@
 <% if current_user %>
+<<<<<<< HEAD
 <% icons = [
   { id: 'profile-icon', class: 'profile-icon', onclick: 'gotoProfile()', text: 'My Profile', alt: 'File Icon' },
   { id: 'challenge-friend-icon', class: 'challenge-friend-icon', onclick: 'openChallengeModal()', text: 'Challenge a Friend', alt: 'Challenge a Friend Icon' },
@@ -6,6 +7,16 @@
   { id: 'create-challenge-icon', class: 'create-challenge-icon', onclick: 'gotoNewChallenge()', text: 'Create Challenge', alt: 'Create Challenge Icon' },
   { id: 'leaderboard-icon', class: 'leaderboard-icon', onclick: 'gotoLeaderboard()', text: 'Leaderboard', alt: 'Leaderboard Icon' }
 ] %>
+=======
+  <% icons = [
+    { id: 'profile-icon', class: 'profile-icon', onclick: 'gotoProfile()', text: 'My Profile', alt: 'File Icon' },
+    { id: 'challenge-friend-icon', class: 'challenge-friend-icon', onclick: 'openChallengeModal()', text: 'Challenge a Friend', alt: 'Challenge a Friend Icon' },
+    { id: 'find-opponent-icon', class: 'find-opponent-icon', onclick: 'gotoPlayNow()', text: 'Find Opponent', alt: 'Find Opponent Icon' },
+    { id: 'create-challenge-icon', class: 'create-challenge-icon', onclick: 'gotoNewChallenge()', text: 'Create Challenge', alt: 'Create Challenge Icon' },
+    { id: 'leaderboard-icon', class: 'leaderboard-icon', onclick: 'gotoLeaderboard()', text: 'Leaderboard', alt: 'Leaderboard Icon' },
+    { id: 'space-invaders-icon', class: 'space-invaders-icon', onclick: 'gotoSpaceInvaders()', text: 'Space Invaders', alt: 'Space Invaders Icon' }
+  ] %>
+>>>>>>> 05a0b07b9ae7b97e49848d5a80673369c44eeedb
 
 <% if @current_user.admin? %>
   <% icons << { id: 'admin-profile-icon', class: 'admin-profile-icon', onclick: 'gotoAdminProfile()', text: 'Admin Profile', alt: 'Admin Profile Icon' } %>

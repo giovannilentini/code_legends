@@ -140,6 +140,10 @@ function closeModal() {
     document.getElementById("searchFriendsModal").classList.add("hidden");
 }
 
+function gotoSpaceInvaders() {
+    window.location.href = '/space_invaders';
+}
+
 function gotoAdminProfile() {
     if (isGuest) {
         openGuestModal();

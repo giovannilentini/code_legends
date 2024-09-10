@@ -5,7 +5,7 @@ import "channels";
 import "codemirror_setup";
 import "code_generation"
 import "match_subscription"
-//= require logged_home
+
 
 
 

@@ -134,6 +134,23 @@
     position: absolute;
 }
 
+.space-invaders-icon {
+    width: 100px;
+    height: 100px;
+    top: 20%;
+    left: 10%;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    position: absolute;
+}
+
 .file-icon img,
 .profile-icon img,
 .challenge-friend-icon img,
@@ -141,7 +158,8 @@
 .create-challenge-icon img,
 .user-profile-icon img,
 .admin-profile-icon img,
-.leaderboard-icon img {
+.leaderboard-icon img,
+.space-invaders-icon img {
     width: 80px;
     height: 80px;
 }
@@ -153,7 +171,8 @@
 .create-challenge-icon p,
 .user-profile-icon p,
 .admin-profile-icon p,
-.leaderboard-icon p {
+.leaderboard-icon p,
+.space-invaders-icon p {
     margin: 0;
     font-size: 14px;
 }
@@ -165,7 +184,8 @@
 .create-challenge-icon:hover,
 .user-profile-icon:hover,
 .admin-profile-icon:hover,
-.leaderboard-icon:hover {
+.leaderboard-icon:hover,
+.space-invaders-icon:hover {
     border: 2px solid white;
     background: #ccc;
 }
@@ -241,3 +261,15 @@
 .error {
     color: red;
 }
+
+canvas {
+    display: block;
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scale(0.7); /* Scala il canvas a 70% della dimensione originale */
+}
+

@@ -1,10 +1,10 @@
-<!-- Icona del Profilo -->
 <% icons = [
   { id: 'profile-icon', class: 'profile-icon', onclick: 'gotoProfile()', text: 'My Profile', alt: 'File Icon' },
   { id: 'challenge-friend-icon', class: 'challenge-friend-icon', onclick: 'openChallengeModal()', text: 'Challenge a Friend', alt: 'Challenge a Friend Icon' },
   { id: 'find-opponent-icon', class: 'find-opponent-icon', onclick: 'gotoPlayNow()', text: 'Find Opponent', alt: 'Find Opponent Icon' },
   { id: 'create-challenge-icon', class: 'create-challenge-icon', onclick: 'gotoNewChallenge()', text: 'Create Challenge', alt: 'Create Challenge Icon' },
-  { id: 'leaderboard-icon', class: 'leaderboard-icon', onclick: 'gotoLeaderboard()', text: 'Leaderboard', alt: 'Leaderboard Icon' }
+  { id: 'leaderboard-icon', class: 'leaderboard-icon', onclick: 'gotoLeaderboard()', text: 'Leaderboard', alt: 'Leaderboard Icon' },
+  { id: 'space-invaders-icon', class: 'space-invaders-icon', onclick: 'gotoSpaceInvaders()', text: 'Space Invaders', alt: 'Space Invaders Icon' }
 ] %>
 
 <% if @current_user.admin? %>
@@ -87,10 +87,6 @@
     </div>
 
   </section>
-</div>
-
-<div class="play-now">
-  <div id="waiting_modal"></div>
 </div>
 
 <div class="taskbar fixed bottom-0 left-0 w-screen h-[43px] bg-neutral-900 border-t border-gray-400 z-[9999] flex items-center justify-between">

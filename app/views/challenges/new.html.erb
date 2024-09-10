@@ -111,7 +111,6 @@
         document.getElementById('current-date').textContent = `${day}/${month}/${year}`;
     }
 
-
     import { initializeCodeMirror } from "codemirror_setup"; // Reference the module by its name
 
     let currentLanguage = <%= @challenge_proposal.language.to_json.html_safe %>;

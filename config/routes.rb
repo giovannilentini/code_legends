@@ -69,4 +69,9 @@ Rails.application.routes.draw do
 
   resources :challenges, only: [:show, :new, :create, :edit, :update, :destroy]
   resources :matches, only: [:show]
+
+  post 'matches/:id/timeout', to: 'matches#timeout', as: 'match_timeout'
+
+  get 'space_invaders', to: 'space_invaders#index'
+
 end
