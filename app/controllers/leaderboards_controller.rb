@@ -4,8 +4,6 @@ class LeaderboardsController < ApplicationController
     # Get the user_number parameter or default to 10 if not provided
     user_number = params[:user_number].presence || 10
 
-    p "USER NUBMBER"
-    p user_number.to_i
     # Fetch top users from Redis (with the specified limit)
     top_users = LeaderboardService.top_users(user_number.to_i)
 

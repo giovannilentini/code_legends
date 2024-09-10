@@ -1,13 +1,14 @@
 class AdminsController < ApplicationController
 
   def show
-    authorize! :read, :admin_page
+    authorize! :admin, :all
 
     @challenges_proposals = ChallengeProposal.where(status: "pending")
     @non_admin_users = User.where(is_admin: false, guest:false).order('users.username')
   end
 
   def promote_to_admin
+    authorize! :admin, :all
     user = User.find(params[:id])
     if user.update(is_admin: true)
       flash[:notice]="#{user.username} è stato promosso a admin."

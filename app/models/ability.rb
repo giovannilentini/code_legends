@@ -17,9 +17,6 @@ class Ability
           else
             can :edit, User, id: user.id
             can :update, User, id: user.id
-            can :create, FriendRequest
-            can :accept, FriendRequest
-            can :reject, FriendRequest
             can :manage, FriendRequest
             can :destroy, Friendship
             can :accept, Friendship

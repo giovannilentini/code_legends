@@ -1,7 +1,5 @@
 class ChallengesController < ApplicationController
-  before_action :set_challenge, only: [:update_status]
-  load_and_authorize_resource except: [:new, :create] 
-
+  load_and_authorize_resource
   def new
     @challenge_proposal = ChallengeProposal.find_by(id: params[:challenge_proposal_id])
     @challenge = Challenge.build
@@ -20,28 +18,11 @@ class ChallengesController < ApplicationController
     if @challenge.save
       ChallengeProposal.find_by(id: @challenge.challenge_proposal_id).update(status: "accepted")
       flash[:success] = "Challenge successfully created!"
-      redirect_to admin_profile_path
+      redirect_to admin_path(current_user)
     else
       Rails.logger.error(@challenge.errors)
       flash[:alert] = "Something went wrong. Please try again."
-      redirect_to admin_profile_path
-    end
-  end
-
-  def update_status
-    authorize! :approve, @challenge 
-    @challenge.status = params[:status]
-
-    if @challenge.status.to_i == 0
-      @challenge.rejection_reason = params[:rejection_reason]
-    else
-      @challenge.rejection_reason = nil
-    end
-
-    if @challenge.save
-      redirect_to admin_profile_path, notice: 'Updated correctly.'
-    else
-      redirect_to admin_profile_path, alert: 'Error updating the status.'
+      redirect_to admin_path(current_user)
     end
   end
 

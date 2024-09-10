@@ -3,13 +3,13 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :user_signed_in?
 
   def user_signed_in?
-    current_user.present?
+    current_user.present? && current_user.guest==false
   end
 
-  rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert]="You are not authorized to access this page."
-    redirect_to root_path
-  end
+  #rescue_from CanCan::AccessDenied do |exception|
+  #flash[:alert]="You are not authorized to access this page."
+    #redirect_to root_path
+  #end
 
   def authenticate_user!
     if user_signed_in? && !current_user.guest?
@@ -20,10 +20,7 @@ class ApplicationController < ActionController::Base
   end
   
   def current_user
-    if session[:user_id]
-      @current_user ||= User.find_by(id: session[:user_id])
-    else
-    end
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
 
   private
