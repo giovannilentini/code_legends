@@ -1,7 +1,6 @@
 class MatchesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_match, only: [:show, :execute_code, :surrender, :timeout]
-  skip_before_action :verify_authenticity_token, only: [:timeout]
 
   def show
     # Ensure that only the participants can view the match

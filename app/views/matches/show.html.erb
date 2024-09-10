@@ -1,3 +1,8 @@
+<head>
+  <title></title>
+  <meta name="csrf-token" content="<%= csrf_meta_tags %>" >
+
+</head>
 <div class="flex flex-col h-full w-full bg-gray-900 text-white">
   <!-- Header Section -->
   <div class="flex flex-col text-center p-4 bg-gray-800 border-b border-gray-700">
@@ -76,7 +81,6 @@
       <%= form_with(url: match_surrender_path(@match), method: :post, id: 'surrender-form', local: true) do |form| %>
         <%= form.submit "Surrender", id: "surrender-submit", class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 w-full transition duration-200" %>
       <% end %>
-
     </div>
   </div>
 </div>
@@ -122,6 +126,11 @@
         });
     });
 
+    // Funzione per ottenere il token CSRF dal meta tag
+    function getCSRFToken() {
+        return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    }
+
     // Timer
     document.addEventListener("turbo:load", function() {
         const timerElement = document.getElementById('timer');
@@ -135,7 +144,20 @@
                 timerElement.textContent = "Time's up!";
                 clearInterval(timerInterval);
 
-                fetch("<%= match_timeout_path(@match.id) %>", { method: 'POST' });
+                const csrfToken = getCSRFToken();
+
+                fetch("<%= match_timeout_path(@match.id) %>", {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-Token': csrfToken,
+                        'Content-Type': 'application/json'
+                    },
+                })
+                  .then(response => response.json())
+                  .then(data => {
+                      console.log("Timeout response:", data);
+                  })
+                  .catch(error => console.error('ERROR:', error));
             } else {
                 const minutes = Math.floor(timeRemaining / 1000 / 60);
                 const seconds = Math.floor((timeRemaining / 1000) % 60);
