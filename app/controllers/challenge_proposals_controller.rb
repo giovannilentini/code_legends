@@ -51,10 +51,6 @@ end
   def challenge_proposal_params
     params.require(:challenge_proposal).permit(:title, :description, :test_cases, :language)
   end
-
-  def authenticate_user!
-    unless session[:user_id] # Verifica se l'ID dell'utente è presente nella sessione
-       redirect_to root_path ,alert: "PORCO DIO"
-    end
-  end
 end
+
+ 
