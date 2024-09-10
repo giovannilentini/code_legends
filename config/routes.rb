@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   resources :matches, only: [:show] do
     post 'execute_code', to: 'matches#execute_code'
     post 'surrender', to: 'matches#surrender'
-    post 'timeout', to: 'matches#timeout', as: 'match_timeout'
+    post 'timeout', to: 'matches#timeout'
 
   end
   resources :matches do
