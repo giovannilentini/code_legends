@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('turbo:load', function() {
     var terminal = document.getElementById('terminal-window');
     var fileIcon = document.getElementById('file-icon');
     var utenteElement = document.getElementById('utente');
