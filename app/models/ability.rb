@@ -15,7 +15,6 @@ class Ability
           if user.admin?
             can :manage, :all
           else
-            can :edit, User, id: user.id
             can :update, User, id: user.id
             can :manage, FriendRequest
             can :destroy, Friendship
@@ -26,7 +25,6 @@ class Ability
             can :accept, ChallengeRequest, receiver: user
             can :reject, ChallengeRequest, receiver: user
             can :create, ChallengeProposal
-            can :update, User, id: user.id
             can :read, User
             can :show, Match
             can :execute_code, Match

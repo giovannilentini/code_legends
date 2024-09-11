@@ -51,27 +51,28 @@
         <div class="max-w-sm mx-auto">
           <div class="relative">
             <!-- Immagine Profilo -->
-            <%= image_tag(@user.profile_image.attached? ? @user.profile_image : 'profile-placeholder.png', class: 'w-32 h-32 rounded-full object-cover border-4 border-indigo-700') %>
+            <%= image_tag(@user_profile.profile_image.attached? ? @user_profile.profile_image : 'profile-placeholder.png', class: 'w-32 h-32 rounded-full object-cover border-4 border-indigo-700') %>
 
-            <!-- Bottone Modifica -->
-            <label for="profile_image" class="absolute bottom-[-10px] right-0 mb-2 mr-2 p-2 bg-indigo-700 text-white rounded-full cursor-pointer">
-              <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232a2.828 2.828 0 114 4L9 19H5v-4l10.232-10.232z"></path>
-              </svg>
-            </label>
-
-            <!-- Input File -->
-            <%= form_with model: @user, url: user_path(@user), method: :patch, local: true do |f| %>
-              <%= f.file_field :profile_image, class: 'hidden', id: 'profile_image', onchange: 'this.form.submit();' %>
-            <% end %>
+            <% if can? :update, @user_profile %>
+              <!-- Bottone Modifica -->
+              <label for="profile_image" class="absolute bottom-[-10px] right-0 mb-2 mr-2 p-2 bg-indigo-700 text-white rounded-full cursor-pointer">
+                <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232a2.828 2.828 0 114 4L9 19H5v-4l10.232-10.232z"></path>
+                </svg>
+              </label>
+              <!-- Input File -->
+              <%= form_with model: @user_profile, url: user_path(@user_profile), method: :patch, local: true do |f| %>
+                <%= f.file_field :profile_image, class: 'hidden', id: 'profile_image', onchange: 'this.form.submit();' %>
+              <% end %>
+            <% end  %>
           </div>
         </div>
 
 
         <div class="text-left w-full space-y-6">
           <h3 class="text-3xl font-bold text-indigo-400">Informazioni Utente</h3>
-          <p class="text-lg text-gray-300"><strong>Nome:</strong> <%= @user.username %></p>
-          <p class="text-lg text-gray-300"><strong>Email:</strong> <%= @user.email %></p>
+          <p class="text-lg text-gray-300"><strong>Nome:</strong> <%= @user_profile.username %></p>
+          <p class="text-lg text-gray-300"><strong>Email:</strong> <%= @user_profile.email %></p>
         </div>
       </div>
 
@@ -152,7 +153,7 @@
         <div style="background-color: #1c1b1b;" class="p-6 rounded-3xl shadow-lg border border-white">
           <h3 class="text-3xl font-bold text-indigo-400 mb-4">Amici</h3>
           <ul class="list-disc list-inside space-y-2 text-gray-300">
-            <% @user.friends.each do |friend| %>
+            <% @user_profile.friends.each do |friend| %>
               <li><%= link_to friend.username, user_path(friend), class: 'text-blue-400 hover:text-blue-500' %></li>
             <% end %>
           </ul>
@@ -215,57 +216,7 @@
         document.getElementById('current-date').textContent = `${day}/${month}/${year}`;
     }
 
-    const mailboxModal = document.getElementById('mailboxModal');
-    const openMailboxBtn = document.getElementById('openMailbox');
-    const closeMailboxBtn = document.getElementById('closeMailbox');
 
-    const requestModal = document.getElementById('requestModal');
-    const closeRequestBtn = document.getElementById('closeRequest');
-
-    const challengeModal = document.getElementById('challengeModal');
-    const closeChallengeBtn = document.getElementById('closeChallenge');
-
-    openMailboxBtn.addEventListener('click', () => {
-        mailboxModal.classList.remove('hidden');
-    });
-
-    closeMailboxBtn.addEventListener('click', () => {
-        mailboxModal.classList.add('hidden');
-    });
-
-    document.querySelectorAll('a[data-request-id]').forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            const requestId = link.dataset.requestId;
-            const senderName = link.innerText.split(' ')[3];
-            document.getElementById('requestMessage').innerText = `Ciao, sono ${senderName}, vuoi diventare mio amico?`;
-
-            requestModal.classList.remove('hidden');
-            document.getElementById('acceptRequestForm').action = `/friend_requests/${requestId}/accept`;
-            document.getElementById('rejectRequestForm').action = `/friend_requests/${requestId}/reject`;
-        });
-    });
-
-    closeRequestBtn.addEventListener('click', () => {
-        requestModal.classList.add('hidden');
-    });
-
-    document.querySelectorAll('.challenge-request').forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            const challengeId = link.dataset.challengeId;
-            const senderName = link.innerText.split(' ')[3];
-            document.getElementById('challengeMessage').innerText = `Hai una nuova sfida da ${senderName}. Accetti?`;
-
-            challengeModal.classList.remove('hidden');
-            document.getElementById('acceptChallengeForm').action = `/challenge_requests/${challengeId}/accept`;
-            document.getElementById('rejectChallengeForm').action = `/challenge_requests/${challengeId}/reject`;
-        });
-    });
-
-    closeChallengeBtn.addEventListener('click', () => {
-        challengeModal.classList.add('hidden');
-    });
     function previewImage(event) {
         const file = event.target.files[0];
         const reader = new FileReader();

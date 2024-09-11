@@ -22,12 +22,12 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find_by(id: params[:id])
-    @accepted_challenges = ChallengeProposal.where(status: "accepted", user: @user)
-    @rejected_challenges = ChallengeProposal.where(status: "reject", user: @user)
+    @user_profile = User.find_by(id: params[:id])
+    @accepted_challenges = ChallengeProposal.where(status: "accepted", user: @user_profile)
+    @rejected_challenges = ChallengeProposal.where(status: "reject", user: @user_profile)
 
-    if @user == current_user
-      @pending_challenges = ChallengeProposal.where(status: "pending", user: @user)
+    if @user_profile == current_user
+      @pending_challenges = ChallengeProposal.where(status: "pending", user: @user_profile)
     end
   end
   def user_params

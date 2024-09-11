@@ -123,79 +123,8 @@
         const year = now.getFullYear();
         document.getElementById('current-date').textContent = `${day}/${month}/${year}`;
     }
-        const closeButton = document.getElementById('close-terminal-button');
 
-        closeButton.addEventListener('click', function() {
-            window.location.href = '/';
-        });
 
     updateDateTime();
     setInterval(updateDateTime, 1000);
-
-    function updateDateTime() {
-        const now = new Date();
-        const hours = now.getHours().toString().padStart(2, '0');
-        const minutes = now.getMinutes().toString().padStart(2, '0');
-        document.getElementById('current-time').textContent = `${hours}:${minutes}`;
-
-        const day = now.getDate().toString().padStart(2, '0');
-        const month = (now.getMonth() + 1).toString().padStart(2, '0');
-        const year = now.getFullYear();
-        document.getElementById('current-date').textContent = `${day}/${month}/${year}`;
-    }
-
-    const mailboxModal = document.getElementById('mailboxModal');
-    const openMailboxBtn = document.getElementById('openMailbox');
-    const closeMailboxBtn = document.getElementById('closeMailbox');
-
-    const requestModal = document.getElementById('requestModal');
-    const closeRequestBtn = document.getElementById('closeRequest');
-
-    const challengeModal = document.getElementById('challengeModal');
-    const closeChallengeBtn = document.getElementById('closeChallenge');
-
-    // Casella postale
-    openMailboxBtn.addEventListener('click', () => {
-        mailboxModal.classList.remove('hidden');
-    });
-
-    closeMailboxBtn.addEventListener('click', () => {
-        mailboxModal.classList.add('hidden');
-    });
-
-    // Modale per richieste di amicizia
-    document.querySelectorAll('a[data-request-id]').forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            const requestId = link.dataset.requestId;
-            const senderName = link.innerText.split(' ')[3]; // Nome del mittente
-            document.getElementById('requestMessage').innerText = `Ciao, sono ${senderName}, vuoi diventare mio amico?`;
-
-            requestModal.classList.remove('hidden');
-            document.getElementById('acceptRequestForm').action = `/friend_requests/${requestId}/accept`;
-            document.getElementById('rejectRequestForm').action = `/friend_requests/${requestId}/reject`;
-        });
-    });
-
-    closeRequestBtn.addEventListener('click', () => {
-        requestModal.classList.add('hidden');
-    });
-
-    // Modale per richieste di sfida
-    document.querySelectorAll('.challenge-request').forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            const challengeId = link.dataset.challengeId;
-            const senderName = link.innerText.split(' ')[3]; // Nome del mittente
-            document.getElementById('challengeMessage').innerText = `Hai una nuova sfida da ${senderName}. Accetti?`;
-
-            challengeModal.classList.remove('hidden');
-            document.getElementById('acceptChallengeForm').action = `/challenge_requests/${challengeId}/accept`;
-            document.getElementById('rejectChallengeForm').action = `/challenge_requests/${challengeId}/reject`;
-        });
-    });
-
-    closeChallengeBtn.addEventListener('click', () => {
-        challengeModal.classList.add('hidden');
-    });
 </script>
