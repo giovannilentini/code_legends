@@ -15,7 +15,6 @@ export function createMatchSubscription(matchId){
         },
 
         received(data) {
-          console.log("Match Channel Data:", data);
             if (data.status === "timeout") {
                 displayPopup("Draw", data.message);
             }

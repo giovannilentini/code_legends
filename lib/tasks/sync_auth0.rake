@@ -6,6 +6,7 @@ namespace :auth0 do
           user_create.email = user["email"]
           user_create.is_admin = false
           user_create.auth0_id = user["user_id"]
+          user_create.rank = 0
         end
       end
     puts "Auth0 database synced to local DB!"

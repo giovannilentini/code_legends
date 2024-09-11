@@ -8,7 +8,7 @@ class FriendRequestsController < ApplicationController
       flash[:alert] = "Siete già amici."
       redirect_to root_path
     elsif FriendRequest.exists?(user_id: current_user.id, friend_id: @user.id) || FriendRequest.exists?(user_id: @user.id, friend_id: current_user.id)
-      flash[:alert] = "C'è già una richiesta di amicizia in sospeso."
+      flash[:alert] = "È già presente una richiesta di amicizia in sospeso per questo utente."
       redirect_to root_path
     else
       @friend_request = FriendRequest.new(user_id: current_user.id, friend_id: @user.id)
@@ -18,7 +18,7 @@ class FriendRequestsController < ApplicationController
         flash[:notice] = "Richiesta di amicizia inviata con successo."
         redirect_to root_path
       else
-        flash[:alert] = "Errore nell'invio della richiesta di amicizia."
+        flash[:alert] = "Impossibile inviare la richiesta di amicizia."
         render :new
       end
     end
@@ -29,18 +29,15 @@ class FriendRequestsController < ApplicationController
 
     Friendship.create(user_id: @friend_request.user_id, friend_id: @friend_request.friend_id)
     Friendship.create(user_id: @friend_request.friend_id, friend_id: @friend_request.user_id)
-
     @friend_request.destroy
     flash[:notice]= 'Richiesta di amicizia accettata.'
-    redirect_to user_path(current_user)
+    redirect_to root_path
   end
 
   def reject
-
     @friend_request = FriendRequest.find(params[:id])
-
     @friend_request.destroy
     flash[:notice]= 'Richiesta di amicizia rifiutata.'
-    redirect_to user_path(current_user)
+    redirect_to root_path
   end
 end

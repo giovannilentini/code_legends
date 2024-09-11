@@ -33,13 +33,37 @@ class MatchmakingQueueService
   end
 
   def create_match(opponent)
-    ActiveRecord::Base.transaction do
-      MatchmakingQueue.where(user: [@user, opponent.user]).update_all(status: 'playing')
-      match = Match.create(player_1_id: @user.id, player_2_id: opponent.user.id, language: @language, status: 'ongoing')
-      notify_players(match)
+    # Update matchmaking queue status
+    MatchmakingQueue.where(user: [@user, opponent.user]).update_all(status: 'playing')
+
+    # Fetch challenge IDs with the specified language
+    challenge_ids = Challenge.where(language: @language).pluck(:id)
+
+    # Handle case where no challenges are found
+    if challenge_ids.empty?
+      Rails.logger.warn "No challenges found for language #{@language}"
+      return # or handle this case as needed
     end
 
+    # Pick a random challenge ID
+    challenge_id = challenge_ids.sample
+
+    # Find the challenge using the randomly selected ID
+    challenge = Challenge.find_by(id: challenge_id)
+
+    # Ensure the challenge was found
+    if challenge.nil?
+      Rails.logger.warn "Challenge with ID #{challenge_id} not found"
+      return # or handle this case as needed
+    end
+
+    # Create the match with the selected challenge
+    match = Match.create(player_1_id: @user.id, player_2_id: opponent.user.id, language: @language, status: 'ongoing', challenge_id: challenge.id)
+
+    # Notify players
+    notify_players(match)
   end
+
 
   def notify_players(match)
     # Use ActionCable to notify players

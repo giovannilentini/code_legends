@@ -27,10 +27,12 @@ class ChallengeRequestsController < ApplicationController
     authorize! :accept,challenge
 
     if challenge.update(status: 'ongoing')
+      match_challenge = Challenge.find_by(id: Challenge.where(language: challenge.language).pluck(:id).sample)
       match = Match.create(
         player_1_id: challenge.user_id,
         player_2_id: challenge.friend_id,
         language: challenge.language,
+        challenge_id: match_challenge.id,
         status: 'ongoing'
       )
 

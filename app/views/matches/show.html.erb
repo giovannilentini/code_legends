@@ -116,68 +116,66 @@
     import { create_executable } from "code_generation";
     import { subscribeToMatchAndSubmissionChannels } from "match_subscription";
 
-        let code_template = <%= @challenge.code_template.to_json.html_safe %>;
-        let currentLanguage = <%= @match.language.to_json.html_safe %>;
-        let test_template = <%= @challenge.test_template.to_json.html_safe %>;
-        const match_id = "<%= @match.id %>";
-        const user_id = "<%= current_user.id %>";
-        subscribeToMatchAndSubmissionChannels(match_id, user_id);
+    let code_template = <%= @challenge.code_template.to_json.html_safe %>;
+    let currentLanguage = <%= @match.language.to_json.html_safe %>;
+    let test_template = <%= @challenge.test_template.to_json.html_safe %>;
+    const match_id = "<%= @match.id %>";
+    const user_id = "<%= current_user.id %>";
+    subscribeToMatchAndSubmissionChannels(match_id, user_id);
 
-        const form = document.getElementById('execute-form');
-        const output = document.getElementById('output');
-        const editor = document.getElementById('code-editor');
-        const hidden_code = document.getElementById('hidden-code-input');
-        initializeCodeMirror(editor, form, hidden_code, code_template, currentLanguage, 20);
-        form.addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent the default form submission
-            // Gather form data
-            const formData = new FormData(form);
-            formData.set("code", create_executable(currentLanguage, hidden_code.value, test_template));
-            // Perform the AJAX request using Fetch API
-            fetch(form.action, {
+    const form = document.getElementById('execute-form');
+    const output = document.getElementById('output');
+    const editor = document.getElementById('code-editor');
+    const hidden_code = document.getElementById('hidden-code-input');
+    initializeCodeMirror(editor, form, hidden_code, code_template, currentLanguage, 20);
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent the default form submission
+        // Gather form data
+        const formData = new FormData(form);
+        formData.set("code", create_executable(currentLanguage, hidden_code.value, test_template));
+        // Perform the AJAX request using Fetch API
+        fetch(form.action, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json', // Expect JSON response
+            },
+            body: formData
+        })
+          .then(response => response.json())  // Return the parsed JSON
+          .then(data => {
+              // Update the output area with the result
+              output.textContent = data.output;
+          })
+          .catch(error => console.error('ERROR:', error));
+    });
+    // TIMER
+    const timerElement = document.getElementById('timer');
+    const timerExpiresAt = new Date("<%= @match.timer_expires_at.iso8601 %>");
+    function getCSRFToken() {
+      return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    }
+    function updateTimer() {
+        const now = new Date();
+        const timeRemaining = timerExpiresAt - now;
+
+        if (timeRemaining <= 0) {
+            timerElement.textContent = "Time's up!";
+            clearInterval(timerInterval);
+
+            fetch("<%= match_timeout_path(@match.id) %>", {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json', // Expect JSON response
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': getCSRFToken()
                 },
-                body: formData
             })
-              .then(response => response.json())  // Return the parsed JSON
-              .then(data => {
-                  // Update the output area with the result
-                  output.textContent = data.output;
-              })
-              .catch(error => console.error('ERROR:', error));
-        });
-        // TIMER
-        const timerElement = document.getElementById('timer');
-        const timerExpiresAt = new Date("<%= @match.timer_expires_at.iso8601 %>");
-        function getCSRFToken() {
-          return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                .catch(error => console.error('ERROR:', error));
+        } else {
+            const minutes = Math.floor(timeRemaining / 1000 / 60);
+            const seconds = Math.floor((timeRemaining / 1000) % 60);
+            timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         }
-
-
-        function updateTimer() {
-            const now = new Date();
-            const timeRemaining = timerExpiresAt - now;
-
-            if (timeRemaining <= 0) {
-                timerElement.textContent = "Time's up!";
-                clearInterval(timerInterval);
-
-                fetch("<%= match_timeout_path(@match.id) %>", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-Token': getCSRFToken()
-                    },
-                })
-                    .catch(error => console.error('ERROR:', error));
-            } else {
-                const minutes = Math.floor(timeRemaining / 1000 / 60);
-                const seconds = Math.floor((timeRemaining / 1000) % 60);
-                timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-            }
-        }
-        const timerInterval = setInterval(updateTimer, 1000);
-        updateTimer();
+    }
+    const timerInterval = setInterval(updateTimer, 1000);
+    updateTimer();
 </script>

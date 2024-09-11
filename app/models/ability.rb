@@ -6,7 +6,7 @@ class Ability
       unless user.nil?
         if user.guest?
           can :create, User
-          can :show, Match
+          can :edit, Match
           can :execute_code, Match
           can :surrender, Match
           can :play_now, :all
@@ -15,6 +15,7 @@ class Ability
           if user.admin?
             can :manage, :all
           else
+            can :edit, User, id: user.id
             can :update, User, id: user.id
             can :manage, FriendRequest
             can :destroy, Friendship
@@ -25,8 +26,9 @@ class Ability
             can :accept, ChallengeRequest, receiver: user
             can :reject, ChallengeRequest, receiver: user
             can :create, ChallengeProposal
+            can :update, User, id: user.id
             can :read, User
-            can :show, Match
+            can :edit, Match
             can :execute_code, Match
             can :surrender, Match
             can :play_now, :all

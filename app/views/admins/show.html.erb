@@ -4,10 +4,10 @@
 
       <!-- Sezione Proposte da Revisionare -->
       <div class="mb-6">
-        <button onclick="toggleSection('challenges')" class="w-full text-left bg-gray-700 text-gray-300 font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
+        <button onclick="toggleSection('challenges-proposal')" class="w-full text-left bg-gray-700 text-gray-300 font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
           Proposte da Revisionare
         </button>
-        <div id="challenges" class="hidden mt-2">
+        <div id="challenges-proposal" class="hidden mt-2">
           <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-md mb-6">
             <thead>
             <tr class="bg-gray-700">
@@ -65,7 +65,39 @@
             </tbody>
           </table>
         </div>
+
+        <!-- Challenges -->
       </div>
+      <div class="mb-6">
+        <button onclick="toggleSection('challenges')" class="w-full text-left bg-gray-700 text-gray-300 font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
+          Challenges
+        </button>
+        <div id="challenges" class="hidden mt-2">
+          <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-md mb-6">
+            <thead>
+            <tr class="bg-gray-700">
+              <th class="px-6 py-3 text-center text-gray-300 font-medium">Nome</th>
+              <th class="px-6 py-3 text-center text-gray-300 font-medium">Descrizione</th>
+              <th class="px-6 py-3 text-center text-gray-300 font-medium">Azione</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @challenges.each do |challenge| %>
+              <tr class="border-b border-gray-700 hover:bg-gray-600 transition-colors duration-200">
+                <td class="px-6 py-4 text-gray-200"><%= challenge.title %></td>
+                <td class="px-6 py-4 text-gray-200"><%= challenge.description %></td>
+                <td class="px-6 py-4 text-center">
+                  <%= button_to 'Visualizza',  challenge_path(challenge.id), method: :get, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
+                  <%= button_to 'Modifica',  edit_challenge_path(challenge.id), method: :get, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
+                </td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
 
       <div class="mt-10 mb-6">
         <%= link_to 'Torna alla Home', root_path, class: 'bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105 shadow-md' %>
@@ -106,6 +138,7 @@
     window.onload = loadSectionStates;
 
 
+    document.addEventListener("turbo:load", ()=>{
         const rejectButton = document.querySelector("#reject-button");
         const rejectForm = document.querySelector("#reject-form");
         const rejectMotivationField = document.querySelector("#reject-motivation");
@@ -128,6 +161,9 @@
                 }
             });
         }
+
+    });
+
 
 
 

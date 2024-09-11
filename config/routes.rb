@@ -77,7 +77,7 @@ Rails.application.routes.draw do
   end
 
   # CHALLENGES ROUTES
-  resources :challenges, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :challenges, only: [:edit, :new, :create, :update, :show, :destroy]
 
   get 'space_invaders', to: 'space_invaders#index'
 

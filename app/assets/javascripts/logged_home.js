@@ -81,8 +81,8 @@ document.querySelectorAll('a[data-request-id]').forEach(link => {
     link.addEventListener('click', (event) => {
         event.preventDefault();
         const requestId = link.dataset.requestId;
-        const senderName = link.innerText.split(' ')[3];
-        document.getElementById('requestMessage').innerText = `Ciao, sono ${senderName}, vuoi diventare mio amico?`;
+        const senderName = document.querySelector("#request-anchor").dataset.username
+        document.getElementById('requestMessage').innerText = `Ciao, sono ${senderName} vuoi diventare mio amico?`;
 
         requestModal.classList.remove('hidden');
         document.getElementById('acceptRequestForm').action = `/friend_requests/${requestId}/accept`;

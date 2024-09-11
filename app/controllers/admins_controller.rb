@@ -5,6 +5,7 @@ class AdminsController < ApplicationController
 
     @challenges_proposals = ChallengeProposal.where(status: "pending")
     @non_admin_users = User.where(is_admin: false, guest:false).order('users.username')
+    @challenges = Challenge.all
   end
 
   def promote_to_admin

@@ -1,0 +1,83 @@
+<div class="w-full mx-auto p-8 bg-gray-800 rounded-lg shadow-md overflow-auto">
+  <h2 class="text-2xl font-bold text-white mb-4">Edit Challenge</h2>
+
+  <!-- Challenge Title -->
+  <div class="mb-4">
+    <h3 class="text-lg font-semibold text-white">Title:</h3>
+    <p class="text-gray-300"><%= @challenge.title %></p>
+  </div>
+
+  <!-- Challenge Description -->
+  <div class="mb-4">
+    <h3 class="text-lg font-semibold text-white">Description:</h3>
+    <p class="text-gray-300"><%= @challenge.description %></p>
+  </div>
+  <div class="mb-4">
+    <h3 class="text-lg font-semibold text-white">Language:</h3>
+    <p class="text-gray-300"><%= @challenge.language %></p>
+  </div>
+
+  <!-- Form Start -->
+  <%= form_with(model: @challenge, url: challenge_path(@challenge), method: :patch, id: 'submit-form', class: "overflow-hidden flex flex-col") do |f| %>
+
+    <!-- Difficulty Selection -->
+    <div class="mb-4">
+      <label for="difficulty" class="block text-white font-bold mb-2">Difficulty:</label>
+      <%= f.select :difficulty, [['Easy', 'easy'], ['Medium', 'medium'], ['Hard', 'hard']],
+                   { prompt: 'Select Difficulty', selected: @challenge.difficulty },
+                   { id: 'difficulty', class: 'w-full p-2 bg-gray-700 text-white rounded-lg', required: true } %>
+    </div>
+
+    <div class="flex flex-col justify-center">
+      <!-- Code Skeleton Editor -->
+      <div class="mb-6">
+        <label for="code_skeleton" class="block text-white font-bold mb-2">Code Skeleton</label>
+        <div id="code_skeleton" class="w-full p-4 bg-gray-700 text-white rounded-lg">
+          <!-- CodeMirror will go inside this div -->
+        </div>
+      </div>
+
+      <!-- Test Skeleton Editor -->
+      <div class="mb-6">
+        <label for="test_skeleton" class="block text-white font-bold mb-2">Test Skeleton</label>
+        <div id="test_skeleton" class="w-full p-4 bg-gray-700 text-white rounded-lg">
+          <!-- CodeMirror will go inside this div -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Hidden Fields for CodeMirror Content -->
+    <%= f.hidden_field :code_template, id: 'hidden-code-skeleton-input', value: @challenge.code_template %>
+    <%= f.hidden_field :test_template, id: 'hidden-test-skeleton-input', value: @challenge.test_template %>
+    <%= f.hidden_field :title, value: @challenge.title %>
+    <%= f.hidden_field :description, value: @challenge.description %>
+    <%= f.hidden_field :language, value: @challenge.language %>
+    <%= f.hidden_field :challenge_proposal_id, value: @challenge.id %>
+
+    <!-- Submit Button -->
+    <div class="flex justify-between items-center">
+      <%= f.submit "Update Challenge", class: "px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition duration-300 w-full md:w-auto" %>
+      <%= link_to 'Back to List', admin_path(current_user), class: "ml-4 px-6 py-3 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 transition duration-300" %>
+    </div>
+
+<% end %>
+
+</div>
+
+<script type="module">
+    import { initializeCodeMirror } from "codemirror_setup"; // Reference the module by its name
+
+    let currentLanguage = <%= @challenge.language.to_json.html_safe %>;
+    const code_skeleton = document.getElementById('code_skeleton');
+    const form = document.getElementById('submit-form');
+    const hidden_code_skeleton_form = document.getElementById('hidden-code-skeleton-input');
+    const test_skeleton = document.getElementById('test_skeleton');
+    const hidden_test_skeleton_form = document.getElementById('hidden-test-skeleton-input');
+
+    // Prepopulate CodeMirror with the existing values
+    const existingCodeTemplate = <%= @challenge.code_template.to_json.html_safe %>;
+    const existingTestTemplate = <%= @challenge.test_template.to_json.html_safe %>;
+
+    initializeCodeMirror(code_skeleton, form, hidden_code_skeleton_form, existingCodeTemplate, currentLanguage, 20);
+    initializeCodeMirror(test_skeleton, form, hidden_test_skeleton_form, existingTestTemplate, currentLanguage, 20);
+</script>

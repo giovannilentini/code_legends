@@ -39,26 +39,20 @@ class MatchesController < ApplicationController
   end
 
   def timeout
-    if @match.timer_expires_at && Time.current >= @match.timer_expires_at
-      @match.update(status: "finished", winner_id: nil)
-      ActionCable.server.broadcast "match_#{@match.id}", { status: "timeout", message: "The match ended in a draw." }
+    unless @match.status == "finished"
+      if @match.timer_expires_at && Time.current >= @match.timer_expires_at
+        @match.update(status: "finished", winner_id: nil)
+        ActionCable.server.broadcast "match_#{@match.id}", { status: "timeout", message: "The match ended in a draw." }
+      end
     end
-
     head :ok
   end
 
   private
   def set_match
     @match = Match.find_by(id: params[:id] || params[:match_id])
-    if @match.challenge_id.nil?
-      @challenge = Challenge.find(Challenge.where(language: @match.language).pluck(:id).sample)
-      @match.update(:challenge_id => @challenge.id)
-    else
-      @challenge = Challenge.find_by(id: @match.challenge_id)
-    end
-
+    @challenge = Challenge.find_by(id: @match.challenge_id)
     unless @match.timer_expires_at
-      @challenge = Challenge.find_by(id: @match.challenge_id)
       if @challenge.difficulty == "hard"
         @match.update(timer_expires_at: 20.minutes.from_now)
       elsif @challenge.difficulty == "medium"
