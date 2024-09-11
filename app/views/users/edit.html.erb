@@ -6,7 +6,7 @@
     </h2>
 
     <!-- Form per aggiornare il profilo -->
-    <%= form_for(current_user, url: user_settings_path(current_user), method: :update, html: { multipart: true }) do |f| %>
+    <%= form_for(@user, url: edit_user_path(@user), method: :update, html: { multipart: true }) do |f| %>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
         <!-- Nome -->
         <div>
@@ -26,8 +26,8 @@
         <%= f.label :profile_image, 'Immagine di Profilo', class: 'block text-lg font-bold text-white mb-4 text-center' %>
         <div class="flex items-center justify-center">
           <div class="relative group">
-            <% if current_user.profile_image.attached? %>
-              <%= image_tag current_user.profile_image_thumbnail, id: 'profileImagePreview', class: 'rounded-full shadow-2xl w-32 h-32 object-cover border-4 border-indigo-500' %>
+            <% if @user.profile_image.attached? %>
+              <%= image_tag @user.profile_image_thumbnail, id: 'profileImagePreview', class: 'rounded-full shadow-2xl w-32 h-32 object-cover border-4 border-indigo-500' %>
             <% else %>
               <%= image_tag('profile-placeholder.png', alt: 'Profile Image', id: 'profileImagePreview', class: 'rounded-full mx-auto shadow-2xl w-32 h-32 object-cover border-4 border-indigo-500') %>
             <% end %>
@@ -47,7 +47,7 @@
 
     <!-- Link Torna al Profilo -->
     <div class="mt-10 text-center">
-      <%= link_to 'Torna al Profilo', personal_profile_path, class: 'text-indigo-300 hover:text-indigo-500 underline transition duration-300' %>
+      <%= link_to 'Torna al Profilo', user_path(@user ), class: 'text-indigo-300 hover:text-indigo-500 underline transition duration-300' %>
     </div>
 
   </section>

@@ -1,5 +1,4 @@
 class MatchesController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_match, only: [:show, :execute_code, :surrender, :timeout]
 
   def show
@@ -54,7 +53,14 @@ class MatchesController < ApplicationController
     end
 
     unless @match.timer_expires_at
-      @match.update(timer_expires_at: 10.seconds.from_now)
+      @challenge = Challenge.find_by(id: @match.challenge_id)
+      if @challenge.difficulty == "hard"
+        @match.update(timer_expires_at: 20.minutes.from_now)
+      elsif @challenge.difficulty == "medium"
+        @match.update(timer_expires_at: 15.minutes.from_now)
+      elsif @challenge.difficulty == "easy"
+        @match.update(timer_expires_at: 10.minutes.from_now)
+      end
     end
   end
 
@@ -96,3 +102,4 @@ class MatchesController < ApplicationController
     end
   end
 end
+

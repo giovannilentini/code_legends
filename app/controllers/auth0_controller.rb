@@ -1,4 +1,5 @@
 class Auth0Controller < ApplicationController
+  skip_authorization_check
   def callback
     # OmniAuth stores the information returned from Auth0 and the IdP in request.env['omniauth.auth'].
     # In this code, you will pull the raw_info supplied from the id_token and assign it to the session.
@@ -18,6 +19,7 @@ class Auth0Controller < ApplicationController
       user.email = email
       user.is_admin = false
       user.auth0_id = auth0_id
+      user.guest = false
     end
     user.update(username: username) if user.username.nil?
 
@@ -39,7 +41,7 @@ class Auth0Controller < ApplicationController
     error_type = params[:error]
     error_description = params[:error_description]
 
-    flash[:alert] = "Authentication failed: #{error_description}. Please try again."
+    flash[:alert] = "Authentication failed: #{error_description} Please try again."
     cookies.delete :user_info
     # Redirect to a specific page with an error message
     redirect_to root_path
