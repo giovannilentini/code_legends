@@ -124,12 +124,10 @@
 </div>
 
 <script>
-    document.addEventListener('turbo:load', function() {
-        const closeButton = document.getElementById('close-terminal-button');
+    const closeButton = document.getElementById('close-terminal-button');
 
-        closeButton.addEventListener('click', function() {
-            window.location.href = '/';
-        });
+    closeButton.addEventListener('click', function() {
+        window.location.href = '/';
     });
 
     updateDateTime();

@@ -1,8 +1,13 @@
 import consumer from "./consumer";
 
-consumer.subscriptions.create("ChallengeNotificationChannel", {
-  received(data) {
-    alert(data.message); // Mostra il messaggio all'utente
-    window.location.href = `/matches/${data.match_id}`; // Reindirizza alla pagina del match
-  }
-});
+export function createChallengeNotificationChannel(){
+  consumer.subscriptions.create("ChallengeNotificationChannel", {
+    connected() {
+      console.log("Connected to the challenge notification channel channel");
+    },
+    received(data) {
+      window.location.href = `/matches/${data.match_id}`; // Reindirizza alla pagina del match
+    }
+  });
+}
+

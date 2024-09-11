@@ -104,11 +104,9 @@
 </div>
 
 <script>
-    document.addEventListener('turbo:load', function() {
-        const closeButton = document.getElementById('close-terminal-button');
-        closeButton.addEventListener('click', function() {
-            window.location.href = '/';
-        });
+    const closeButton = document.getElementById('close-terminal-button');
+    closeButton.addEventListener('click', function() {
+        window.location.href = '/';
     });
 
     updateDateTime();
@@ -125,13 +123,11 @@
         const year = now.getFullYear();
         document.getElementById('current-date').textContent = `${day}/${month}/${year}`;
     }
-    document.addEventListener('turbo:load', function() {
         const closeButton = document.getElementById('close-terminal-button');
 
         closeButton.addEventListener('click', function() {
             window.location.href = '/';
         });
-    });
 
     updateDateTime();
     setInterval(updateDateTime, 1000);

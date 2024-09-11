@@ -21,9 +21,9 @@ class Ability
             can :destroy, Friendship
             can :accept, Friendship
             can :create, ChallengeRequest
-            can :update, ChallengeRequest, sender: user.id
-            can :accept, ChallengeRequest, receiver: user.id
-            can :reject, ChallengeRequest
+            can :update, ChallengeRequest, sender: user
+            can :accept, ChallengeRequest, receiver: user
+            can :reject, ChallengeRequest, receiver: user
             can :create, ChallengeProposal
             can :update, User, id: user.id
             can :read, User

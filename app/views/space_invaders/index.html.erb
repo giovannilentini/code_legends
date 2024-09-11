@@ -81,13 +81,11 @@
 <%= javascript_include_tag 'space_invaders', 'data-turbolinks-track': 'reload' %>
 
 <script>
-    document.addEventListener('turbo:load', function() {
-        const closeButton = document.getElementById('close-terminal-button');
+      const closeButton = document.getElementById('close-terminal-button');
 
-        closeButton.addEventListener('click', function() {
-            window.location.href = '/';
-        });
-    });
+      closeButton.addEventListener('click', function() {
+          window.location.href = '/';
+      });
 
     updateDateTime();
     setInterval(updateDateTime, 1000);

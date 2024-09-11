@@ -5,7 +5,8 @@ import "channels";
 import "codemirror_setup";
 import "code_generation"
 import "match_subscription"
-
+import "challenge_notification_channel"
+import "matchmaking_subscription"
 
 
 

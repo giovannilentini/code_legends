@@ -13,7 +13,7 @@ pin "@codemirror/view", to: "@codemirror--view.js" # @6.33.0
 pin "codemirror" # @6.0.1
 pin "@codemirror/autocomplete", to: "@codemirror--autocomplete.js" # @6.18.0
 pin "@codemirror/commands", to: "@codemirror--commands.js" # @6.6.1
-pin "@codemirror/language", to: "@codemirror--language.js" # @6.10.2
+pin "@codemirror/language", to: "@codemirror--language.js" # @6.10.2matchmaking_subscription
 pin "@codemirror/lint", to: "@codemirror--lint.js" # @6.8.1
 pin "@codemirror/search", to: "@codemirror--search.js" # @6.5.6
 pin "@lezer/common", to: "@lezer--common.js" # @1.2.1
@@ -34,3 +34,5 @@ pin_all_from "app/javascript/channels", under: "channels"
 pin "codemirror_setup", to: "codemirror_setup.js"
 pin "code_generation", to: "code_generation.js"
 pin "match_subscription", to: "channels/match_submission_channels.js"
+pin "challenge_notification_channel", to: "channels/challenge_notification_channel.js"
+pin "matchmaking_subscription", to: "channels/matchmaking_subscription.js"

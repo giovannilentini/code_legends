@@ -1,5 +1,4 @@
 class ChallengeRequestsController < ApplicationController
-  load_and_authorize_resource
 
   def index
     @received_challenge_requests = current_user.received_challenge_requests
@@ -7,6 +6,7 @@ class ChallengeRequestsController < ApplicationController
   end
 
   def create
+    authorize! :create, ChallengeRequest
     @challenge_request = ChallengeRequest.new(
       user_id: current_user.id,
       friend_id: params[:friend_id],
@@ -23,6 +23,7 @@ class ChallengeRequestsController < ApplicationController
 
   def accept
     challenge = ChallengeRequest.find(params[:id])
+    authorize! :accept,challenge
 
     if challenge.update(status: 'ongoing')
       match = Match.create(
@@ -55,6 +56,7 @@ class ChallengeRequestsController < ApplicationController
 
   def reject
     challenge = ChallengeRequest.find(params[:id])
+    authorize! :accept,challenge
     if challenge.destroy
       flash[:notice] = "Richiesta di sfida rifiutata con successo."
     else

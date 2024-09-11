@@ -148,15 +148,14 @@
   </div>
 </div>
 
-<script>
-    document.addEventListener('turbo:load', function() {
-        const closeButton = document.getElementById('close-terminal-button');
+<script type="module">
+    import {createMatchmakingSubscription} from "matchmaking_subscription";
+    createMatchmakingSubscription()
+    const closeButton = document.getElementById('close-terminal-button');
 
-        closeButton.addEventListener('click', function() {
-            window.location.href = '/';
-        });
+    closeButton.addEventListener('click', function() {
+        window.location.href = '/';
     });
-
     updateDateTime();
     setInterval(updateDateTime, 1000);
 

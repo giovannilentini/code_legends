@@ -1,7 +1,8 @@
 import {createConsumer} from "@rails/actioncable"
 
-const consumer = createConsumer()
-function createSubscription() {
+
+export function createMatchmakingSubscription() {
+    const consumer = createConsumer()
     // Create a new subscription
     return consumer.subscriptions.create("MatchmakingChannel", {
         connected() {
@@ -19,11 +20,4 @@ function createSubscription() {
     });
 }
 
-document.addEventListener('turbo:load', () => {
-    // Ensure previous subscription is cleaned up
-    const pathname = window.location.pathname;
-    if(pathname==="/play_now"){
-        createSubscription()
-    }
-});
 

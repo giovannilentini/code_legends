@@ -1,4 +1,4 @@
-document.addEventListener('turbo:load', function() {
+
     var terminal = document.getElementById('terminal-window');
     var fileIcon = document.getElementById('file-icon');
     var utenteElement = document.getElementById('utente');
@@ -145,8 +145,6 @@ document.addEventListener('turbo:load', function() {
             utenteElement.innerHTML += e.key;
         }
     }
-});
-
 function updateDateTime() {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0');

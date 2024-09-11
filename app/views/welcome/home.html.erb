@@ -181,3 +181,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
   <%= javascript_include_tag 'home', 'data-turbolinks-track': 'reload' %>
 <% end %>
+
+<script type="module">
+  import {createChallengeNotificationChannel} from "challenge_notification_channel";
+  createChallengeNotificationChannel()
+</script>
