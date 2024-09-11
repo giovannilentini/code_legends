@@ -1,11 +1,10 @@
 class WelcomeController < ApplicationController
   before_action :set_languages
-
   def home
-    if current_user
-      @user = User.find(session[:user_id])
+    unless current_user.guest?
+      @user = current_user
       @friend_requests = FriendRequest.where(friend_id: @user.id)
-      @challenge_requests = current_user.received_challenge_requests
+      @challenge_requests = ChallengeRequest.where(friend_id: @user.id)
     end
   end
 

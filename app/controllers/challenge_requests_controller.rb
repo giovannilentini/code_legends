@@ -1,6 +1,7 @@
 class ChallengeRequestsController < ApplicationController
 
   def index
+    authorize! :read, ChallengeRequest
     @received_challenge_requests = current_user.received_challenge_requests
     @sent_challenge_requests = current_user.sent_challenge_requests
   end

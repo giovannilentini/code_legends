@@ -20,6 +20,7 @@ class Ability
             can :manage, FriendRequest
             can :destroy, Friendship
             can :accept, Friendship
+            can :read, ChallengeRequest
             can :create, ChallengeRequest
             can :update, ChallengeRequest, sender: user
             can :accept, ChallengeRequest, receiver: user
