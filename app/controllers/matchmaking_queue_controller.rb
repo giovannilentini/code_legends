@@ -10,7 +10,13 @@ class MatchmakingQueueController < ApplicationController
 
     @match_details = @last_matches.map do |match|
       opponent_id = match.player_1_id == current_user.id ? match.player_2_id : match.player_1_id
-      match_result = match.winner_id == current_user.id ? "Win" : "Lose"
+      if match.winner_id == current_user.id
+        match_result = "Win"
+      elsif match.winner_id == nil
+        match_result = "Draw"
+      else
+        match_result = "Lose"
+      end
       {
         opponent: User.find_by(id: opponent_id).username,
         result: match_result,

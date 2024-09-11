@@ -29,12 +29,13 @@
   </div>
 </div>
 
-<div class="absolute bottom-10 right-2 mb-4 ml-4">
-  <div class="relative flex h-[30px] w-40 items-center justify-center overflow-hidden bg-transparent text-white transition-all border border-gray-400 hover:border-gray-600 before:absolute before:h-0 before:w-0 before:rounded-full before:bg-gray-600 before:duration-500 before:ease-out hover:before:h-56 hover:before:w-56 hover:before:opacity-100 font-mono">
-    <%= link_to 'View DB', database_info_path, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold group bg-transparent text-white hover:bg-white hover:text-gray-900' %>
-  </div>
-</div>
-
+  <%if can? :database, :all %>
+    <div class="absolute bottom-10 right-2 mb-4 ml-4">
+      <div class="relative flex h-[30px] w-40 items-center justify-center overflow-hidden bg-transparent text-white transition-all border border-gray-400 hover:border-gray-600 before:absolute before:h-0 before:w-0 before:rounded-full before:bg-gray-600 before:duration-500 before:ease-out hover:before:h-56 hover:before:w-56 hover:before:opacity-100 font-mono">
+        <%= link_to 'View DB', database_info_path, class: 'relative inline-flex items-center justify-center w-64 h-12 px-6 py-3 overflow-hidden font-bold group bg-transparent text-white hover:bg-white hover:text-gray-900' %>
+      </div>
+    </div>
+  <%end %>
 
   <div class="taskbar fixed bottom-0 left-0 w-screen h-[43px] bg-neutral-900 border-t border-gray-400 z-[9999] flex items-center justify-between">
 

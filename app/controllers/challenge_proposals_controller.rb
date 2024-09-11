@@ -16,7 +16,7 @@ end
     @challenge_proposal.user = current_user
     if @challenge_proposal.save
       flash[:success] = "Challenge Proposal created!"
-      redirect_to challenge_proposal_path(@challenge_proposal)
+      redirect_to root_path
     else
       flash[:alert]="An error occurred while creating the challenge proposal, retry."
       redirect_to new_challenge_proposal_path
