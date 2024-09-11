@@ -52,7 +52,7 @@
 
           <%= form_with url: find_opponent_path, method: :post, local: true do |form| %>
             <%= hidden_field_tag :language, @selected_language, id: 'language_field' %>
-            <%= button_tag(type: 'submit', class: "items-center bg-neutral-600 hover:bg-neutral-400 text-white font-bold py-2 px-4 border-b-4 border-neutral-800 hover:border-neutral-600 rounded", onclick: "return checkGuestStatus()") do %>
+            <%= button_tag(type: 'submit', class: "items-center bg-neutral-600 hover:bg-neutral-400 text-white font-bold py-2 px-4 border-b-4 border-neutral-800 hover:border-neutral-600 rounded") do %>
               Find Opponent
             <% end %>
           <% end %>
@@ -119,8 +119,12 @@
   </div>
 </div>
 
-<script>
-    document.addEventListener('turbo:load', function() {
+<script type="module">
+
+  import {createMatchmakingSubscription} from "matchmaking_subscription";
+
+  createMatchmakingSubscription()
+  document.addEventListener('turbo:load', function() {
         const closeButton = document.getElementById('close-terminal-button');
 
         closeButton.addEventListener('click', function() {

@@ -17,8 +17,14 @@ class MatchmakingQueueController < ApplicationController
       else
         match_result = "Lose"
       end
+      opponent = User.find_by(id: opponent_id)
+      if opponent==nil
+        name = "Guest"
+      else
+        name = opponent.username
+      end
       {
-        opponent: User.find_by(id: opponent_id).username,
+        opponent: name,
         result: match_result,
         date: match.updated_at.strftime("%B %d, %Y")
       }
@@ -27,8 +33,6 @@ class MatchmakingQueueController < ApplicationController
 
   def find_opponent
     authorize! :find_opponent, MatchmakingQueue
-
-
     player = User.find_by(id: session[:user_id])
     if player
       MatchmakingQueueService.new(player).add_to_queue(@selected_language)

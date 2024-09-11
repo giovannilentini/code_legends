@@ -13,7 +13,7 @@ class MatchmakingQueueService
     if user && user.language != language
       user.language = language
     else
-      MatchmakingQueue.create(user: @user, status: 'waiting', language: language)
+      MatchmakingQueue.create!(user: @user, status: 'waiting', language: language)
     end
     find_opponent
   end
@@ -35,7 +35,7 @@ class MatchmakingQueueService
   def create_match(opponent)
     ActiveRecord::Base.transaction do
       MatchmakingQueue.where(user: [@user, opponent.user]).update_all(status: 'playing')
-      match = Match.create(player_1: @user, player_2: opponent.user, language: @language, status: 'ongoing')
+      match = Match.create(player_1_id: @user.id, player_2_id: opponent.user.id, language: @language, status: 'ongoing')
       notify_players(match)
     end
 
@@ -44,7 +44,7 @@ class MatchmakingQueueService
   def notify_players(match)
     # Use ActionCable to notify players
     ActionCable.server.broadcast "matchmaking_#{@user.id}", { action: 'redirect_to_match', match_id: match.id }
-    ActionCable.server.broadcast "matchmaking_#{match.player_2.id}", { action: 'redirect_to_match', match_id: match.id }
+    ActionCable.server.broadcast "matchmaking_#{match.player_2_id}", { action: 'redirect_to_match', match_id: match.id }
   end
 
 end
