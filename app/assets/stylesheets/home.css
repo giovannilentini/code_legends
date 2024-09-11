@@ -190,7 +190,6 @@
     background: #ccc;
 }
 
-/* Terminal Window */
 .window {
     border: 2px solid aliceblue;
     text-align: left;
@@ -207,7 +206,6 @@
     display: none;
 }
 
-/* Terminal Header */
 .window header {
     display: flex;
     justify-content: space-between;
@@ -238,7 +236,6 @@
     border-radius: 8px;
 }
 
-/* Terminal Body */
 .window section.terminal {
     color: white;
     font-family: Menlo, Monaco, "Consolas", "Courier New", "Courier";
@@ -253,7 +250,6 @@
     overflow: auto;
 }
 
-/* Text Styles */
 .utente {
     color: green;
 }
@@ -270,7 +266,7 @@ canvas {
     left: 0;
     right: 0;
     bottom: 0;
-    transform: scale(0.7); /* Scala il canvas a 70% della dimensione originale */
+    transform: scale(0.7);
 }
 
 .notification-dot {
