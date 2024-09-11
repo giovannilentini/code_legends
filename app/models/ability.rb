@@ -25,6 +25,7 @@ class Ability
             can :accept, ChallengeRequest, receiver_id: user.id
             can :reject, ChallengeRequest
             can :create, ChallengeProposal
+            can :read, ChallengeProposal
             can :update, User, id: user.id
             can :read, User
             can :show, Match
