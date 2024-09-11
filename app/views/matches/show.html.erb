@@ -10,6 +10,10 @@
     </div>
   </div>
 
+  <div class="hidden">
+    <meta name="csrf-token" content="<%= csrf_meta_tags %>">
+  </div>
+
   <!-- Main Content Section -->
   <div class="flex flex-row justify-center space-x-8 px-6 py-6 overflow-auto">
     <!-- Left Column -->
@@ -147,6 +151,10 @@
         // TIMER
         const timerElement = document.getElementById('timer');
         const timerExpiresAt = new Date("<%= @match.timer_expires_at.iso8601 %>");
+        function getCSRFToken() {
+          return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        }
+
 
         function updateTimer() {
             const now = new Date();
@@ -159,13 +167,10 @@
                 fetch("<%= match_timeout_path(@match.id) %>", {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': getCSRFToken()
                     },
                 })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log("Timeout response:", data);
-                    })
                     .catch(error => console.error('ERROR:', error));
             } else {
                 const minutes = Math.floor(timeRemaining / 1000 / 60);
