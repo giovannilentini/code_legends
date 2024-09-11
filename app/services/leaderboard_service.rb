@@ -17,4 +17,8 @@ class LeaderboardService
     $redis.zrange(LEADERBOARD_KEY, 0, limit-1, rev: true, with_scores: true)
   end
 
+  def self.flushall
+    $redis.flushall
+  end
+
 end

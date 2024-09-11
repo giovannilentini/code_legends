@@ -1,5 +1,5 @@
 namespace :auth0 do
-  task sync_to_redis: :environment do
+  task sync_to_auth0: :environment do
     Auth0Service.get_users.each do |user|
       User.find_or_create_by(auth0_id: user["user_id"]) do |user_create|
           user_create.username = user["username"] != nil ? user["username"] : user["nickname"]

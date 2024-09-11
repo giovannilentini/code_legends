@@ -85,3 +85,6 @@ end
 gem 'typedjs-rails', '~> 1.0', '>= 1.0.3'
 gem 'anime-rails', '~> 3.2', '>= 3.2.1.2'
 
+#authorization
+gem 'cancancan'
+

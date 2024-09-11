@@ -103,8 +103,8 @@
 .admin-profile-icon {
     width: 100px;
     height: 100px;
-    top: 68%;
-    left: 2%;
+    top: 50%;
+    left: 12%;
     border-radius: 8px;
     text-align: center;
     padding: 10px;
@@ -200,7 +200,7 @@
     margin: auto;
     position: relative;
 
-    z-index: 30;
+    z-index: 45;
 }
 
 .hidden {
