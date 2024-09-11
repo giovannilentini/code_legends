@@ -11,10 +11,8 @@ class ChallengesController < ApplicationController
 
   def create
     @challenge = Challenge.new(challenge_params)
-
-    authorize! :create, Challenge  # Solo utenti registrati possono creare una sfida
-
-
+    p @challenge
+    authorize! :create, @challenge  # Solo utenti registrati possono creare una sfida
     if @challenge.save
       ChallengeProposal.find_by(id: @challenge.challenge_proposal_id).update(status: "accepted")
       flash[:success] = "Challenge successfully created!"

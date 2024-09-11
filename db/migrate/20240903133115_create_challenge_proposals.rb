@@ -1,4 +1,4 @@
-class CreateChallengeProposal < ActiveRecord::Migration[7.1]
+class CreateChallengeProposals < ActiveRecord::Migration[7.1]
   def change
     create_table :challenge_proposals do |t|
       t.references :user, null: false, foreign_key: true

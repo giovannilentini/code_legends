@@ -35,7 +35,7 @@ class MatchmakingQueueService
   def create_match(opponent)
     ActiveRecord::Base.transaction do
       MatchmakingQueue.where(user: [@user, opponent.user]).update_all(status: 'playing')
-      match = Match.create(player_1: @user, player_2: opponent.user, language: @language, status: 'ongoing')
+      match = Match.create(player_1_id: @user.id, player_2_id: opponent.user.id, language: @language, status: 'ongoing')
       notify_players(match)
     end
 
