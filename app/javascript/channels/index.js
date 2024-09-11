@@ -5,3 +5,4 @@ import "channels/challenge_notification_channel"
 import "channels/match_submission_channels"
 
 //import "channels/chat_channel"
+import "channels/notifications_channel"

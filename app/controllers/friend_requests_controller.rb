@@ -14,6 +14,7 @@ class FriendRequestsController < ApplicationController
       @friend_request = FriendRequest.new(user_id: current_user.id, friend_id: @user.id)
 
       if @friend_request.save
+        ActionCable.server.broadcast 'notifications_channel', { has_notifications: true }
         flash[:notice] = "Richiesta di amicizia inviata con successo."
         redirect_to root_path
       else

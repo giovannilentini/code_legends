@@ -14,6 +14,7 @@ class ChallengeRequestsController < ApplicationController
     )
 
     if @challenge_request.save
+      ActionCable.server.broadcast 'notifications_channel', { has_notifications: true }
       redirect_to root_path, notice: 'Richiesta di sfida inviata con successo!'
     else
       render :new, alert: "Si è verificato un errore nell'invio della richiesta."

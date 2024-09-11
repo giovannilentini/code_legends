@@ -54,13 +54,21 @@ const closeChallengeRequestBtn = document.getElementById('closeChallengeRequest'
 updateDateTime();
 setInterval(updateDateTime, 1000);
 
-// Funzioni per gestire le modali
 function openMailBoxModal() {
     if (isGuest) {
         openGuestModal();
         return true;
     } else {
         mailboxModal.classList.remove('hidden');
+
+        const notificationIcon = document.getElementById("notifications");
+        const notificationDot = document.querySelector(".notification-dot");
+
+        if (notificationDot) {
+            notificationDot.remove();
+            notificationIcon.classList.remove('has-notifications');
+        }
+
         return false;
     }
 }

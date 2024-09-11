@@ -273,3 +273,16 @@ canvas {
     transform: scale(0.7); /* Scala il canvas a 70% della dimensione originale */
 }
 
+.notification-dot {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 10px;
+    width: 10px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+#notifications.has-notifications {
+    position: relative;
+}

@@ -21,8 +21,8 @@ class Ability
             can :destroy, Friendship
             can :accept, Friendship
             can :create, ChallengeRequest
-            can :update, ChallengeRequest, sender_id: user.id
-            can :accept, ChallengeRequest, receiver_id: user.id
+            can :update, ChallengeRequest, sender: user.id
+            can :accept, ChallengeRequest, receiver: user.id
             can :reject, ChallengeRequest
             can :create, ChallengeProposal
             can :update, User, id: user.id
@@ -34,6 +34,8 @@ class Ability
             can :find_opponent, :all
             can :create, ChatMessage
             can :cancel, MatchmakingQueue
+            can :create, ChallengeProposal
+            can :read, ChallengeProposal
           end
         end
 
