@@ -9,11 +9,12 @@ pin "@codemirror/basic-setup", to: "@codemirror--basic-setup.js" # @0.20.0
 pin "@codemirror/lang-javascript", to: "@codemirror--lang-javascript.js" # @6.2.2
 pin "@codemirror/state", to: "@codemirror--state.js" # @6.4.1
 pin "@codemirror/theme-one-dark", to: "@codemirror--theme-one-dark.js" # @6.1.2
+pin "@codemirror/theme-one-dark", to: "@codemirror--theme-one-dark.js" # @6.1.2
 pin "@codemirror/view", to: "@codemirror--view.js" # @6.33.0
 pin "codemirror" # @6.0.1
 pin "@codemirror/autocomplete", to: "@codemirror--autocomplete.js" # @6.18.0
 pin "@codemirror/commands", to: "@codemirror--commands.js" # @6.6.1
-pin "@codemirror/language", to: "@codemirror--language.js" # @6.10.2matchmaking_subscription
+pin "@codemirror/language", to: "@codemirror--language.js" # @6.10.2
 pin "@codemirror/lint", to: "@codemirror--lint.js" # @6.8.1
 pin "@codemirror/search", to: "@codemirror--search.js" # @6.5.6
 pin "@lezer/common", to: "@lezer--common.js" # @1.2.1
@@ -36,3 +37,5 @@ pin "code_generation", to: "code_generation.js"
 pin "match_subscription", to: "channels/match_submission_channels.js"
 pin "challenge_notification_channel", to: "channels/challenge_notification_channel.js"
 pin "matchmaking_subscription", to: "channels/matchmaking_channel.js"
+pin "@fsegurai/codemirror-theme-basic-light", to: "@fsegurai--codemirror-theme-basic-light.js" # @6.0.4
+pin "@fsegurai/codemirror-theme-github-light", to: "@fsegurai--codemirror-theme-github-light.js" # @6.0.2
