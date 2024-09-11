@@ -13,7 +13,7 @@ Fare questo comando, inserire prima la password dell'utente linux e poi quella d
     
 Poi proseguire con la creazione dei database 
 
-    CREATE ROLE 'code_legends' WITH LOGIN PASSWORD 'code_legends';
+    CREATE ROLE code_legends WITH LOGIN PASSWORD 'code_legends';
     
     ALTER ROLE code_legends CREATEDB;
 
