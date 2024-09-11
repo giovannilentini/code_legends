@@ -40,9 +40,11 @@
           <h2 class="text-lg font-bold"><%= @challenge.language %></h2>
         </div>
         <div class="h-full">
-          <div id="code-editor" class="bg-black rounded-lg p-2"></div>
+          <div id="code-editor-dark" class="bg-black rounded-lg p-2"></div>
+          <div id="code-editor-light" class="bg-black rounded-lg p-2 hidden"></div>
         </div>
       </div>
+
 
       <!-- Console Box -->
       <div class="flex flex-col bg-gray-800 p-4 h-[15rem] rounded-lg shadow-lg">
@@ -60,7 +62,11 @@
       <div class="flex justify-center mt-4">
         <h2 id="timer" class="text-2xl font-bold text-white"></h2>
       </div>
-
+      <div class="mt-4">
+        <button id="switch-theme" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-all">
+          Change Theme
+        </button>
+      </div>
       <!-- Timeout Form -->
       <%= form_with(url: match_timeout_path(@match), method: :post, id: 'timeout-form', local: true, style: 'display:none;') do |form| %>
         <%= hidden_field_tag :match_id, @match.id %>
@@ -69,7 +75,8 @@
       <!-- Run Code Button -->
       <%= form_with(url: match_execute_code_path(@match.id), method: :post, id: 'execute-form', class: "overflow-hidden", local: false) do |form| %>
         <%= hidden_field_tag :language, @challenge.language, id: 'hidden-language-selection' %>
-        <%= hidden_field_tag :code, '', id: 'hidden-code-input' %>
+        <%= hidden_field_tag :code, '', id: 'hidden-dark-input' %>
+        <%= hidden_field_tag :code, '', id: 'hidden-light-input' %>
         <%= hidden_field_tag :match_id, @match.id %>
         <%= form.submit "Run Code", id: "submit-code", class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-full transition duration-200" %>
       <% end %>
@@ -108,71 +115,95 @@
 </div>
 
 <script type="module">
-    import { initializeCodeMirror } from "codemirror_setup";
+    import { initializeCodeMirror, changeTheme } from "codemirror_setup";
     import { create_executable } from "code_generation";
     import { subscribeToMatchAndSubmissionChannels } from "match_subscription";
 
-        let code_template = <%= @challenge.code_template.to_json.html_safe %>;
-        let currentLanguage = <%= @match.language.to_json.html_safe %>;
-        let test_template = <%= @challenge.test_template.to_json.html_safe %>;
-        const match_id = "<%= @match.id %>";
-        const user_id = "<%= current_user.id %>";
-        subscribeToMatchAndSubmissionChannels(match_id, user_id);
+    let code_template = <%= @challenge.code_template.to_json.html_safe %>;
+    let currentLanguage = <%= @match.language.to_json.html_safe %>;
+    let test_template = <%= @challenge.test_template.to_json.html_safe %>;
+    const match_id = "<%= @match.id %>";
+    const user_id = "<%= current_user.id %>";
+    subscribeToMatchAndSubmissionChannels(match_id, user_id);
+    const form = document.getElementById('execute-form');
+    const output = document.getElementById('output');
+    const dark_editor = document.getElementById('code-editor-dark');
+    const light_editor = document.getElementById('code-editor-light');
+    const dark_hidden_code = document.getElementById('hidden-dark-input');
+    const light_hidden_code = document.getElementById('hidden-light-input');
+    const dark_editor_instance = initializeCodeMirror(dark_editor, form, dark_hidden_code, code_template, currentLanguage, 20, "dark")
+    const light_editor_instance = initializeCodeMirror(light_editor, form, light_hidden_code, code_template, currentLanguage, 20, "light")
+    let current_theme = "dark"
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent the default form submission
+        // Gather form data
+        const formData = new FormData(form);
+        const hidden_code = current_theme==="dark" ? dark_hidden_code : light_hidden_code
+        formData.set("code", create_executable(currentLanguage, hidden_code.value, test_template));
+        console.log(formData)
+        // Perform the AJAX request using Fetch API
+        fetch(form.action, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json', // Expect JSON response
+            },
+            body: formData
+        })
+          .then(response => response.json())  // Return the parsed JSON
+          .then(data => {
+              // Update the output area with the result
+              output.textContent = data.output;
+          })
+          .catch(error => console.error('ERROR:', error));
+    });
+    // TIMER
+    const timerElement = document.getElementById('timer');
+    const timerExpiresAt = new Date("<%= @match.timer_expires_at.iso8601 %>");
 
-        const form = document.getElementById('execute-form');
-        const output = document.getElementById('output');
-        const editor = document.getElementById('code-editor');
-        const hidden_code = document.getElementById('hidden-code-input');
-        initializeCodeMirror(editor, form, hidden_code, code_template, currentLanguage, 20);
-        form.addEventListener('submit', function (e) {
-            e.preventDefault(); // Prevent the default form submission
-            // Gather form data
-            const formData = new FormData(form);
-            formData.set("code", create_executable(currentLanguage, hidden_code.value, test_template));
-            // Perform the AJAX request using Fetch API
-            fetch(form.action, {
+    function updateTimer() {
+        const now = new Date();
+        const timeRemaining = timerExpiresAt - now;
+
+        if (timeRemaining <= 0) {
+            timerElement.textContent = "Time's up!";
+            clearInterval(timerInterval);
+
+            fetch("<%= match_timeout_path(@match.id) %>", {
                 method: 'POST',
                 headers: {
-                    'Accept': 'application/json', // Expect JSON response
+                    'Content-Type': 'application/json'
                 },
-                body: formData
             })
-              .then(response => response.json())  // Return the parsed JSON
-              .then(data => {
-                  // Update the output area with the result
-                  output.textContent = data.output;
-              })
-              .catch(error => console.error('ERROR:', error));
-        });
-        // TIMER
-        const timerElement = document.getElementById('timer');
-        const timerExpiresAt = new Date("<%= @match.timer_expires_at.iso8601 %>");
-
-        function updateTimer() {
-            const now = new Date();
-            const timeRemaining = timerExpiresAt - now;
-
-            if (timeRemaining <= 0) {
-                timerElement.textContent = "Time's up!";
-                clearInterval(timerInterval);
-
-                fetch("<%= match_timeout_path(@match.id) %>", {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Timeout response:", data);
                 })
-                    .then(response => response.json())
-                    .then(data => {
-                        console.log("Timeout response:", data);
-                    })
-                    .catch(error => console.error('ERROR:', error));
-            } else {
-                const minutes = Math.floor(timeRemaining / 1000 / 60);
-                const seconds = Math.floor((timeRemaining / 1000) % 60);
-                timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-            }
+                .catch(error => console.error('ERROR:', error));
+        } else {
+            const minutes = Math.floor(timeRemaining / 1000 / 60);
+            const seconds = Math.floor((timeRemaining / 1000) % 60);
+            timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         }
-        const timerInterval = setInterval(updateTimer, 1000);
-        updateTimer();
+    }
+    const timerInterval = setInterval(updateTimer, 1000);
+    updateTimer();
+
+
+    const changeThemeButton = document.querySelector("#switch-theme")
+
+    changeThemeButton.addEventListener("click", ()=>{
+        console.log(current_theme)
+        if(current_theme==="dark"){
+            dark_editor.classList.add("hidden")
+            light_editor.classList.remove("hidden")
+            current_theme="light"
+        }
+        else{
+            light_editor.classList.add("hidden")
+            dark_editor.classList.remove("hidden")
+            current_theme="dark"
+        }
+    })
+
+
 </script>
