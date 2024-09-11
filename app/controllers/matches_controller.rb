@@ -30,6 +30,7 @@ class MatchesController < ApplicationController
   def surrender
     winner =  current_user == @match.player_1 ? @match.player_2 : @match.player_1
     loser =  @match.player_2 == winner ? @match.player_1 : @match.player_2
+    @match.status = "finished"
     set_winner(winner, loser, @match, true)
   end
 
