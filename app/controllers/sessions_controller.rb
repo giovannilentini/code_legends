@@ -5,10 +5,10 @@ class SessionsController < ApplicationController
   end
 
   def login_post
-
     user = User.find_by(email: params[:email])
-    if user.has_auth0?
-      flash[:alert] = "Login with #{user.provider} oauth"
+  
+    if user&.has_auth0?
+      flash[:alert] = "Already logged in with #{user.provider} oauth!"
       redirect_to root_path
     else
       if user && user.authenticate(params[:password])
