@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'session/show'
 
   # ROOT ROUTE
   root 'welcome#home'
