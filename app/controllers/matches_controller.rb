@@ -2,13 +2,10 @@ class MatchesController < ApplicationController
   before_action :set_match, only: [:show, :execute_code, :surrender, :timeout]
 
   def show
+    authorize! :read, @match
     if @match.status == "finished"
       flash[:alert] = "Match finished"
       redirect_to root_path
-    end
-    # Ensure that only the participants can view the match
-    unless [@match.player_1, @match.player_2].include?(current_user)
-      redirect_to root_path, alert: 'You are not authorized to view this match.'
     end
   end
   def execute_code
@@ -18,10 +15,11 @@ class MatchesController < ApplicationController
       @result = JSON.parse(response.body)["Result"]
       @error = JSON.parse(response.body)["Errors"]
 
+      p @result
       if @result
           @output = @result
           if @result.strip == "Winner"
-            loser = current_user == @match.player_1 ? @match.player_2 : @match.player_1
+            loser = current_user == @match.player_1_id ? @match.player_2_id : @match.player_1_id
             set_winner(current_user, loser, @match)
           end
       else
