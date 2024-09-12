@@ -14,13 +14,11 @@ class MatchesController < ApplicationController
 
       @result = JSON.parse(response.body)["Result"]
       @error = JSON.parse(response.body)["Errors"]
-
-      p @result
       if @result
           @output = @result
           if @result.strip == "Winner"
-            loser = current_user == @match.player_1_id ? @match.player_2_id : @match.player_1_id
-            set_winner(current_user, loser, @match)
+            loser = current_user == @match.player_1 ? @match.player_2 : @match.player_1
+            set_winner(current_user, loser, @match, false)
           end
       else
         @output = @error
@@ -65,7 +63,7 @@ class MatchesController < ApplicationController
     end
   end
 
-  def set_winner(winner, loser, match, surrendered=false)
+  def set_winner(winner, loser, match, surrendered)
     MatchmakingQueueService.remove_from_queue(loser)
     MatchmakingQueueService.remove_from_queue(winner)
     match.chat_messages.destroy_all

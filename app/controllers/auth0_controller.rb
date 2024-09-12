@@ -14,7 +14,6 @@ class Auth0Controller < ApplicationController
     username = response["username"] || name
 
     provider = (auth0_id.split('|').first).split("-").first
-    p provider
     #Find or create a user based on the Auth0 UID
     user = User.find_or_create_by!(email: email) do |user|
       user.username = response["username"]
