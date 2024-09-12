@@ -5,9 +5,11 @@ class GuestsController < ApplicationController
       end
   
       unless guest_user
-        guest_user = User.create(
+
+        guest_user = User.create!(
           username: generate_guest_username,
-          guest: true
+          guest: true,
+          password_digest: "guest"
         )
 
         session[:user_id] = guest_user.id

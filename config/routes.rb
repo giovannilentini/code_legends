@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'sessions/show'
 
   # ROOT ROUTE
   root 'welcome#home'
@@ -12,11 +13,15 @@ Rails.application.routes.draw do
   get '/auth/logout', to: 'auth0#logout', as: 'auth_logout'
 
 
+  # LOCAL AUTHENTICATION
+  get 'login', to: 'sessions#login', as: 'login'
+  get 'signup', to: 'sessions#signup', as: 'signup'
+  post 'login_post', to: 'sessions#login_post', as: 'login_post'
   # USER / SETTINGS ROUTES
   resources :users, only: [:show] do
     post 'users/:id/add_friend', to: 'friendships#create', as: 'add_friend'
   end
-  resources :users, only: [:update, :edit]
+  resources :users, only: [:update, :edit, :create]
   #patch '/profile', to: 'profiles#update', as: 'profile_update'
   # ADMIN ROUTES
   resources :admins, only: [:show] do

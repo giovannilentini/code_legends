@@ -1,0 +1,42 @@
+<!-- app/views/users/new.html.erb -->
+<div class="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-gray-200">
+  <h1 class="text-3xl font-bold mb-8">Sign Up</h1>
+
+  <!-- Email/Password Signup Form -->
+  <div class="bg-gray-800 p-8 shadow-md rounded-lg w-full max-w-md mb-8">
+    <h2 class="text-xl font-semibold mb-4">Sign up with Email</h2>
+
+    <%= form_with(url: users_path, method: :post, model: @user, local: true, class: 'space-y-6') do |form| %>
+
+      <div class="flex flex-col space-y-2">
+        <%= form.label :username, "Username", class: "text-sm font-medium text-gray-300" %>
+        <%= form.text_field :username, required: true, class: "block w-full px-4 py-2 border border-gray-700 bg-gray-900 text-gray-200 rounded-lg" %>
+      </div>
+
+      <div class="flex flex-col space-y-2">
+        <%= form.label :email, "Email", class: "text-sm font-medium text-gray-300" %>
+        <%= form.email_field :email, required: true, class: "block w-full px-4 py-2 border border-gray-700 bg-gray-900 text-gray-200 rounded-lg" %>
+      </div>
+
+      <div class="flex flex-col space-y-2">
+        <%= form.label :password, "Password", class: "text-sm font-medium text-gray-300" %>
+        <%= form.password_field :password, required: true, class: "block w-full px-4 py-2 border border-gray-700 bg-gray-900 text-gray-200 rounded-lg" %>
+      </div>
+
+      <div class="flex justify-center">
+        <%= form.submit 'Sign Up', class: 'bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700' %>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- OAuth Login via Auth0 -->
+  <div class="flex flex-col items-center">
+    <h2 class="text-xl font-semibold mb-4">Or sign up with:</h2>
+
+    <!-- Auth0 OAuth Button -->
+    <%= button_to 'OAUTH', '/auth/auth0/', method: :post, data: { turbo: false }, class: 'bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700' %>
+  </div>
+
+  <!-- Already have an account link -->
+  <p class="text-gray-400">Already have an account? <%= link_to 'Log in', login_path, class: 'text-blue-400 hover:underline' %></p>
+</div>
