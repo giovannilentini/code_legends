@@ -7,3 +7,4 @@
 //= link home.js
 //= link logged_home.js
 //= link space_invaders.js
+//= link login.js
