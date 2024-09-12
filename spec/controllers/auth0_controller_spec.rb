@@ -14,7 +14,6 @@ RSpec.describe Auth0Controller, type: :controller do
     end
 
     before do
-      # Simuliamo l'ambiente di OmniAuth
       request.env['omniauth.auth'] = auth_info
       allow(Auth0Service).to receive(:get_user_info).with('auth0|12345').and_return({ "username" => "test_user" })
     end
@@ -29,7 +28,7 @@ RSpec.describe Auth0Controller, type: :controller do
         expect(session[:userinfo]['auth0_id']).to eq(user.auth0_id)
         expect(flash[:success]).to be_nil
         expect(response).to redirect_to(root_path)
-        expect(user.reload.username).to eq('test_user') # Il nome utente viene aggiornato
+        expect(user.reload.username).to eq('test_user')
       end
     end
 
