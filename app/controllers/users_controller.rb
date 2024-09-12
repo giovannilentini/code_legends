@@ -4,10 +4,6 @@ class UsersController < ApplicationController
 
   end
 
-  def edit
-    @user = User.find_by(id: params[:id])
-  end
-
   def create
     if @current_user
       flash[:notice] = "You are already logged in."

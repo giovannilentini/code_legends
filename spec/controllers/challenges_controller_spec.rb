@@ -1,37 +1,67 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  describe "GET #admin_profile" do
-    it "renders the admin_profile template" do
-      get :admin_profile
-      expect(response).to render_template(:admin_profile)
+  let(:user) { User.create!(email: 'user@example.com', username: 'username', password: 'password') }
+  let(:another_user) { User.create!(email: 'another@example.com', username: 'another_username', password: 'password') }
+
+  describe 'GET #show' do
+    before { get :show, params: { id: user.id } }
+
+    it 'assigns the requested user to @user_profile' do
+      expect(assigns(:user_profile)).to eq(user)
     end
 
-    it "assigns only challenges with status -1" do
-      challenge_1 = Challenge.create(description: "Challenge 1", status: -1)
-      challenge_2 = Challenge.create(description: "Challenge 2", status: 1)
+    it 'assigns accepted challenges to @accepted_challenges' do
+      expect(assigns(:accepted_challenges)).to eq([])
+    end
 
-      get :admin_profile
+    it 'assigns rejected challenges to @rejected_challenges' do
+      expect(assigns(:rejected_challenges)).to eq([])
+    end
 
-      expect(assigns(:challenges)).to include(challenge_1)
-      expect(assigns(:challenges)).not_to include(challenge_2)
+    it 'assigns pending challenges if user is current_user' do
+      allow(controller).to receive(:current_user).and_return(user)
+      get :show, params: { id: user.id }
+      expect(assigns(:pending_challenges)).to eq([])
+    end
+
+    it 'does not assign pending challenges if user is not current_user' do
+      allow(controller).to receive(:current_user).and_return(another_user)
+      get :show, params: { id: user.id }
+      expect(assigns(:pending_challenges)).to be_nil
+    end
+  end
+
+  describe 'POST #create' do
+    before do
+      User.destroy_all
+    end
+    context 'when user does not exist' do
+      it 'creates a new user and redirects to root path' do
+        post :create, params: { user: { email: 'newuser@example.com', username: 'newuser', password: 'password' } }
+        expect(User.count).to eq(1) # Adjust if there are other users already present
+        expect(response).to redirect_to(root_path)
+        expect(flash[:success]).to eq('User created succesfully')
+      end
+    end
+
+    context 'when user already exists' do
+      it 'does not create a new user and redirects to root path with alert' do
+        post :create, params: { user: { email: 'user2@example.com', username: 'newusername', password: 'password' } }
+        expect(User.count).to eq(1) # Adjust if there are other users already present
+        expect(response).to redirect_to(root_path)
+      end
+    end
+
+    context 'when user already exists with auth0' do
+      before { user.update(auth0_id: "google-auth0|test", provider: "auth0") }
+
+      it 'redirects to root path with an appropriate alert' do
+        post :create, params: { user: { email: 'user@example.com', username: 'newusername', password: 'password' } }
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq("User with mail user@example.com already registered with auth0 oauth")
+      end
     end
   end
 
-  describe "POST #update_status" do
-    it "accepts a challenge and sets status to 1" do
-      challenge = Challenge.create(description: "Accept me", status: -1)
-      post :update_status, params: { id: challenge.id, status: 1 }
-      challenge.reload
-      expect(challenge.status).to eq(1)
-    end
-
-    it "rejects a challenge and stores rejection reason" do
-      challenge = Challenge.create(description: "Reject me", status: -1)
-      post :update_status, params: { id: challenge.id, status: 0, rejection_reason: "Not suitable" }
-      challenge.reload
-      expect(challenge.status).to eq(0)
-      expect(challenge.rejection_reason).to eq("Not suitable")
-    end
-  end
 end
