@@ -1,6 +1,6 @@
 class Auth0Controller < ApplicationController
 
-
+  skip_before_action :verify_authenticity_token
   skip_authorization_check
   def callback
     # OmniAuth stores the information returned from Auth0 and the IdP in request.env['omniauth.auth'].
