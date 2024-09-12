@@ -1,25 +1,28 @@
 class Auth0Controller < ApplicationController
+
+
   skip_authorization_check
   def callback
     # OmniAuth stores the information returned from Auth0 and the IdP in request.env['omniauth.auth'].
-    # In this code, you will pull the raw_info supplied from the id_token and assign it to the session.
+    # In this code, you will pull the raw_info supplied from the id_token and assign it to the sessions.
     auth_info = request.env['omniauth.auth']
-
     # Estrai le informazioni dell'utente
     auth0_id = auth_info['uid']
     email = auth_info['info']['email']
     name = auth_info['info']['name']
-
     response = Auth0Service.get_user_info(auth0_id)
     username = response["username"] || name
-
+    provider = auth0_id.split('-').first
+    p provider
     #Find or create a user based on the Auth0 UID
-    user = User.find_or_create_by(email: email) do |user|
+    user = User.find_or_create_by!(email: email) do |user|
       user.username = response["username"]
       user.email = email
       user.is_admin = false
       user.auth0_id = auth0_id
+      user.provider = provider
       user.guest = false
+      user.password = "auth0"
     end
     user.update(username: username) if user.username.nil?
 
@@ -50,10 +53,21 @@ class Auth0Controller < ApplicationController
   def logout
     if current_user.guest?
       User.find(current_user.id).destroy
+      flash[:success] = "You have been logged out."
+      redirect_to root_url
+    else
+      if User.find(current_user.id).has_auth0?
+        reset_session
+        cookies.delete :user_info
+        flash[:success] = "You have been logged out."
+        redirect_to logout_url, allow_other_host: true
+      else
+        reset_session
+        cookies.delete :user_info
+        flash[:success] = "You have been logged out."
+        redirect_to root_url
+      end
     end
-    reset_session
-    cookies.delete :user_info
-    redirect_to logout_url, allow_other_host: true
   end
 
   private
