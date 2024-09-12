@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   get '/auth/failure', to: 'auth0#failure', as: 'auth_failure'
   get '/auth/logout', to: 'auth0#logout', as: 'auth_logout'
 
-
   # LOCAL AUTHENTICATION
   get 'login', to: 'sessions#login', as: 'login'
   get 'signup', to: 'sessions#signup', as: 'signup'
