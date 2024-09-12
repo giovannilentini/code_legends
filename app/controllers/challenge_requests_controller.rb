@@ -74,6 +74,6 @@ class ChallengeRequestsController < ApplicationController
   private
 
   def challenge_params
-    params.require(:challenge_request).permit(:user_id, :friend_id, :language)
+    params.require(:challenge_request).permit(:sender_id, :receiver_id, :language)
   end
 end

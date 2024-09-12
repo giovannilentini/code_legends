@@ -1,7 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
   def show
-
+    if @current_user
+      flash[:notice] = "You are already logged in."
+      redirect_to root_path
+    end
   end
 
   def edit

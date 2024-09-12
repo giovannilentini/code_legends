@@ -32,7 +32,6 @@ class MatchesController < ApplicationController
   end
 
   def surrender
-    @match = Match.find_by(id: params[:id])
     if @match
       winner = current_user == @match.player_1 ? @match.player_2 : @match.player_1
       loser = @match.player_2 == winner ? @match.player_1 : @match.player_2
@@ -42,8 +41,6 @@ class MatchesController < ApplicationController
   end
 
   def timeout
-    @match = Match.find_by(id: params[:match_id])  # Assicurati di recuperare il match
-  
     if @match
       if @match.status != "finished" && @match.timer_expires_at && Time.current >= @match.timer_expires_at
         @match.update(status: "finished", winner_id: nil)
