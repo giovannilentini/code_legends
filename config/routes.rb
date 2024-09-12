@@ -27,6 +27,9 @@ Rails.application.routes.draw do
     post 'promote_to_admin', to: 'admins#promote_to_admin'
   end
 
+  #FRIENDSHIPS REQUEST
+  resources :friendships, only: [:create]
+
   # FRIEND REQUESTS ROUTES
   resources :friend_requests, only: [:create] do
     member do
