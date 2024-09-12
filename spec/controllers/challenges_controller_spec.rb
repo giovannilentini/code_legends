@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ProfilesController, type: :controller do
+RSpec.describe UsersController, type: :controller do
   describe "GET #admin_profile" do
     it "renders the admin_profile template" do
       get :admin_profile

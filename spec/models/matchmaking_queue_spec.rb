@@ -1,38 +1,26 @@
-# spec/models/matchmaking_queue_spec.rb
 require 'rails_helper'
-require 'parallel'
 
 RSpec.describe MatchmakingQueue, type: :model do
-  let(:language) { 'Ruby' }   # The language for the matchmaking queue
-  let(:num_users) { 2000 }      # Number of concurrent users
+  let(:user) { User.create!(auth0_id: 'user1', email: 'example1@gmail.com ')}
 
-  before do
-    # Ensure the database is clean
-    MatchmakingQueue.delete_all
-    User.delete_all
-
-    # Create users directly in the test
-    @users = []
-    num_users.times do |i|
-      @users << User.create!(
-        username: "User#{i + 1}",
-        email: "user#{i + 1}@example.com",
-        auth0_id: "auth0|#{i + 1}",  # Assuming auth0_id is unique
-        guest: false,
-        rank: 0
-      )
-    end
+  it "belongs to user" do
+    association = MatchmakingQueue.reflect_on_association(:user)
+    expect(association.macro).to eq(:belongs_to)
   end
 
-  it "allows multiple users to join the matchmaking queue concurrently" do
-    Parallel.each(@users, in_threads: num_users) do |user|
-      # Simulate each user joining the queue with a specific language
-      MatchmakingQueue.create!(user: user, status: 'waiting', language: language)
-    end
-
-    # Assertions to verify that all users are in the queue
-    @users.each do |user|
-      expect(MatchmakingQueue.exists?(user_id: user.id, status: 'waiting', language: language)).to be true
-    end
+  it "is invalid without user" do
+    matchmaking_queue = MatchmakingQueue.new(user: nil, language:'python3', status:-1)
+    expect(matchmaking_queue).to_not be_valid
+    expect(matchmaking_queue.errors[:user]).to include("can't be blank")
+  end
+  it "is invalid without language" do
+    matchmaking_queue = MatchmakingQueue.new(user: user, language:nil, status: -1)
+    expect(matchmaking_queue).to_not be_valid
+    expect(matchmaking_queue.errors[:language]).to include("can't be blank")
+  end
+  it "is invalid without status" do
+    matchmaking_queue = MatchmakingQueue.new(user: user, language:'python3', status: nil)
+    expect(matchmaking_queue).to_not be_valid
+    expect(matchmaking_queue.errors[:status]).to include("can't be blank")
   end
 end

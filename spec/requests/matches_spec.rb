@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "Challenges", type: :request do
-  describe "GET /edit" do
+  before do
+    @challenge = Challenge.create!(description: "Test Challenge", status: "pending")
+  end
+
+  describe "GET /challenges/:id" do
     it "returns http success" do
-      get "/challenges/edit"
+      get "/challenges/#{@challenge.id}"
       expect(response).to have_http_status(:success)
     end
   end
-
 end
