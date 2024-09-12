@@ -15,15 +15,17 @@ RSpec.describe MatchesController, type: :controller do
 
   describe 'GET #show' do
     context 'when match is not finished' do
-      it 'renders the show template' do
+      it 'renders the show template if the current user is a participant' do
         get :show, params: { id: match.id }
         expect(response).to have_http_status(:success)
       end
 
-      it 'redirects if the current user is not a participant' do
-        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user2)
+      it 'redirects to root with an alert if the current user is not a participant' do
+        other_user = User.create(email: 'other_user@example.com', guest: false, password: 'password')
+        allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(other_user)
         get :show, params: { id: match.id }
-        expect(response).to have_http_status(:success)
+        expect(response).to redirect_to(root_path)
+        expect(flash[:alert]).to eq('You are not authorized to view this match.')
       end
     end
 
@@ -39,33 +41,58 @@ RSpec.describe MatchesController, type: :controller do
   end
 
   describe 'POST #execute_code' do
-    let(:code_execution_service) { double('CodeExecutionService') }
-    let(:response_body) { { "Result" => "Winner", "Errors" => "" }.to_json }
+  let(:code_execution_service) { double('CodeExecutionService') }
+  let(:success_response) { { "Result" => "Winner", "Errors" => "" }.to_json }
+  let(:error_response) { { "Result" => nil, "Errors" => "Some error" }.to_json }
+  
 
-    before do
-      allow(CodeExecutionService).to receive(:execute_code).and_return(double(body: response_body))
-    end
+  before do
+    allow(CodeExecutionService).to receive(:execute_code).and_return(double(body: success_response))
+    allow(LeaderboardService).to receive(:update_score)
+  end
 
-    it 'executes code and returns result' do
+  it 'executes code and returns result' do
+    post :execute_code, params: { id: match.id, code: 'some_code', language: 'ruby' }
+    expect(response).to have_http_status(:ok)
+    expect(JSON.parse(response.body)['output']).to eq('Winner')
+  end
+
+  context 'when result indicates a win' do
+    it 'sets the winner and updates match status' do
+      expect_any_instance_of(MatchesController).to receive(:set_winner).with(user1, user2, match).and_call_original
       post :execute_code, params: { id: match.id, code: 'some_code', language: 'ruby' }
-      expect(response).to have_http_status(:ok)
-      expect(JSON.parse(response.body)['output']).to eq('Winner')
     end
-
-    context 'when result indicates a win' do
-      it 'sets the winner and updates match status' do
-        expect_any_instance_of(MatchesController).to receive(:set_winner).with(user1, user2, match)
-        post :execute_code, params: { id: match.id, code: 'some_code', language: 'ruby' }
-      end
+ 
+    it 'updates the leaderboard when the result indicates a win' do
+      post :execute_code, params: { id: match.id, code: 'some_code', language: 'ruby' }
+      expect(LeaderboardService).to have_received(:update_score).twice
     end
   end
 
+  context 'when there are errors in the response' do
+    before do
+      allow(CodeExecutionService).to receive(:execute_code).and_return(double(body: error_response))
+    end
+
+    it 'returns error message if there are errors' do
+      post :execute_code, params: { id: match.id, code: 'some_code', language: 'ruby' }
+      expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)['output']).to eq('Some error')
+    end
+  end
+end
+
+
   describe 'POST #surrender' do
+  let(:code_execution_service) { double('CodeExecutionService') }
+  
+
   before do
-    # Mocking current_user and set_winner
     allow(controller).to receive(:current_user).and_return(user1)
     allow_any_instance_of(MatchesController).to receive(:set_winner).with(user2, user1, match, true)
-    # Assicurati che il match sia nella situazione di test corretta
+    
+    
+
     match.update(status: 'ongoing')
   end
 
@@ -76,11 +103,16 @@ RSpec.describe MatchesController, type: :controller do
     match.reload
     expect(match.status).to eq('finished')
   end
+
+  it 'does nothing if the match is already finished' do
+    match.update(status: 'finished')
+    post :surrender, params: { id: match.id }
+    expect(match.reload.status).to eq('finished')
+  end
 end
 
 describe 'POST #timeout' do
   before do
-    # Imposta una condizione in cui il timer è scaduto
     match.update(timer_expires_at: 1.minute.ago)
   end
 
@@ -88,13 +120,19 @@ describe 'POST #timeout' do
     post :timeout, params: { match_id: match.id }
     expect(response).to have_http_status(:ok)
     expect(match.reload.status).to eq('finished')
-    # Verifica anche il broadcasting se configurato
   end
+  
 
   it 'does nothing if the match is already finished' do
     match.update(status: 'finished')
     post :timeout, params: { match_id: match.id }
     expect(match.reload.status).to eq('finished')
+  end
+  
+  it 'does nothing if the timer has not expired' do
+    match.update(timer_expires_at: 1.minute.from_now)
+    post :timeout, params: { match_id: match.id }
+    expect(match.reload.status).to eq('ongoing')
   end
   end
 end
