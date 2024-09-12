@@ -4,7 +4,7 @@ class Match < ApplicationRecord
   belongs_to :player_2, class_name: 'User', foreign_key: 'player_2_id'
   belongs_to :challenge
   validate :players_must_be_different
-
+  validates :challenge, presence: true
   validates :player_1, presence: true
   validates :player_2, presence: true
   validate :players_must_be_different

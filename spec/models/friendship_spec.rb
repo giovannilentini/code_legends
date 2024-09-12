@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Friendship, type: :model do
-  let(:user1) { User.create!(auth0_id: 'user1', email: 'example1@gmail.com ')}
-  let(:user2) { User.create!(auth0_id: 'user2', email: 'example2@gmail.com') }
+  let(:user1) { User.create!(auth0_id: 'user1', email: 'example1@gmail.com', password: '123456') }
+  let(:user2) { User.create!(auth0_id: 'user2', email: 'example2@gmail.com', password: '123456') }
 
   it "belongs to user" do
     association = Friendship.reflect_on_association(:user)
