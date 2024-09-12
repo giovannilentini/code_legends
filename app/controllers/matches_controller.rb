@@ -32,21 +32,28 @@ class MatchesController < ApplicationController
   end
 
   def surrender
-    winner =  current_user == @match.player_1 ? @match.player_2 : @match.player_1
-    loser =  @match.player_2 == winner ? @match.player_1 : @match.player_2
-    @match.status = "finished"
-    set_winner(winner, loser, @match, true)
+    @match = Match.find_by(id: params[:id])
+    if @match
+      winner = current_user == @match.player_1 ? @match.player_2 : @match.player_1
+      loser = @match.player_2 == winner ? @match.player_1 : @match.player_2
+      @match.update(status: "finished")
+      set_winner(winner, loser, @match, true)
+    end
   end
 
   def timeout
-    unless @match.status == "finished"
-      if @match.timer_expires_at && Time.current >= @match.timer_expires_at
+    @match = Match.find_by(id: params[:match_id])  # Assicurati di recuperare il match
+  
+    if @match
+      if @match.status != "finished" && @match.timer_expires_at && Time.current >= @match.timer_expires_at
         @match.update(status: "finished", winner_id: nil)
         ActionCable.server.broadcast "match_#{@match.id}", { status: "timeout", message: "The match ended in a draw." }
       end
     end
+  
     head :ok
   end
+  
 
   private
   def set_match
