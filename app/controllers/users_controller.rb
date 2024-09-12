@@ -1,10 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
   def show
-    if @current_user
-      flash[:notice] = "You are already logged in."
-      redirect_to root_path
-    end
+
   end
 
   def edit
@@ -12,6 +9,11 @@ class UsersController < ApplicationController
   end
 
   def create
+    if @current_user
+      flash[:notice] = "You are already logged in."
+      redirect_to root_path
+    end
+
     @user = User.new(user_auth)
     @user.guest=false
 
@@ -31,10 +33,7 @@ class UsersController < ApplicationController
         redirect_to root_path
       end
     end
-
-
   end
-
 
   def update
     @user = User.find_by(id: params[:id])

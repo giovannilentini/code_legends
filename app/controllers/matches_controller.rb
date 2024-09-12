@@ -6,7 +6,6 @@ class MatchesController < ApplicationController
       flash[:alert] = "Match finished"
       redirect_to root_path
     end
-    # Ensure that only the participants can view the match
     unless [@match.player_1, @match.player_2].include?(current_user)
       redirect_to root_path, alert: 'You are not authorized to view this match.'
     end

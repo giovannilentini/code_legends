@@ -82,7 +82,7 @@ document.querySelectorAll('a[data-request-id]').forEach(link => {
         event.preventDefault();
         const requestId = link.dataset.requestId;
         const senderName = document.querySelector("#request-anchor").dataset.username
-        document.getElementById('requestMessage').innerText = `Ciao, sono ${senderName}, vuoi diventare mio amico?`;
+        document.getElementById('requestMessage').innerText = `Ciao, sono ${senderName} vuoi diventare mio amico?`;
 
         requestModal.classList.remove('hidden');
         document.getElementById('acceptRequestForm').action = `/friend_requests/${requestId}/accept`;
@@ -98,7 +98,7 @@ document.querySelectorAll('.challenge-request').forEach(link => {
     link.addEventListener('click', (event) => {
         event.preventDefault();
         const challengeId = link.dataset.challengeId;
-        const senderName = document.querySelector("#request-anchor").dataset.username
+        const senderName = document.querySelector("#challenge-request-anchor").dataset.username
         document.getElementById('challengeMessage').innerText = `Hai una nuova sfida da ${senderName}. Accetti?`;
 
         challengeRequestModal.classList.remove('hidden');
