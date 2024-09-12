@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
     else
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
+        cookies[:user_info] = { value: user.id, expires: 1.year.from_now }
         flash[:success]= "Logged in successfully!"
         redirect_to root_path
       else
