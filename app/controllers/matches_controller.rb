@@ -43,8 +43,9 @@ class MatchesController < ApplicationController
         ActionCable.server.broadcast "match_#{@match.id}", { status: "timeout", message: "The match ended in a draw." }
       end
     end
-  
-    head :ok
+
+    render plain: "ok", status: :ok
+    #head :ok
   end
   
 
