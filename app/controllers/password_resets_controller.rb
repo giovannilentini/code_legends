@@ -17,7 +17,7 @@ class PasswordResetsController < ApplicationController
       end
     else
       flash[:alert] = "Email not found"
-      render :new
+      redirect_to root_path
     end
   end
 
