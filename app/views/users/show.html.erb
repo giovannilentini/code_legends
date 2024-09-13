@@ -45,22 +45,22 @@
     <section class="flex flex-col md:flex-row items-start justify-center min-h-screen p-8 space-x-8 ">
       <div class="w-full md:w-1/3 border-white border p-8 rounded-3xl shadow-lg flex flex-col space-y-8" style="background-color: #1c1b1b;">
         <div class="text-center mb-6">
-          <h2 class="text-5xl font-extrabold tracking-tight drop-shadow-lg text-indigo-400">Profilo Utente</h2>
+          <h2 class="text-5xl font-extrabold tracking-tight drop-shadow-lg text-indigo-400">User Profile</h2>
         </div>
 
         <div class="max-w-sm mx-auto">
           <div class="relative">
-            <!-- Immagine Profilo -->
+            <!-- Profile Image -->
             <%= image_tag(@user_profile.profile_image.attached? ? @user_profile.profile_image : 'profile-placeholder.png', class: 'w-32 h-32 rounded-full object-cover border-4 border-indigo-700') %>
 
             <% if can? :update, @user_profile %>
-              <!-- Bottone Modifica -->
+              <!-- Edit Button -->
               <label for="profile_image" class="absolute bottom-[-10px] right-0 mb-2 mr-2 p-2 bg-indigo-700 text-white rounded-full cursor-pointer">
                 <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232a2.828 2.828 0 114 4L9 19H5v-4l10.232-10.232z"></path>
                 </svg>
               </label>
-              <!-- Input File -->
+              <!-- File Input -->
               <%= form_with model: @user_profile, url: user_path(@user_profile), method: :patch, local: true do |f| %>
                 <%= f.file_field :profile_image, class: 'hidden', id: 'profile_image', onchange: 'this.form.submit();' %>
               <% end %>
@@ -70,8 +70,8 @@
 
 
         <div class="text-left w-full space-y-6">
-          <h3 class="text-3xl font-bold text-indigo-400">Informazioni Utente</h3>
-          <p class="text-lg text-gray-300"><strong>Nome:</strong> <%= @user_profile.username %></p>
+          <h3 class="text-3xl font-bold text-indigo-400">User Information</h3>
+          <p class="text-lg text-gray-300"><strong>Name:</strong> <%= @user_profile.username %></p>
           <p class="text-lg text-gray-300"><strong>Email:</strong> <%= @user_profile.email %></p>
         </div>
       </div>
@@ -80,14 +80,14 @@
 
         <div style="background-color: #1c1b1b;" class="border-white border p-6 rounded-3xl shadow-lg space-y-8">
           <div>
-            <h3 class="text-4xl font-bold mb-8 text-green-400 tracking-tight drop-shadow-md">Proposte Accettate</h3>
+            <h3 class="text-4xl font-bold mb-8 text-green-400 tracking-tight drop-shadow-md">Accepted Proposals</h3>
             <div class="overflow-hidden rounded-2xl shadow-lg bg-gray-700">
               <table class="w-full rounded-2xl">
                 <thead>
                 <tr class="bg-neutral-700">
-                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Titolo</th>
-                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Descrizione</th>
-                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Linguaggio</th>
+                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Title</th>
+                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Description</th>
+                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Language</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -103,16 +103,16 @@
             </div>
           </div>
 
-          <%if @pending_challenges %>
+          <% if @pending_challenges %>
             <div>
-              <h3 class="text-4xl font-bold mb-8 text-blue-400 tracking-tight drop-shadow-md">Proposte In Attesa</h3>
+              <h3 class="text-4xl font-bold mb-8 text-blue-400 tracking-tight drop-shadow-md">Pending Proposals</h3>
               <div class="overflow-hidden rounded-2xl shadow-lg bg-gray-700">
                 <table class="w-full rounded-2xl">
                   <thead>
                   <tr class="bg-neutral-700">
-                    <th class="px-6 py-4 text-center text-xl font-semibold text-white">Titolo</th>
-                    <th class="px-6 py-4 text-center text-xl font-semibold text-white">Descrizione</th>
-                    <th class="px-6 py-4 text-center text-xl font-semibold text-white">Linguaggio</th>
+                    <th class="px-6 py-4 text-center text-xl font-semibold text-white">Title</th>
+                    <th class="px-6 py-4 text-center text-xl font-semibold text-white">Description</th>
+                    <th class="px-6 py-4 text-center text-xl font-semibold text-white">Language</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -127,76 +127,13 @@
                 </table>
               </div>
             </div>
-          <%end %>
-
-          <div>
-            <h3 class="text-4xl font-extrabold mb-8 text-red-400 tracking-tight drop-shadow-md">Proposte Rifiutate</h3>
-            <div class="overflow-hidden rounded-2xl shadow-lg bg-gray-700">
-              <table class="w-full rounded-2xl">
-                <thead>
-                <tr class="bg-neutral-700">
-                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Descrizione</th>
-                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Motivo</th>
-                </tr>
-                </thead>
-                <tbody>
-                <% @rejected_challenges.each do |challenge| %>
-                  <tr class="border-b">
-                    <td class="px-6 py-4 text-white"><%= challenge.description %></td>
-                    <td class="px-6 py-4 text-white"><%= challenge.rejection_reason %></td>
-                  </tr>
-                <% end %>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <div style="background-color: #1c1b1b;" class="p-6 rounded-3xl shadow-lg border border-white">
-          <h3 class="text-3xl font-bold text-indigo-400 mb-4">Amici</h3>
-          <ul class="list-disc list-inside space-y-2 text-gray-300">
-            <% @user_profile.friends.each do |friend| %>
-              <li><%= link_to friend.username, user_path(friend), class: 'text-blue-400 hover:text-blue-500' %></li>
-            <% end %>
-          </ul>
+          <% end %>
         </div>
       </div>
     </section>
   </section>
 </div>
 
-<div class="taskbar fixed bottom-0 left-0 w-screen h-[43px] bg-neutral-900 border-t border-gray-400 z-[9999] flex items-center justify-between">
-
-  <div class="icons-left flex items-center space-x-[-4px]">
-    <div id="start-menu" class="relative h-[43px] w-[48px] flex items-center justify-center">
-        <div id="logout" class="h-[43px] w-[49px] flex items-center justify-center hover:bg-white/10 rounded cursor-pointer relative">
-          <img class="h-[25px] w-[25px]" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAADGElEQVR4nO2aW29NURDHl9CLEMrBqYQHb4roA1/BPSgikuKtDS+Nuj2WSESEepCQ+BykERIV96q2EYe02hLiEhL1RkkqP5mc2clK9ejZu2vvs9dJ/6/da+Y/nVmz5nKMmUaZAlgINAAXgQ5gAPgO/AZ+AV+BQf3bOWA3MM+kAUA1cBC4DfwhPMTIm0AjUFEKA2YDx4HPFin5r3cCbeqZOmCBEASqgCXASmAPcAa4C4xZ5z+ozKqkjNgGvLEIPAOagPkRZGWAZiBnyRsEtsQdRtcshb3ARkeyZwh54KUl/4pz7wC1SlzwA2gBZjpVktdToeE1qrq6Rbcr4SuAYRXcD6xxIvj/OtcBb1Xna2C5C08ERjyWFOuM7eS6F1lRIHcyO5U70WsZMcc528k51ABdyuFRpDtjXez+JD0xHpq23ymXdhMhxQYXO/Y7UQSfeq0Mzod97IJ3osX4CuCE9U44T7GJgHwp8UkN2WB8BXAgKDtSwOU+0COXPcphqWIFTbGwC8elW7nkQhmj/cSYVrGhC8CY0m4utDHALj10x6QEwGLghfWeLS3mULseaDMpAmE9oy2oYIdJGQjjGW1oBHUmhaBYzwAj+lHJ6ionntFBgKDSOADwgPjRU9aGjHgYWrVlfdk79KOdxkdPTPAgnjKeP4gN+nGn8dETAXS8GRSNNcbXolEA3NKDzabEID+KDW+EHt5fMD8nDODJVBoraXU/qjGbjM8Ajqkhfd4OH6wJYzAmPWJ8BvkRv+AnsNbLAV0A4Ko1Dc+YdIxML0UNsSAFdpVwiP1UOTyMvPiRUT4wZBmTSXit0Ke6hyOl4QkWPUNWmNU7Y1tY53pr0SNr7mWuBGetMJME0ArMciL839XbSS2TgijIulZSbSUAwXNX21ddhm4FXlnyL7vqVgsp3WyFWjC1PyRFZ8Tq9vA4AwYSG6Crd1qtcgbt+e8Bp3VquVr36JX6vewjVwF7gbP6rf2DgffA0Vi9MElt1qg/w7BJFYtR7Uz3xXHnIkEG38B24AJwQxuhb+opIfxFw+a6ekQaubnRtE3DpB5/Ads59FkS0XrYAAAAAElFTkSuQmCC">
-        </div>
-    </div>
-
-    <div id="search" class="h-[43px] w-[49px] flex items-center justify-center hover:bg-white/10 rounded">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAEn0lEQVR4nO2dy48UVRSHj6OO8RF0xhETH2tFWcKIRv8BYwLB4IuF0bgDdYO6bFAXblAkozFB3RlJjIqJrnXi/A8CKghuBAYSBklmJPKZkz4kBLXu7aK769yq8yW1qX7Ur+o3Xffe86gRCYIgCIIgCIIgGDHAJPAo8AbwCbAAHAHOAH/Zdsb2Ldh7XrfPXB8G1bvoNwFbge+A89TnT+Bb4Dn9zjAjfeHvBd4Hlhg+S8Ae4J4w4t8X/nbgI2CF0bMCfAhMhxH9i/8SsMj4OQW82FkTgFXAfprna2BKugSwxmYtXvgFuE+6ALAeOIk/TgOPSJsBHgLO1Rw4fwB2ApvsFzSl83zbpmyfvrYLmLf1waCotllpI3aBBh1sfwK26SypxvFmgO3AwRqD8/3SJoDbBrznHwW2ABNDOPYE8DRwbMAx4VZpA8A1wJeZJ34R2D2KVSv91fV7dowcvpAWzfNzV6pPjEHPxgHGoRekBSvcxcz77rox6prN1HWy6BWzhRdy/vLXNaBt1oJ1Keak4MBaKrZzcRy3nf/Dpq2pMWEZuFtKw6KaKXYXovNdKQng5oyQ8lEPMXr6Wo8ntJ4FbpRSsGRKii3iBODZDL3PSClYJiu1wr3qRdawAK4FDiU0fyMF5XBTacRt4gzg5YTmc0XkmIHHEieiQbIZcQZwR0YA72HxjlUkVPG9OAX4MaF9h3gH+DRxEjvFKcBbCe0fi3esNqeKjeIUYHNC+7x4B/gtcRJrxCnAgwntR8Q7ltqrYtp58LCKU+KdjPjPpPieQlexLN4p3IAb2mBAybegmTbcglKD8APiFGBtGwbhmIY2idXnV7FLnAK8ndC+T1oQipgv+Ne7Q7xjnSlVXABWizOA1aatig3iHZtLp5Ld28UZwKsJzUtFhKMVawuq4qDDhMzhhOYDUgrWk1VMio+8FOpTUgpWBphKyh9zkpS/Bfi9VUl5xRriUuxxoHOuhPKZgdFuxMzCrMbyA8CTGRdfC7PukhKxbkSXTRHAhswe5L1SKhp4s8LbFIvjNIH+xU8FDZUTxTfwaSsoeejaYdOYbjvnMzU9L21Amx0yT1jHhL1aLjii2c4c+eyXtqDtPtb2k8txKxecGNIia2vGVPNydFG2StqE9uFmjgeXc8gq1gaOHQF3Aq8APw94zL+Bx6WNWFNEnTbVC1Y09aaVjqy1AX7Stmnbt9lqexYyAmtV/OE5cdTWRu1c3pHS0T7cAceEUXMY+KxrJujDOj6neb6yPmZtp/2gUyYo2gra0C3pxJXzfDOBLpowbXN0jbuMmmVba/znCrfG97XDBEW7Ea2bXcO/w+asdeFXBtZqfnd7TFA09q4JG20LqjltvYR+9oA9KyIrnk992mXCJYDr9Dk+wGtan2+PovnVgmkrtp22ffraPq1e0G4W/WyN410N7TRhnNB/PmmYECZ0HOKX0DyECc1DmNA8hAnNQ5jQPGGCA8IEB4QJDggTHBAmOCBMcECY4IAwwQFhQvkm9JrW32UTek3r7rIJvab1dtmEXtM6u2xCr2l9XTah17SuLpvQa1pPJ6H/b7jcPjc1CIIgCIIgCAJxyT8T2MIXGvEQ4gAAAABJRU5ErkJggg==" alt="search" class="h-[24px] w-[24px]" />
-    </div>
-
-    <div class="px h-[43px] w-1"></div>
-  </div>
-
-  <div class="icons-right flex items-center space-x-[-4px]">
-    <div id="sound" class="h-[43px] w-[49px] flex items-center justify-center hover:bg-white/5 p-1">
-      <img src="https://img.icons8.com/ios-glyphs/90/ffffff/speaker.png" alt="speaker" class="h-[22px] w-[22px]" />
-    </div>
-
-    <div class="datetime text-center w-[70px] cursor-pointer hover:bg-white/10 rounded">
-      <span id="current-time" class="hour block text-white text-[11.3px]"></span>
-      <span id="current-date" class="date block text-white text-[11.3px]"></span>
-    </div>
-
-    <div id="notifications" class="relative h-[43px] w-[42px] flex items-center justify-center hover:bg-white/10 rounded">
-      <img src="https://img.icons8.com/material-sharp/96/ffffff/bell.png" alt="bell" class="h-[24px] w-[24px]"/>
-    </div>
-
-  </div>
-</div>
 
 <script type="module">
 
