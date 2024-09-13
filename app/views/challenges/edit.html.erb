@@ -64,9 +64,20 @@
 
 </div>
 
-<script type="module">
-    import { initializeCodeMirror } from "codemirror_setup"; // Reference the module by its name
+<script type="module" defer>
+    // Handle browser back/forward navigation
 
+    function cleanupCodeMirrorEditors() {
+        // Select all CodeMirror editor instances
+        const editors = document.querySelectorAll('.cm-editor');
+        editors.forEach((editor) => {
+            // Remove the CodeMirror container element
+            editor.remove();
+        });
+    }
+
+    cleanupCodeMirrorEditors()
+    import { initializeCodeMirror } from "codemirror_setup"; // Reference the module by its name
     let currentLanguage = <%= @challenge.language.to_json.html_safe %>;
     const code_skeleton = document.getElementById('code_skeleton');
     const form = document.getElementById('submit-form');
@@ -77,7 +88,9 @@
     // Prepopulate CodeMirror with the existing values
     const existingCodeTemplate = <%= @challenge.code_template.to_json.html_safe %>;
     const existingTestTemplate = <%= @challenge.test_template.to_json.html_safe %>;
+    const challengeid = <%= @challenge.id.to_json.html_safe %>;
+    initializeCodeMirror(code_skeleton, form, hidden_code_skeleton_form, existingCodeTemplate, currentLanguage, 20, "dark");
+    initializeCodeMirror(test_skeleton, form, hidden_test_skeleton_form, existingTestTemplate, currentLanguage, 20, "dark");
 
-    initializeCodeMirror(code_skeleton, form, hidden_code_skeleton_form, existingCodeTemplate, currentLanguage, 20);
-    initializeCodeMirror(test_skeleton, form, hidden_test_skeleton_form, existingTestTemplate, currentLanguage, 20);
+
 </script>
