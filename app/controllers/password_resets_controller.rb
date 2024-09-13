@@ -4,6 +4,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
+
     @user = User.find_by(email: params[:email])
     if @user
       if @user.has_auth0?
@@ -22,6 +23,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
+
     unless params[:token].nil?
       @user = User.find_by(reset_token: params[:token])
       @reset_token = @user.reset_token
@@ -33,9 +35,9 @@ class PasswordResetsController < ApplicationController
   end
 
   def update
-
     @user = User.find_by(reset_token: params[:token])
     if @user && @user.update(password_params)
+
       @user.clear_password_reset_token!
       flash[:notice] = "Password has been reset!"
       redirect_to login_path
