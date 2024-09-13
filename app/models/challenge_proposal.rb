@@ -4,4 +4,5 @@ class ChallengeProposal < ApplicationRecord
   validates :description, presence: true
   validates :title, presence: true
   validates :test_cases, presence: true
+  validates :difficulty, presence: true
 end

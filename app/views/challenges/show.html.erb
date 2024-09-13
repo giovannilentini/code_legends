@@ -12,6 +12,9 @@
     <p class="text-gray-300"><%= @challenge.language %></p>
   </div>
 
+
+
+
   <div class="flex flex-col justify-center">
     <!-- Code Skeleton Editor -->
     <div class="mb-6">
@@ -29,6 +32,7 @@
       </div>
     </div>
   </div>
+  <%= link_to 'Back to Dashboard', admin_path(current_user), class: "ml-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition" %>
 </div>
 
 <script type="module" defer>
