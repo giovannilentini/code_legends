@@ -6,7 +6,7 @@ class Ability
       unless user.nil?
         if user.guest?
           can :create, User
-          can :edit, Match
+          can :read, Match
           can :execute_code, Match
           can :surrender, Match
           can :play_now, :all

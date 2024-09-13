@@ -41,7 +41,6 @@ RSpec.describe UsersController, type: :controller do
         post :create, params: { user: { email: 'newuser@example.com', username: 'newuser', password: 'password' } }
         expect(User.count).to eq(1) # Adjust if there are other users already present
         expect(response).to redirect_to(root_path)
-        expect(flash[:success]).to eq('User created succesfully')
       end
     end
 

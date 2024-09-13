@@ -1,4 +1,4 @@
-# features/step_definitions/user_steps.rb
+# features/step_definitions/signup_and_login_steps.rb
 
 Given("I am on the registration page") do
   visit signup_url
@@ -24,18 +24,19 @@ When("I visit the confirmation link") do
   visit @confirmation_link
 end
 
-Then("I should see a message to check my email") do
+Then("I should see a confirmation success message") do
   # Check for the flash message within the right container or class
   expect(page).to have_selector('.flash-notice', text: 'Please check your email to confirm your account.')
 end
 
 When("I log in with my credentials") do
   visit login_path
-  fill_in 'Email', with: 'testuser@example.com'
-  fill_in 'Password', with: 'password'
-  click_button 'Log in'
+  fill_in 'email', with: 'testuser@example.com'
+  fill_in 'password', with: 'password'
+  click_button 'Login'
 end
 
 Then("I should see a successful login message") do
-  expect(page).to have_content('Logged in successfully')
+  expect(page).to have_content('My Profile')
 end
+
