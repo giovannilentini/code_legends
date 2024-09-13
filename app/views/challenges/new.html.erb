@@ -61,8 +61,21 @@
 </div>
 
 <script type="module">
+
+
     import { initializeCodeMirror } from "codemirror_setup"; // Reference the module by its name
 
+
+    function cleanupCodeMirrorEditors() {
+        // Select all CodeMirror editor instances
+        const editors = document.querySelectorAll('.cm-editor');
+        editors.forEach((editor) => {
+            // Remove the CodeMirror container element
+            editor.remove();
+        });
+    }
+
+    cleanupCodeMirrorEditors()
     let currentLanguage = <%= @challenge_proposal.language.to_json.html_safe %>;
     const code_skeleton = document.getElementById('code_skeleton');
     const form = document.getElementById('submit-form');
