@@ -23,15 +23,34 @@ class UsersController < ApplicationController
       end
     else
       if @user.save!
-        session[:user_id] = @user.id
-        flash[:success]="User created succesfully"
+        @user.generate_confirmation_token
+        RegistrationMailer.email_confirmation(@user).deliver_now
+        flash[:notice]="Please check your email to confirm your account."
         redirect_to root_path
       end
     end
-
-
   end
 
+  def confirm_email
+    unless params[:token].nil?
+      user = User.find_by(confirmation_token: params[:token])
+      if user.present?
+        if user.has_auth0?
+          flash[:alert] = "User with mail #{user.email} already registered with #{user.provider} oauth"
+          #redirect_to root_path
+        else
+          user.update(email_confirmed_at: Time.current, confirmation_token: nil)
+          flash[:notice] = "Your email has been confirmed."
+          #redirect_to login_path
+        end
+      else
+        flash[:alert] = "Invalid or expired token."
+        #redirect_to root_path
+      end
+    end
+    redirect_to root_path
+
+  end
 
   def update
     @user = User.find_by(id: params[:id])
