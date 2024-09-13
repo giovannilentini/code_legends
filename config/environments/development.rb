@@ -1,6 +1,10 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  # Configure 'rails notes' to inspect Cucumber files
+  config.annotations.register_directories('features')
+  config.annotations.register_extensions('feature') { |tag| /#\s*(#{tag}):?\s*(.*)$/ }
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -73,8 +77,22 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.mailtrap.io', # Mailtrap SMTP server address
+    port:                 587,                # Port number
+    domain:               'localhost',      # Your domain
+    user_name:            Rails.application.credentials.mail['mailtrap_username'],
+    password:             Rails.application.credentials.mail['mailtrap_password'],
+    authentication:       'plain',            # Authentication type
+    enable_starttls_auto: true                # Enable TLS
+  }
+
+
 
   config.action_cable.url = "ws://localhost:3000/cable"
   config.action_cable.allowed_request_origins = [ 'http://localhost:3000' ]
 
+  config.filter_parameters -= ["password"]  # List parameters to be excluded from filtering
 end

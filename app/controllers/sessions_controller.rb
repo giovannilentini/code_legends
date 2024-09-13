@@ -1,7 +1,10 @@
 class SessionsController < ApplicationController
 
   def login
-
+    if @current_user
+      flash[:notice] = "You are already logged in."
+      redirect_to root_path
+    end
   end
 
   def login_post
@@ -13,6 +16,7 @@ class SessionsController < ApplicationController
     else
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
+        cookies[:user_info] = { value: user.id, expires: 1.year.from_now }
         flash[:success]= "Logged in successfully!"
         redirect_to root_path
       else

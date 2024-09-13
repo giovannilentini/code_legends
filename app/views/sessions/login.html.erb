@@ -20,15 +20,18 @@
           <%= form.password_field :password, required: true, class: "mt-1 h-12 px-4 bg-gray-100 border rounded-lg text-gray-800 text-base shadow-sm focus:bg-[#f8f8c6] focus:outline-none focus:ring-2 focus:ring-neutral-500" %>
           <span class="i i-close hidden absolute right-0 top-1/2 transform -translate-y-1/2"></span>
         </div>
-        <%= form.submit 'Log in', class: 'w-full h-12 mt-4 bg-neutral-600 text-white font-bold rounded-lg shadow-md cursor-pointer hover:bg-neutral-800' %>
+        <%= form.submit 'Login', class: 'w-full h-12 mt-4 bg-neutral-600 text-white font-bold rounded-lg shadow-md cursor-pointer hover:bg-neutral-800' %>
       <% end %>
       <p class="text-gray-400 text-sm mt-4">Don't have an account? <%= link_to 'Sign up', signup_path, class: 'text-purple-500 hover:underline' %></p>
-      <h2 class="text-xl font-semibold mt-4 text-gray-600 mb-2">Or log in with socials:</h2>
+      <h2 class="text-xl font-semibold mt-4 text-gray-600 mb-2">Or login with socials:</h2>
       <%= button_to '/auth/auth0/', method: :post, data: { turbo: false }, class: 'w-full h-12 bg-neutral-600 text-white font-bold rounded-lg shadow-md flex items-center justify-center gap-4 cursor-pointer hover:bg-neutral-800' do %>
         <img width="24" height="24" src="https://img.icons8.com/ios-filled/100/github.png" alt="GitHub" class="inline-block" />
         <img width="24" height="24" src="https://img.icons8.com/color/96/google-logo.png" alt="Google" class="inline-block" />
         <img width="24" height="24" src="https://img.icons8.com/fluency/96/facebook-new.png" alt="Facebook" class="inline-block" />
       <% end %>
+      <div class="flex flex-col items-center mt-8">
+        <%= button_to 'Forgot Password?', password_reset_url, method: :get, class: 'bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600' %>
+      </div>
     </div>
   </div>
 </div>

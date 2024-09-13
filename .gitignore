@@ -79,3 +79,6 @@ config/auth0.yml
 dump.rdb
 
 /config/credentials/test.key
+
+/app/assets/builds/*
+!/app/assets/builds/.keep
