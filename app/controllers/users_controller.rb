@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show]
   def show
-
+    authorize! :read, User
   end
 
   def edit
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
   def set_user
     @user_profile = User.find_by(id: params[:id])
     @accepted_challenges = ChallengeProposal.where(status: "accepted", user: @user_profile)
-    @rejected_challenges = ChallengeProposal.where(status: "reject", user: @user_profile)
+    @rejected_challenges = ChallengeProposal.where(status: "rejected", user: @user_profile)
 
     if @user_profile == current_user
       @pending_challenges = ChallengeProposal.where(status: "pending", user: @user_profile)
