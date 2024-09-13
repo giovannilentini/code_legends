@@ -77,6 +77,8 @@ For detailed instructions on installing Rails and PostgreSQL, please refer to th
     rails db:migrate
     rails db:seed
 
+3. The first Admin must be set from the rails console (User.wher(user_id: *your_user_id*).update(is_admin: true))
+
 ---
 
 ### Usage

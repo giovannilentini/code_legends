@@ -1,7 +1,7 @@
 <div id="mailboxModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
   <div class="bg-neutral-800 p-8 rounded-3xl shadow-2xl w-full max-w-2xl">
     <div class="flex justify-between items-center mb-4">
-      <h3 class="text-3xl font-bold text-indigo-600">Richieste</h3>
+      <h3 class="text-3xl font-bold text-indigo-600">Requests</h3>
       <button id="closeMailbox" class="text-gray-400 hover:text-gray-300">&times;</button>
     </div>
     <ul class="space-y-4 text-white">
@@ -9,23 +9,23 @@
         <% @friend_requests.each do |request| %>
           <li>
             <a href="#" id="request-anchor" class="text-blue-400 hover:text-blue-500" data-username="<%=request.sender.username %>" data-request-id="<%= request.id %>">
-              Richiesta di amicizia da <%= request.sender.username %>
+              Friend request from <%= request.sender.username %>
             </a>
           </li>
         <% end %>
       <% else %>
-        <li class="text-neutral-400">Nessuna richiesta di amicizia in sospeso.</li>
+        <li class="text-neutral-400">No friend requests yet.</li>
       <% end %>
       <% if @challenge_requests.present? %>
         <% @challenge_requests.each do |challenge| %>
           <li>
             <a href="#" id="challenge-request-anchor" class="text-blue-400 hover:text-blue-500 challenge-request" data-username="<%=challenge.sender.username %>" data-challenge-id="<%= challenge.id %>">
-              Richiesta di sfida da <%= challenge.sender.username %>
+              Challenge requests from <%= challenge.sender.username %>
             </a>
           </li>
         <% end %>
       <% else %>
-        <li class="text-neutral-400">Nessuna richiesta di sfida in sospeso.</li>
+        <li class="text-neutral-400">No Challenge requests yet.</li>
       <% end %>
     </ul>
   </div>

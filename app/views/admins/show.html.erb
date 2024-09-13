@@ -11,7 +11,7 @@
           <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-md mb-6">
             <thead>
             <tr class="bg-gray-700">
-              <th class="px-6 py-3 text-center text-gray-300 font-medium">Descrizione</th>
+              <th class="px-6 py-3 text-center text-gray-300 font-medium">Description</th>
               <th class="px-6 py-3 text-center text-gray-300 font-medium">Test Case</th>
               <th class="px-6 py-3 text-center text-gray-300 font-medium">Azione</th>
             </tr>
@@ -41,13 +41,13 @@
       <!-- Sezione Utenti non Admin -->
       <div class="mb-6">
         <button onclick="toggleSection('non-admin-users')" class="w-full text-left bg-gray-700 text-gray-300 font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
-          Utenti non Admin
+          Non Admin User
         </button>
         <div id="non-admin-users" class="hidden mt-2">
           <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-md mb-6">
             <thead>
             <tr class="bg-gray-700">
-              <th class="px-6 py-3 text-center text-gray-300 font-medium">Nome</th>
+              <th class="px-6 py-3 text-center text-gray-300 font-medium">Name</th>
               <th class="px-6 py-3 text-center text-gray-300 font-medium">Email</th>
               <th class="px-6 py-3 text-center text-gray-300 font-medium">Azione</th>
             </tr>
@@ -58,7 +58,7 @@
                 <td class="px-6 py-4 text-gray-200"><%= user.username %></td>
                 <td class="px-6 py-4 text-gray-200"><%= user.email %></td>
                 <td class="px-6 py-4 text-center">
-                  <%= button_to 'Promuovi a Admin',  admin_promote_to_admin_path(user.id), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
+                  <%= button_to 'Promote to Admin',  admin_promote_to_admin_path(user.id), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
                 </td>
               </tr>
             <% end %>
@@ -76,8 +76,8 @@
           <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-md mb-6">
             <thead>
             <tr class="bg-gray-700">
-              <th class="px-6 py-3 text-center text-gray-300 font-medium">Nome</th>
-              <th class="px-6 py-3 text-center text-gray-300 font-medium">Descrizione</th>
+              <th class="px-6 py-3 text-center text-gray-300 font-medium">Name</th>
+              <th class="px-6 py-3 text-center text-gray-300 font-medium">Description</th>
               <th class="px-6 py-3 text-center text-gray-300 font-medium">Azione</th>
             </tr>
             </thead>
@@ -87,8 +87,8 @@
                 <td class="px-6 py-4 text-gray-200"><%= challenge.title %></td>
                 <td class="px-6 py-4 text-gray-200"><%= challenge.description %></td>
                 <td class="px-6 py-4 text-center">
-                  <%= button_to 'Visualizza',  challenge_path(challenge.id), method: :get, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
-                  <%= button_to 'Modifica',  edit_challenge_path(challenge.id), method: :get, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
+                  <%= button_to 'View',  challenge_path(challenge.id), method: :get, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
+                  <%= button_to 'Edit',  edit_challenge_path(challenge.id), method: :get, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
                 </td>
               </tr>
             <% end %>
@@ -100,7 +100,7 @@
 
 
       <div class="mt-10 mb-6">
-        <%= link_to 'Torna alla Home', root_path, class: 'bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105 shadow-md' %>
+        <%= link_to 'Back to Home', root_path, class: 'bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105 shadow-md' %>
       </div>
     </div>
   </section>
