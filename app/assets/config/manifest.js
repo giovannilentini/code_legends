@@ -4,6 +4,6 @@
 //= link_tree ../../../vendor/javascript .js
 //= link_tree ../builds
 //= link Error.mp3
-//= link home.js
 //= link logged_home.js
 //= link space_invaders.js
+//= link home.js

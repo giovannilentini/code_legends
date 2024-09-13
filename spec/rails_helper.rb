@@ -6,6 +6,7 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'selenium/webdriver'
 require 'webdrivers'
+Webdrivers::Chromedriver.required_version = '128.0.6613'
 
 begin
   ActiveRecord::Migration.maintain_test_schema!
