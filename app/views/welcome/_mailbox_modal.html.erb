@@ -19,7 +19,7 @@
       <% if @challenge_requests.present? %>
         <% @challenge_requests.each do |challenge| %>
           <li>
-            <a href="#" class="text-blue-400 hover:text-blue-500 challenge-request" data-challenge-id="<%= challenge.id %>">
+            <a href="#" id="challenge-request-anchor" class="text-blue-400 hover:text-blue-500 challenge-request" data-username="<%=challenge.sender.username %>" data-challenge-id="<%= challenge.id %>">
               Richiesta di sfida da <%= challenge.sender.username %>
             </a>
           </li>

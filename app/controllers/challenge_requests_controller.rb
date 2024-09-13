@@ -4,6 +4,8 @@ class ChallengeRequestsController < ApplicationController
     authorize! :read, ChallengeRequest
     @received_challenge_requests = current_user.received_challenge_requests
     @sent_challenge_requests = current_user.sent_challenge_requests
+
+    head :ok
   end
 
   def create
@@ -18,7 +20,8 @@ class ChallengeRequestsController < ApplicationController
       ActionCable.server.broadcast 'notifications_channel', { has_notifications: true }
       redirect_to root_path, notice: 'Richiesta di sfida inviata con successo!'
     else
-      render :new, alert: "Si è verificato un errore nell'invio della richiesta."
+      redirect_to root_path, alert: "Si è verificato un errore nell'invio della richiesta."
+
     end
   end
 

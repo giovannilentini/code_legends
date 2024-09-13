@@ -4,9 +4,12 @@ class MatchmakingQueueController < ApplicationController
 
   def play_now
     authorize! :play_now, MatchmakingQueue
-    @player = User.find_by(id: session[:user_id])
-    @last_matches = Match.where(player_1_id: @player.id).or(Match.where(player_2_id: @player.id))
-                         .order(updated_at: :desc).limit(5)
+    @player = current_user
+
+    @last_matches = Match.where(
+      '(player_1_id = ? OR player_2_id = ?) AND status = ?',
+      @player.id, @player.id, 'finished'
+    ).order(updated_at: :desc).limit(5)
 
     @match_details = @last_matches.map do |match|
       opponent_id = match.player_1_id == current_user.id ? match.player_2_id : match.player_1_id
@@ -33,7 +36,7 @@ class MatchmakingQueueController < ApplicationController
 
   def find_opponent
     authorize! :find_opponent, MatchmakingQueue
-    player = User.find_by(id: session[:user_id])
+    player = current_user
     if player
       MatchmakingQueueService.new(player).add_to_queue(@selected_language)
       respond_to do |format|
@@ -44,8 +47,7 @@ class MatchmakingQueueController < ApplicationController
   end
 
   def cancel
-    player = User.find_by(id: session[:user_id])
-    language = session[:selected_language]
+    player = current_user
     MatchmakingQueueService.remove_from_queue(player)
     redirect_to play_now_path, notice: "Ricerca avversario annullata."
   end

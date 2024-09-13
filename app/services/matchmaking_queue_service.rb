@@ -1,15 +1,22 @@
 class MatchmakingQueueService
   def initialize(user)
+    p "helloooo"
     @user = user
     @language = nil
   end
 
   def add_to_queue(language)
+
+    # User already in queue for the language or
+    # User already in game
     return if
       MatchmakingQueue.exists?(user: @user, language: language, status: 'waiting') ||
       MatchmakingQueue.exists?(user: @user, status: 'playing')
     @language = language
+
+
     user = MatchmakingQueue.exists?(user: @user)
+    # User already in queue but wants to change language
     if user && user.language != language
       user.language = language
     else
