@@ -15,8 +15,12 @@ Feature: Timeout e fine della partita in pareggio
     Then la partita dovrebbe essere segnata come "finished"
     And il giocatore che non si è arreso dovrebbe essere il vincitore
 
-  Scenario: Un utente invia un messaggio durante la partita
+  Scenario: Un giocatore vince la partita inviando un codice corretto
     Given che esistono due utenti registrati
+    Given an external API is called
     And che esiste una partita con timer attivo tra questi due utenti
-    When un utente invia un messaggio nella partita
-    Then il messaggio dovrebbe essere visibile nella cronologia della partita
+    And il giocatore 1 ha inviato un codice vincente
+    When il giocatore 2 invia un codice che viene valutato come perdente
+    Then la partita dovrebbe essere segnata come "finished"
+    And il giocatore 1 dovrebbe essere il vincitore
+    And il giocatore 2 dovrebbe essere il perdente

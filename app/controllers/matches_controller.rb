@@ -9,6 +9,7 @@ class MatchesController < ApplicationController
     end
   end
   def execute_code
+    p 'ciao daniele'
     response = CodeExecutionService.execute_code(params[:code], params[:language])
     unless response.nil?
 
