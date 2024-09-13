@@ -39,16 +39,16 @@ RSpec.describe UsersController, type: :controller do
     context 'when user does not exist' do
       it 'creates a new user and redirects to root path' do
         post :create, params: { user: { email: 'newuser@example.com', username: 'newuser', password: 'password' } }
-        expect(User.count).to eq(1) # Adjust if there are other users already present
+        expect(User.count).to eq(1) 
         expect(response).to redirect_to(root_path)
-        expect(flash[:success]).to eq('User created succesfully')
+        expect(flash[:notice]).to eq('Please check your email to confirm your account.')
       end
     end
 
     context 'when user already exists' do
       it 'does not create a new user and redirects to root path with alert' do
         post :create, params: { user: { email: 'user2@example.com', username: 'newusername', password: 'password' } }
-        expect(User.count).to eq(1) # Adjust if there are other users already present
+        expect(User.count).to eq(1) 
         expect(response).to redirect_to(root_path)
       end
     end

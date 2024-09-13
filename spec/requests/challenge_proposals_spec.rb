@@ -11,12 +11,14 @@ RSpec.describe "ChallengeProposals", type: :request do
     OmniAuth.config.mock_auth[:auth0] = OmniAuth::AuthHash.new({
       'uid' => 'auth0|1234567890',
       'info' => {
-        'email' => 'test@example.com',
-        'name' => 'Test User'
+        'email' => 'example@gmail.com',
+        'name' => 'Test User',
+        'password' => 'Password1!'
+
       }
     })
 
-    @user = User.create!(email: "test@example.com", auth0_id: 'auth0|1234567890')
+    @user = User.create!(email: 'example@gmail.com', username: 'test_user', auth0_id: 'auth0|12345', password:'Password1')
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
     # Ottieni i valori delle variabili di ambiente
@@ -48,7 +50,7 @@ RSpec.describe "ChallengeProposals", type: :request do
           'User-Agent' => 'Ruby'
         }
       )
-      .to_return(status: 200, body: '{"email": "test@example.com", "name": "Test User"}', headers: { 'Content-Type' => 'application/json' })
+      .to_return(status: 200, body: '{"email": "example@gmail.com", "name": "Test User"}', headers: { 'Content-Type' => 'application/json' })
   end
 
   after do

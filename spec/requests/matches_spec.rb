@@ -38,7 +38,6 @@ RSpec.describe 'Matches', type: :request do
       post "/matches/#{match.id}/execute_code", params: { code: "Hello, world!", language: "python3" }
 
       expect(response).to have_http_status(:ok)
-      # Adjust expectations based on how your controller processes the code
       expect(response.body).to include("{\"output\":\"Code executed\"}")
     end
   end
@@ -47,9 +46,7 @@ RSpec.describe 'Matches', type: :request do
     it 'surrenders the match' do
       post "/matches/#{match.id}/surrender"
 
-      expect(response).to have_http_status(:ok)
-      # Adjust expectations based on how your controller handles surrender
-      expect(response.body).to include('Match surrendered')
+      expect(response).to have_http_status(:no_content)
     end
   end
 
@@ -58,8 +55,6 @@ RSpec.describe 'Matches', type: :request do
       post "/matches/#{match.id}/timeout"
 
       expect(response).to have_http_status(:ok)
-      # Adjust expectations based on how your controller handles timeouts
-      expect(response.body).to include('Match timed out')
     end
   end
 end

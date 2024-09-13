@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "Settings", type: :request do
-  let(:user) { User.create!(auth0_id: "auth0|12345", email: "test@example.com") }
+  let(:user) { User.create!(email: 'example@gmail.com', username: 'test_user', auth0_id: 'auth0|12345', password:'Password1')}
 
   before do
     # Simula l'autenticazione
