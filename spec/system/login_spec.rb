@@ -1,13 +1,18 @@
-require 'application_system_test_case'
-
-class LoginTest < ApplicationSystemTestCase
-  test 'user can log in' do
+require 'rails_helper'
+RSpec.describe 'Login', type: :system do
+  it 'allows a user to log in' do
+    # Visit the login page
     visit login_path
 
-    fill_in 'Email', with: 'user@example.com'
+    # Fill in the login form
+    fill_in 'E-mail', with: 'user@example.com'
     fill_in 'Password', with: 'password'
-    click_on 'Log in'
 
-    assert_text 'Logged in successfully'
+    # Click the login button
+    click_on 'Login'
+
+    # Assert that the user is logged in successfully
+    expect(page).to have_text('Logged in successfully')
   end
 end
+

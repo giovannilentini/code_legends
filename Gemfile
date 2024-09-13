@@ -75,7 +75,10 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'selenium-webdriver', '>= 4.0'
-  gem 'webdrivers'
+  gem 'cucumber-rails', require: false
+  # database_cleaner is not mandatory, but highly recommended
+  gem 'database_cleaner'
+  gem 'webdrivers', '~> 5.0', require: false
   gem 'capybara', '>= 3.36'
   gem "webmock"
   gem 'parallel'
