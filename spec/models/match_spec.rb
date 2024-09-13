@@ -32,7 +32,7 @@ RSpec.describe Match, type: :model do
     let(:user1) { User.create(email: 'user1@example.com', guest: false, password: 'password') }
     let(:user2) { User.create(email: 'user2@example.com', guest: false, password: 'password') }
     let(:challenge_proposal) { ChallengeProposal.create(title: 'Challenge Proposal', description: 'Proposal description', test_cases:"asdasd", user: user1) }
-    let(:challenge) { Challenge.create(title: 'Challenge', description: 'Challenge description', challenge_proposal: challenge_proposal) }
+    let(:challenge) { Challenge.create(title: 'Challenge',difficulty: "easy", description: 'Challenge description', challenge_proposal: challenge_proposal) }
 
     it 'is valid with different players and a challenge' do
       match = Match.new(player_1: user1, player_2: user2, challenge: challenge)

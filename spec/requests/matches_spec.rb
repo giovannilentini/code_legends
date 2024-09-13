@@ -5,7 +5,7 @@ RSpec.describe 'Matches', type: :request do
   let(:user1) { User.create!(email: 'user1@example.com', guest: false, password: 'password') }
   let(:user2) { User.create!(email: 'user2@example.com', guest: false, password: 'password') }
   let(:challenge_proposal) { ChallengeProposal.create!(user: user1, title: 'Test Challenge', test_cases: "asuyidgas", description: 'A challenging challenge') }
-  let(:challenge) { Challenge.create!(title: 'Test Challenge', description: 'A challenging challenge', challenge_proposal: challenge_proposal) }
+  let(:challenge) { Challenge.create!(title: 'Test Challenge', difficulty: "easy",  description: 'A challenging challenge', challenge_proposal: challenge_proposal) }
   let(:match) { Match.create!(player_1_id: user1.id, player_2_id: user2.id, challenge: challenge, status: "ongoing", timer_expires_at: 10.minutes.from_now) }
 
   before do
