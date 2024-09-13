@@ -52,12 +52,9 @@ RSpec.configure do |config|
     config.include Rails::Controller::Testing::Integration, type: type
     config.include Rails::Controller::Testing::TestProcess, type: type
   end
-
-  # Selenium setup for Capybara
-  config.before(:each, type: :system) do
-    driven_by :selenium_chrome_headless
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, browser: :firefox)
   end
-
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
@@ -81,9 +78,4 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  RSpec.configure do |config|
-    config.before(:each, type: :system) do
-      driven_by :selenium_chrome_headless
-    end
-  end
 end

@@ -185,13 +185,7 @@ function gotoProfile() {
 }
 
 function gotoLeaderboard() {
-    if (isGuest) {
-        openGuestModal();
-        return true;
-    } else {
-        window.location.href = '/leaderboard';
-        return false;
-    }
+    window.location.href = '/leaderboard';
 }
 
 function toggleTerminal() {

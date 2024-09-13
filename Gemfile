@@ -44,13 +44,13 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-
 gem "tailwindcss-rails", "~> 2.6"
 gem 'omniauth-auth0', '~> 3.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0' # prevents forged authentication requests
 gem 'rails-controller-testing', group: [:test]
 gem 'image_processing', '~> 1.2'
 gem 'mini_magick'
+
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -75,10 +75,13 @@ end
 
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+  gem 'selenium-webdriver', '>= 4.0'
+  gem 'cucumber-rails', require: false
+  # database_cleaner is not mandatory, but highly recommended
+  gem 'database_cleaner'
+  gem 'webdrivers', '~> 5.0', require: false
+  gem 'capybara', '>= 3.36'
   gem "webmock"
-  gem 'webdrivers'
   gem 'parallel'
 end
 

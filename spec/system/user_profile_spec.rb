@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "UserProfile", type: :system do
   before do
-    driven_by(:selenium_chrome)
+
 
     # Crea sfide accettate e rifiutate
     Challenge.create(description: "Accepted Challenge", status: 1)
