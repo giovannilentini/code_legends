@@ -118,8 +118,6 @@ GEM
     ffi (1.17.0-x86_64-linux-gnu)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
-    font-awesome-sass (6.5.2)
-      sassc (~> 2.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashdiff (1.1.1)
@@ -282,8 +280,6 @@ GEM
       ffi (~> 1.12)
       logger
     rubyzip (2.3.2)
-    sassc (2.4.0)
-      ffi (~> 1.9)
     selenium-webdriver (4.24.0)
       base64 (~> 0.2)
       logger (~> 1.4)
@@ -353,10 +349,9 @@ DEPENDENCIES
   bcrypt (~> 3.1.7)
   bootsnap
   cancancan
-  capybara
+  capybara (>= 3.36)
   debug
   figaro
-  font-awesome-sass (~> 6.0)
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
@@ -370,7 +365,7 @@ DEPENDENCIES
   rails-controller-testing
   redis (>= 4.0.1)
   rspec-rails
-  selenium-webdriver
+  selenium-webdriver (>= 4.0)
   sprockets-rails
   stimulus-rails
   tailwindcss-rails (~> 2.6)
