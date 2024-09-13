@@ -35,9 +35,32 @@ class User < ApplicationRecord
         auth0_id
     end
 
+
     # Metodo per ottenere la miniatura dell'immagine del profilo
     def profile_image_thumbnail
       profile_image.variant(resize_to_fill: [200, 200]).processed
+    end
+
+    # Generates a reset token and sets its expiration
+    def generate_password_reset_token!
+        self.reset_token = SecureRandom.urlsafe_base64
+        self.reset_sent_at = Time.current
+        update_columns(reset_token: reset_token, reset_sent_at: Time.zone.now)
+    end
+
+    def generate_confirmation_token
+        self.confirmation_token = SecureRandom.urlsafe_base64.to_s
+        update_columns(confirmation_token: confirmation_token)
+    end
+
+    # Checks if the reset token is still valid
+    def password_reset_token_valid?
+        self.reset_sent_at > 2.hours.ago && self.reset_token != nil
+    end
+
+    # Clears the reset token after use
+    def clear_password_reset_token!
+        update_columns(reset_token: nil, reset_sent_at: nil)
     end
 
 end

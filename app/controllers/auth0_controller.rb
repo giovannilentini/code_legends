@@ -14,6 +14,7 @@ class Auth0Controller < ApplicationController
     username = response["username"] || name
 
     provider = (auth0_id.split('|').first).split("-").first
+
     #Find or create a user based on the Auth0 UID
     user = User.find_or_create_by!(email: email) do |user|
       user.username = response["username"]
@@ -26,7 +27,13 @@ class Auth0Controller < ApplicationController
     end
     user.update(username: username) if user.username.nil?
 
-
+    # Check if
+    if user.auth0_id.nil?
+      user.update(auth0_id: auth0_id)
+    end
+    if user.provider.nil?
+      user.update(provider: provider)
+    end
     session[:userinfo] = {
       'auth0_id' => user.auth0_id,
       'name' => user.username,

@@ -1,9 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe "AdminProfile", type: :system do
-  before do
-    driven_by(:selenium_chrome) # Assicurati di avere il driver configurato correttamente
-  end
 
   it "shows only challenges with status -1" do
     Challenge.create(description: "Challenge 1", status: -1)

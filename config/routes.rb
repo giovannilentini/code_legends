@@ -21,7 +21,16 @@ Rails.application.routes.draw do
     post 'users/:id/add_friend', to: 'friendships#create', as: 'add_friend'
   end
   resources :users, only: [:update, :edit, :create]
-  #patch '/profile', to: 'profiles#update', as: 'profile_update'
+
+  # REGISTRATION EMAIL
+  get '/confirm_email', to: 'users#confirm_email'
+
+  # PASSWORD RESET
+  get '/password/reset', to: 'password_resets#new'
+  post '/password/reset', to: 'password_resets#create'
+  get '/password/reset/edit', to: 'password_resets#edit'
+  patch '/password/reset/edit', to: 'password_resets#update'
+
   # ADMIN ROUTES
   resources :admins, only: [:show] do
     post 'promote_to_admin', to: 'admins#promote_to_admin'
