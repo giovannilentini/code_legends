@@ -45,7 +45,7 @@ RSpec.describe ChallengeRequestsController, type: :controller do
 
   describe 'POST #accept' do
     let!(:challenge_proposal) { ChallengeProposal.create!(user: user, title: 'Test Proposal', test_cases: 'test', description: 'Test description', language: 'Python') }
-    let!(:challenge) { Challenge.create!(title: "test title", description: 'test description', language: 'Python', challenge_proposal: challenge_proposal) }
+    let!(:challenge) { Challenge.create!(title: "test title", difficulty: "easy", description: 'test description', language: 'Python', challenge_proposal: challenge_proposal) }
     let!(:challenge_request) { ChallengeRequest.create!(user_id: friend.id, friend_id: user.id, language: 'Python') }
 
     it 'accetta la sfida e crea un match' do

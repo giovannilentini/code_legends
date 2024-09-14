@@ -4,7 +4,7 @@ RSpec.describe MatchmakingQueueController, type: :controller do
   let(:user) { User.create!(email: 'user@example.com', password: 'password', username: 'User1', guest: false) }
   let(:user2) { User.create!(email: 'user2@example.com', password: 'password', username: 'User2', guest: false) }
   let(:challenge_proposal) { ChallengeProposal.create!(user: user, title: 'Test Challenge', test_cases: 'test cases', description: 'A challenging challenge') }
-  let(:challenge) { Challenge.create!(title: 'Test Challenge', description: 'A challenging challenge', challenge_proposal: challenge_proposal) }
+  let(:challenge) { Challenge.create!(title: 'Test Challenge', difficulty: "easy",  description: 'A challenging challenge', challenge_proposal: challenge_proposal) }
 
   before do
     allow(controller).to receive(:current_user).and_return(user)

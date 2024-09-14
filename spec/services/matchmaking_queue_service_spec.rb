@@ -5,7 +5,7 @@ RSpec.describe MatchmakingQueueService, type: :service do
   let(:user2) { User.create!(email: 'user2@example.com', guest: false, password: 'password') }
   let(:language) { 'python3' }
   let(:challenge_proposal) { ChallengeProposal.create!(user: user1, title: 'Test Challenge', test_cases: "asuyidgas", description: 'A challenging challenge') }
-  let(:challenge) { Challenge.create!(title: 'Test Challenge', description: 'A challenging challenge', challenge_proposal: challenge_proposal, language: language) }
+  let(:challenge) { Challenge.create!(title: 'Test Challenge', difficulty: "easy",  description: 'A challenging challenge', challenge_proposal: challenge_proposal, language: language) }
 
   before do
     # Stub ActionCable server broadcasting
@@ -48,8 +48,8 @@ RSpec.describe MatchmakingQueueService, type: :service do
 
     context 'when there is an opponent available' do
       before do
-        Challenge.create!(title: 'Test Challenge', description: 'A challenging challenge', challenge_proposal: challenge_proposal, language: language)
-        MatchmakingQueue.create!(user: user2, status: 'waiting', language: language)
+        Challenge.create!(title: 'Test Challenge', description: 'A challenging challenge', difficulty: "easy", challenge_proposal: challenge_proposal, language: language)
+        MatchmakingQueue.create!(user: user2, status: 'waiting',  language: language)
       end
 
       it 'creates a match and notifies players' do
