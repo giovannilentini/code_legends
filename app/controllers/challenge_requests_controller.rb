@@ -18,9 +18,9 @@ class ChallengeRequestsController < ApplicationController
 
     if @challenge_request.save
       ActionCable.server.broadcast 'notifications_channel', { has_notifications: true }
-      redirect_to root_path, notice: 'Richiesta di sfida inviata con successo!'
+      redirect_to root_path, notice: 'Succesfully created the challenge request!'
     else
-      redirect_to root_path, alert: "Si è verificato un errore nell'invio della richiesta."
+      redirect_to root_path, alert: "An Error Occurred while creating the challenge request!"
 
     end
   end
@@ -46,7 +46,7 @@ class ChallengeRequestsController < ApplicationController
       ChallengeNotificationChannel.broadcast_to(
         User.find(challenge.user_id), # L'utente che ha inviato la richiesta
         {
-          message: "#{friend.username} ha accettato la tua sfida!",
+          message: "#{friend.username} accepted the challenge request!",
           match_id: match.id
         }
       )
@@ -54,7 +54,7 @@ class ChallengeRequestsController < ApplicationController
       challenge.destroy
       redirect_to match_path(match.id)
     else
-      flash[:alert] = "Errore nell'accettare la sfida."
+      flash[:alert] = "Error occurred while accepting challenge."
       redirect_back(fallback_location: root_path)
     end
   end
@@ -64,9 +64,9 @@ class ChallengeRequestsController < ApplicationController
     challenge = ChallengeRequest.find(params[:id])
     authorize! :accept,challenge
     if challenge.destroy
-      flash[:notice] = "Richiesta di sfida rifiutata con successo."
+      flash[:notice] = "Challenge request was rejected."
     else
-      flash[:alert] = "Si è verificato un errore nel rifiuto della richiesta."
+      flash[:alert] = "An error occured while rejecting the challenge request."
     end
     redirect_back(fallback_location: root_path)
   end

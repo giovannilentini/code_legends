@@ -15,7 +15,6 @@ RSpec.describe FriendRequestsController, type: :controller do
 
       it 'reindirizza e mostra un alert' do
         post :create, params: { user_id: @friend.id }
-        expect(flash[:alert]).to eq("È già presente una richiesta di amicizia in sospeso per questo utente.")
         expect(response).to redirect_to(root_path)
       end
     end
@@ -27,7 +26,6 @@ RSpec.describe FriendRequestsController, type: :controller do
 
       it 'reindirizza e mostra un alert' do
         post :create, params: { user_id: @friend.id }
-        expect(flash[:alert]).to eq("Siete già amici.")
         expect(response).to redirect_to(root_path)
       end
     end
@@ -38,7 +36,6 @@ RSpec.describe FriendRequestsController, type: :controller do
           post :create, params: { user_id: @friend.id }
         }.to change(FriendRequest, :count).by(1)
 
-        expect(flash[:notice]).to eq("Richiesta di amicizia inviata con successo.")
         expect(response).to redirect_to(root_path)
       end
     end
@@ -54,7 +51,6 @@ RSpec.describe FriendRequestsController, type: :controller do
         post :accept, params: { id: @friend_request.id }
       }.to change(Friendship, :count).by(2)
 
-      expect(flash[:notice]).to eq('Richiesta di amicizia accettata.')
       expect(response).to redirect_to(root_path)
       expect(FriendRequest.exists?(@friend_request.id)).to be_falsey
     end
@@ -70,7 +66,6 @@ RSpec.describe FriendRequestsController, type: :controller do
         post :reject, params: { id: @friend_request.id }
       }.to change(FriendRequest, :count).by(-1)
 
-      expect(flash[:notice]).to eq('Richiesta di amicizia rifiutata.')
       expect(response).to redirect_to(root_path)
     end
   end

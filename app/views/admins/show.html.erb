@@ -5,7 +5,7 @@
       <!-- Sezione Proposte da Revisionare -->
       <div class="mb-6">
         <button onclick="toggleSection('challenges-proposal')" class="w-full text-left bg-gray-700 text-gray-300 font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
-          Proposte da Revisionare
+          Pending Requests
         </button>
         <div id="challenges-proposal" class="hidden mt-2">
           <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-md mb-6">
@@ -25,10 +25,10 @@
                 <td class="px-6 py-4 text-gray-200"><%= challenge.user_id %></td>
                 <td class="px-6 py-4 text-gray-200"><%= challenge.test_cases%></td>
                 <td class="px-6 py-4 text-center">
-                  <%= button_to 'Accetta', new_challenge_path, params: {challenge_proposal_id: challenge.id}, class: 'bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110', method: :get %>
+                  <%= button_to 'Accept', new_challenge_path, params: {challenge_proposal_id: challenge.id}, class: 'bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110', method: :get %>
                   <%= form_with url: reject_challenge_proposal_path(challenge.id), method: :post, id: "reject-form", local: true do %>
                     <%= hidden_field_tag :reject_motivation, nil, id: "reject-motivation" %>
-                    <%= submit_tag 'Rifiuta', id: "reject-button", class: 'bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110 mt-2 ml-2' %>
+                    <%= submit_tag 'Reject', id: "reject-button", class: 'bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110 mt-2 ml-2' %>
                   <% end %>
                 </td>
               </tr>

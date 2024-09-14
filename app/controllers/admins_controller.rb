@@ -14,10 +14,10 @@ class AdminsController < ApplicationController
     p params
     user = User.find(params[:admin_id])
     if user.update(is_admin: true)
-      flash[:notice]="#{user.username} è stato promosso a admin."
+      flash[:notice]="#{user.username} has been promoted."
       redirect_to admin_path(user.id)
     else
-      flash[:alert]="Errore nella promozione di #{user.username}."
+      flash[:alert]="Error promoting #{user.username}."
       redirect_to admin_path(user.id)
     end
   end

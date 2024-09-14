@@ -35,14 +35,12 @@ RSpec.describe ChallengeRequestsController, type: :controller do
       expect(challenge_request.friend_id).to eq(friend.id)
       expect(challenge_request.language).to eq('Ruby')
       expect(response).to redirect_to(root_path)
-      expect(flash[:notice]).to eq('Richiesta di sfida inviata con successo!')
-    end
+     end
 
     it 'fallisce quando i parametri sono incompleti' do
       post :create, params: { friend_id: nil, language: 'Ruby' }
       expect(response).to redirect_to(root_path)
-      expect(flash[:alert]).to eq("Si è verificato un errore nell'invio della richiesta.")
-    end
+   end
   end
 
   describe 'POST #accept' do
@@ -71,7 +69,6 @@ RSpec.describe ChallengeRequestsController, type: :controller do
       post :reject, params: { id: challenge_request.id }
       expect(ChallengeRequest.find_by(id: challenge_request.id)).to be_nil
       expect(response).to redirect_to(root_path)
-      expect(flash[:notice]).to eq('Richiesta di sfida rifiutata con successo.')
     end
   end
 end

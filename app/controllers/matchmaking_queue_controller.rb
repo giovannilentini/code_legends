@@ -49,7 +49,7 @@ class MatchmakingQueueController < ApplicationController
   def cancel
     player = current_user
     MatchmakingQueueService.remove_from_queue(player)
-    redirect_to play_now_path, notice: "Ricerca avversario annullata."
+    redirect_to play_now_path, notice: "Opponent search cancelled"
   end
   private
   def set_languages

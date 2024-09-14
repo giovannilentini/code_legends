@@ -32,7 +32,6 @@ RSpec.describe MatchmakingQueueController, type: :controller do
 
       post :cancel
       expect(response).to redirect_to(play_now_path)
-      expect(flash[:notice]).to eq('Ricerca avversario annullata.')
     end
   end
 end

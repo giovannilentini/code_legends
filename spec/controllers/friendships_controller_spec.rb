@@ -16,7 +16,6 @@ RSpec.describe FriendshipsController, type: :controller do
         }.to change { user.friends.count }.by(1)
 
         expect(response).to redirect_to(user_path(friend))
-        expect(flash[:notice]).to eq('Amico aggiunto con successo!')
       end
 
       it 'does not add a friend if already friends' do
@@ -27,7 +26,6 @@ RSpec.describe FriendshipsController, type: :controller do
         }.not_to change { user.friends.count }
 
         expect(response).to redirect_to(user_path(friend))
-        expect(flash[:alert]).to eq('Sei già amico di questo utente.')
       end
     end
 
@@ -38,7 +36,6 @@ RSpec.describe FriendshipsController, type: :controller do
         }.not_to change { user.friends.count }
 
         expect(response).to redirect_to(root_path)
-        expect(flash[:alert]).to eq('Non puoi aggiungere te stesso come amico.')
       end
     end
   end

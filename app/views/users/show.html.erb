@@ -79,6 +79,7 @@
       <div class="w-full md:w-2/3 flex flex-col space-y-8">
 
         <div style="background-color: #1c1b1b;" class="border-white border p-6 rounded-3xl shadow-lg space-y-8">
+
           <div>
             <h3 class="text-4xl font-bold mb-8 text-green-400 tracking-tight drop-shadow-md">Accepted Proposals</h3>
             <div class="overflow-hidden rounded-2xl shadow-lg bg-gray-700">
@@ -128,6 +129,29 @@
               </div>
             </div>
           <% end %>
+
+          <div>
+            <h3 class="text-4xl font-extrabold mb-8 text-red-400 tracking-tight drop-shadow-md">Rejected Proposals</h3>
+            <div class="overflow-hidden rounded-2xl shadow-lg bg-gray-700">
+              <table class="w-full rounded-2xl">
+                <thead>
+                <tr class="bg-neutral-700">
+                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Description</th>
+                  <th class="px-6 py-4 text-center text-xl font-semibold text-white">Motivation</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% @rejected_challenges.each do |challenge| %>
+                  <tr class="border-b">
+                    <td class="px-6 py-4 text-white"><%= challenge.description %></td>
+                    <td class="px-6 py-4 text-white"><%= challenge.rejection_reason %></td>
+                  </tr>
+                <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

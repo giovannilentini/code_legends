@@ -5,20 +5,20 @@ class FriendRequestsController < ApplicationController
     @user = User.find(params[:user_id])
 
     if Friendship.exists?(user_id: current_user.id, friend_id: @user.id) || Friendship.exists?(user_id: @user.id, friend_id: current_user.id)
-      flash[:alert] = "Siete già amici."
+      flash[:alert] = "You are already friends with that user"
       redirect_to root_path
     elsif FriendRequest.exists?(user_id: current_user.id, friend_id: @user.id) || FriendRequest.exists?(user_id: @user.id, friend_id: current_user.id)
-      flash[:alert] = "È già presente una richiesta di amicizia in sospeso per questo utente."
+      flash[:alert] = "Pending request already exists"
       redirect_to root_path
     else
       @friend_request = FriendRequest.new(user_id: current_user.id, friend_id: @user.id)
 
       if @friend_request.save
         ActionCable.server.broadcast 'notifications_channel', { has_notifications: true }
-        flash[:notice] = "Richiesta di amicizia inviata con successo."
+        flash[:notice] = "Friend request sent."
         redirect_to root_path
       else
-        flash[:alert] = "Impossibile inviare la richiesta di amicizia."
+        flash[:alert] = "Cannot send friend request."
         render :new
       end
     end
@@ -30,14 +30,14 @@ class FriendRequestsController < ApplicationController
     Friendship.create(user_id: @friend_request.user_id, friend_id: @friend_request.friend_id)
     Friendship.create(user_id: @friend_request.friend_id, friend_id: @friend_request.user_id)
     @friend_request.destroy
-    flash[:notice]= 'Richiesta di amicizia accettata.'
+    flash[:notice]= 'Friend request accepted.'
     redirect_to root_path
   end
 
   def reject
     @friend_request = FriendRequest.find(params[:id])
     @friend_request.destroy
-    flash[:notice]= 'Richiesta di amicizia rifiutata.'
+    flash[:notice]= 'Friend request rejected.'
     redirect_to root_path
   end
 end
