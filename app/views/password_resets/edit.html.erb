@@ -3,12 +3,12 @@
   <div class="relative w-[320px] bg-white shadow-lg rounded-lg">
     <div class="w-full bg-[#fdfdfd] p-4 rounded-lg shadow-lg">
       <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-800">Enter New Password</h1>
+        <h1 class="text-3xl font-bold text-blue-500">Enter New Password</h1>
       </div>
       <%= form_with model: @user, url: password_reset_edit_path(token: @reset_token), method: :patch, local: true, class: 'space-y-6' do |form| %>
         <div class="relative flex flex-col">
           <label for="password" class="text-gray-700 text-sm font-medium">New Password</label>
-          <%= form.password_field :password, id: 'password_field', required: true, class: "mt-1 h-12 px-4 bg-gray-100 border rounded-lg text-gray-800 text-base shadow-sm focus:bg-[#f8f8c6] focus:outline-none focus:ring-2 focus:ring-neutral-500" %>
+          <%= form.password_field :password, id: 'password_field', required: true, class: "mt-1 h-12 px-4 bg-gray-100 border rounded-lg text-gray-800 text-base shadow-sm focus:bg-[#f8f8c6] focus:outline-none focus:ring-2 focus:ring-blue-500" %>
           <button type="button" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 focus:outline-none" id="toggle_password">
             <span id="password_icon">Show</span>
           </button>

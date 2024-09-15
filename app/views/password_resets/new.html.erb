@@ -2,7 +2,7 @@
   <div class="relative w-[320px] bg-white shadow-lg rounded-lg">
     <div class="w-full bg-[#fdfdfd] p-4 rounded-lg shadow-lg">
       <div class="text-center mb-8">
-        <h1 class="text-3xl font-bold text-gray-800 relative inline-block">
+        <h1 class="text-3xl font-bold text-blue-500 relative inline-block">
           Reset Password
           <span class="absolute inset-0 flex items-center justify-center">
             <span class="block w-full h-1 bg-gradient-to-r from-[#87314e] to-[#df405a] opacity-50 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
@@ -12,18 +12,15 @@
       <%= form_with url: password_reset_path, method: :post, local: true, class: 'space-y-6' do |form| %>
         <div class="flex flex-col">
           <label for="email" class="text-gray-700 text-sm font-medium">E-mail</label>
-          <%= form.email_field :email, required: true, class: "mt-1 h-12 px-4 bg-gray-100 border rounded-lg text-gray-800 text-base shadow-sm focus:bg-[#f8f8c6] focus:outline-none focus:ring-2 focus:ring-neutral-500" %>
+          <%= form.email_field :email, required: true, class: "mt-1 h-12 px-4 bg-gray-100 border rounded-lg text-gray-800 text-base shadow-sm focus:bg-[#f8f8c6] focus:outline-none focus:ring-2 focus:ring-blue-500" %>
           <span class="i i-warning hidden absolute right-0 top-1/2 transform -translate-y-1/2"></span>
         </div>
-        <%= form.submit 'Send Reset Instructions', class: 'w-full h-12 mt-4 bg-neutral-600 text-white font-bold rounded-lg shadow-md cursor-pointer hover:bg-neutral-800' %>
+        <p class="text-gray-700 text-sm mt-4">If the email you entered is associated with an account, you will receive instructions on how to reset your password shortly.</p>
+        <%= form.submit 'Send Reset Instructions', class: 'w-full h-12 mt-4 bg-blue-500 text-white font-bold rounded-lg shadow-md cursor-pointer hover:bg-blue-600' %>
       <% end %>
-      <p class="text-gray-400 text-sm mt-4">Remembered your password? <%= link_to 'Log in', login_path, class: 'text-purple-500 hover:underline' %></p>
-      <h2 class="text-xl font-semibold mt-4 text-gray-600 mb-2">Or log in with socials:</h2>
-      <%= button_to '/auth/auth0/', method: :post, data: { turbo: false }, class: 'w-full h-12 bg-neutral-600 text-white font-bold rounded-lg shadow-md flex items-center justify-center gap-4 cursor-pointer hover:bg-neutral-800' do %>
-        <img width="24" height="24" src="https://img.icons8.com/ios-filled/100/github.png" alt="GitHub" class="inline-block" />
-        <img width="24" height="24" src="https://img.icons8.com/color/96/google-logo.png" alt="Google" class="inline-block" />
-        <img width="24" height="24" src="https://img.icons8.com/fluency/96/facebook-new.png" alt="Facebook" class="inline-block" />
-      <% end %>
+      <div class="flex justify-center margint">
+        <%= link_to 'Return to Log in', login_path, class: 'text-gray-700 hover:underline mt-4' %>
+      </div>
     </div>
   </div>
 </div>
