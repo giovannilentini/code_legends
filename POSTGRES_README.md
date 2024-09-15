@@ -15,7 +15,7 @@ sudo apt update
 Install PostgreSQL and its additional modules. This will allow you to run a PostgreSQL server on your machine.
 
 ```bash
-sudo apt install postgresql postgresql-contrib
+sudo apt install postgresql postgresql-contrib postgresql-devel
 ```
 
 ### Step 3: Start PostgreSQL Service
