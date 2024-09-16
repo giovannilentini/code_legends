@@ -35,21 +35,14 @@ class UsersController < ApplicationController
     unless params[:token].nil?
       user = User.find_by(confirmation_token: params[:token])
       if user.present?
-        if user.has_auth0?
-          flash[:alert] = "User with mail #{user.email} already registered with #{user.provider} oauth"
-          #redirect_to root_path
-        else
-          user.update(email_confirmed_at: Time.current, confirmation_token: nil)
-          flash[:notice] = "Your email has been confirmed."
-          #redirect_to login_path
-        end
+        user.update(email_confirmed_at: Time.current, confirmation_token: nil)
+        flash[:notice] = "Your email has been confirmed."
+        redirect_to login_path
       else
         flash[:alert] = "Invalid or expired token."
-        #redirect_to root_path
+        redirect_to root_path
       end
     end
-    redirect_to root_path
-
   end
 
   def update

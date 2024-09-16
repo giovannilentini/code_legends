@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe SessionsController, type: :request do
-  let(:user) { User.create!(email: 'user@example.com', password: 'password', guest: false) }
+  let(:user) { User.create!(email: 'user@example.com', username: "testuser", password: 'password', guest: false, email_confirmed_at: Time.now) }
 
   describe 'GET /login' do
     it 'renders the login page if not logged in' do

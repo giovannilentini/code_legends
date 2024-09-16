@@ -9,6 +9,14 @@ require 'selenium-webdriver'
 
 
 Capybara.default_driver = :selenium_headless
+# Set the app host to localhost
+Capybara.app_host = 'http://localhost:3000'
+
+# Ensure the server is running on port 3000 (or another port if needed)
+Capybara.server_port = 3000
+
+
+
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how
 # your application behaves in the production environment, where an error page will

@@ -148,7 +148,8 @@ end
 
 Then("un popup con il risultato viene mostrato al {string} con il messaggio {string}") do |player, message|
   Capybara.using_session("#{player}") do
-    expect(page).to have_content("Time's up!")
+    expect(page).to have_selector(".popup-content", visible: true)
+    expect(page).to have_content("Draw")
   end
 end
 # Then la partita dovrebbe essere segnata come "finita"

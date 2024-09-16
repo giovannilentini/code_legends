@@ -5,6 +5,8 @@ require "active_support/core_ext/integer/time"
 # your test database is "scratch space" for the test suite and is wiped
 # and recreated between test runs. Don't rely on the data there!
 
+
+Rails.application.routes.default_url_options[:host] = 'localhost:3000'
 Rails.application.configure do
   # Configure 'rails notes' to inspect Cucumber files
   config.annotations.register_directories('features')
@@ -68,12 +70,6 @@ Rails.application.configure do
 
 
   ## CUSTOM CONFIG
-
-  config.server = { port: ENV.fetch('PORT', 28080) }
-  config.action_cable.url = "ws://localhost:#{ENV.fetch('PORT', 28080)}/cable"
-  config.action_cable.allowed_request_origins = ['http://localhost:3000']
-
-  #config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   #config.action_mailer.delivery_method = :smtp
   #config.action_mailer.smtp_settings = {
   #address:              'smtp.mailtrap.io', # Mailtrap SMTP server address
