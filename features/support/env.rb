@@ -3,10 +3,12 @@
 # newer version of cucumber-rails. Consider adding your own code to a new file
 # instead of editing this one. Cucumber will automatically load all features/**/*.rb
 # files.
-
-
 require 'cucumber/rails'
+require 'capybara/rails'
+require 'selenium-webdriver'
 
+
+Capybara.default_driver = :selenium_headless
 # By default, any exception happening in your Rails application will bubble up
 # to Cucumber so that your scenario will fail. This is a different from how
 # your application behaves in the production environment, where an error page will
@@ -53,5 +55,5 @@ end
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
 require 'webmock/cucumber'
-
+# Optionally, disable real network connections except to localhost
 WebMock.disable_net_connect!(allow_localhost: true)

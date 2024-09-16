@@ -78,9 +78,8 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem "capybara"
-  gem "selenium-webdriver"
   gem "webmock"
-  gem 'webdrivers'
+  gem 'selenium-webdriver'
   gem 'parallel'
 end
 

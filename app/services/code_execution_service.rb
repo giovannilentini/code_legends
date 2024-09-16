@@ -25,7 +25,6 @@ class CodeExecutionService
     request["Content-Type"] = 'application/json'
     request.body = req_params.to_json
     response = http.request(request)
-    p response.read_body
     return response
   end
 

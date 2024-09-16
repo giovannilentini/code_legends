@@ -4,47 +4,153 @@ Given("che esistono due utenti registrati") do
   @player_1 = User.create!(
     username: 'player1',
     email: 'player1@example.com',
-    password: 'password'
+    password: 'password',
+    email_confirmed_at: Time.now,
   )
-
-  @player_1 = User.find_by(email: 'player1@example.com')
-  @confirmation_token_1 = @player_1.confirmation_token
-
   # Creazione del secondo utente
   @player_2 = User.create!(
     username: 'player2',
     email: 'player2@example.com',
-    password: 'password'
+    password: 'password',
+    email_confirmed_at: Time.now
   )
+end
 
-  @player_2 = User.find_by(email: 'player2@example.com')
-  @confirmation_token_2 = @player_2.confirmation_token
+And("gli utenti sono loggati") do
+  Capybara.using_session("player1") do
+    visit login_path
+    fill_in 'email', with: @player_1.email
+    fill_in 'password', with: @player_1.password
+    click_button 'Login'
+    expect(page).to have_content("My Profile")
+  end
+  Capybara.using_session("player2") do
+    visit login_path
+    fill_in 'email', with: @player_2.email
+    fill_in 'password', with: @player_2.password
+    click_button 'Login'
+    expect(page).to have_content("My Profile")
+  end
+
 end
 
 # And che esiste una partita con timer attivo tra questi due utenti
-Given("che esiste una partita con timer attivo tra questi due utenti") do
-  @challenge_proposal = ChallengeProposal.create!(title: "test", description: "test", test_cases: "test", user: @player_1)
-  @challenge = Challenge.create!(title: "test", description: "test", difficulty: "hard", challenge_proposal_id: @challenge_proposal.id, code_template: 'class Solution:\n    def string_num_times(self, s: str, n: int) -> str:\n        return ""', test_template: '"if name == "main":\n    solution = Solution()\n\n    test_passed = 0\n\n    # Test cases\n    test_cases = [\n        ("Hello", 3, "HelloHelloHello"),\n        ("abc", 5, "abcabcabcabcabc"),\n        ("x", 10, "xxxxxxxxxx"),\n        ("", 5, ""),  # Empty string should return empty\n        ("Test", 0, ""),  # Repeating 0 times should return empty\n        ("Repeat", 1, "Repeat"),  # Repeating once should return the string itself\n        ("123", 3, "123123123"),\n        ("Hi", 4, "HiHiHiHi"),\n        ("!", 6, "!!!!!!"),\n        ("LongString", 2, "LongStringLongString")\n    ]\n\n    # Running tests\n    for i, (s, n, expected) in enumerate(test_cases):\n        result = solution.string_num_times(s, n)\n        if result == expected:\n            test_passed += 1\n        else:\n            if i < 3:  # For the first 3 tests, print the difference if they fail\n                print(f"Test {i+1} failed: expected \{expected}\', but got \'{result}\'")\n            else:\n                print(f"Test {i+1} failed")\n\n    if(test_passed==len(test_cases)):\n        print("Winner")\n    else:\n        print(f"Tests passed: {test_passed}/{len(test_cases)}")' )
+Given("che esiste una partita con timer breve attivo tra questi due utenti") do
+  @challenge = Challenge.create!(
+    title: "test",
+    description: "test",
+    difficulty: "hard",
+    code_template: <<~PYTHON_CODE,
+      class Solution:
+          def string_num_times(self, s: str, n: int) -> str:
+              return ""
+    PYTHON_CODE
+    test_template: <<~PYTHON_TESTS
+      if __name__ == "main":
+          solution = Solution()
+
+          test_passed = 0
+
+          # Test cases
+          test_cases = [
+              ("Hello", 3, "HelloHelloHello"),
+              ("abc", 5, "abcabcabcabcabc"),
+              ("x", 10, "xxxxxxxxxx"),
+              ("", 5, ""),  
+          ]
+          for i, (s, n, expected) in enumerate(test_cases):
+              result = solution.string_num_times(s, n)
+              if result == expected:
+                  test_passed += 1
+              else:
+                  if i < 3:  # For the first 3 tests, print the difference if they fail
+                      print(f"Test {i+1} failed: expected '{expected}', but got '{result}'")
+                  else:
+                      print(f"Test {i+1} failed")
+
+          if test_passed == len(test_cases):
+              print("Winner")
+          else:
+              print(f"Tests passed: {test_passed}/{len(test_cases)}")
+    PYTHON_TESTS
+  )
   @match = Match.create!(
-    status: "in_progress",
+    status: "ongoing",
     player_1: @player_1,
     player_2: @player_2,
-    timer_expires_at: 1.minute.from_now,
-    challenge: @challenge
+    challenge: @challenge,
+    timer_expires_at: 2.seconds.from_now,
+    language: "python3"
   )
 end
 
-# And la partita ha un timer che scade fra pochi secondi
-And("la partita ha un timer che scade fra pochi secondi") do
-  @match.update(timer_expires_at: 5.seconds.from_now)
+Given("che esiste una partita con timer attivo tra questi due utenti") do
+  @challenge = Challenge.create!(
+    title: "test",
+    description: "test",
+    difficulty: "hard",
+    code_template: <<~PYTHON_CODE,
+      class Solution:
+          def string_num_times(self, s: str, n: int) -> str:
+              return ""
+    PYTHON_CODE
+    test_template: <<~PYTHON_TESTS
+      if __name__ == "main":
+          solution = Solution()
+
+          test_passed = 0
+
+          # Test cases
+          test_cases = [
+              ("Hello", 3, "HelloHelloHello"),
+              ("abc", 5, "abcabcabcabcabc"),
+              ("x", 10, "xxxxxxxxxx"),
+              ("", 5, ""),  
+          ]
+          for i, (s, n, expected) in enumerate(test_cases):
+              result = solution.string_num_times(s, n)
+              if result == expected:
+                  test_passed += 1
+              else:
+                  if i < 3:  # For the first 3 tests, print the difference if they fail
+                      print(f"Test {i+1} failed: expected '{expected}', but got '{result}'")
+                  else:
+                      print(f"Test {i+1} failed")
+
+          if test_passed == len(test_cases):
+              print("Winner")
+          else:
+              print(f"Tests passed: {test_passed}/{len(test_cases)}")
+    PYTHON_TESTS
+  )
+  @match = Match.create!(
+    status: "ongoing",
+    player_1: @player_1,
+    player_2: @player_2,
+    challenge: @challenge,
+    timer_expires_at: 10.minutes.from_now,
+    language: "python3"
+  )
+end
+
+
+And("l'utente {string} è nella pagina della partita") do |player|
+  Capybara.using_session("#{player}") do
+    visit match_path(@match)
+    expect(page).to have_content("Dettagli della Sfida")
+  end
 end
 
 # When passa il tempo e il timer scade
 When("passa il tempo e il timer scade") do
-  travel_to @match.timer_expires_at + 1.second
-  page.driver.post("/matches/#{@match.id}/timeout")
+  @match.update(timer_expires_at: 1.seconds.from_now)
 end
 
+Then("un popup con il risultato viene mostrato al {string} con il messaggio {string}") do |player, message|
+  Capybara.using_session("#{player}") do
+    expect(page).to have_content("Time's up!")
+  end
+end
 # Then la partita dovrebbe essere segnata come "finita"
 Then("la partita dovrebbe essere segnata come {string}") do |status|
   @match.reload
@@ -57,13 +163,43 @@ And("non dovrebbe essere assegnato alcun vincitore") do
 end
 
 # And un giocatore si arrende
-When("un giocatore si arrende") do
-  post "/matches/#{@match.id}/surrender"
+When("l'utente {string} si arrende") do |player|
+  Capybara.using_session("#{player}") do
+    click_button "surrender-submit"
+  end
 end
 
 # Then il giocatore che non si è arreso dovrebbe essere il vincitore
 Then("il giocatore che non si è arreso dovrebbe essere il vincitore") do
+
   @match.reload
-  winner = @match.player_2 == @player_1 ? @match.player_2 : @match.player_1
-  expect(@match.winner_id).to eq(winner.id)
+  expect(@match.winner_id).to eq(@player_2.id)
+end
+
+Given("api esterna") do
+  stub_request(:post, "https://code-compiler.p.rapidapi.com/v2")
+    .to_return(
+      status: 200,
+      body: { Result: "Winner", Errors: nil }.to_json,
+      headers: { 'Content-Type' => 'application/json' }
+    )
+end
+
+When("il {string} manda il codice giusto") do |player|
+  Capybara.using_session("#{player}") do
+    click_button "submit-code"
+  end
+end
+
+And("l'utente {string} dovrebbe essere il vincitore") do |player|
+
+  case player
+  when "player1"
+    winner = @player_1.id
+  when "player2"
+    winner = @player_2.id
+  end
+
+  @match.reload
+  expect(@match.winner_id).to eq(winner)
 end

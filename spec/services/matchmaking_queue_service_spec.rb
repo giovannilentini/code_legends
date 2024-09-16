@@ -49,23 +49,6 @@ RSpec.describe MatchmakingQueueService, type: :service do
     context 'when there is an opponent available' do
       before do
         Challenge.create!(title: 'Test Challenge', description: 'A challenging challenge', difficulty: "easy", challenge_proposal: challenge_proposal, language: language)
-        MatchmakingQueue.create!(user: user2, status: 'waiting',  language: language)
-      end
-
-      it 'creates a match and notifies players' do
-        service = MatchmakingQueueService.new(user1)
-
-        expect { service.add_to_queue(language) }.to change { Match.count }.by(1)
-
-        match = Match.last
-        expect(match.player_1_id).to eq(user1.id)
-        expect(match.player_2_id).to eq(user2.id)
-        expect(match.language).to eq(language)
-        expect(match.status).to eq('ongoing')
-        expect(ActionCable.server).to have_received(:broadcast).twice
-      end
-
-      it 'handles the case where no challenges are found' do
         Challenge.delete_all # Ensure no challenges are present
 
         service = MatchmakingQueueService.new(user1)

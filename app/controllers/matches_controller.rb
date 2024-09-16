@@ -39,8 +39,10 @@ class MatchesController < ApplicationController
   def timeout
     if @match
       if @match.status != "finished" && @match.timer_expires_at && Time.current >= @match.timer_expires_at
-        @match.update(status: "finished", winner_id: nil)
-        ActionCable.server.broadcast "match_#{@match.id}", { status: "timeout", message: "The match ended in a draw." }
+        if @match.update!(status: "finished", winner_id: nil)
+          ActionCable.server.broadcast "match_#{@match.id}", { status: "timeout", message: "The match ended in a draw." }
+        end
+
       end
     end
 
