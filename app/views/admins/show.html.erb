@@ -1,6 +1,6 @@
-<div class="container mx-auto my-8 h-screen overflow-y-auto">
+<div class="container mx-auto h-screen overflow-y-auto">
   <section class="flex items-center justify-center h-full bg-neutral-800 overflow-y-auto">
-    <div class="text-center px-4 p-4 w-full h-full overflow-y-auto">
+    <div class="text-center px-4 w-full h-full overflow-y-auto">
       <!-- Sezione Proposte da Revisionare -->
       <div class="mb-6">
         <button onclick="toggleSection('challenges-proposal')" class="w-full text-left bg-gray-700 text-gray-300 font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
@@ -39,7 +39,7 @@
 
       <!-- Sezione Utenti non Admin -->
       <div class="mb-6">
-        <button onclick="toggleSection('non-admin-registered_users')" class="w-full text-left bg-gray-700 text-gray-300 font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
+        <button onclick="toggleSection('non-admin-users')" class="w-full text-left bg-gray-700 text-gray-300 font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
           Non Admin User
         </button>
         <div id="non-admin-users" class="hidden mt-2 overflow-y-auto">
@@ -125,13 +125,13 @@
 
     function loadSectionStates() {
         const challengeState = localStorage.getItem('challenges');
-        const nonAdminUserState = localStorage.getItem('non-admin-registered_users');
+        const nonAdminUserState = localStorage.getItem('non-admin-users');
 
         if (challengeState === 'visible') {
             document.getElementById('challenges').classList.remove('hidden');
         }
         if (nonAdminUserState === 'visible') {
-            document.getElementById('non-admin-registered_users').classList.remove('hidden');
+            document.getElementById('non-admin-users').classList.remove('hidden');
         }
     }
 
