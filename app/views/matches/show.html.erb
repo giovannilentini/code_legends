@@ -123,6 +123,7 @@
 
         <div class="flex grow flex-col bg-neutral-800 p-4 h-2/3  rounded-lg shadow-lg">
         <div class=" overflow-y-auto text-xl">
+
           <div id="code-editor-dark" class="bg-neutral-900 rounded-lg h-full p-2"></div>
           <div id="code-editor-light" class="bg-neutral-900 rounded-lg h-full p-2 hidden"></div>
         </div>
@@ -144,9 +145,7 @@
     import { subscribeToMatchAndSubmissionChannels } from "match_subscription";
     const match_id = "<%= @match.id %>";
     const user_id = "<%= current_user.id %>";
-    document.addEventListener("turbo:load", ()=>{
-        subscribeToMatchAndSubmissionChannels(match_id, user_id);
-    });
+    subscribeToMatchAndSubmissionChannels(match_id, user_id);
     const timerElement = document.getElementById('timer');
     const timerExpiresAt = new Date("<%= @match.timer_expires_at.iso8601 %>");
     let code_template = <%= @challenge.code_template.to_json.html_safe %>;
