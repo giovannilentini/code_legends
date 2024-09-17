@@ -7,8 +7,8 @@ class CodeExecutionService
       chosen_language = 5
     elsif language == "java"
       chosen_language = 4
-    elsif language == "cpp"
-      chosen_language = 7
+    elsif language == "javascript"
+      chosen_language = 17
     else
 
     end

@@ -1,13 +1,12 @@
-<div class="container mx-auto h-screen">
-  <section class="flex items-center justify-center h-full bg-gradient-to-br from-gray-800 via-gray-900 to-black">
-    <div class="text-center px-4 w-full h-full">
-
+<div class="container mx-auto h-screen overflow-y-auto">
+  <section class="flex items-center justify-center h-full bg-neutral-800 overflow-y-auto">
+    <div class="text-center px-4 w-full h-full overflow-y-auto">
       <!-- Sezione Proposte da Revisionare -->
       <div class="mb-6">
         <button onclick="toggleSection('challenges-proposal')" class="w-full text-left bg-gray-700 text-gray-300 font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
           Pending Requests
         </button>
-        <div id="challenges-proposal" class="hidden mt-2">
+        <div id="challenges-proposal" class="hidden mt-2 overflow-y-auto">
           <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-md mb-6">
             <thead>
             <tr class="bg-gray-700">
@@ -43,7 +42,7 @@
         <button onclick="toggleSection('non-admin-users')" class="w-full text-left bg-gray-700 text-gray-300 font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
           Non Admin User
         </button>
-        <div id="non-admin-users" class="hidden mt-2">
+        <div id="non-admin-users" class="hidden mt-2 overflow-y-auto">
           <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-md mb-6">
             <thead>
             <tr class="bg-gray-700">
@@ -58,21 +57,21 @@
                 <td class="px-6 py-4 text-gray-200"><%= user.username %></td>
                 <td class="px-6 py-4 text-gray-200"><%= user.email %></td>
                 <td class="px-6 py-4 text-center">
-                  <%= button_to 'Promote to Admin',  admin_promote_to_admin_path(user.id), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
+                  <%= button_to 'Promote to Admin', admin_promote_to_admin_path(user.id), method: :post, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
                 </td>
               </tr>
             <% end %>
             </tbody>
           </table>
         </div>
-
-        <!-- Challenges -->
       </div>
+
+      <!-- Challenges -->
       <div class="mb-6">
         <button onclick="toggleSection('challenges')" class="w-full text-left bg-gray-700 text-gray-300 font-semibold py-3 px-4 rounded-lg shadow-md hover:bg-gray-600 transition-transform transform hover:scale-105">
           Challenges
         </button>
-        <div id="challenges" class="hidden mt-2">
+        <div id="challenges" class="hidden mt-2 overflow-y-auto">
           <table class="min-w-full bg-gray-800 border border-gray-700 rounded-lg shadow-md mb-6">
             <thead>
             <tr class="bg-gray-700">
@@ -87,8 +86,8 @@
                 <td class="px-6 py-4 text-gray-200"><%= challenge.title %></td>
                 <td class="px-6 py-4 text-gray-200"><%= challenge.description %></td>
                 <td class="px-6 py-4 text-center">
-                  <%= button_to 'View',  challenge_path(challenge.id), method: :get, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
-                  <%= button_to 'Edit',  edit_challenge_path(challenge.id), method: :get, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
+                  <%= button_to 'View', challenge_path(challenge.id), method: :get, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
+                  <%= button_to 'Edit', edit_challenge_path(challenge.id), method: :get, class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-110" %>
                 </td>
               </tr>
             <% end %>
@@ -96,8 +95,6 @@
           </table>
         </div>
       </div>
-
-
 
       <div class="mt-10 mb-6">
         <%= link_to 'Back to Home', root_path, class: 'bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-full transition duration-300 transform hover:scale-105 shadow-md' %>
@@ -109,10 +106,21 @@
 <script>
     function toggleSection(sectionId) {
         const section = document.getElementById(sectionId);
-        section.classList.toggle('hidden');
+        const isVisible = !section.classList.contains('hidden');
 
-        const isHidden = section.classList.contains('hidden');
-        localStorage.setItem(sectionId, isHidden ? 'hidden' : 'visible');
+        // Hide all sections
+        document.querySelectorAll('.section').forEach(el => el.classList.add('hidden'));
+
+        if (isVisible) {
+            section.classList.add('hidden');
+        } else {
+            section.classList.remove('hidden');
+        }
+
+        const overflowHidden = section.classList.contains('hidden');
+        document.querySelector('section').style.overflow = overflowHidden ? 'hidden' : 'auto';
+
+        localStorage.setItem(sectionId, overflowHidden ? 'hidden' : 'visible');
     }
 
     function loadSectionStates() {
@@ -127,44 +135,21 @@
         }
     }
 
-    function saveSectionStates() {
-        const challengesSection = document.getElementById('challenges');
-        const nonAdminUsersSection = document.getElementById('non-admin-users');
-
-        localStorage.setItem('challenges', challengesSection.classList.contains('hidden') ? 'hidden' : 'visible');
-        localStorage.setItem('non-admin-users', nonAdminUsersSection.classList.contains('hidden') ? 'hidden' : 'visible');
-    }
-
     window.onload = loadSectionStates;
 
-
-    document.addEventListener("turbo:load", ()=>{
+    document.addEventListener("turbo:load", () => {
         const rejectButton = document.querySelector("#reject-button");
         const rejectForm = document.querySelector("#reject-form");
-        const rejectMotivationField = document.querySelector("#reject-motivation");
+        const rejectMotivation = document.querySelector("#reject-motivation");
 
-        if (rejectButton && rejectForm && rejectMotivationField) {
-            rejectButton.addEventListener("click", (event) => {
-                // Prevent default form submission
-                event.preventDefault();
-
-                // Prompt user for rejection reason
-                const reason = prompt('Inserisci il motivo del rifiuto:');
-                if (reason !== null && reason.trim() !== '') {
-                    // Set the hidden field with the rejection reason
-                    rejectMotivationField.value = reason.trim();
-
-                    // Submit the form
+        if (rejectButton && rejectForm) {
+            rejectButton.addEventListener("click", () => {
+                const reason = prompt("Please enter the reason for rejection:");
+                if (reason !== null) {
+                    rejectMotivation.value = reason;
                     rejectForm.submit();
-                } else {
-                    alert("Il motivo del rifiuto non può essere vuoto.");
                 }
             });
         }
-
     });
-
-
-
-
 </script>

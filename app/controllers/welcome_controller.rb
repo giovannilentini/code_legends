@@ -12,7 +12,7 @@ class WelcomeController < ApplicationController
 
   private
   def set_languages
-    @languages = ['Python3', 'Java', 'Cpp']
+    @languages = ['Python3', 'Java', 'JavaScript']
     @selected_language = params[:language].presence || 'python3'
   end
 end
