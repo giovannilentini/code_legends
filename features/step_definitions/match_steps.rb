@@ -141,9 +141,30 @@ And("l'utente {string} è nella pagina della partita") do |player|
   end
 end
 
-# When passa il tempo e il timer scade
-When("passa il tempo e il timer scade") do
-  @match.update(timer_expires_at: 1.seconds.from_now)
+Then('un timer è presente') do
+  Capybara.using_session("player1") do
+    expect(page).to have_selector('#timer', visible:true, wait:2)
+  end
+  Capybara.using_session("player2") do
+    expect(page).to have_selector('#timer', visible:true, wait:2)
+  end
+
+end
+
+When('il timer scade') do
+  @match.update(timer_expires_at: Time.now)
+  # Simulate the timer expiring by manipulating JavaScript
+  Capybara.using_session("player1") do
+    page.execute_script <<-JS
+      const timerElement = document.getElementById('timer');
+      const timerExpiresAt = new Date(Date.now() - 10000); // Set to 10 seconds in the past
+      const matchId = '#{@match.id}';
+
+      // Start the timer
+      window.setTimer(timerExpiresAt, matchId, timerElement);
+    JS
+  end
+  sleep(2)
 end
 
 Then("un popup con il risultato viene mostrato al {string} con il messaggio {string}") do |player, message|
@@ -172,7 +193,6 @@ end
 
 # Then il giocatore che non si è arreso dovrebbe essere il vincitore
 Then("il giocatore che non si è arreso dovrebbe essere il vincitore") do
-
   @match.reload
   expect(@match.winner_id).to eq(@player_2.id)
 end
@@ -203,4 +223,28 @@ And("l'utente {string} dovrebbe essere il vincitore") do |player|
 
   @match.reload
   expect(@match.winner_id).to eq(winner)
+end
+
+
+And("gli utenti aspettano la connessione con gli ActionCable") do
+  Capybara.using_session("player1") do
+    Timeout.timeout(5) do
+      loop until ActionCable.server.connections.any?
+    end
+  end
+  Capybara.using_session("player2") do
+    Timeout.timeout(5) do
+      loop until ActionCable.server.connections.any?
+    end
+  end
+end
+
+
+Then("è presente la scritta {string}") do |string|
+  Capybara.using_session("player1") do
+    expect(page).to have_content(string)
+  end
+  Capybara.using_session("player2") do
+    expect(page).to have_content(string)
+  end
 end
