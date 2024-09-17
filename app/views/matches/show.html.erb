@@ -12,7 +12,7 @@
   <!-- Timer centrato -->
   <div class="absolute inset-x-0 z-0 flex justify-center">
     <h2 id="timer" class="border-2 border-white px-3 py-2 rounded-md text-2xl font-bold text-white"></h2>
-    <%= form_with(url: match_timeout_path(@match), method: :post, id: 'timeout-form', local: true, style: 'display:none;') do |form| %>
+    <%= form_with(url: match_timeout_path(@match), method: :post, id: 'timeout-form', local: true, style: 'display:none;') do %>
       <%= hidden_field_tag :match_id, @match.id %>
     <% end %>
   </div>
@@ -50,6 +50,7 @@
         <span class="bg-transparent border border-yellow-500 text-yellow-500 px-4 py-2 rounded-md">Medium</span>
       <% else %>
         <span class="bg-transparent border border-blue-500 text-blue-500 px-4 py-2 rounded-md">Easy</span>
+
     <% end %>
   </div>
 </div>
@@ -136,20 +137,21 @@
       </div>
     </div>
   </div>
-</div>
 
   <script type="module">
     import { initializeCodeMirror } from "codemirror_setup";
     import { create_executable } from "code_generation";
     import { subscribeToMatchAndSubmissionChannels } from "match_subscription";
-
-    
+    const match_id = "<%= @match.id %>";
+    const user_id = "<%= current_user.id %>";
+    document.addEventListener("turbo:load", ()=>{
+        subscribeToMatchAndSubmissionChannels(match_id, user_id);
+    });
+    const timerElement = document.getElementById('timer');
+    const timerExpiresAt = new Date("<%= @match.timer_expires_at.iso8601 %>");
     let code_template = <%= @challenge.code_template.to_json.html_safe %>;
     let currentLanguage = <%= @match.language.to_json.html_safe %>;
     let test_template = <%= @challenge.test_template.to_json.html_safe %>;
-    const match_id = "<%= @match.id %>";
-    const user_id = "<%= current_user.id %>";
-    subscribeToMatchAndSubmissionChannels(match_id, user_id);
     const form = document.getElementById('execute-form');
     const output = document.getElementById('output');
     const dark_editor = document.getElementById('code-editor-dark');
@@ -165,7 +167,6 @@
         const formData = new FormData(form);
         const hidden_code = current_theme==="dark" ? dark_hidden_code : light_hidden_code
         formData.set("code", create_executable(currentLanguage, hidden_code.value, test_template));
-        console.log(formData)
         // Perform the AJAX request using Fetch API
         fetch(form.action, {
             method: 'POST',
@@ -182,41 +183,43 @@
           .catch(error => console.error('ERROR:', error));
     });
     // TIMER
-    const timerElement = document.getElementById('timer');
-    const timerExpiresAt = new Date("<%= @match.timer_expires_at.iso8601 %>");
+
     function getCSRFToken() {
         return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     }
-    function updateTimer() {
-        const now = new Date();
-        const timeRemaining = timerExpiresAt - now;
 
-        if (timeRemaining <= 0) {
-            timerElement.textContent = "Time's up!";
-            clearInterval(timerInterval);
+    window.setTimer = function(timerExpiresAt, matchId, timerElement) {
+        function updateTimer() {
+            const now = new Date();
+            const timeRemaining = timerExpiresAt - now;
+            if (timeRemaining <= 0) {
+                timerElement.textContent = "Time's up!";
+                clearInterval(timerInterval);
 
-            fetch("<%= match_timeout_path(@match.id) %>", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-Token': getCSRFToken()
-                },
-            })
-                .then(response => response.json())
-                .then(data => {
-                    console.log("Timeout response:", data);
-                })
-                .catch(error => console.error('ERROR:', error));
-        } else {
-            const minutes = Math.floor(timeRemaining / 1000 / 60);
-            const seconds = Math.floor((timeRemaining / 1000) % 60);
-            timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+                fetch(`/matches/${matchId}/timeout`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-Token': getCSRFToken()
+                    },
+                });
+            } else {
+                const minutes = Math.floor(timeRemaining / 1000 / 60);
+                const seconds = Math.floor((timeRemaining / 1000) % 60);
+                timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            }
         }
-    }
-    const timerInterval = setInterval(updateTimer, 1000);
-    updateTimer();
+
+        // Start the timer
+        const timerInterval = setInterval(updateTimer, 1000);
+        updateTimer();  // Initial call to update immediately
+    };
+    window.setTimer(timerExpiresAt, match_id, timerElement);
+
 
     // Logica per il ridimensionamento
+
+
     const divider = document.getElementById('divider');
 const leftPane = document.getElementById('leftPane');
 const rightPane = document.getElementById('rightPane');

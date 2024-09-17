@@ -8,13 +8,13 @@ require 'capybara/rails'
 require 'selenium-webdriver'
 
 
-Capybara.default_driver = :selenium_headless
+Capybara.default_driver = :selenium
 # Set the app host to localhost
 Capybara.app_host = 'http://localhost:3000'
 
 # Ensure the server is running on port 3000 (or another port if needed)
 Capybara.server_port = 3000
-
+Selenium::WebDriver.logger.level = :error
 
 
 # By default, any exception happening in your Rails application will bubble up
