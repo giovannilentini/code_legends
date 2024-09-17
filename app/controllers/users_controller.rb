@@ -47,12 +47,12 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-    if @user.update(user_settings)
+    if @user.update!(user_settings)
       flash[:success] = "Profile updated"
       redirect_to user_path(@user)
     else
       flash.now[:alert] = "Error updating profile"
-      render :edit
+      render user_path(@user)
     end
   end
   private

@@ -62,7 +62,7 @@ challenges = [
       }
     CODE
     test_template: <<~TEST
-      public class Main {
+      public class Progman {
           public static void main(String[] args) {
               Solution solution = new Solution();
 
@@ -212,7 +212,7 @@ challenges = [
       }
     CODE
     test_template: <<~TEST
-      public class Main {
+      public class Progman {
           public static void main(String[] args) {
               Solution solution = new Solution();
 
@@ -359,7 +359,7 @@ additional_challenges = [
       }
     CODE
     test_template: <<~TEST
-      public class Main {
+      public class Progman {
           public static void main(String[] args) {
               Solution solution = new Solution();
 
@@ -506,7 +506,7 @@ additional_challenges = [
       }
     CODE
     test_template: <<~TEST
-      public class Main {
+      public class Progman {
           public static void main(String[] args) {
               Solution solution = new Solution();
 

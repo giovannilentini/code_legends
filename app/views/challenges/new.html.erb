@@ -16,7 +16,6 @@
     <h3 class="text-lg font-semibold text-white">Language:</h3>
     <p class="text-gray-300"><%= @challenge_proposal.language %></p>
   </div>
-
   <!-- Form Start -->
   <%= form_with(model: @challenge, id: 'submit-form', class: "overflow-y-auto flex flex-col") do |f| %>
 
@@ -62,10 +61,11 @@
     <%= f.hidden_field :challenge_proposal_id, value: @challenge_proposal.id %>
 
     <!-- Submit Button -->
-    <div class="flex justify-end">
-      <%= f.submit "Save Challenge", class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-full" %>
+    <div class="flex justify-end space-x-4">
+      <%= f.submit "Save Challenge", class: "px-6 py-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105" %>
+      <%= link_to 'Back to Home', root_path, class: 'bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-md' %>
     </div>
-  <% end %>
+<% end %>
 </div>
 
 

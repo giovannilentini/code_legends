@@ -47,7 +47,6 @@ class MatchmakingQueueService
 
     # Handle case where no challenges are found
     if challenge_ids.empty?
-      Rails.logger.warn "No challenges found for language #{@language}"
       return # or handle this case as needed
     end
 

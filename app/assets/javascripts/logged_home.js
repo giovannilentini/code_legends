@@ -201,10 +201,15 @@ function updateDateTime() {
     const now = new Date();
     const hours = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
-    document.getElementById('current-time').textContent = `${hours}:${minutes}`;
+    const current_hour = document.getElementById('current-time')
+    if(current_hour)
+        current_hour.textContent = `${hours}:${minutes}`;
 
     const day = now.getDate().toString().padStart(2, '0');
     const month = (now.getMonth() + 1).toString().padStart(2, '0');
     const year = now.getFullYear();
-    document.getElementById('current-date').textContent = `${day}/${month}/${year}`;
+    const current_date = document.getElementById('current-date')
+        if(current_date)
+            current_date.textContent = `${day}/${month}/${year}`;
+
 }
