@@ -7,7 +7,6 @@ Feature: Timeout e fine della partita in pareggio
     And l'utente "player1" è nella pagina della partita
     And l'utente "player2" è nella pagina della partita
     When passa il tempo e il timer scade
-    Then un popup con il risultato viene mostrato al "player1" con il messaggio "Draw"
     Then un popup con il risultato viene mostrato al "player2" con il messaggio "Draw"
     And non dovrebbe essere assegnato alcun vincitore
     And la partita dovrebbe essere segnata come "finished"
@@ -19,6 +18,8 @@ Feature: Timeout e fine della partita in pareggio
     And l'utente "player1" è nella pagina della partita
     And l'utente "player2" è nella pagina della partita
     When l'utente "player1" si arrende
+    Then un popup con il risultato viene mostrato al "player2" con il messaggio "Winner"
+    And un popup con il risultato viene mostrato al "player1" con il messaggio "Loser"
     Then la partita dovrebbe essere segnata come "finished"
     And l'utente "player2" dovrebbe essere il vincitore
 
@@ -31,5 +32,7 @@ Feature: Timeout e fine della partita in pareggio
     And l'utente "player1" è nella pagina della partita
     And l'utente "player2" è nella pagina della partita
     When il "player1" manda il codice giusto
+    Then un popup con il risultato viene mostrato al "player1" con il messaggio "Winner"
+    And un popup con il risultato viene mostrato al "player2" con il messaggio "Loser"
     Then la partita dovrebbe essere segnata come "finished"
     And l'utente "player1" dovrebbe essere il vincitore

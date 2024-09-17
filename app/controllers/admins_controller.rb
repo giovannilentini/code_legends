@@ -10,8 +10,6 @@ class AdminsController < ApplicationController
 
   def promote_to_admin
     authorize! :admin, :all
-    p "PARAMS"
-    p params
     user = User.find(params[:admin_id])
     if user.update(is_admin: true)
       flash[:notice]="#{user.username} has been promoted."

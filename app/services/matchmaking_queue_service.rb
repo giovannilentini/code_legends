@@ -1,6 +1,5 @@
 class MatchmakingQueueService
   def initialize(user)
-    p "helloooo"
     @user = user
     @language = nil
   end

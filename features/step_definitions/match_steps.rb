@@ -137,7 +137,7 @@ end
 And("l'utente {string} è nella pagina della partita") do |player|
   Capybara.using_session("#{player}") do
     visit match_path(@match)
-    expect(page).to have_content("Dettagli della Sfida")
+    expect(page).to have_content("Change Theme")
   end
 end
 
@@ -149,7 +149,7 @@ end
 Then("un popup con il risultato viene mostrato al {string} con il messaggio {string}") do |player, message|
   Capybara.using_session("#{player}") do
     expect(page).to have_selector(".popup-content", visible: true)
-    expect(page).to have_content("Draw")
+    expect(page).to have_content("#{message}")
   end
 end
 # Then la partita dovrebbe essere segnata come "finita"

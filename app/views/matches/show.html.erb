@@ -10,7 +10,7 @@
   </div>
 
   <!-- Timer centrato -->
-  <div class="absolute inset-x-0 flex justify-center">
+  <div class="absolute inset-x-0 z-0 flex justify-center">
     <h2 id="timer" class="border-2 border-white px-3 py-2 rounded-md text-2xl font-bold text-white"></h2>
     <%= form_with(url: match_timeout_path(@match), method: :post, id: 'timeout-form', local: true, style: 'display:none;') do |form| %>
       <%= hidden_field_tag :match_id, @match.id %>
