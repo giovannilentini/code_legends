@@ -82,7 +82,7 @@
                 <%= form_with model: [@match, ChatMessage.new], id: 'chat-form', local: false, class: "flex space-y-2" do |form| %>
                   <%= form.text_field :content, :minlength => 1, :maxlength => 500 ,id: 'chat-input', class: 'w-full mr-2 px-3 py-2 text-black rounded mb-2', placeholder: 'Write a message...', autocomplete: 'off', data: { user_id: current_user.id } %>
                   <%= form.hidden_field :user_id, value: current_user.id %>
-                  <%= form.submit 'Send', class: 'px-4 py-2 border-2 border-blue-500 text-blue-500 rounded transition duration-200' %>
+                  <%= form.submit 'Send', id:"send-msg", class: 'px-4 py-2 border-2 border-blue-500 text-blue-500 rounded transition duration-200' %>
                 <% end %>
               <%else %>
                 <%= form_with model: [@match, ChatMessage.new], id: 'chat-form', local: false, class: "flex flex-col space-y-2" do |form| %>
