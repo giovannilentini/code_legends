@@ -248,3 +248,23 @@ Then("è presente la scritta {string}") do |string|
     expect(page).to have_content(string)
   end
 end
+
+Then("il {string} manda un messaggio") do |player|
+  Capybara.using_session("#{player}") do
+    fill_in "chat-input", with: "Test Messaggio"
+    click_button "send-msg"
+  end
+end
+Then("il {string} riceve il messaggio") do |player|
+  Capybara.using_session("#{player}") do
+    expect(page).to have_content("Test Messaggio")
+  end
+end
+And("gli utenti sono sulla sezione chat") do
+  Capybara.using_session("player1") do
+    click_button "chatBtn"
+  end
+  Capybara.using_session("player2") do
+    click_button "chatBtn"
+  end
+end

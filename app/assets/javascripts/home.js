@@ -35,7 +35,7 @@
     const icon =document.getElementById('file-icon');
 
     makeDraggable(icon);
-
+    let typed = false
 
     fileIcon.addEventListener('dblclick', function() {
         openTerminal();
@@ -44,6 +44,7 @@
     function openTerminal() {
         terminal.classList.remove('hidden');
         fileIcon.classList.add('hidden');
+
         anime({
             targets: '#terminal-window',
             translateY: ['100%', '0%'],
@@ -51,7 +52,10 @@
             easing: 'easeOutCubic',
             duration: 400
         });
-        startTypedEffect();
+        if (!typed){
+            typed=true
+            startTypedEffect();
+        }
     }
 
     closeTerminalButton.addEventListener('click', function() {
