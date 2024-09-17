@@ -1,127 +1,149 @@
-<div class="flex flex-col h-full w-full bg-gray-900 text-white">
-  <!-- Header Section -->
-  <div class="flex flex-col text-center p-4 bg-gray-800 border-b border-gray-700">
-    <h1 class="text-3xl font-bold text-white mb-2">Dettagli della Sfida</h1>
-    <div class="text-white space-y-2">
-      <p><strong>Player 1:</strong> <%= @match.player_1.username %></p>
-      <p><strong>Player 2:</strong> <%= @match.player_2.username %></p>
-      <p><strong>Language:</strong> <%= @match.language %></p>
-      <input type="hidden" id="match-id" value="<%= @match.id %>" />
-    </div>
-  </div>
-
+<div class="fixed inset-x-0 top-0 bg-neutral-900 text-white p-4 z-10 flex items-center">
+  <!-- Sezione di sinistra -->
   <div class="hidden">
     <meta name="csrf-token" content="<%= csrf_meta_tags %>">
   </div>
 
-  <!-- Main Content Section -->
-  <div class="flex flex-row justify-center space-x-8 px-6 py-6 overflow-auto">
-    <!-- Left Column -->
-    <div class="flex flex-col grow space-y-6 max-w-5xl">
-      <!-- Challenge Info Box -->
-      <div class="flex flex-col bg-gray-800 p-6 rounded-lg shadow-lg">
-        <h2 class="text-2xl font-semibold text-white mb-4">Challenge Info</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="flex flex-col">
-            <span class="text-sm font-semibold text-gray-400">Title</span>
-            <span class="text-lg font-bold text-white"><%= @challenge.title %></span>
-          </div>
-          <div class="flex flex-col">
-            <span class="text-sm font-semibold text-gray-400">Difficulty</span>
-            <span class="text-lg font-bold text-white capitalize"><%= @challenge.difficulty %></span>
-          </div>
-          <div class="flex flex-col md:col-span-3">
-            <span class="text-sm font-semibold text-gray-400">Description</span>
-            <p class="text-white mt-1"><%= @challenge.description %></p>
-          </div>
-        </div>
-      </div>
+  <div class="flex flex-col space-y-1">
+    <h1 class="text-xl font-bold"><%= @challenge.title %></h1>
+    <p class="text-sm"><%= @match.player_1.username %> vs <%= @match.player_2.username %></p>
+  </div>
 
-      <!-- Code Editor Box -->
-      <div class="flex flex-col bg-gray-800 h-[30rem] p-4 rounded-lg shadow-lg">
-        <div class="flex flex-row py-2 justify-between items-center border-b border-gray-700 mb-4">
-          <h2 class="text-lg font-bold">CODE</h2>
-          <h2 class="text-lg font-bold"><%= @challenge.language %></h2>
+  <!-- Timer centrato -->
+  <div class="absolute inset-x-0 flex justify-center">
+    <h2 id="timer" class="border-2 border-white px-3 py-2 rounded-md text-2xl font-bold text-white"></h2>
+    <%= form_with(url: match_timeout_path(@match), method: :post, id: 'timeout-form', local: true, style: 'display:none;') do |form| %>
+      <%= hidden_field_tag :match_id, @match.id %>
+    <% end %>
+  </div>
+
+  <!-- Spazio flessibile per la sezione di destra -->
+  <div class="ml-auto flex items-center space-x-4">
+    <!-- Sezione con linguaggio -->
+
+    <button id="switch-theme" class="bg-trasparent border border-blue-500 text-blue-500 py-2 px-4 rounded-lg hover:bg-blue-600 hover:text-white z-10 transition-all">
+      Change Theme
+    </button>
+    <% language_info = case @challenge.language %>
+      <% when 'java' %>
+        <span class="bg-transparent border border-white px-4 py-2 rounded-md flex items-center space-x-2">
+          <img width="24" height="24" src="https://img.icons8.com/color/48/java-coffee-cup-logo--v1.png" alt="Java Logo" />
+          <span>Java</span>
+        </span>
+      <% when 'python3' %>
+        <span class="bg-transparent border border-white px-4 py-2 rounded-md flex items-center space-x-2">
+          <img width="24" height="24" src="https://img.icons8.com/color/48/python--v1.png" alt="Python Logo" />
+          <span>Python3</span>
+        </span>
+      <% when 'cpp' %>
+        <span class="bg-transparent border border-white px-4 py-2 rounded-md flex items-center space-x-2">
+          <img width="24" height="24" src="https://img.icons8.com/fluency/48/c-plus-plus-logo.png" alt="c-plus-plus-logo"/>
+          <span>CPP</span>
+        </span>
+    <% end %>
+
+    <!-- Sezione con difficoltà -->
+    <% difficulty_class = case @challenge.difficulty %>
+      <% when 'hard' %>
+        <span class="bg-transparent border border-red-500 text-red-500 px-4 py-2 rounded-md">Hard</span>
+      <% when 'medium' %>
+        <span class="bg-transparent border border-yellow-500 text-yellow-500 px-4 py-2 rounded-md">Medium</span>
+      <% else %>
+        <span class="bg-transparent border border-blue-500 text-blue-500 px-4 py-2 rounded-md">Easy</span>
+    <% end %>
+  </div>
+</div>
+
+<div class="absolute inset-x-0 top-[80px] bottom-0 flex overflow-hidden ">
+  <div id="leftPane" class="bg-neutral-900 flex flex-col h-full p-4">
+    <div class="flex space-x-4 mb-4">
+      <button id="descriptionBtn" class="bg-neutral-700 text-white px-4 py-2 rounded-lg hover:bg-neutral-800 focus:outline-none">
+        Description
+      </button>
+      <button id="chatBtn" class="bg-neutral-900 text-white px-4 py-2 rounded-lg hover:bg-neutral-800 focus:outline-none">
+        Chat
+      </button>
+    </div>
+
+    <!-- Contenitore contenuto (occupando tutto lo spazio rimanente con il 20% in basso libero) -->
+    <div class="grow bg-transparent mx-auto ">
+        <div id="chatContent" class="hidden flex flex-col mb-4 max-w-80">
+          <div class="flex flex-col bg-neutral-800 p-4 rounded-lg shadow-lg max-h-96 overflow-auto">
+                  <h2 class="text-lg font-bold text-center mb-2">CHAT</h2>
+                  <div class="text-white p-2 h-full rounded-lg" id="chat-container">
+                    <div id="chat" class="w-full space-y-2 overflow-y-auto">
+                      <%= render @match.chat_messages.includes(:user) %>
+                    </div>
+                  </div>
+                </div>
+              <% if can? :create, ChatMessage %>
+                <!-- Message Form -->
+                <%= form_with model: [@match, ChatMessage.new], id: 'chat-form', local: false, class: "flex space-y-2" do |form| %>
+                  <%= form.text_field :content, :minlength => 1, :maxlength => 500 ,id: 'chat-input', class: 'w-full mr-2 px-3 py-2 text-black rounded mb-2', placeholder: 'Write a message...', autocomplete: 'off', data: { user_id: current_user.id } %>
+                  <%= form.hidden_field :user_id, value: current_user.id %>
+                  <%= form.submit 'Send', class: 'px-4 py-2 border-2 border-blue-500 text-blue-500 rounded transition duration-200' %>
+                <% end %>
+              <%else %>
+                <%= form_with model: [@match, ChatMessage.new], id: 'chat-form', local: false, class: "flex flex-col space-y-2" do |form| %>
+                  <%= form.text_field :content, id: 'chat-input', class: 'w-full px-3 py-2 text-black rounded mb-2', placeholder: 'You cannot chat...', autocomplete: 'off', data: { user_id: current_user.id }, disabled: true %>
+                  <%= form.hidden_field :user_id, value: current_user.id, disabled: true %>
+                  <%= form.submit 'Send', class: 'px-4 py-2 border-2 border-blue-500 text-blue-500 rounded transition duration-200', disabled: true %>
+                <% end %>
+            <%end %>
         </div>
+
+      <div id="descriptionContent" class="hidden border border-neutral-600 p-2 rounded-md h-full" style="height: calc(100% - 8px);"> 
+        <p class="text-white"><%= @challenge.description %></p>
+      </div>
+    </div>
+
+
+    <div class="h-[20%] flex flex-row">       
+    <%= form_with(url: match_execute_code_path(@match.id), method: :post, id: 'execute-form', class: "overflow-hidden", local: false) do |form| %>
+        <%= hidden_field_tag :language, @challenge.language, id: 'hidden-language-selection' %>
+        <%= hidden_field_tag :code, '', id: 'hidden-dark-input' %>
+        <%= hidden_field_tag :code, '', id: 'hidden-light-input' %>
+        <%= hidden_field_tag :match_id, @match.id %>
+        <%= form.submit "Run Code", id: "submit-code", class: " mr-4 px-4 py-2  text-cyan-500 rounded hover:bg-cyan-800 hover:text-white border border-cyan-500 transition duration-200" %>
+      <% end %>   
+
+      <%= form_with(url: match_surrender_path(@match), method: :post, id: 'surrender-form', local: true) do |form| %>
+          <%= form.submit "Surrender", id: "surrender-submit", class: "px-4 py-2 text-red-500 rounded hover:bg-red-800 hover:text-white border border-red-500 transition duration-200" %>
+      <% end %>
+
+
+    </div>
+  </div>
+  <!-- Divisore ridimensionabile -->
+<div id="divider" class="w-[4px] cursor-ew-resize my-2 rounded-sm border-l-2 border-r-2 border-neutral-600"></div>
+
+  <!-- Sezione di destra -->
+  <div id="rightPane" class="bg-neutral-900 flex flex-col h-full p-4 w-full overflow-y-auto">
+
+        <div class="flex flex-col bg-neutral-800 h-[30rem] p-4 rounded-lg shadow-lg">
         <div class="h-full">
-          <div id="code-editor-dark" class="bg-black rounded-lg p-2"></div>
-          <div id="code-editor-light" class="bg-black rounded-lg p-2 hidden"></div>
+          <div id="code-editor-dark" class="bg-neutral-900 rounded-lg p-2"></div>
+          <div id="code-editor-light" class="bg-neutral-900 rounded-lg p-2 hidden"></div>
         </div>
       </div>
 
       <!-- Console Box -->
-      <div class="flex flex-col bg-gray-800 p-4 h-[15rem] rounded-lg shadow-lg">
-        <h2 class="text-lg font-bold text-center">CONSOLE</h2>
+      <div class="flex flex-col bg-neutral-800 p-4 mt-2 h-[15rem] rounded-lg shadow-lg">
+        <p class="text-md font-bold ">CONSOLE</p>
         <div class="bg-[#2d2d2d] text-white mt-2 p-4 h-full overflow-auto rounded-lg">
           <pre id="output" class="text-lime-500 font-mono"></pre>
         </div>
       </div>
     </div>
-
-    <!-- Right Column -->
-    <div class="flex flex-col max-w-sm p-4 space-y-6 bg-gray-800 rounded-lg shadow-lg">
-
-      <!-- Timer -->
-      <div class="flex justify-center mt-4">
-        <h2 id="timer" class="text-2xl font-bold text-white"></h2>
-      </div>
-      <div class="mt-4">
-        <button id="switch-theme" class="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-all">
-          Change Theme
-        </button>
-      </div>
-      <!-- Timeout Form -->
-      <%= form_with(url: match_timeout_path(@match), method: :post, id: 'timeout-form', local: true, style: 'display:none;') do |form| %>
-        <%= hidden_field_tag :match_id, @match.id %>
-      <% end %>
-
-      <!-- Run Code Button -->
-      <%= form_with(url: match_execute_code_path(@match.id), method: :post, id: 'execute-form', class: "overflow-hidden", local: false) do |form| %>
-        <%= hidden_field_tag :language, @challenge.language, id: 'hidden-language-selection' %>
-        <%= hidden_field_tag :code, '', id: 'hidden-dark-input' %>
-        <%= hidden_field_tag :code, '', id: 'hidden-light-input' %>
-        <%= hidden_field_tag :match_id, @match.id %>
-        <%= form.submit "Run Code", id: "submit-code", class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-full transition duration-200" %>
-      <% end %>
-
-      <!-- Chat Box -->
-      <div class="flex flex-col bg-gray-800 p-4 max-h-[26rem] rounded-lg shadow-lg">
-        <h2 class="text-lg font-bold text-center mb-2">CHAT</h2>
-        <div class="bg-gray-700 text-white p-2 h-full overflow-y-auto rounded-lg max-h-[26rem]" id="chat-container">
-          <div id="chat" class="w-full space-y-2">
-            <%= render @match.chat_messages.includes(:user) %>
-          </div>
-        </div>
-      </div>
-
-      <% if can? :create, ChatMessage %>
-        <!-- Message Form -->
-        <%= form_with model: [@match, ChatMessage.new], id: 'chat-form', local: false, class: "flex flex-col space-y-2" do |form| %>
-          <%= form.text_field :content, :minlength => 1, :maxlength => 500 ,id: 'chat-input', class: 'w-full px-3 py-2 text-black rounded mb-2', placeholder: 'Write a message...', autocomplete: 'off', data: { user_id: current_user.id } %>
-          <%= form.hidden_field :user_id, value: current_user.id %>
-          <%= form.submit 'Send', class: 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200' %>
-        <% end %>
-      <%else %>
-        <%= form_with model: [@match, ChatMessage.new], id: 'chat-form', local: false, class: "flex flex-col space-y-2" do |form| %>
-          <%= form.text_field :content, id: 'chat-input', class: 'w-full px-3 py-2 text-black rounded mb-2', placeholder: 'You cannot chat...', autocomplete: 'off', data: { user_id: current_user.id }, disabled: true %>
-          <%= form.hidden_field :user_id, value: current_user.id, disabled: true %>
-          <%= form.submit 'Send', class: 'px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200', disabled: true %>
-        <% end %>
-
-    <%end %>
-      <!-- Surrender Button -->
-      <%= form_with(url: match_surrender_path(@match), method: :post, id: 'surrender-form', local: true) do |form| %>
-        <%= form.submit "Surrender", id: "surrender-submit", class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 w-full transition duration-200" %>
-      <% end %>
-    </div>
   </div>
 </div>
 
-<script type="module">
+  <script type="module">
     import { initializeCodeMirror } from "codemirror_setup";
     import { create_executable } from "code_generation";
     import { subscribeToMatchAndSubmissionChannels } from "match_subscription";
 
+    
     let code_template = <%= @challenge.code_template.to_json.html_safe %>;
     let currentLanguage = <%= @match.language.to_json.html_safe %>;
     let test_template = <%= @challenge.test_template.to_json.html_safe %>;
@@ -187,8 +209,82 @@
     const timerInterval = setInterval(updateTimer, 1000);
     updateTimer();
 
+    // Logica per il ridimensionamento
+    const divider = document.getElementById('divider');
+const leftPane = document.getElementById('leftPane');
+const rightPane = document.getElementById('rightPane');
 
-    const changeThemeButton = document.querySelector("#switch-theme")
+let isDragging = false;
+
+divider.addEventListener('mousedown', function (e) {
+  isDragging = true;
+});
+
+document.addEventListener('mousemove', function (e) {
+  if (isDragging) {
+    const containerWidth = divider.parentNode.offsetWidth;
+    const offsetX = e.clientX;
+    const leftWidth = (offsetX / containerWidth) * 100;
+    const rightWidth = 100 - leftWidth;
+
+    // Imposta le larghezze e nasconde i pannelli se necessario
+    if (leftWidth <= 0) {
+      leftPane.style.width = '0%';
+      leftPane.classList.add('hidden');
+    } else {
+      leftPane.style.width = `${leftWidth}%`;
+      leftPane.classList.remove('hidden');
+    }
+
+    if (rightWidth <= 0) {
+      rightPane.style.width = '0%';
+      rightPane.classList.add('hidden');
+    } else {
+      rightPane.style.width = `${rightWidth}%`;
+      rightPane.classList.remove('hidden');
+    }
+  }
+});
+
+document.addEventListener('mouseup', function () {
+  isDragging = false;
+});
+
+ const chatBtn = document.getElementById('chatBtn');
+  const descriptionBtn = document.getElementById('descriptionBtn');
+  const chatContent = document.getElementById('chatContent');
+  const descriptionContent = document.getElementById('descriptionContent');
+
+  // Funzione per rimuovere lo stato attivo dai bottoni
+  function removeActiveClass() {
+    chatBtn.classList.remove('bg-neutral-700');
+    descriptionBtn.classList.remove('bg-neutral-700');
+    descriptionBtn.classList.add('bg-neutral-900');
+    chatBtn.classList.add('bg-neutral-900');
+    
+  }
+
+  // Funzioni per mostrare/nascondere contenuti e attivare bottoni
+  chatBtn.addEventListener('click', function() {
+    removeActiveClass();
+    chatBtn.classList.remove('bg-neutral-900');
+    chatBtn.classList.add('bg-neutral-700');  // Aggiunge background attivo al bottone
+    chatContent.classList.remove('hidden');
+    descriptionContent.classList.add('hidden');
+  });
+
+  descriptionBtn.addEventListener('click', function() {
+    removeActiveClass();
+    descriptionBtn.classList.remove('bg-neutral-900');
+    descriptionBtn.classList.add('bg-neutral-700');  // Aggiunge background attivo al bottone
+    chatContent.classList.add('hidden');
+    descriptionContent.classList.remove('hidden');
+  });
+
+  // Imposta il contenuto iniziale (opzionale)
+  descriptionContent.classList.remove('hidden');
+    
+  const changeThemeButton = document.querySelector("#switch-theme")
 
     changeThemeButton.addEventListener("click", ()=>{
         console.log(current_theme)
@@ -203,6 +299,4 @@
             current_theme="dark"
         }
     })
-
-
-</script>
+  </script>
