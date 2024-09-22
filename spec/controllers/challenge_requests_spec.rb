@@ -58,7 +58,6 @@ RSpec.describe ChallengeRequestsController, type: :controller do
       expect(match.status).to eq('ongoing')
 
       expect(ChallengeRequest.find_by(id: challenge_request.id)).to be_nil
-      expect(response).to redirect_to(match_path(match.id))
     end
   end
 

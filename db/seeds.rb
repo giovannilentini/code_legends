@@ -55,14 +55,14 @@ challenges = [
     language: 'java',
     difficulty: 'easy',
     code_template: <<~CODE,
-      public class Solution {
+      class Solution {
           public String stringNumTimes(String s, int n) {
               return "";
           }
       }
     CODE
     test_template: <<~TEST
-      public class Main {
+      public class Progman {
           public static void main(String[] args) {
               Solution solution = new Solution();
 
@@ -109,72 +109,52 @@ challenges = [
     TEST
   },
   {
-    title: 'Repeat String N Times (C++)',
-    description: 'Write a method in C++ that takes a string and an integer n, and returns the string repeated n times.',
-    language: 'cpp',
-    difficulty: 'easy',
-    code_template: <<~CODE,
-      class Solution {
-      public:
-          std::string stringNumTimes(const std::string& s, int n) {
-              return "";
-          }
-      };
-    CODE
-    test_template: <<~TEST
-      #include <iostream>
-      #include <string>
-      #include <vector>
-      #include <cassert>
-
-      class Solution {
-      public:
-          std::string stringNumTimes(const std::string& s, int n) {
-              return "";
-          }
-      };
-
-      int main() {
-          Solution solution;
-          int testPassed = 0;
-
-          // Test cases
-          std::vector<std::tuple<std::string, int, std::string>> testCases = {
-              {"Hello", 3, "HelloHelloHello"},
-              {"abc", 5, "abcabcabcabcabc"},
-              {"x", 10, "xxxxxxxxxx"},
-              {"", 5, ""},  // Empty string should return empty
-              {"Test", 0, ""},  // Repeating 0 times should return empty
-              {"Repeat", 1, "Repeat"},  // Repeating once should return the string itself
-              {"123", 3, "123123123"},
-              {"Hi", 4, "HiHiHiHi"},
-              {"!", 6, "!!!!!!"},
-              {"LongString", 2, "LongStringLongString"}
-          };
-
-          // Running tests
-          for (size_t i = 0; i < testCases.size(); ++i) {
-              auto [s, n, expected] = testCases[i];
-              std::string result = solution.stringNumTimes(s, n);
-              if (result == expected) {
-                  ++testPassed;
-              } else {
-                  if (i < 3) {  // For the first 3 tests, print the difference if they fail
-                      std::cout << "Test " << i+1 << " failed: expected '" << expected << "', but got '" << result << "'\n";
-                  } else {
-                      std::cout << "Test " << i+1 << " failed\n";
-                  }
-              }
-          }
-
-          if (testPassed == testCases.size()) {
-              std::cout << "Winner\n";
-          } else {
-              std::cout << "Tests passed: " << testPassed << "/" << testCases.size() << "\n";
-          }
-
-          return 0;
+    "title": "Repeat String N Times (JavaScript)",
+    "description": "Write a method in JavaScript that takes a string and an integer n, and returns the string repeated n times.",
+    "language": "javascript",
+    "difficulty": "easy",
+    "code_template": <<~CODE,
+    class Solution {
+      stringNumTimes(s, n) {
+        // Implementation will go here
       }
+    }
+    CODE
+    "test_template": <<~TEST
+    const assert = require('assert');
+
+    function runTests() {
+      const solution = new Solution();
+      const testCases = [
+        { s: "Hello", n: 3, expected: "HelloHelloHello" },
+        { s: "abc", n: 5, expected: "abcabcabcabcabc" },
+        { s: "x", n: 10, expected: "xxxxxxxxxx" },
+        { s: "", n: 5, expected: "" },
+        { s: "Test", n: 0, expected: "" },
+        { s: "Repeat", n: 1, expected: "Repeat" },
+        { s: "123", n: 3, expected: "123123123" },
+        { s: "Hi", n: 4, expected: "HiHiHiHi" },
+        { s: "!", n: 6, expected: "!!!!!!" },
+        { s: "LongString", n: 2, expected: "LongStringLongString" }
+      ];
+
+      let allPassed = true;
+
+      testCases.forEach((testCase, index) => {
+        const result = solution.stringNumTimes(testCase.s, testCase.n);
+        if (result !== testCase.expected) {
+          console.log(`Test ${index + 1} failed: expected '${testCase.expected}', but got '${result}'`);
+          allPassed = false;
+          // Optionally break if a failure is encountered.
+        }
+      });
+
+      if (allPassed) {
+        console.log("Winner");
+      }
+    }
+
+    runTests();
     TEST
   },
   {
@@ -225,14 +205,14 @@ challenges = [
     language: 'java',
     difficulty: 'medium',
     code_template: <<~CODE,
-      public class Solution {
+      class Solution {
           public String longestCommonPrefix(String[] strs) {
               return "";
           }
       }
     CODE
     test_template: <<~TEST
-      public class Main {
+      public class Progman {
           public static void main(String[] args) {
               Solution solution = new Solution();
 
@@ -273,67 +253,46 @@ challenges = [
     TEST
   },
   {
-    title: 'Longest Common Prefix (C++)',
-    description: 'Write a method in C++ to find the longest common prefix string amongst an array of strings.',
-    language: 'cpp',
-    difficulty: 'medium',
-    code_template: <<~CODE,
-      class Solution {
-      public:
-          std::string longestCommonPrefix(const std::vector<std::string>& strs) {
-              return "";
-          }
-      };
-    CODE
-    test_template: <<~TEST
-      #include <iostream>
-      #include <string>
-      #include <vector>
-      #include <cassert>
-
-      class Solution {
-      public:
-          std::string longestCommonPrefix(const std::vector<std::string>& strs) {
-              return "";
-          }
-      };
-
-      int main() {
-          Solution solution;
-          int testPassed = 0;
-
-          // Test cases
-          std::vector<std::tuple<std::vector<std::string>, std::string>> testCases = {
-              {{"flower", "flow", "flight"}, "fl"},
-              {{"dog", "racecar", "car"}, ""},
-              {{"interspecies", "interstellar", "interstate"}, "inter"},
-              {{"apple", "applet", "applied"}, "appl"},
-              {{"", "", ""}, ""}
-          };
-
-          // Running tests
-          for (size_t i = 0; i < testCases.size(); ++i) {
-              auto [strs, expected] = testCases[i];
-              std::string result = solution.longestCommonPrefix(strs);
-              if (result == expected) {
-                  ++testPassed;
-              } else {
-                  if (i < 3) {  // For the first 3 tests, print the difference if they fail
-                      std::cout << "Test " << i+1 << " failed: expected '" << expected << "', but got '" << result << "'\n";
-                  } else {
-                      std::cout << "Test " << i+1 << " failed\n";
-                  }
-              }
-          }
-
-          if (testPassed == testCases.size()) {
-              std::cout << "Winner\n";
-          } else {
-              std::cout << "Tests passed: " << testPassed << "/" << testCases.size() << "\n";
-          }
-
-          return 0;
+    "title": "Longest Common Prefix (JavaScript)",
+    "description": "Write a method in JavaScript to find the longest common prefix string amongst an array of strings.",
+    "language": "javascript",
+    "difficulty": "medium",
+    "code_template": <<~CODE,
+    class Solution {
+      longestCommonPrefix(strs) {
+        // Implementation will go here
       }
+    }
+    CODE
+    "test_template": <<~TEST
+    const assert = require('assert');
+
+    function runTests() {
+      const solution = new Solution();
+      const testCases = [
+        { strs: ["flower", "flow", "flight"], expected: "fl" },
+        { strs: ["dog", "racecar", "car"], expected: "" },
+        { strs: ["interspecies", "interstellar", "interstate"], expected: "inter" },
+        { strs: ["apple", "applet", "applied"], expected: "appl" },
+        { strs: ["", "", ""], expected: "" }
+      ];
+
+      let allPassed = true;
+
+      testCases.forEach((testCase, index) => {
+        const result = solution.longestCommonPrefix(testCase.strs);
+        if (result !== testCase.expected) {
+          console.log(`Test ${index + 1} failed: expected '${testCase.expected}', but got '${result}'`);
+          allPassed = false;
+        }
+      });
+
+      if (allPassed) {
+        console.log("Winner");
+      }
+    }
+
+    runTests();
     TEST
   }
 ]
@@ -393,14 +352,14 @@ additional_challenges = [
     language: 'java',
     difficulty: 'easy',
     code_template: <<~CODE,
-      public class Solution {
+      class Solution {
           public int[] twoSum(int[] nums, int target) {
               return new int[]{};
           }
       }
     CODE
     test_template: <<~TEST
-      public class Main {
+      public class Progman {
           public static void main(String[] args) {
               Solution solution = new Solution();
 
@@ -442,67 +401,54 @@ additional_challenges = [
     TEST
   },
   {
-    title: 'Two Sum (C++)',
-    description: 'Write a method in C++ to return indices of the two numbers such that they add up to a specific target.',
-    language: 'cpp',
-    difficulty: 'easy',
-    code_template: <<~CODE,
-      class Solution {
-      public:
-          std::vector<int> twoSum(const std::vector<int>& nums, int target) {
-              return {};
-          }
-      };
-    CODE
-    test_template: <<~TEST
-      #include <iostream>
-      #include <vector>
-      #include <unordered_map>
-      #include <cassert>
-
-      class Solution {
-      public:
-          std::vector<int> twoSum(const std::vector<int>& nums, int target) {
-              return {};
-          }
-      };
-
-      int main() {
-          Solution solution;
-          int testPassed = 0;
-
-          // Test cases
-          std::vector<std::tuple<std::vector<int>, int, std::vector<int>>> testCases = {
-              {{2, 7, 11, 15}, 9, {0, 1}},
-              {{3, 2, 4}, 6, {1, 2}},
-              {{3, 3}, 6, {0, 1}},
-              {{1, 5, 3, 7}, 12, {1, 3}},
-              {{1, 2, 3, 4}, 7, {2, 3}}
-          };
-
-          // Running tests
-          for (size_t i = 0; i < testCases.size(); ++i) {
-              auto [nums, target, expected] = testCases[i];
-              std::vector<int> result = solution.twoSum(nums, target);
-              if (result == expected) {
-                  ++testPassed;
-              } else {
-                  if (i < 3) {  // For the first 3 tests, print the difference if they fail
-                      std::cout << "Test " << i+1 << " failed: expected '" << expected << "', but got '" << result << "'\n";
-                  } else {
-                      std::cout << "Test " << i+1 << " failed\n";
-                  }
-              }
-          }
-
-          if (testPassed == testCases.size()) {
-              std::cout << "Winner\n";
-          } else {
-              std::cout << "Tests passed: " << testPassed << "/" << testCases.size() << "\n";
-          }
-
-          return 0;
+    "title": "Two Sum (JavaScript)",
+    "description": "Write a method in JavaScript to return indices of the two numbers such that they add up to a specific target.",
+    "language": "javascript",
+    "difficulty": "easy",
+    "code_template": <<~CODE,
+    class Solution {
+      twoSum(nums, target) {
+        // Implementation will go here
       }
+    }
+    CODE
+    "test_template": <<~TEST
+    const assert = require('assert');
+
+    function runTests() {
+      const solution = new Solution();
+      const testCases = [
+        { nums: [2, 7, 11, 15], target: 9, expected: [0, 1] },
+        { nums: [3, 2, 4], target: 6, expected: [1, 2] },
+        { nums: [3, 3], target: 6, expected: [0, 1] },
+        { nums: [1, 5, 3, 7], target: 12, expected: [1, 3] },
+        { nums: [1, 2, 3, 4], target: 7, expected: [2, 3] }
+      ];
+
+      let allPassed = true;
+
+      testCases.forEach((testCase, index) => {
+        const result = solution.twoSum(testCase.nums, testCase.target);
+        if (!arraysEqual(result, testCase.expected)) {
+          console.log(`Test ${index + 1} failed: expected '${testCase.expected}', but got '${result}'`);
+          allPassed = false;
+        }
+      });
+
+      if (allPassed) {
+        console.log("Winner");
+      }
+    }
+
+    function arraysEqual(arr1, arr2) {
+      if (arr1.length !== arr2.length) return false;
+      for (let i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) return false;
+      }
+      return true;
+    }
+
+    runTests();
     TEST
   },
   {
@@ -553,14 +499,14 @@ additional_challenges = [
     language: 'java',
     difficulty: 'hard',
     code_template: <<~CODE,
-      public class Solution {
+       class Solution {
           public boolean isValid(String s) {
               return true;
           }
       }
     CODE
     test_template: <<~TEST
-      public class Main {
+      public class Progman {
           public static void main(String[] args) {
               Solution solution = new Solution();
 
@@ -601,67 +547,47 @@ additional_challenges = [
     TEST
   },
   {
-    title: 'Valid Parentheses (C++)',
-    description: 'Write a method in C++ to determine if the input string containing just the characters (,),{,},[,], is valid.',
-    language: 'cpp',
-    difficulty: 'hard',
-    code_template: <<~CODE,
-      class Solution {
-      public:
-          bool isValid(const std::string& s) {
-              return true;
-          }
-      };
-    CODE
-    test_template: <<~TEST
-      #include <iostream>
-      #include <string>
-      #include <stack>
-      #include <cassert>
-
-      class Solution {
-      public:
-          bool isValid(const std::string& s) {
-              return true;
-          }
-      };
-
-      int main() {
-          Solution solution;
-          int testPassed = 0;
-
-          // Test cases
-          std::vector<std::tuple<std::string, bool>> testCases = {
-              {"()", true},
-              {"()[]{}", true},
-              {"(]", false},
-              {"([)]", false},
-              {"{[]}", true}
-          };
-
-          // Running tests
-          for (size_t i = 0; i < testCases.size(); ++i) {
-              auto [s, expected] = testCases[i];
-              bool result = solution.isValid(s);
-              if (result == expected) {
-                  ++testPassed;
-              } else {
-                  if (i < 3) {  // For the first 3 tests, print the difference if they fail
-                      std::cout << "Test " << i+1 << " failed: expected '" << expected << "', but got '" << result << "'\n";
-                  } else {
-                      std::cout << "Test " << i+1 << " failed\n";
-                  }
-              }
-          }
-
-          if (testPassed == testCases.size()) {
-              std::cout << "Winner\n";
-          } else {
-              std::cout << "Tests passed: " << testPassed << "/" << testCases.size() << "\n";
-          }
-
-          return 0;
+    "title": "Valid Parentheses (JavaScript)",
+    "description": "Write a method in JavaScript to determine if the input string containing just the characters (,),{,},[,], is valid.",
+    "language": "javascript",
+    "difficulty": "hard",
+    "code_template": <<~CODE,
+    class Solution {
+      isValid(s) {
+        // Implementation will go here
       }
+    }
+    CODE
+    "test_template": <<~TEST
+    const assert = require('assert');
+
+    function runTests() {
+      const solution = new Solution();
+      const testCases = [
+        { s: "()", expected: true },
+        { s: "()[]{}", expected: true },
+        { s: "(]", expected: false },
+        { s: "([)]", expected: false },
+        { s: "{[]}", expected: true }
+      ];
+
+      let allPassed = true;
+
+      testCases.forEach((testCase, index) => {
+        const result = solution.isValid(testCase.s);
+        if (result !== testCase.expected) {
+          console.log(`Test ${index + 1} failed: expected '${testCase.expected}', but got '${result}'`);
+          allPassed = false;
+          break;  // Exit early on first failure
+        }
+      });
+
+      if (allPassed) {
+        console.log("Winner");
+      }
+    }
+
+    runTests();
     TEST
   }
 ]

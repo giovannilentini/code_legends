@@ -12,8 +12,6 @@ class PasswordResetsController < ApplicationController
         redirect_to login_path
       else
         @user.generate_password_reset_token!
-        p "USER TOKEN"
-        p @user.reset_token
         PasswordMailer.with(user: @user).password_reset.deliver_now
         flash[:notice] = "Password reset instructions sent to your email"
         redirect_to root_path

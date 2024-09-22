@@ -42,7 +42,6 @@ class MatchesController < ApplicationController
         if @match.update!(status: "finished", winner_id: nil)
           ActionCable.server.broadcast "match_#{@match.id}", { status: "timeout", message: "The match ended in a draw." }
         end
-
       end
     end
 
@@ -57,18 +56,16 @@ class MatchesController < ApplicationController
     @challenge = Challenge.find_by(id: @match.challenge_id)
     unless @match.timer_expires_at
       if @challenge.difficulty == "hard"
-        @match.update(timer_expires_at: 20.minutes.from_now)
+        @match.update!(timer_expires_at: 20.minutes.from_now)
       elsif @challenge.difficulty == "medium"
-        @match.update(timer_expires_at: 15.minutes.from_now)
+        @match.update!(timer_expires_at: 15.minutes.from_now)
       elsif @challenge.difficulty == "easy"
-        @match.update(timer_expires_at: 10.minutes.from_now)
+        @match.update!(timer_expires_at: 10.minutes.from_now)
       end
     end
   end
 
   def set_winner(winner, loser, match, surrendered)
-    MatchmakingQueueService.remove_from_queue(loser)
-    MatchmakingQueueService.remove_from_queue(winner)
     match.chat_messages.destroy_all
     match.update(status: "finished", winner_id: winner.id)
 

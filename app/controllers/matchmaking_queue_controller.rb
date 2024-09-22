@@ -38,7 +38,7 @@ class MatchmakingQueueController < ApplicationController
     authorize! :find_opponent, MatchmakingQueue
     player = current_user
     if player
-      MatchmakingQueueService.new(player).add_to_queue(@selected_language)
+      MatchmakingQueueService.add_to_queue(player, @selected_language)
       respond_to do |format|
         format.turbo_stream { render turbo_stream: turbo_stream.replace("waiting_modal", partial: "matchmaking_queue/waiting_modal") }
         format.html { redirect_to play_now_path }
@@ -48,12 +48,12 @@ class MatchmakingQueueController < ApplicationController
 
   def cancel
     player = current_user
-    MatchmakingQueueService.remove_from_queue(player)
+    MatchmakingQueueService.remove_player(player, @selected_language)
     redirect_to play_now_path, notice: "Opponent search cancelled"
   end
   private
   def set_languages
-    @languages = ['Python3', 'Java', 'Cpp']
+    @languages = ['Python3', 'Java', 'JavaScript']
     @selected_language = params[:language].presence || 'python3'
   end
 end

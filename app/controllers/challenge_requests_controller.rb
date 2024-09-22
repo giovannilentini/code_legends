@@ -10,18 +10,23 @@ class ChallengeRequestsController < ApplicationController
 
   def create
     authorize! :create, ChallengeRequest
-    @challenge_request = ChallengeRequest.new(
-      user_id: current_user.id,
-      friend_id: params[:friend_id],
-      language: params[:language]
-    )
 
-    if @challenge_request.save
-      ActionCable.server.broadcast 'notifications_channel', { has_notifications: true }
-      redirect_to root_path, notice: 'Succesfully created the challenge request!'
+    if ChallengeRequest.exists?(user_id: current_user.id, friend_id: params[:friend_id])
+      flash[:alert]="Challenge Request already exists"
+      redirect_to root_path
     else
-      redirect_to root_path, alert: "An Error Occurred while creating the challenge request!"
+      @challenge_request = ChallengeRequest.new(
+        user_id: current_user.id,
+        friend_id: params[:friend_id],
+        language: params[:language]
+      )
+      if @challenge_request.save
+        ActionCable.server.broadcast 'notifications_channel', { has_notifications: true }
+        redirect_to root_path, notice: 'Succesfully created the challenge request!'
+      else
+        redirect_to root_path, alert: "An Error Occurred while creating the challenge request!"
 
+      end
     end
   end
 
@@ -46,13 +51,18 @@ class ChallengeRequestsController < ApplicationController
       ChallengeNotificationChannel.broadcast_to(
         User.find(challenge.user_id), # L'utente che ha inviato la richiesta
         {
-          message: "#{friend.username} accepted the challenge request!",
+          action: "redirect_to_match",
           match_id: match.id
         }
       )
-
+      ChallengeNotificationChannel.broadcast_to(
+        User.find(challenge.friend_id), # L'utente che ha ricevuto la richiesta
+        {
+          action: "redirect_to_match",
+          match_id: match.id
+        }
+      )
       challenge.destroy
-      redirect_to match_path(match.id)
     else
       flash[:alert] = "Error occurred while accepting challenge."
       redirect_back(fallback_location: root_path)
@@ -65,10 +75,11 @@ class ChallengeRequestsController < ApplicationController
     authorize! :accept,challenge
     if challenge.destroy
       flash[:notice] = "Challenge request was rejected."
+      redirect_to root_path
     else
       flash[:alert] = "An error occured while rejecting the challenge request."
+      redirect_to root_path
     end
-    redirect_back(fallback_location: root_path)
   end
 
   private

@@ -5,4 +5,5 @@ class Challenge < ApplicationRecord
   validates :title, presence: true
   validates :description, presence: true
   validates :difficulty, presence: true
+  validates :language, presence: true
 end

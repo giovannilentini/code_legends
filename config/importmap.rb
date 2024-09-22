@@ -28,8 +28,8 @@ pin "@codemirror/lang-python", to: "@codemirror--lang-python.js" # @6.1.6
 pin "@lezer/python", to: "@lezer--python.js" # @1.1.14
 pin "@codemirror/lang-java", to: "@codemirror--lang-java.js" # @6.0.1
 pin "@lezer/java", to: "@lezer--java.js" # @1.1.2
-pin "@codemirror/lang-cpp", to: "@codemirror--lang-cpp.js" # @6.0.2
-pin "@lezer/cpp", to: "@lezer--cpp.js" # @1.1.2
+pin "@codemirror/lang-javascript", to: "@codemirror--lang-javascript.js" # @6.0.2
+pin "@lezer/javascript", to: "@lezer--javascript.js" # @1.1.2
 pin "@rails/actioncable", to: "actioncable.esm.js"
 pin_all_from "app/javascript/channels", under: "channels"
 pin "codemirror_setup", to: "codemirror_setup.js"

@@ -1,4 +1,4 @@
-<div class="w-full mx-auto p-8 bg-gray-800 rounded-lg shadow-md overflow-auto">
+<div class="w-full mx-auto my-4 p-8 bg-neutral-800 rounded-lg shadow-md overflow-auto">
   <h2 class="text-2xl font-bold text-white mb-4">Challenge Details</h2>
 
   <!-- Challenge Title -->
@@ -16,32 +16,38 @@
     <h3 class="text-lg font-semibold text-white">Language:</h3>
     <p class="text-gray-300"><%= @challenge_proposal.language %></p>
   </div>
-
   <!-- Form Start -->
-  <%= form_with(model: @challenge, id: 'submit-form', class: "overflow-hidden flex flex-col") do |f| %>
+  <%= form_with(model: @challenge, id: 'submit-form', class: "overflow-y-auto flex flex-col") do |f| %>
 
     <!-- Difficulty Selection -->
     <div class="mb-4">
       <label for="difficulty" class="block text-white font-bold mb-2">Difficulty:</label>
       <%= f.select :difficulty, [['Easy', 'easy'], ['Medium', 'medium'], ['Hard', 'hard']],
                    { prompt: 'Select Difficulty' },
-                   { id: 'difficulty', class: 'w-full p-2 bg-gray-700 text-white rounded-lg', required: true } %>
+                   { id: 'difficulty', class: 'w-full p-2 bg-neutral-700 text-white rounded-lg', required: true } %>
     </div>
 
-    <div class="flex flex-col justify-center">
+    <div class="flex flex-col h-full">
       <!-- Code Skeleton Editor -->
       <div class="mb-6">
         <label for="code_skeleton" class="block text-white font-bold mb-2">Code Skeleton</label>
-        <div id="code_skeleton" class="w-full p-4 bg-gray-700 text-white rounded-lg">
-          <!-- CodeMirror will go inside this div -->
+
+        <div class="bg-neutral-800 rounded-lg h-96 shadow-lg h-64">
+          <div class="overflow-y-auto h-full">
+            <div id="code_skeleton" class="w-full p-2 h-full bg-neutral-900 text-white rounded-lg">
+              <!-- CodeMirror will go inside this div -->
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Test Skeleton Editor -->
       <div class="mb-6">
         <label for="test_skeleton" class="block text-white font-bold mb-2">Test Skeleton</label>
-        <div id="test_skeleton" class="w-full p-4 bg-gray-700 text-white rounded-lg">
-          <!-- CodeMirror will go inside this div -->
+        <div class="bg-neutral-700 rounded-lg h-96 overflow-y-auto">
+          <div id="test_skeleton" class="w-full p-2 bg-neutral-900  h-full text-white rounded-lg">
+            <!-- CodeMirror will go inside this div -->
+          </div>
         </div>
       </div>
     </div>
@@ -53,12 +59,15 @@
     <%= f.hidden_field :description, value: @challenge_proposal.description %>
     <%= f.hidden_field :language, value: @challenge_proposal.language %>
     <%= f.hidden_field :challenge_proposal_id, value: @challenge_proposal.id %>
+
     <!-- Submit Button -->
-    <div class="flex justify-end">
-      <%= f.submit "Save Challenge", class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 w-full" %>
+    <div class="flex justify-end space-x-4">
+      <%= f.submit "Save Challenge", class: "px-6 py-3 bg-green-600 text-white rounded-lg shadow-md hover:bg-green-700 transition duration-300 ease-in-out transform hover:scale-105" %>
+      <%= link_to 'Back to Home', root_path, class: 'bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 shadow-md' %>
     </div>
-  <% end %>
+<% end %>
 </div>
+
 
 <script type="module">
 

@@ -4,11 +4,10 @@ import { indentWithTab } from "@codemirror/commands";
 import { EditorView, keymap } from "@codemirror/view";
 import { indentUnit } from "@codemirror/language";
 import { python } from "@codemirror/lang-python";
-import { cpp } from "@codemirror/lang-cpp";
+import { javascript } from "@codemirror/lang-javascript";
 import { java } from "@codemirror/lang-java";
 import { oneDark } from "@codemirror/theme-one-dark";
 import { githubLight } from '@fsegurai/codemirror-theme-github-light';
-import { create_template } from "./code_generation";
 
 // Event that gets triggered when the page loads
 export function initializeCodeMirror(editorElement, form, hidden_form, code_template, language, initial_newline_number, current_theme){
@@ -33,8 +32,8 @@ export function initializeCodeMirror(editorElement, form, hidden_form, code_temp
                 case 'java':
                     languageExtension = java();
                     break;
-                case 'cpp':
-                    languageExtension = cpp();
+                case 'javascript':
+                    languageExtension = javascript();
                     break;
                 default:
                     languageExtension = python();
