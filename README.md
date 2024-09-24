@@ -90,4 +90,4 @@ For detailed instructions on installing Rails and PostgreSQL, please refer to th
     ```bash
     rails server
 
-2. Open your browser and go to http://localhost:3000 to start using Code Legends!
+2. Open your browser and go to http://localhost:3000 to start using Code Legends
