@@ -40,7 +40,7 @@ Then("I should see a successful login message") do
 end
 
 And("an user with email {string} and password {string} exists") do |email, password|
-  User.create!(email: email, username: "test", password: password)
+  RegisteredUser.create!(email: email, username: "test", password: password)
 end
 
 Then("I should get the error {string}") do |message|

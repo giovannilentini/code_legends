@@ -3,8 +3,9 @@ class WelcomeController < ApplicationController
   def home
     unless current_user.nil?
       unless current_user.guest?
-        @user = current_user
+        @user = RegisteredUser.find_by(id:current_user.id)
         @friend_requests = FriendRequest.where(friend_id: @user.id)
+        @available_friends = RegisteredUser.where.not(id: @current_user.id).where.not(id: @current_user.friends.ids)
         @challenge_requests = ChallengeRequest.where(friend_id: @user.id)
       end
     end

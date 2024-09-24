@@ -6,7 +6,7 @@ class Auth0Service
   def self.get_user_info(user_id)
     token = get_token
     encoded_user_id = URI.encode_www_form_component(user_id)
-    uri = URI.parse("https://#{@domain}/api/v2/users/#{encoded_user_id}")
+    uri = URI.parse("https://#{@domain}/api/v2/registered_users/#{encoded_user_id}")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
@@ -25,7 +25,7 @@ class Auth0Service
   end
   def self.get_users
     token = get_token
-    uri = URI("https://#{@domain}/api/v2/users?fields=email%2Cuser_id%2Cnickname%2Cusername&include_fields=true")
+    uri = URI("https://#{@domain}/api/v2/registered_users?fields=email%2Cuser_id%2Cnickname%2Cusername&include_fields=true")
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE

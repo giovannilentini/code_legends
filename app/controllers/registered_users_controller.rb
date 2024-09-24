@@ -1,18 +1,17 @@
-class UsersController < ApplicationController
+class RegisteredUsersController < ApplicationController
   before_action :set_user, only: [:show]
   def show
-    authorize! :read, User
+    authorize! :read, RegisteredUser
   end
 
   def edit
-    @user = User.find_by(id: params[:id])
+    @user = RegisteredUser.find_by(id: params[:id])
   end
 
   def create
-    @user = User.new(user_auth)
-    @user.guest=false
+    @user = RegisteredUser.new(user_auth)
 
-    existing_user = User.find_by(email: @user.email)
+    existing_user = RegisteredUser.find_by(email: @user.email)
     if existing_user
       if existing_user.has_auth0?
         flash[:alert] = "User with mail #{@user.email} already registered with #{existing_user.provider} oauth"
@@ -33,7 +32,7 @@ class UsersController < ApplicationController
 
   def confirm_email
     unless params[:token].nil?
-      user = User.find_by(confirmation_token: params[:token])
+      user = RegisteredUser.find_by(confirmation_token: params[:token])
       if user.present?
         user.update(email_confirmed_at: Time.current, confirmation_token: nil)
         flash[:notice] = "Your email has been confirmed."
@@ -46,7 +45,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find_by(id: params[:id])
+    @user = RegisteredUser.find_by(id: params[:id])
     if @user.update!(user_settings)
       flash[:success] = "Profile updated"
       redirect_to user_path(@user)
@@ -58,7 +57,7 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user_profile = User.find_by(id: params[:id])
+    @user_profile = RegisteredUser.find_by(id: params[:id])
     @accepted_challenges = ChallengeProposal.where(status: "accepted", user: @user_profile)
     @rejected_challenges = ChallengeProposal.where(status: "rejected", user: @user_profile)
 

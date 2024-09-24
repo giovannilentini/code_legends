@@ -8,11 +8,11 @@
   </div>
   <div class="flex-1">
     <div class="flex items-center space-x-2">
-    <% if chat_message.user==current_user %>
-      <span class="font-semibold text-blue-500"><%= chat_message.user.username %>:</span>
-    <%else%>
-      <span class="font-semibold text-red-500"><%= chat_message.user.username %>:</span>
-    <% end %>
+      <% if chat_message.user==current_user %>
+        <span class="font-semibold text-blue-500"><%= chat_message.user.username %>:</span>
+      <%else%>
+        <span class="font-semibold text-red-500"><%= chat_message.user.username %>:</span>
+      <% end %>
       <span class="text-xs text-neutral-200"><%= chat_message.created_at.strftime("%H:%M") %></span>
     </div>
     <p class="mt-1 break-all text-black bg-gray-300 p-2 rounded-lg shadow-inner">

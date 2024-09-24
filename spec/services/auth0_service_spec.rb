@@ -12,7 +12,7 @@ RSpec.describe Auth0Service, type: :service do
   describe '.get_user_info' do
     it 'retrieves user information successfully' do
       user_id = 'auth0|12345'
-      stub_request(:get, "https://#{auth0_domain}/api/v2/users/#{user_id}")
+      stub_request(:get, "https://#{auth0_domain}/api/v2/registered_users/#{user_id}")
         .with(headers: { 'Authorization' => "Bearer #{auth0_token}" })
         .to_return(status: 200, body: { username: 'testuser', email: 'example@gmail.com' }.to_json, headers: {})
 
@@ -23,7 +23,7 @@ RSpec.describe Auth0Service, type: :service do
 
     it 'returns error message when user not found' do
       user_id = 'auth0|nonexistent'
-      stub_request(:get, "https://#{auth0_domain}/api/v2/users/#{user_id}")
+      stub_request(:get, "https://#{auth0_domain}/api/v2/registered_users/#{user_id}")
         .with(headers: { 'Authorization' => "Bearer #{auth0_token}" })
         .to_return(status: 404, body: { error: 'user not found' }.to_json, headers: {})
 
@@ -33,8 +33,8 @@ RSpec.describe Auth0Service, type: :service do
   end
 
   describe '.get_users' do
-    it 'retrieves the list of users successfully' do
-      stub_request(:get, "https://#{auth0_domain}/api/v2/users?fields=email%2Cuser_id%2Cnickname%2Cusername&include_fields=true")
+    it 'retrieves the list of registered_users successfully' do
+      stub_request(:get, "https://#{auth0_domain}/api/v2/registered_users?fields=email%2Cuser_id%2Cnickname%2Cusername&include_fields=true")
         .with(headers: { 'Authorization' => "Bearer #{auth0_token}" })
         .to_return(status: 200, body: [{ email: 'example@gmail.com', username: 'testuser' }].to_json, headers: {})
 
@@ -44,7 +44,7 @@ RSpec.describe Auth0Service, type: :service do
     end
 
     it 'returns error message if request fails' do
-      stub_request(:get, "https://#{auth0_domain}/api/v2/users?fields=email%2Cuser_id%2Cnickname%2Cusername&include_fields=true")
+      stub_request(:get, "https://#{auth0_domain}/api/v2/registered_users?fields=email%2Cuser_id%2Cnickname%2Cusername&include_fields=true")
         .with(headers: { 'Authorization' => "Bearer #{auth0_token}" })
         .to_return(status: 500, body: { error: 'internal server error' }.to_json, headers: {})
 

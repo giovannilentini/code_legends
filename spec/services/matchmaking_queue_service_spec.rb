@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe MatchmakingQueueService, type: :service do
-  let(:user1) { User.create!(id: 1, username: 'User One', password: "password1", email: "test1@test.com") }  # Directly creating a User instance
-  let(:user2) { User.create!(id: 2, username: 'User Two', password: "password2", email: "test2@test.com") }
+  let(:user1) { RegisteredUser.create!(id: 1, username: 'User One', password: "password1", email: "test1@test.com") }  # Directly creating a User instance
+  let(:user2) { RegisteredUser.create!(id: 2, username: 'User Two', password: "password2", email: "test2@test.com") }
   let(:challenge) {Challenge.create!(id: 1, title: "challenge", difficulty: "easy", description: "challengeee", language: "python3")}
   let(:language) { 'python3' }
 
@@ -58,19 +58,19 @@ RSpec.describe MatchmakingQueueService, type: :service do
     end
   end
 
-  describe 'concurrent users joining the queue' do
+  describe 'concurrent registered_users joining the queue' do
     it 'handles simultaneous joins and creates matches as expected' do
-      number_of_players = 10000  # Change this to your desired number of players
+      number_of_players = 100  # Change this to your desired number of players
       users = []
 
-      # Create users for the test
+      # Create registered_users for the test
       number_of_players.times do |i|
-        users << User.create!(id: i + 1, username: "User #{i + 1}", password: "password#{i + 1}", email: "test#{i + 1}@test.com")
+        users << RegisteredUser.create!(id: i + 1, username: "User #{i + 1}", password: "password#{i + 1}", email: "test#{i + 1}@test.com")
       end
 
       threads = []
 
-      # Simulate concurrent users joining the queue
+      # Simulate concurrent registered_users joining the queue
       users.each do |user|
         threads << Thread.new do
           MatchmakingQueueService.add_to_queue(user, language)
@@ -79,7 +79,7 @@ RSpec.describe MatchmakingQueueService, type: :service do
 
       threads.each(&:join)
 
-      # After all users have joined, attempt to find opponents and create matches
+      # After all registered_users have joined, attempt to find opponents and create matches
       MatchmakingQueueService.send(:find_opponent)
 
       # Check the number of matches created

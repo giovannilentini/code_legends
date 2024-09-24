@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe FriendRequestsController, type: :controller do
   before do
-    @user = User.create(email: "user@example.com", password: "password")
-    @friend = User.create(email: "friend@example.com", password: "password")
+    @user = RegisteredUser.create(email: "user@example.com", password: "password")
+    @friend = RegisteredUser.create(email: "friend@example.com", password: "password")
     session[:user_id] = @user.id
   end
 

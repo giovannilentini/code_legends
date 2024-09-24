@@ -18,8 +18,8 @@ RSpec.describe ChallengeRequest, type: :model do
   end
 
   describe 'validations' do
-    let(:user1) { User.create(email: 'user1@example.com', guest: false, password: 'password') }
-    let(:user2) { User.create(email: 'user2@example.com', guest: false, password: 'password') }
+    let(:user1) { RegisteredUser.create(email: 'user1@example.com',  password: 'password') }
+    let(:user2) { RegisteredUser.create(email: 'user2@example.com',  password: 'password') }
     it 'is valid with a user_id, friend_id, and language' do
       challenge_request = ChallengeRequest.new(user_id: user1.id, friend_id: user2.id, language: 'Ruby')
       expect(challenge_request).to be_valid

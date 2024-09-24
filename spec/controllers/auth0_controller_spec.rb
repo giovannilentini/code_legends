@@ -20,7 +20,7 @@ RSpec.describe Auth0Controller, type: :controller do
 
     context "when user exists" do
       it "finds the user and logs them in" do
-        user = User.create!(email: 'test@example.com', username: 'test_user', auth0_id: 'auth0|12345', password:'Password1')
+        user = RegisteredUser.create!(email: 'test@example.com', username: 'test_user', auth0_id: 'auth0|12345', password:'Password1')
 
         post :callback
 
@@ -36,9 +36,9 @@ RSpec.describe Auth0Controller, type: :controller do
       it "creates a new user and logs them in" do
         expect {
           post :callback
-        }.to change(User, :count).by(1)
+        }.to change(RegisteredUser, :count).by(1)
 
-        user = User.last
+        user = RegisteredUser.last
         expect(user.email).to eq('test@example.com')
         expect(user.username).to eq('test_user')
         expect(user.auth0_id).to eq('auth0|12345')
@@ -62,7 +62,7 @@ RSpec.describe Auth0Controller, type: :controller do
   describe "GET #logout" do
     context "when current user is a guest" do
       it "destroys the guest user and logs them out" do
-        user = User.create!(email: 'guest@example.com', username: 'guest_user', guest: true, password:'Password1!')
+        user = Guest.create!
         allow(controller).to receive(:current_user).and_return(user)
 
         get :logout
@@ -75,7 +75,7 @@ RSpec.describe Auth0Controller, type: :controller do
 
     context "when current user has Auth0" do
       it "logs out using Auth0 and resets session" do
-        user = User.create!(email: 'auth0user@example.com', username: 'auth0_user', guest: false, auth0_id: 'auth0|12345', password:'Password1!')
+        user = RegisteredUser.create!(email: 'auth0user@example.com', username: 'auth0_user', auth0_id: 'auth0|12345', password:'Password1!')
         allow(controller).to receive(:current_user).and_return(user)
         allow(controller).to receive(:logout_url).and_return('https://auth0.com/v2/logout')
 
@@ -89,7 +89,7 @@ RSpec.describe Auth0Controller, type: :controller do
 
     context "when current user does not have Auth0" do
       it "logs out locally and resets session" do
-        user = User.create!(email: 'localuser@example.com', username: 'local_user', guest: false, password: 'Password1!')
+        user = RegisteredUser.create!(email: 'localuser@example.com', username: 'local_user', password: 'Password1!')
         allow(controller).to receive(:current_user).and_return(user)
 
         get :logout

@@ -5,21 +5,21 @@ RSpec.describe FriendRequest, type: :model do
     it 'belongs to sender' do
       association = FriendRequest.reflect_on_association(:sender)
       expect(association.macro).to eq(:belongs_to)
-      expect(association.options[:class_name]).to eq('User')
+      expect(association.options[:class_name]).to eq('RegisteredUser')
       expect(association.options[:foreign_key]).to eq('user_id')
     end
 
     it 'belongs to receiver' do
       association = FriendRequest.reflect_on_association(:receiver)
       expect(association.macro).to eq(:belongs_to)
-      expect(association.options[:class_name]).to eq('User')
+      expect(association.options[:class_name]).to eq('RegisteredUser')
       expect(association.options[:foreign_key]).to eq('friend_id')
     end
   end
 
   describe 'validations' do
-    let(:user1) { User.create(email: 'user1@example.com', guest: false, password: 'password') }
-    let(:user2) { User.create(email: 'user2@example.com', guest: false, password: 'password') }
+    let(:user1) { RegisteredUser.create(email: 'user1@example.com', password: 'password') }
+    let(:user2) { RegisteredUser.create(email: 'user2@example.com', password: 'password') }
 
     it 'is valid with sender and receiver' do
       friend_request = FriendRequest.new(user_id: user1.id, friend_id: user2.id)
