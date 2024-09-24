@@ -1,14 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe MatchmakingQueueController, type: :controller do
-  let(:user) { User.create!(email: 'user@example.com', password: 'password', username: 'User1', guest: false) }
-  let(:user2) { User.create!(email: 'user2@example.com', password: 'password', username: 'User2', guest: false) }
+  let(:user) { RegisteredUser.create!(email: 'user@example.com', password: 'password', username: 'User1',) }
+  let(:user2) { RegisteredUser.create!(email: 'user2@example.com', password: 'password', username: 'User2') }
   let(:challenge_proposal) { ChallengeProposal.create!(user: user, title: 'Test Challenge', test_cases: 'test cases', description: 'A challenging challenge') }
-  let(:challenge) { Challenge.create!(title: 'Test Challenge', difficulty: "easy",  description: 'A challenging challenge', challenge_proposal: challenge_proposal) }
-
+  let(:challenge) { Challenge.create!(title: 'Test Challenge', language: "python3", difficulty: "easy",  description: 'A challenging challenge', challenge_proposal: challenge_proposal) }
+  let(:language){"python3"}
   before do
     allow(controller).to receive(:current_user).and_return(user)
-    allow_any_instance_of(MatchmakingQueueService).to receive(:add_to_queue).and_return(true)
   end
 
   describe 'GET #play_now' do
@@ -28,7 +27,7 @@ RSpec.describe MatchmakingQueueController, type: :controller do
 
   describe 'POST #cancel' do
     it 'removes user from matchmaking queue and redirects to play_now_path' do
-      allow(MatchmakingQueueService).to receive(:remove_from_queue).with(user).and_call_original
+      allow(MatchmakingQueueService).to receive(:remove_player).with(user, language).and_call_original
 
       post :cancel
       expect(response).to redirect_to(play_now_path)

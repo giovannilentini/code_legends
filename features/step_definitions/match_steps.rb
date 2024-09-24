@@ -1,14 +1,14 @@
 # Given che esistono due utenti registrati
 Given("che esistono due utenti registrati") do
   # Creazione del primo utente
-  @player_1 = User.create!(
+  @player_1 = RegisteredUser.create!(
     username: 'player1',
     email: 'player1@example.com',
     password: 'password',
     email_confirmed_at: Time.now,
   )
   # Creazione del secondo utente
-  @player_2 = User.create!(
+  @player_2 = RegisteredUser.create!(
     username: 'player2',
     email: 'player2@example.com',
     password: 'password',
@@ -40,6 +40,7 @@ Given("che esiste una partita con timer breve attivo tra questi due utenti") do
     title: "test",
     description: "test",
     difficulty: "hard",
+    language:"python3",
     code_template: <<~PYTHON_CODE,
       class Solution:
           def string_num_times(self, s: str, n: int) -> str:
@@ -87,6 +88,7 @@ end
 Given("che esiste una partita con timer attivo tra questi due utenti") do
   @challenge = Challenge.create!(
     title: "test",
+    language:"python3",
     description: "test",
     difficulty: "hard",
     code_template: <<~PYTHON_CODE,

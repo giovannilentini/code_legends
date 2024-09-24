@@ -18,7 +18,7 @@ RSpec.describe "ChallengeProposals", type: :request do
       }
     })
 
-    @user = User.create!(email: 'example@gmail.com', username: 'test_user', auth0_id: 'auth0|12345', password:'Password1')
+    @user = RegisteredUser.create!(email: 'example@gmail.com', username: 'test_user', auth0_id: 'auth0|12345', password:'Password1')
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
     # Ottieni i valori delle variabili di ambiente

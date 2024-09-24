@@ -16,13 +16,12 @@ class Auth0Controller < ApplicationController
     provider = (auth0_id.split('|').first).split("-").first
 
     #Find or create a user based on the Auth0 UID
-    user = User.find_or_create_by!(email: email) do |user|
+    user = RegisteredUser.find_or_create_by!(email: email) do |user|
       user.username = response["username"]
       user.email = email
       user.is_admin = false
       user.auth0_id = auth0_id
       user.provider = provider
-      user.guest = false
       user.password = "auth0"
     end
     user.update(username: username) if user.username.nil?
@@ -59,11 +58,11 @@ class Auth0Controller < ApplicationController
 
   def logout
     if current_user.guest?
-      User.find(current_user.id).destroy
+      Guest.find(current_user.id).destroy
       flash[:success] = "You have been logged out."
       redirect_to root_url
     else
-      if User.find(current_user.id).has_auth0?
+      if RegisteredUser.find(current_user.id).has_auth0?
         reset_session
         cookies.delete :user_info
         flash[:success] = "You have been logged out."

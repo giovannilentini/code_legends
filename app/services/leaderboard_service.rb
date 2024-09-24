@@ -12,7 +12,7 @@ class LeaderboardService
     $redis.zadd(LEADERBOARD_KEY, new_rank, "user_#{user_id}")
   end
 
-  # Gets the top N users from the leaderboard (using Redis)
+  # Gets the top N registered_users from the leaderboard (using Redis)
   def self.top_users(limit = 10)
     $redis.zrange(LEADERBOARD_KEY, 0, limit-1, rev: true, with_scores: true)
   end

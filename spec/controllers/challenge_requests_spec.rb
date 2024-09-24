@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ChallengeRequestsController, type: :controller do
-  let!(:user) { User.create!(username: 'test_user', email: 'test@example.com', password: 'password') }
-  let!(:friend) { User.create!(username: 'friend_user', email: 'friend@example.com', password: 'password') }
+  let!(:user) { RegisteredUser.create!(username: 'test_user', email: 'test@example.com', password: 'password') }
+  let!(:friend) { RegisteredUser.create!(username: 'friend_user', email: 'friend@example.com', password: 'password') }
 
   before do
     session[:user_id] = user.id

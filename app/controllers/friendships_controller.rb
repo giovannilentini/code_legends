@@ -1,7 +1,6 @@
 class FriendshipsController < ApplicationController
   def create
-      friend = User.find(params[:id])
-
+      friend = RegisteredUser.find(params[:id])
       if friend.nil?
         redirect_to root_path, alert: 'User not found'
       elsif friend == current_user
@@ -9,7 +8,7 @@ class FriendshipsController < ApplicationController
       elsif current_user.friends.include?(friend)
         redirect_to user_path(friend), alert: 'You are already friends.'
       else
-      current_user.friends << friend unless current_user.friends.include?(friend) || friend == current_user
+      current_user.friends << friend
       redirect_to user_path(friend), notice: 'Successfully friend!'
       end
     end

@@ -1,10 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe MatchesController, type: :controller do
-  let(:user1) { User.create(email: 'user1@example.com', guest: false, password: 'password') }
-  let(:user2) { User.create(email: 'user2@example.com', guest: false, password: 'password') }
-  let(:challenge_proposal) { ChallengeProposal.create(title: 'Challenge Proposal', description: 'Proposal description', test_cases:"asdasd", user: user1) }
-  let(:challenge) { Challenge.create(title: 'Challenge', difficulty: "easy",  description: 'Challenge description', challenge_proposal: challenge_proposal) }
+  let(:user1) { RegisteredUser.create(email: 'user1@example.com', password: 'password') }
+  let(:user2) { RegisteredUser.create(email: 'user2@example.com',  password: 'password') }
+  let(:challenge_proposal) { ChallengeProposal.create!(title: 'Challenge Proposal', description: 'Proposal description', test_cases:"asdasd", user: user1) }
+  let(:challenge) { Challenge.create!(title: 'Challenge', language: "python3", difficulty: "easy",  description: 'Challenge description', challenge_proposal: challenge_proposal) }
   let!(:match) { Match.create!(player_1_id: user1.id, player_2_id: user2.id, challenge: challenge, status: 'ongoing') }
 
   before do
@@ -21,7 +21,7 @@ RSpec.describe MatchesController, type: :controller do
       end
 
       it 'redirects to root with an alert if the current user is not a participant' do
-        other_user = User.create(email: 'other_user@example.com', guest: false, password: 'password')
+        other_user = RegisteredUser.create(email: 'other_user@example.com', password: 'password')
         allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(other_user)
         get :show, params: { id: match.id }
         expect(response).to redirect_to(root_path)

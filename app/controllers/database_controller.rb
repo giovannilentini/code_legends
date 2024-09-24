@@ -1,7 +1,7 @@
 class DatabaseController < ApplicationController
   def info
     authorize! :database, :all
-    @tables = %w[users challenges matches matchmaking_queues friendship friend_requests challenge_requests chat_messages challenge_proposals]
+    @tables = %w[registered_users challenges matches matchmaking_queues friendship friend_requests challenge_requests chat_messages challenge_proposals]
     @table_data = @tables.each_with_object({}) do |table, hash|
       model = table.classify.constantize rescue nil
       if model

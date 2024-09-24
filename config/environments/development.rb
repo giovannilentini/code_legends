@@ -77,18 +77,10 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+  config.action_mailer.delivery_method = :test
+  config.action_mailer.perform_deliveries = true  # Ensure this is true to see the output
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.mailtrap.io', # Mailtrap SMTP server address
-    port:                 587,                # Port number
-    domain:               'localhost',      # Your domain
-    user_name:            Rails.application.credentials.mail['mailtrap_username'],
-    password:             Rails.application.credentials.mail['mailtrap_password'],
-    authentication:       'plain',            # Authentication type
-    enable_starttls_auto: true                # Enable TLS
-  }
-
 
 
   config.action_cable.url = "ws://localhost:3000/cable"

@@ -1,10 +1,9 @@
 class PasswordResetsController < ApplicationController
   def new
-    # This is the form where users request password reset
+    # This is the form where registered_users request password reset
   end
 
   def create
-
     @user = User.find_by(email: params[:email])
     if @user
       if @user.has_auth0?
@@ -49,8 +48,6 @@ class PasswordResetsController < ApplicationController
   private
 
   def password_params
-    params.require(:user).permit(:password)
+    params.permit(:password)
   end
-
-
 end

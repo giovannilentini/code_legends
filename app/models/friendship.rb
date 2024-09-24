@@ -1,6 +1,6 @@
 class Friendship < ApplicationRecord
-  belongs_to :user
-  belongs_to :friend, class_name: 'User'
+  belongs_to :user, class_name: 'RegisteredUser'
+  belongs_to :friend, class_name: 'RegisteredUser'
 
   validates :user_id, presence: true
   validates :friend_id, presence: true

@@ -66,8 +66,6 @@ class MatchesController < ApplicationController
   end
 
   def set_winner(winner, loser, match, surrendered)
-    MatchmakingQueueService.remove_from_queue(loser)
-    MatchmakingQueueService.remove_from_queue(winner)
     match.chat_messages.destroy_all
     match.update(status: "finished", winner_id: winner.id)
 

@@ -58,13 +58,15 @@
 </head>
 <body class="text-white h-full flex justify-center font-sans">
 <main class="container flex">
+
+
+
   <% if flash[:alert] || flash[:notice] || flash[:success] %>
     <div id="flash-popup" class="flash-popup">
       <span id="flash-message"></span>
     </div>
   <% end %>
   <%= yield %>
-
 </main>
 
 <script>

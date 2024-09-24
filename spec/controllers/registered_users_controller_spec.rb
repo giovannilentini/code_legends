@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe UsersController, type: :controller do
-  let(:user) { User.create!(email: 'user@example.com', username: 'username', password: 'password') }
-  let(:another_user) { User.create!(email: 'another@example.com', username: 'another_username', password: 'password') }
+RSpec.describe RegisteredUsersController, type: :controller do
+  let(:user) { RegisteredUser.create!(email: 'user@example.com', username: 'username', password: 'password') }
+  let(:another_user) { RegisteredUser.create!(email: 'another@example.com', username: 'another_username', password: 'password') }
 
   describe 'GET #show' do
     before { get :show, params: { id: user.id } }

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe FriendshipsController, type: :controller do
-  let(:user) { User.create(email: 'user@example.com', password: 'password') }
-  let(:friend) { User.create(email: 'friend@example.com', password: 'password') }
+  let(:user) { RegisteredUser.create!(email: 'user@example.com', password: 'password') }
+  let(:friend) { RegisteredUser.create!(email: 'friend@example.com', password: 'password') }
 
   before do
     session[:user_id] = user.id

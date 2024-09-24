@@ -1,17 +1,17 @@
 require 'rails_helper'
-
-
+require 'webmock/rspec'
 RSpec.describe 'Matches', type: :request do
-  let(:user1) { User.create!(email: 'user1@example.com', guest: false, password: 'password') }
-  let(:user2) { User.create!(email: 'user2@example.com', guest: false, password: 'password') }
+  let(:user1) { RegisteredUser.create!(email: 'user1@example.com', password: 'password') }
+  let(:user2) { RegisteredUser.create!(email: 'user2@example.com', password: 'password') }
   let(:challenge_proposal) { ChallengeProposal.create!(user: user1, title: 'Test Challenge', test_cases: "asuyidgas", description: 'A challenging challenge') }
-  let(:challenge) { Challenge.create!(title: 'Test Challenge', difficulty: "easy",  description: 'A challenging challenge', challenge_proposal: challenge_proposal) }
+  let(:challenge) { Challenge.create!(title: 'Test Challenge', difficulty: "easy", language:"python3", description: 'A challenging challenge', challenge_proposal: challenge_proposal) }
   let(:match) { Match.create!(player_1_id: user1.id, player_2_id: user2.id, challenge: challenge, status: "ongoing", timer_expires_at: 10.minutes.from_now) }
 
   before do
     # Manually set the current user for authorization
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user1)
   end
+
 
   describe 'GET /matches/:id' do
     it 'shows a match' do

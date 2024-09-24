@@ -16,14 +16,16 @@ Rails.application.routes.draw do
   get 'login', to: 'sessions#login', as: 'login'
   get 'signup', to: 'sessions#signup', as: 'signup'
   post 'login_post', to: 'sessions#login_post', as: 'login_post'
+
+
   # USER / SETTINGS ROUTES
-  resources :users, only: [:show] do
-    post 'users/:id/add_friend', to: 'friendships#create', as: 'add_friend'
+  resources :users, only: [:show], controller: 'registered_users' do
+    post 'registered_users/:id/add_friend', to: 'friendships#create', as: 'add_friend'
   end
-  resources :users, only: [:update, :edit, :create]
+  resources :users, only: [:update, :edit, :create], controller: 'registered_users'
 
   # REGISTRATION EMAIL
-  get '/confirm_email', to: 'users#confirm_email'
+  get '/confirm_email', to: 'registered_users#confirm_email'
 
   # PASSWORD RESET
   get '/password/reset', to: 'password_resets#new'

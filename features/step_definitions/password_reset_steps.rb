@@ -1,7 +1,7 @@
 # features/step_definitions/password_reset_steps.rb
 
 Given("a user exists with email {string}") do |email|
-  @user = User.create!(
+  @user = RegisteredUser.create!(
     username: 'testuser',
     email: email,
     password: 'oldpassword',

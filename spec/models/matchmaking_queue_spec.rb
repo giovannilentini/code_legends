@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe MatchmakingQueue, type: :model do
-  let(:user) { User.create!(auth0_id: 'user1', email: 'example1@gmail.com', password: 'password') }
+  let(:user) { RegisteredUser.create!(auth0_id: 'user1', email: 'example1@gmail.com', password: 'password') }
 
   it "belongs to user" do
     association = MatchmakingQueue.reflect_on_association(:user)
