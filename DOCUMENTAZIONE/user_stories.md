@@ -23,7 +23,7 @@
 2. As a **GUEST**, I want to be able to go to the **REGISTRATION PAGE** so that I can **REGISTER**.
 3. As a **GUEST**, I want to be able to go to the **PLAY NOW PAGE** so that I can **PLAY**.
 4. As a **GUEST**, I want to be able to view the **LEADERBOARD** to **SEE PLAYER STATISTICS**.
-5. As a **USER**, I want to be able to **LOGOUT**.
+5. As a **GUEST**, I want to be able to **LOGOUT**.
 
 ## D) Home Section (USER):
 1. As a **USER**, I want to be able to go to the **PLAY NOW PAGE** so that I can **PLAY**.
