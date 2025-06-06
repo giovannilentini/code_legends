@@ -4,7 +4,7 @@ class AdminsController < ApplicationController
     authorize! :admin, :all
 
     @challenges_proposals = ChallengeProposal.where(status: "pending")
-    @non_admin_users = RegisteredUser.where(is_admin: false, guest:false).order('registered_users.username')
+    @non_admin_users = RegisteredUser.where(is_admin: false)
     @challenges = Challenge.all
   end
 

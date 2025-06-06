@@ -66,7 +66,7 @@ class RegisteredUsersController < ApplicationController
     end
   end
   def user_settings
-    params.require(:user).permit(:name, :email, :profile_image)
+    params.require(:registered_user).permit(:name, :email, :profile_image)
   end
 
   def user_auth

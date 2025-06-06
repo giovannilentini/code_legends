@@ -12,7 +12,7 @@
        <% @available_friends.each do |user| %>
         <li class="flex items-center justify-between p-4 border-b border-white">
           <%= link_to user.username, user_path(user), class: 'friend-name text-lg text-white hover:underline' %>
-          <%= button_to 'Richiedi Amicizia', friend_requests_path(user_id: user.id), method: :post,
+          <%= button_to 'Send Friend Request', friend_requests_path(user_id: user.id), method: :post,
                         class: 'bg-transparent text-white border border-white hover:bg-white hover:text-neutral-900 font-bold py-2 px-4 rounded-lg mt-2 md:mt-0' %>
         </li>
       <% end %>
@@ -20,7 +20,7 @@
     <%end%>
     <!-- Bottone "Chiudi" -->
     <div class="mt-6 text-center">
-      <button onclick="closeModal()" class="bg-transparent text-white px-4 py-2 rounded-lg hover:bg-white hover:text-neutral-900">Chiudi</button>
+      <button onclick="closeModal()" class="bg-transparent text-white px-4 py-2 rounded-lg hover:bg-white hover:text-neutral-900">Close</button>
     </div>
   </div>
 </div>

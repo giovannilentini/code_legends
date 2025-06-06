@@ -1,0 +1,51 @@
+services:
+  # PostgreSQL Database Service
+  db:
+    image: postgres:13
+    container_name: code_legends_db       # Set container name
+    environment:
+      POSTGRES_USER: code_legends
+      POSTGRES_PASSWORD: code_legends
+      POSTGRES_DB: code_legends_development
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+  # Redis Service
+  redis:
+    image: redis:alpine
+    container_name: code_legends_redis    # Set container name
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+  # Rails Application Service
+  web:
+    build: .
+    container_name: code_legends_app      # Set container name
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
+    volumes:
+      - ".:/app"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - redis
+    networks:
+      - app-network
+    environment:
+      - POSTGRES_USER=code_legends
+      - POSTGRES_PASSWORD=code_legends
+      - POSTGRES_DB=code_legends_development
+      - REDIS_URL=redis://redis:6379/1
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  db-data:
