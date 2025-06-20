@@ -1,0 +1,150 @@
+digraph CodeLegends {
+rankdir = "LR";
+ranksep = "0.5";
+nodesep = "0.4";
+pad = "0.4,0.4";
+margin = "0,0";
+concentrate = "true";
+labelloc = "t";
+fontsize = "13";
+fontname = "Arial BoldMT";
+splines = "spline";
+node[ shape  =  "Mrecord" , fontsize  =  "10" , fontname  =  "ArialMT" , margin  =  "0.07,0.05" , penwidth  =  "1.0"];
+edge[ fontname  =  "ArialMT" , fontsize  =  "7" , dir  =  "both" , arrowsize  =  "0.9" , penwidth  =  "1.0" , labelangle  =  "32" , labeldistance  =  "1.8"];
+rankdir = "TB";
+label = "CodeLegends domain model\n\n";
+"m_ActiveStorage::Attachment" [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">ActiveStorage::Attachment</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="name">name <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="record_type">record_type <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+</table>
+}>];
+"m_ActiveStorage::Blob" [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">ActiveStorage::Blob</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="byte_size">byte_size <font face="Arial ItalicMT" color="grey60">integer (8) ∗</font></td></tr>
+  <tr><td align="left" width="130" port="checksum">checksum <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="content_type">content_type <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="filename">filename <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="key">key <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="metadata">metadata <font face="Arial ItalicMT" color="grey60">text</font></td></tr>
+  <tr><td align="left" width="130" port="service_name">service_name <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+</table>
+}>];
+"m_ActiveStorage::VariantRecord" [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">ActiveStorage::VariantRecord</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="variation_digest">variation_digest <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+</table>
+}>];
+m_Challenge [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">Challenge</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="code_template">code_template <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="description">description <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="difficulty">difficulty <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="language">language <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="test_template">test_template <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="title">title <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+</table>
+}>];
+m_ChallengeProposal [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">ChallengeProposal</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="description">description <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="language">language <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="rejection_reason">rejection_reason <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="status">status <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="test_cases">test_cases <font face="Arial ItalicMT" color="grey60">text ∗</font></td></tr>
+  <tr><td align="left" width="130" port="title">title <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="users_id">users_id <font face="Arial ItalicMT" color="grey60">integer (8)</font></td></tr>
+</table>
+}>];
+m_ChallengeRequest [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">ChallengeRequest</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="language">language <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="status">status <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+</table>
+}>];
+m_ChatMessage [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">ChatMessage</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="content">content <font face="Arial ItalicMT" color="grey60">text</font></td></tr>
+</table>
+}>];
+m_FriendRequest [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">FriendRequest</font></td></tr>
+</table>
+}>];
+m_Friendship [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">Friendship</font></td></tr>
+</table>
+}>];
+m_Match [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">Match</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="language">language <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="status">status <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="timer_expires_at">timer_expires_at <font face="Arial ItalicMT" color="grey60">datetime (6,0)</font></td></tr>
+  <tr><td align="left" width="130" port="winner_id">winner_id <font face="Arial ItalicMT" color="grey60">integer</font></td></tr>
+</table>
+}>];
+m_MatchmakingQueue [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">MatchmakingQueue</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="language">language <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+  <tr><td align="left" width="130" port="status">status <font face="Arial ItalicMT" color="grey60">string ∗</font></td></tr>
+</table>
+}>];
+m_User [label = <{<table border="0" align="center" cellspacing="0.5" cellpadding="0" width="134">
+  <tr><td align="center" valign="bottom" width="130"><font face="Arial BoldMT" point-size="11">User</font></td></tr>
+</table>
+|
+<table border="0" align="left" cellspacing="2" cellpadding="0" width="134">
+  <tr><td align="left" width="130" port="auth0_id">auth0_id <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="confirmation_token">confirmation_token <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="email">email <font face="Arial ItalicMT" color="grey60">string ∗ U</font></td></tr>
+  <tr><td align="left" width="130" port="email_confirmed_at">email_confirmed_at <font face="Arial ItalicMT" color="grey60">datetime (6,0)</font></td></tr>
+  <tr><td align="left" width="130" port="is_admin">is_admin <font face="Arial ItalicMT" color="grey60">boolean</font></td></tr>
+  <tr><td align="left" width="130" port="password_digest">password_digest <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="provider">provider <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="rank">rank <font face="Arial ItalicMT" color="grey60">integer</font></td></tr>
+  <tr><td align="left" width="130" port="reset_sent_at">reset_sent_at <font face="Arial ItalicMT" color="grey60">datetime (6,0)</font></td></tr>
+  <tr><td align="left" width="130" port="reset_token">reset_token <font face="Arial ItalicMT" color="grey60">string</font></td></tr>
+  <tr><td align="left" width="130" port="username">username <font face="Arial ItalicMT" color="grey60">string ∗ U</font></td></tr>
+</table>
+}>];
+  "m_ActiveStorage::VariantRecord" -> "m_ActiveStorage::Blob" [arrowhead = "normal", arrowtail = "none", weight = "3"];
+  "m_ActiveStorage::Blob" -> "m_ActiveStorage::Attachment" [arrowhead = "none", arrowtail = "none", weight = "1"];
+  "m_ActiveStorage::VariantRecord" -> "m_ActiveStorage::Attachment" [arrowhead = "none", arrowtail = "none", weight = "1"];
+  "m_ActiveStorage::Blob" -> "m_ActiveStorage::Blob" [style = "dotted", arrowhead = "none", arrowtail = "none", weight = "1", constraint = "false"];
+  "m_ActiveStorage::Blob" -> "m_ActiveStorage::Attachment" [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_User -> m_MatchmakingQueue [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_User -> m_Match [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_Challenge -> m_Match [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_Match -> m_ChatMessage [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_User -> m_ChatMessage [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_User -> m_ChallengeRequest [arrowhead = "normal", arrowtail = "none", weight = "2"];
+  m_User -> m_ChallengeProposal [arrowhead = "normal", arrowtail = "none", weight = "1"];
+  m_ChallengeProposal -> m_Challenge [arrowhead = "none", arrowtail = "none", weight = "2"];
+}
