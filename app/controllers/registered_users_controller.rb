@@ -65,11 +65,12 @@ class RegisteredUsersController < ApplicationController
       @pending_challenges = ChallengeProposal.where(status: "pending", user: @user_profile)
     end
   end
+  
   def user_settings
     params.require(:registered_user).permit(:name, :email, :profile_image)
   end
 
   def user_auth
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:registered_user).permit(:username, :email, :password)
   end
 end

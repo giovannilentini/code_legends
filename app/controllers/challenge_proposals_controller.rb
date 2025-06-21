@@ -4,7 +4,7 @@ class ChallengeProposalsController < ApplicationController
   def show
     @challenge_proposal = ChallengeProposal.find(params[:id])
     @test_cases = @challenge_proposal.test_cases
-end
+  end
 
 
   def new
@@ -25,7 +25,6 @@ end
   end
 
   def reject
-
     reject_motivation = params[:reject_motivation]
     if reject_motivation != ""
       @challenge_proposal = ChallengeProposal.find(params[:id])
@@ -42,6 +41,7 @@ end
     end
 
   end
+  
   def destroy
     @challenge_proposal = ChallengeProposal.find(params[:id])
     @challenge_proposal.destroy
